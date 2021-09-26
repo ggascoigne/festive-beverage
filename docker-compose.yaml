@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: festive-beverage-postgres
+    image: postgres:13-alpine
+    restart: unless-stopped
+    ports:
+      - "54321:5432"
+    stop_signal: SIGINT
+    environment:
+      - POSTGRES_USER=ggp
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    command: -c log_statement=all -c log_min_error_statement=error
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

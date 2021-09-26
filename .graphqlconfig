@@ -1,0 +1,15 @@
+{
+  "name": "FestiveBeverage GraphQL Schema",
+  "schemaPath": "./graphql-schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:40000/api/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

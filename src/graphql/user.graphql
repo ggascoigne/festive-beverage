@@ -1,0 +1,29 @@
+#import "./userFragment.graphql"
+
+query getUserByEmail($email: String!) {
+  userByEmail(email: $email) {
+    ...userFields
+  }
+}
+
+query getUserById($id: Int!) {
+  user(id: $id) {
+    ...userFields
+  }
+}
+
+mutation updateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
+    user {
+      ...userFields
+    }
+  }
+}
+
+query getAllUsers {
+  users {
+    nodes {
+      ...userFields
+    }
+  }
+}
