@@ -3,8 +3,6 @@ import MenuIcon from '@material-ui/icons/Menu'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Config, useGetConfig } from 'utils'
 
-const drawerWidth = 240
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
@@ -12,16 +10,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginLeft: drawerWidth,
-      [theme.breakpoints.up('md')]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-      },
     },
     menuButton: {
       marginRight: 20,
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
-      },
     },
     toolbar: {
       width: '100%',

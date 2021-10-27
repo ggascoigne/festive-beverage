@@ -2,7 +2,6 @@ import {
   CssBaseline,
   Divider,
   Drawer,
-  Hidden,
   List,
   ListItem,
   MuiThemeProvider,
@@ -17,8 +16,6 @@ import { Header } from './components/Header'
 import { LoginMenu } from './components/LoginMenu'
 import { MenuItems, SelectedContent, rootRoutes } from './components/Navigation'
 import { theme } from './components/Theme'
-
-const drawerWidth = 240
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,17 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       minHeight: '100vh',
     },
-    drawer: {
-      [theme.breakpoints.up('md')]: {
-        width: drawerWidth,
-        flexShrink: 0,
-      },
-    },
     toolbar: theme.mixins.toolbar,
-    drawerPaper: {
-      width: drawerWidth,
-      overflowX: 'hidden',
-    },
     content: {
       minHeight: '100vh',
       width: '100%',
@@ -105,7 +92,7 @@ const DrawerContents: React.FC = () => {
   const classes = useStyles()
   return (
     <>
-      <div className={classes.toolbar}></div>
+      <div className={classes.toolbar} />
       <Divider />
       <MenuItems menuItems={rootRoutes} />
       <div style={{ height: '100%' }} />
@@ -140,37 +127,19 @@ export const App: React.FC = React.memo(() => {
         <CssBaseline />
 
         <Header handleDrawerToggle={handleDrawerToggle} rightMenu={RightMenu} />
-        <nav className={classes.drawer}>
-          <Hidden mdUp>
-            <Drawer
-              variant='temporary'
-              anchor='left'
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}
-            >
-              <DrawerContents />
-              <Divider />
-              <RightMenu small />
-            </Drawer>
-          </Hidden>
-          <Hidden smDown>
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              variant='permanent'
-              open
-            >
-              <DrawerContents />
-            </Drawer>
-          </Hidden>
-        </nav>
+        <Drawer
+          variant='temporary'
+          anchor='left'
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <DrawerContents />
+          <Divider />
+          <RightMenu small />
+        </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <SelectedContent routes={rootRoutes} />

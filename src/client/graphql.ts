@@ -16,8 +16,139 @@ export interface Scalars {
   Boolean: boolean
   Int: number
   Float: number
+  /** A floating point number that requires more precision than IEEE 754 binary 64 */
+  BigFloat: any
   /** A location in a connection that can be used for resuming pagination. */
   Cursor: any
+  FullText: any
+}
+
+/** A filter to be used against BigFloat fields. All fields are combined with a logical ‘and.’ */
+export interface BigFloatFilter {
+  /** Not equal to the specified value, treating null like an ordinary value. */
+  distinctFrom?: Maybe<Scalars['BigFloat']>
+  /** Equal to the specified value. */
+  equalTo?: Maybe<Scalars['BigFloat']>
+  /** Greater than the specified value. */
+  greaterThan?: Maybe<Scalars['BigFloat']>
+  /** Greater than or equal to the specified value. */
+  greaterThanOrEqualTo?: Maybe<Scalars['BigFloat']>
+  /** Included in the specified list. */
+  in?: Maybe<Array<Scalars['BigFloat']>>
+  /** Is null (if `true` is specified) or is not null (if `false` is specified). */
+  isNull?: Maybe<Scalars['Boolean']>
+  /** Less than the specified value. */
+  lessThan?: Maybe<Scalars['BigFloat']>
+  /** Less than or equal to the specified value. */
+  lessThanOrEqualTo?: Maybe<Scalars['BigFloat']>
+  /** Equal to the specified value, treating null like an ordinary value. */
+  notDistinctFrom?: Maybe<Scalars['BigFloat']>
+  /** Not equal to the specified value. */
+  notEqualTo?: Maybe<Scalars['BigFloat']>
+  /** Not included in the specified list. */
+  notIn?: Maybe<Array<Scalars['BigFloat']>>
+}
+
+/** All input for the create `Ingredient` mutation. */
+export interface CreateIngredientInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The `Ingredient` to be created by this mutation. */
+  ingredient: IngredientInput
+}
+
+/** The output of our create `Ingredient` mutation. */
+export interface CreateIngredientPayload {
+  __typename: 'CreateIngredientPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The `Ingredient` that was created by this mutation. */
+  ingredient?: Maybe<Ingredient>
+  /** An edge for our `Ingredient`. May be used by Relay 1. */
+  ingredientEdge?: Maybe<IngredientsEdge>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+}
+
+/** The output of our create `Ingredient` mutation. */
+export interface CreateIngredientPayloadIngredientEdgeArgs {
+  orderBy?: Maybe<Array<IngredientsOrderBy>>
+}
+
+/** All input for the create `RecipeIngredient` mutation. */
+export interface CreateRecipeIngredientInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The `RecipeIngredient` to be created by this mutation. */
+  recipeIngredient: RecipeIngredientInput
+}
+
+/** The output of our create `RecipeIngredient` mutation. */
+export interface CreateRecipeIngredientPayload {
+  __typename: 'CreateRecipeIngredientPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** Reads a single `Ingredient` that is related to this `RecipeIngredient`. */
+  ingredient?: Maybe<Ingredient>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+  /** Reads a single `Recipe` that is related to this `RecipeIngredient`. */
+  recipe?: Maybe<Recipe>
+  /** The `RecipeIngredient` that was created by this mutation. */
+  recipeIngredient?: Maybe<RecipeIngredient>
+  /** An edge for our `RecipeIngredient`. May be used by Relay 1. */
+  recipeIngredientEdge?: Maybe<RecipeIngredientsEdge>
+  /** Reads a single `Unit` that is related to this `RecipeIngredient`. */
+  unit?: Maybe<Unit>
+}
+
+/** The output of our create `RecipeIngredient` mutation. */
+export interface CreateRecipeIngredientPayloadRecipeIngredientEdgeArgs {
+  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+}
+
+/** All input for the create `Recipe` mutation. */
+export interface CreateRecipeInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The `Recipe` to be created by this mutation. */
+  recipe: RecipeInput
+}
+
+/** The output of our create `Recipe` mutation. */
+export interface CreateRecipePayload {
+  __typename: 'CreateRecipePayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+  /** The `Recipe` that was created by this mutation. */
+  recipe?: Maybe<Recipe>
+  /** An edge for our `Recipe`. May be used by Relay 1. */
+  recipeEdge?: Maybe<RecipesEdge>
+}
+
+/** The output of our create `Recipe` mutation. */
+export interface CreateRecipePayloadRecipeEdgeArgs {
+  orderBy?: Maybe<Array<RecipesOrderBy>>
 }
 
 /** All input for the create `Role` mutation. */
@@ -50,6 +181,38 @@ export interface CreateRolePayload {
 /** The output of our create `Role` mutation. */
 export interface CreateRolePayloadRoleEdgeArgs {
   orderBy?: Maybe<Array<RolesOrderBy>>
+}
+
+/** All input for the create `Unit` mutation. */
+export interface CreateUnitInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The `Unit` to be created by this mutation. */
+  unit: UnitInput
+}
+
+/** The output of our create `Unit` mutation. */
+export interface CreateUnitPayload {
+  __typename: 'CreateUnitPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+  /** The `Unit` that was created by this mutation. */
+  unit?: Maybe<Unit>
+  /** An edge for our `Unit`. May be used by Relay 1. */
+  unitEdge?: Maybe<UnitsEdge>
+}
+
+/** The output of our create `Unit` mutation. */
+export interface CreateUnitPayloadUnitEdgeArgs {
+  orderBy?: Maybe<Array<UnitsOrderBy>>
 }
 
 /** All input for the create `User` mutation. */
@@ -120,6 +283,141 @@ export interface CreateUserRolePayloadUserRoleEdgeArgs {
   orderBy?: Maybe<Array<UserRolesOrderBy>>
 }
 
+/** All input for the `deleteIngredientByNodeId` mutation. */
+export interface DeleteIngredientByNodeIdInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The globally unique `ID` which will identify a single `Ingredient` to be deleted. */
+  nodeId: Scalars['ID']
+}
+
+/** All input for the `deleteIngredient` mutation. */
+export interface DeleteIngredientInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+}
+
+/** The output of our delete `Ingredient` mutation. */
+export interface DeleteIngredientPayload {
+  __typename: 'DeleteIngredientPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  deletedIngredientNodeId?: Maybe<Scalars['ID']>
+  /** The `Ingredient` that was deleted by this mutation. */
+  ingredient?: Maybe<Ingredient>
+  /** An edge for our `Ingredient`. May be used by Relay 1. */
+  ingredientEdge?: Maybe<IngredientsEdge>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+}
+
+/** The output of our delete `Ingredient` mutation. */
+export interface DeleteIngredientPayloadIngredientEdgeArgs {
+  orderBy?: Maybe<Array<IngredientsOrderBy>>
+}
+
+/** All input for the `deleteRecipeByNodeId` mutation. */
+export interface DeleteRecipeByNodeIdInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The globally unique `ID` which will identify a single `Recipe` to be deleted. */
+  nodeId: Scalars['ID']
+}
+
+/** All input for the `deleteRecipeIngredientByNodeId` mutation. */
+export interface DeleteRecipeIngredientByNodeIdInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The globally unique `ID` which will identify a single `RecipeIngredient` to be deleted. */
+  nodeId: Scalars['ID']
+}
+
+/** All input for the `deleteRecipeIngredient` mutation. */
+export interface DeleteRecipeIngredientInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+}
+
+/** The output of our delete `RecipeIngredient` mutation. */
+export interface DeleteRecipeIngredientPayload {
+  __typename: 'DeleteRecipeIngredientPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  deletedRecipeIngredientNodeId?: Maybe<Scalars['ID']>
+  /** Reads a single `Ingredient` that is related to this `RecipeIngredient`. */
+  ingredient?: Maybe<Ingredient>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+  /** Reads a single `Recipe` that is related to this `RecipeIngredient`. */
+  recipe?: Maybe<Recipe>
+  /** The `RecipeIngredient` that was deleted by this mutation. */
+  recipeIngredient?: Maybe<RecipeIngredient>
+  /** An edge for our `RecipeIngredient`. May be used by Relay 1. */
+  recipeIngredientEdge?: Maybe<RecipeIngredientsEdge>
+  /** Reads a single `Unit` that is related to this `RecipeIngredient`. */
+  unit?: Maybe<Unit>
+}
+
+/** The output of our delete `RecipeIngredient` mutation. */
+export interface DeleteRecipeIngredientPayloadRecipeIngredientEdgeArgs {
+  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+}
+
+/** All input for the `deleteRecipe` mutation. */
+export interface DeleteRecipeInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+}
+
+/** The output of our delete `Recipe` mutation. */
+export interface DeleteRecipePayload {
+  __typename: 'DeleteRecipePayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  deletedRecipeNodeId?: Maybe<Scalars['ID']>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+  /** The `Recipe` that was deleted by this mutation. */
+  recipe?: Maybe<Recipe>
+  /** An edge for our `Recipe`. May be used by Relay 1. */
+  recipeEdge?: Maybe<RecipesEdge>
+}
+
+/** The output of our delete `Recipe` mutation. */
+export interface DeleteRecipePayloadRecipeEdgeArgs {
+  orderBy?: Maybe<Array<RecipesOrderBy>>
+}
+
 /** All input for the `deleteRoleByAuthority` mutation. */
 export interface DeleteRoleByAuthorityInput {
   authority: Scalars['String']
@@ -171,6 +469,49 @@ export interface DeleteRolePayload {
 /** The output of our delete `Role` mutation. */
 export interface DeleteRolePayloadRoleEdgeArgs {
   orderBy?: Maybe<Array<RolesOrderBy>>
+}
+
+/** All input for the `deleteUnitByNodeId` mutation. */
+export interface DeleteUnitByNodeIdInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The globally unique `ID` which will identify a single `Unit` to be deleted. */
+  nodeId: Scalars['ID']
+}
+
+/** All input for the `deleteUnit` mutation. */
+export interface DeleteUnitInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+}
+
+/** The output of our delete `Unit` mutation. */
+export interface DeleteUnitPayload {
+  __typename: 'DeleteUnitPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  deletedUnitNodeId?: Maybe<Scalars['ID']>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+  /** The `Unit` that was deleted by this mutation. */
+  unit?: Maybe<Unit>
+  /** An edge for our `Unit`. May be used by Relay 1. */
+  unitEdge?: Maybe<UnitsEdge>
+}
+
+/** The output of our delete `Unit` mutation. */
+export interface DeleteUnitPayloadUnitEdgeArgs {
+  orderBy?: Maybe<Array<UnitsOrderBy>>
 }
 
 /** All input for the `deleteUserByEmail` mutation. */
@@ -296,6 +637,132 @@ export interface FTruncateTablesPayload {
   query?: Maybe<Query>
 }
 
+/** A filter to be used against FullText fields. All fields are combined with a logical ‘and.’ */
+export interface FullTextFilter {
+  /** Performs a full text search on the field. */
+  matches?: Maybe<Scalars['String']>
+}
+
+export interface Ingredient extends Node {
+  __typename: 'Ingredient'
+  description?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+  name: Scalars['String']
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID']
+  /** Reads and enables pagination through a set of `RecipeIngredient`. */
+  recipeIngredients: RecipeIngredientsConnection
+  sort?: Maybe<Scalars['Int']>
+  tags?: Maybe<Scalars['String']>
+}
+
+export interface IngredientRecipeIngredientsArgs {
+  after?: Maybe<Scalars['Cursor']>
+  before?: Maybe<Scalars['Cursor']>
+  condition?: Maybe<RecipeIngredientCondition>
+  filter?: Maybe<RecipeIngredientFilter>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+}
+
+/**
+ * A condition to be used against `Ingredient` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export interface IngredientCondition {
+  /** Checks for equality with the object’s `description` field. */
+  description?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['Int']>
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `sort` field. */
+  sort?: Maybe<Scalars['Int']>
+  /** Checks for equality with the object’s `tags` field. */
+  tags?: Maybe<Scalars['String']>
+}
+
+/** A filter to be used against `Ingredient` object types. All fields are combined with a logical ‘and.’ */
+export interface IngredientFilter {
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<IngredientFilter>>
+  /** Filter by the object’s `description` field. */
+  description?: Maybe<StringFilter>
+  /** Filter by the object’s `id` field. */
+  id?: Maybe<IntFilter>
+  /** Filter by the object’s `name` field. */
+  name?: Maybe<StringFilter>
+  /** Negates the expression. */
+  not?: Maybe<IngredientFilter>
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<IngredientFilter>>
+  /** Filter by the object’s `sort` field. */
+  sort?: Maybe<IntFilter>
+  /** Filter by the object’s `tags` field. */
+  tags?: Maybe<StringFilter>
+}
+
+/** An input for mutations affecting `Ingredient` */
+export interface IngredientInput {
+  description?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['Int']>
+  name: Scalars['String']
+  sort?: Maybe<Scalars['Int']>
+  tags?: Maybe<Scalars['String']>
+}
+
+/** Represents an update to a `Ingredient`. Fields that are set will be updated. */
+export interface IngredientPatch {
+  description?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+  sort?: Maybe<Scalars['Int']>
+  tags?: Maybe<Scalars['String']>
+}
+
+/** A connection to a list of `Ingredient` values. */
+export interface IngredientsConnection {
+  __typename: 'IngredientsConnection'
+  /** A list of edges which contains the `Ingredient` and cursor to aid in pagination. */
+  edges: Array<IngredientsEdge>
+  /** A list of `Ingredient` objects. */
+  nodes: Array<Maybe<Ingredient>>
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo
+  /** The count of *all* `Ingredient` you could get from the connection. */
+  totalCount: Scalars['Int']
+}
+
+/** A `Ingredient` edge in the connection. */
+export interface IngredientsEdge {
+  __typename: 'IngredientsEdge'
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>
+  /** The `Ingredient` at the end of the edge. */
+  node?: Maybe<Ingredient>
+}
+
+/** Methods to use when ordering `Ingredient`. */
+export enum IngredientsOrderBy {
+  DescriptionAsc = 'DESCRIPTION_ASC',
+  DescriptionDesc = 'DESCRIPTION_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  RecipeIngredientsByIngredientIdCountAsc = 'RECIPE_INGREDIENTS_BY_INGREDIENT_ID__COUNT_ASC',
+  RecipeIngredientsByIngredientIdCountDesc = 'RECIPE_INGREDIENTS_BY_INGREDIENT_ID__COUNT_DESC',
+  SortAsc = 'SORT_ASC',
+  SortDesc = 'SORT_DESC',
+  TagsAsc = 'TAGS_ASC',
+  TagsDesc = 'TAGS_DESC',
+}
+
 /** A filter to be used against Int fields. All fields are combined with a logical ‘and.’ */
 export interface IntFilter {
   /** Not equal to the specified value, treating null like an ordinary value. */
@@ -325,18 +792,42 @@ export interface IntFilter {
 /** The root mutation type which contains root level fields which mutate data. */
 export interface Mutation {
   __typename: 'Mutation'
+  /** Creates a single `Ingredient`. */
+  createIngredient?: Maybe<CreateIngredientPayload>
+  /** Creates a single `Recipe`. */
+  createRecipe?: Maybe<CreateRecipePayload>
+  /** Creates a single `RecipeIngredient`. */
+  createRecipeIngredient?: Maybe<CreateRecipeIngredientPayload>
   /** Creates a single `Role`. */
   createRole?: Maybe<CreateRolePayload>
+  /** Creates a single `Unit`. */
+  createUnit?: Maybe<CreateUnitPayload>
   /** Creates a single `User`. */
   createUser?: Maybe<CreateUserPayload>
   /** Creates a single `UserRole`. */
   createUserRole?: Maybe<CreateUserRolePayload>
+  /** Deletes a single `Ingredient` using a unique key. */
+  deleteIngredient?: Maybe<DeleteIngredientPayload>
+  /** Deletes a single `Ingredient` using its globally unique id. */
+  deleteIngredientByNodeId?: Maybe<DeleteIngredientPayload>
+  /** Deletes a single `Recipe` using a unique key. */
+  deleteRecipe?: Maybe<DeleteRecipePayload>
+  /** Deletes a single `Recipe` using its globally unique id. */
+  deleteRecipeByNodeId?: Maybe<DeleteRecipePayload>
+  /** Deletes a single `RecipeIngredient` using a unique key. */
+  deleteRecipeIngredient?: Maybe<DeleteRecipeIngredientPayload>
+  /** Deletes a single `RecipeIngredient` using its globally unique id. */
+  deleteRecipeIngredientByNodeId?: Maybe<DeleteRecipeIngredientPayload>
   /** Deletes a single `Role` using a unique key. */
   deleteRole?: Maybe<DeleteRolePayload>
   /** Deletes a single `Role` using a unique key. */
   deleteRoleByAuthority?: Maybe<DeleteRolePayload>
   /** Deletes a single `Role` using its globally unique id. */
   deleteRoleByNodeId?: Maybe<DeleteRolePayload>
+  /** Deletes a single `Unit` using a unique key. */
+  deleteUnit?: Maybe<DeleteUnitPayload>
+  /** Deletes a single `Unit` using its globally unique id. */
+  deleteUnitByNodeId?: Maybe<DeleteUnitPayload>
   /** Deletes a single `User` using a unique key. */
   deleteUser?: Maybe<DeleteUserPayload>
   /** Deletes a single `User` using a unique key. */
@@ -348,12 +839,28 @@ export interface Mutation {
   /** Deletes a single `UserRole` using its globally unique id. */
   deleteUserRoleByNodeId?: Maybe<DeleteUserRolePayload>
   fTruncateTables?: Maybe<FTruncateTablesPayload>
+  /** Updates a single `Ingredient` using a unique key and a patch. */
+  updateIngredient?: Maybe<UpdateIngredientPayload>
+  /** Updates a single `Ingredient` using its globally unique id and a patch. */
+  updateIngredientByNodeId?: Maybe<UpdateIngredientPayload>
+  /** Updates a single `Recipe` using a unique key and a patch. */
+  updateRecipe?: Maybe<UpdateRecipePayload>
+  /** Updates a single `Recipe` using its globally unique id and a patch. */
+  updateRecipeByNodeId?: Maybe<UpdateRecipePayload>
+  /** Updates a single `RecipeIngredient` using a unique key and a patch. */
+  updateRecipeIngredient?: Maybe<UpdateRecipeIngredientPayload>
+  /** Updates a single `RecipeIngredient` using its globally unique id and a patch. */
+  updateRecipeIngredientByNodeId?: Maybe<UpdateRecipeIngredientPayload>
   /** Updates a single `Role` using a unique key and a patch. */
   updateRole?: Maybe<UpdateRolePayload>
   /** Updates a single `Role` using a unique key and a patch. */
   updateRoleByAuthority?: Maybe<UpdateRolePayload>
   /** Updates a single `Role` using its globally unique id and a patch. */
   updateRoleByNodeId?: Maybe<UpdateRolePayload>
+  /** Updates a single `Unit` using a unique key and a patch. */
+  updateUnit?: Maybe<UpdateUnitPayload>
+  /** Updates a single `Unit` using its globally unique id and a patch. */
+  updateUnitByNodeId?: Maybe<UpdateUnitPayload>
   /** Updates a single `User` using a unique key and a patch. */
   updateUser?: Maybe<UpdateUserPayload>
   /** Updates a single `User` using a unique key and a patch. */
@@ -367,8 +874,28 @@ export interface Mutation {
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
+export interface MutationCreateIngredientArgs {
+  input: CreateIngredientInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationCreateRecipeArgs {
+  input: CreateRecipeInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationCreateRecipeIngredientArgs {
+  input: CreateRecipeIngredientInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
 export interface MutationCreateRoleArgs {
   input: CreateRoleInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationCreateUnitArgs {
+  input: CreateUnitInput
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -379,6 +906,36 @@ export interface MutationCreateUserArgs {
 /** The root mutation type which contains root level fields which mutate data. */
 export interface MutationCreateUserRoleArgs {
   input: CreateUserRoleInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationDeleteIngredientArgs {
+  input: DeleteIngredientInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationDeleteIngredientByNodeIdArgs {
+  input: DeleteIngredientByNodeIdInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationDeleteRecipeArgs {
+  input: DeleteRecipeInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationDeleteRecipeByNodeIdArgs {
+  input: DeleteRecipeByNodeIdInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationDeleteRecipeIngredientArgs {
+  input: DeleteRecipeIngredientInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationDeleteRecipeIngredientByNodeIdArgs {
+  input: DeleteRecipeIngredientByNodeIdInput
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -394,6 +951,16 @@ export interface MutationDeleteRoleByAuthorityArgs {
 /** The root mutation type which contains root level fields which mutate data. */
 export interface MutationDeleteRoleByNodeIdArgs {
   input: DeleteRoleByNodeIdInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationDeleteUnitArgs {
+  input: DeleteUnitInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationDeleteUnitByNodeIdArgs {
+  input: DeleteUnitByNodeIdInput
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -427,6 +994,36 @@ export interface MutationFTruncateTablesArgs {
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
+export interface MutationUpdateIngredientArgs {
+  input: UpdateIngredientInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationUpdateIngredientByNodeIdArgs {
+  input: UpdateIngredientByNodeIdInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationUpdateRecipeArgs {
+  input: UpdateRecipeInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationUpdateRecipeByNodeIdArgs {
+  input: UpdateRecipeByNodeIdInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationUpdateRecipeIngredientArgs {
+  input: UpdateRecipeIngredientInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationUpdateRecipeIngredientByNodeIdArgs {
+  input: UpdateRecipeIngredientByNodeIdInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
 export interface MutationUpdateRoleArgs {
   input: UpdateRoleInput
 }
@@ -439,6 +1036,16 @@ export interface MutationUpdateRoleByAuthorityArgs {
 /** The root mutation type which contains root level fields which mutate data. */
 export interface MutationUpdateRoleByNodeIdArgs {
   input: UpdateRoleByNodeIdInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationUpdateUnitArgs {
+  input: UpdateUnitInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export interface MutationUpdateUnitByNodeIdArgs {
+  input: UpdateUnitByNodeIdInput
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -490,6 +1097,11 @@ export interface Query extends Node {
   __typename: 'Query'
   currentUserId?: Maybe<Scalars['Int']>
   currentUserIsAdmin?: Maybe<Scalars['Boolean']>
+  ingredient?: Maybe<Ingredient>
+  /** Reads a single `Ingredient` using its globally unique `ID`. */
+  ingredientByNodeId?: Maybe<Ingredient>
+  /** Reads and enables pagination through a set of `Ingredient`. */
+  ingredients?: Maybe<IngredientsConnection>
   /** Fetches an object given its globally unique `ID`. */
   node?: Maybe<Node>
   /** The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`. */
@@ -499,12 +1111,27 @@ export interface Query extends Node {
    * which can only query top level fields if they are in a particular form.
    */
   query: Query
+  recipe?: Maybe<Recipe>
+  /** Reads a single `Recipe` using its globally unique `ID`. */
+  recipeByNodeId?: Maybe<Recipe>
+  recipeIngredient?: Maybe<RecipeIngredient>
+  /** Reads a single `RecipeIngredient` using its globally unique `ID`. */
+  recipeIngredientByNodeId?: Maybe<RecipeIngredient>
+  /** Reads and enables pagination through a set of `RecipeIngredient`. */
+  recipeIngredients?: Maybe<RecipeIngredientsConnection>
+  /** Reads and enables pagination through a set of `Recipe`. */
+  recipes?: Maybe<RecipesConnection>
   role?: Maybe<Role>
   roleByAuthority?: Maybe<Role>
   /** Reads a single `Role` using its globally unique `ID`. */
   roleByNodeId?: Maybe<Role>
   /** Reads and enables pagination through a set of `Role`. */
   roles?: Maybe<RolesConnection>
+  unit?: Maybe<Unit>
+  /** Reads a single `Unit` using its globally unique `ID`. */
+  unitByNodeId?: Maybe<Unit>
+  /** Reads and enables pagination through a set of `Unit`. */
+  units?: Maybe<UnitsConnection>
   user?: Maybe<User>
   userByEmail?: Maybe<User>
   /** Reads a single `User` using its globally unique `ID`. */
@@ -519,8 +1146,74 @@ export interface Query extends Node {
 }
 
 /** The root query type which gives access points into the data universe. */
+export interface QueryIngredientArgs {
+  id: Scalars['Int']
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryIngredientByNodeIdArgs {
+  nodeId: Scalars['ID']
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryIngredientsArgs {
+  after?: Maybe<Scalars['Cursor']>
+  before?: Maybe<Scalars['Cursor']>
+  condition?: Maybe<IngredientCondition>
+  filter?: Maybe<IngredientFilter>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  orderBy?: Maybe<Array<IngredientsOrderBy>>
+}
+
+/** The root query type which gives access points into the data universe. */
 export interface QueryNodeArgs {
   nodeId: Scalars['ID']
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryRecipeArgs {
+  id: Scalars['Int']
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryRecipeByNodeIdArgs {
+  nodeId: Scalars['ID']
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryRecipeIngredientArgs {
+  id: Scalars['Int']
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryRecipeIngredientByNodeIdArgs {
+  nodeId: Scalars['ID']
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryRecipeIngredientsArgs {
+  after?: Maybe<Scalars['Cursor']>
+  before?: Maybe<Scalars['Cursor']>
+  condition?: Maybe<RecipeIngredientCondition>
+  filter?: Maybe<RecipeIngredientFilter>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryRecipesArgs {
+  after?: Maybe<Scalars['Cursor']>
+  before?: Maybe<Scalars['Cursor']>
+  condition?: Maybe<RecipeCondition>
+  filter?: Maybe<RecipeFilter>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  orderBy?: Maybe<Array<RecipesOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -548,6 +1241,28 @@ export interface QueryRolesArgs {
   last?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
   orderBy?: Maybe<Array<RolesOrderBy>>
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryUnitArgs {
+  id: Scalars['Int']
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryUnitByNodeIdArgs {
+  nodeId: Scalars['ID']
+}
+
+/** The root query type which gives access points into the data universe. */
+export interface QueryUnitsArgs {
+  after?: Maybe<Scalars['Cursor']>
+  before?: Maybe<Scalars['Cursor']>
+  condition?: Maybe<UnitCondition>
+  filter?: Maybe<UnitFilter>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  orderBy?: Maybe<Array<UnitsOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -598,6 +1313,319 @@ export interface QueryUsersArgs {
   last?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
   orderBy?: Maybe<Array<UsersOrderBy>>
+}
+
+export interface Recipe extends Node {
+  __typename: 'Recipe'
+  description?: Maybe<Scalars['String']>
+  garnish?: Maybe<Scalars['String']>
+  glass?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+  ingredientText: Scalars['String']
+  instructions?: Maybe<Scalars['String']>
+  name: Scalars['String']
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID']
+  /** Reads and enables pagination through a set of `RecipeIngredient`. */
+  recipeIngredients: RecipeIngredientsConnection
+  source?: Maybe<Scalars['String']>
+  ts?: Maybe<Scalars['FullText']>
+  /** Full-text search ranking when filtered by `ts`. */
+  tsRank?: Maybe<Scalars['Float']>
+}
+
+export interface RecipeRecipeIngredientsArgs {
+  after?: Maybe<Scalars['Cursor']>
+  before?: Maybe<Scalars['Cursor']>
+  condition?: Maybe<RecipeIngredientCondition>
+  filter?: Maybe<RecipeIngredientFilter>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+}
+
+/** A condition to be used against `Recipe` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export interface RecipeCondition {
+  /** Checks for equality with the object’s `description` field. */
+  description?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `garnish` field. */
+  garnish?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `glass` field. */
+  glass?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['Int']>
+  /** Checks for equality with the object’s `ingredientText` field. */
+  ingredientText?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `instructions` field. */
+  instructions?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `source` field. */
+  source?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `ts` field. */
+  ts?: Maybe<Scalars['FullText']>
+}
+
+/** A filter to be used against `Recipe` object types. All fields are combined with a logical ‘and.’ */
+export interface RecipeFilter {
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<RecipeFilter>>
+  /** Filter by the object’s `description` field. */
+  description?: Maybe<StringFilter>
+  /** Filter by the object’s `garnish` field. */
+  garnish?: Maybe<StringFilter>
+  /** Filter by the object’s `glass` field. */
+  glass?: Maybe<StringFilter>
+  /** Filter by the object’s `id` field. */
+  id?: Maybe<IntFilter>
+  /** Filter by the object’s `ingredientText` field. */
+  ingredientText?: Maybe<StringFilter>
+  /** Filter by the object’s `instructions` field. */
+  instructions?: Maybe<StringFilter>
+  /** Filter by the object’s `name` field. */
+  name?: Maybe<StringFilter>
+  /** Negates the expression. */
+  not?: Maybe<RecipeFilter>
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<RecipeFilter>>
+  /** Filter by the object’s `source` field. */
+  source?: Maybe<StringFilter>
+  /** Filter by the object’s `ts` field. */
+  ts?: Maybe<FullTextFilter>
+}
+
+export interface RecipeIngredient extends Node {
+  __typename: 'RecipeIngredient'
+  amount?: Maybe<Scalars['BigFloat']>
+  id: Scalars['Int']
+  /** Reads a single `Ingredient` that is related to this `RecipeIngredient`. */
+  ingredient?: Maybe<Ingredient>
+  ingredientId: Scalars['Int']
+  modifier?: Maybe<Scalars['String']>
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID']
+  /** Reads a single `Recipe` that is related to this `RecipeIngredient`. */
+  recipe?: Maybe<Recipe>
+  recipeId: Scalars['Int']
+  /** Reads a single `Unit` that is related to this `RecipeIngredient`. */
+  unit?: Maybe<Unit>
+  unitId: Scalars['Int']
+}
+
+/**
+ * A condition to be used against `RecipeIngredient` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export interface RecipeIngredientCondition {
+  /** Checks for equality with the object’s `amount` field. */
+  amount?: Maybe<Scalars['BigFloat']>
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['Int']>
+  /** Checks for equality with the object’s `ingredientId` field. */
+  ingredientId?: Maybe<Scalars['Int']>
+  /** Checks for equality with the object’s `modifier` field. */
+  modifier?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `recipeId` field. */
+  recipeId?: Maybe<Scalars['Int']>
+  /** Checks for equality with the object’s `unitId` field. */
+  unitId?: Maybe<Scalars['Int']>
+}
+
+/** A filter to be used against `RecipeIngredient` object types. All fields are combined with a logical ‘and.’ */
+export interface RecipeIngredientFilter {
+  /** Filter by the object’s `amount` field. */
+  amount?: Maybe<BigFloatFilter>
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<RecipeIngredientFilter>>
+  /** Filter by the object’s `id` field. */
+  id?: Maybe<IntFilter>
+  /** Filter by the object’s `ingredientId` field. */
+  ingredientId?: Maybe<IntFilter>
+  /** Filter by the object’s `modifier` field. */
+  modifier?: Maybe<StringFilter>
+  /** Negates the expression. */
+  not?: Maybe<RecipeIngredientFilter>
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<RecipeIngredientFilter>>
+  /** Filter by the object’s `recipeId` field. */
+  recipeId?: Maybe<IntFilter>
+  /** Filter by the object’s `unitId` field. */
+  unitId?: Maybe<IntFilter>
+}
+
+/** An input for mutations affecting `RecipeIngredient` */
+export interface RecipeIngredientInput {
+  amount?: Maybe<Scalars['BigFloat']>
+  id?: Maybe<Scalars['Int']>
+  ingredientId: Scalars['Int']
+  modifier?: Maybe<Scalars['String']>
+  recipeId: Scalars['Int']
+  unitId: Scalars['Int']
+}
+
+/** Represents an update to a `RecipeIngredient`. Fields that are set will be updated. */
+export interface RecipeIngredientPatch {
+  amount?: Maybe<Scalars['BigFloat']>
+  id?: Maybe<Scalars['Int']>
+  ingredientId?: Maybe<Scalars['Int']>
+  modifier?: Maybe<Scalars['String']>
+  recipeId?: Maybe<Scalars['Int']>
+  unitId?: Maybe<Scalars['Int']>
+}
+
+/** A connection to a list of `RecipeIngredient` values. */
+export interface RecipeIngredientsConnection {
+  __typename: 'RecipeIngredientsConnection'
+  /** A list of edges which contains the `RecipeIngredient` and cursor to aid in pagination. */
+  edges: Array<RecipeIngredientsEdge>
+  /** A list of `RecipeIngredient` objects. */
+  nodes: Array<Maybe<RecipeIngredient>>
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo
+  /** The count of *all* `RecipeIngredient` you could get from the connection. */
+  totalCount: Scalars['Int']
+}
+
+/** A `RecipeIngredient` edge in the connection. */
+export interface RecipeIngredientsEdge {
+  __typename: 'RecipeIngredientsEdge'
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>
+  /** The `RecipeIngredient` at the end of the edge. */
+  node?: Maybe<RecipeIngredient>
+}
+
+/** Methods to use when ordering `RecipeIngredient`. */
+export enum RecipeIngredientsOrderBy {
+  AmountAsc = 'AMOUNT_ASC',
+  AmountDesc = 'AMOUNT_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  IngredientByIngredientIdDescriptionAsc = 'INGREDIENT_BY_INGREDIENT_ID__DESCRIPTION_ASC',
+  IngredientByIngredientIdDescriptionDesc = 'INGREDIENT_BY_INGREDIENT_ID__DESCRIPTION_DESC',
+  IngredientByIngredientIdIdAsc = 'INGREDIENT_BY_INGREDIENT_ID__ID_ASC',
+  IngredientByIngredientIdIdDesc = 'INGREDIENT_BY_INGREDIENT_ID__ID_DESC',
+  IngredientByIngredientIdNameAsc = 'INGREDIENT_BY_INGREDIENT_ID__NAME_ASC',
+  IngredientByIngredientIdNameDesc = 'INGREDIENT_BY_INGREDIENT_ID__NAME_DESC',
+  IngredientByIngredientIdSortAsc = 'INGREDIENT_BY_INGREDIENT_ID__SORT_ASC',
+  IngredientByIngredientIdSortDesc = 'INGREDIENT_BY_INGREDIENT_ID__SORT_DESC',
+  IngredientByIngredientIdTagsAsc = 'INGREDIENT_BY_INGREDIENT_ID__TAGS_ASC',
+  IngredientByIngredientIdTagsDesc = 'INGREDIENT_BY_INGREDIENT_ID__TAGS_DESC',
+  IngredientIdAsc = 'INGREDIENT_ID_ASC',
+  IngredientIdDesc = 'INGREDIENT_ID_DESC',
+  ModifierAsc = 'MODIFIER_ASC',
+  ModifierDesc = 'MODIFIER_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  RecipeByRecipeIdDescriptionAsc = 'RECIPE_BY_RECIPE_ID__DESCRIPTION_ASC',
+  RecipeByRecipeIdDescriptionDesc = 'RECIPE_BY_RECIPE_ID__DESCRIPTION_DESC',
+  RecipeByRecipeIdGarnishAsc = 'RECIPE_BY_RECIPE_ID__GARNISH_ASC',
+  RecipeByRecipeIdGarnishDesc = 'RECIPE_BY_RECIPE_ID__GARNISH_DESC',
+  RecipeByRecipeIdGlassAsc = 'RECIPE_BY_RECIPE_ID__GLASS_ASC',
+  RecipeByRecipeIdGlassDesc = 'RECIPE_BY_RECIPE_ID__GLASS_DESC',
+  RecipeByRecipeIdIdAsc = 'RECIPE_BY_RECIPE_ID__ID_ASC',
+  RecipeByRecipeIdIdDesc = 'RECIPE_BY_RECIPE_ID__ID_DESC',
+  RecipeByRecipeIdIngredientTextAsc = 'RECIPE_BY_RECIPE_ID__INGREDIENT_TEXT_ASC',
+  RecipeByRecipeIdIngredientTextDesc = 'RECIPE_BY_RECIPE_ID__INGREDIENT_TEXT_DESC',
+  RecipeByRecipeIdInstructionsAsc = 'RECIPE_BY_RECIPE_ID__INSTRUCTIONS_ASC',
+  RecipeByRecipeIdInstructionsDesc = 'RECIPE_BY_RECIPE_ID__INSTRUCTIONS_DESC',
+  RecipeByRecipeIdNameAsc = 'RECIPE_BY_RECIPE_ID__NAME_ASC',
+  RecipeByRecipeIdNameDesc = 'RECIPE_BY_RECIPE_ID__NAME_DESC',
+  RecipeByRecipeIdSourceAsc = 'RECIPE_BY_RECIPE_ID__SOURCE_ASC',
+  RecipeByRecipeIdSourceDesc = 'RECIPE_BY_RECIPE_ID__SOURCE_DESC',
+  RecipeByRecipeIdTsAsc = 'RECIPE_BY_RECIPE_ID__TS_ASC',
+  RecipeByRecipeIdTsDesc = 'RECIPE_BY_RECIPE_ID__TS_DESC',
+  RecipeIdAsc = 'RECIPE_ID_ASC',
+  RecipeIdDesc = 'RECIPE_ID_DESC',
+  UnitByUnitIdAsMlAsc = 'UNIT_BY_UNIT_ID__AS_ML_ASC',
+  UnitByUnitIdAsMlDesc = 'UNIT_BY_UNIT_ID__AS_ML_DESC',
+  UnitByUnitIdIdAsc = 'UNIT_BY_UNIT_ID__ID_ASC',
+  UnitByUnitIdIdDesc = 'UNIT_BY_UNIT_ID__ID_DESC',
+  UnitByUnitIdNameAsc = 'UNIT_BY_UNIT_ID__NAME_ASC',
+  UnitByUnitIdNameDesc = 'UNIT_BY_UNIT_ID__NAME_DESC',
+  UnitByUnitIdSortAsc = 'UNIT_BY_UNIT_ID__SORT_ASC',
+  UnitByUnitIdSortDesc = 'UNIT_BY_UNIT_ID__SORT_DESC',
+  UnitIdAsc = 'UNIT_ID_ASC',
+  UnitIdDesc = 'UNIT_ID_DESC',
+}
+
+/** An input for mutations affecting `Recipe` */
+export interface RecipeInput {
+  description?: Maybe<Scalars['String']>
+  garnish?: Maybe<Scalars['String']>
+  glass?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['Int']>
+  ingredientText: Scalars['String']
+  instructions?: Maybe<Scalars['String']>
+  name: Scalars['String']
+  source?: Maybe<Scalars['String']>
+  ts?: Maybe<Scalars['FullText']>
+}
+
+/** Represents an update to a `Recipe`. Fields that are set will be updated. */
+export interface RecipePatch {
+  description?: Maybe<Scalars['String']>
+  garnish?: Maybe<Scalars['String']>
+  glass?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['Int']>
+  ingredientText?: Maybe<Scalars['String']>
+  instructions?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  source?: Maybe<Scalars['String']>
+  ts?: Maybe<Scalars['FullText']>
+}
+
+/** A connection to a list of `Recipe` values. */
+export interface RecipesConnection {
+  __typename: 'RecipesConnection'
+  /** A list of edges which contains the `Recipe` and cursor to aid in pagination. */
+  edges: Array<RecipesEdge>
+  /** A list of `Recipe` objects. */
+  nodes: Array<Maybe<Recipe>>
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo
+  /** The count of *all* `Recipe` you could get from the connection. */
+  totalCount: Scalars['Int']
+}
+
+/** A `Recipe` edge in the connection. */
+export interface RecipesEdge {
+  __typename: 'RecipesEdge'
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>
+  /** The `Recipe` at the end of the edge. */
+  node?: Maybe<Recipe>
+}
+
+/** Methods to use when ordering `Recipe`. */
+export enum RecipesOrderBy {
+  DescriptionAsc = 'DESCRIPTION_ASC',
+  DescriptionDesc = 'DESCRIPTION_DESC',
+  GarnishAsc = 'GARNISH_ASC',
+  GarnishDesc = 'GARNISH_DESC',
+  GlassAsc = 'GLASS_ASC',
+  GlassDesc = 'GLASS_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  IngredientTextAsc = 'INGREDIENT_TEXT_ASC',
+  IngredientTextDesc = 'INGREDIENT_TEXT_DESC',
+  InstructionsAsc = 'INSTRUCTIONS_ASC',
+  InstructionsDesc = 'INSTRUCTIONS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  RecipeIngredientsByRecipeIdCountAsc = 'RECIPE_INGREDIENTS_BY_RECIPE_ID__COUNT_ASC',
+  RecipeIngredientsByRecipeIdCountDesc = 'RECIPE_INGREDIENTS_BY_RECIPE_ID__COUNT_DESC',
+  SourceAsc = 'SOURCE_ASC',
+  SourceDesc = 'SOURCE_DESC',
+  TsAsc = 'TS_ASC',
+  TsDesc = 'TS_DESC',
+  TsRankAsc = 'TS_RANK_ASC',
+  TsRankDesc = 'TS_RANK_DESC',
 }
 
 export interface Role extends Node {
@@ -768,6 +1796,258 @@ export interface StringFilter {
   startsWithInsensitive?: Maybe<Scalars['String']>
 }
 
+export interface Unit extends Node {
+  __typename: 'Unit'
+  asMl?: Maybe<Scalars['BigFloat']>
+  id: Scalars['Int']
+  name: Scalars['String']
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID']
+  /** Reads and enables pagination through a set of `RecipeIngredient`. */
+  recipeIngredients: RecipeIngredientsConnection
+  sort?: Maybe<Scalars['Int']>
+}
+
+export interface UnitRecipeIngredientsArgs {
+  after?: Maybe<Scalars['Cursor']>
+  before?: Maybe<Scalars['Cursor']>
+  condition?: Maybe<RecipeIngredientCondition>
+  filter?: Maybe<RecipeIngredientFilter>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+}
+
+/** A condition to be used against `Unit` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export interface UnitCondition {
+  /** Checks for equality with the object’s `asMl` field. */
+  asMl?: Maybe<Scalars['BigFloat']>
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['Int']>
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>
+  /** Checks for equality with the object’s `sort` field. */
+  sort?: Maybe<Scalars['Int']>
+}
+
+/** A filter to be used against `Unit` object types. All fields are combined with a logical ‘and.’ */
+export interface UnitFilter {
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<UnitFilter>>
+  /** Filter by the object’s `asMl` field. */
+  asMl?: Maybe<BigFloatFilter>
+  /** Filter by the object’s `id` field. */
+  id?: Maybe<IntFilter>
+  /** Filter by the object’s `name` field. */
+  name?: Maybe<StringFilter>
+  /** Negates the expression. */
+  not?: Maybe<UnitFilter>
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<UnitFilter>>
+  /** Filter by the object’s `sort` field. */
+  sort?: Maybe<IntFilter>
+}
+
+/** An input for mutations affecting `Unit` */
+export interface UnitInput {
+  asMl?: Maybe<Scalars['BigFloat']>
+  id?: Maybe<Scalars['Int']>
+  name: Scalars['String']
+  sort?: Maybe<Scalars['Int']>
+}
+
+/** Represents an update to a `Unit`. Fields that are set will be updated. */
+export interface UnitPatch {
+  asMl?: Maybe<Scalars['BigFloat']>
+  id?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+  sort?: Maybe<Scalars['Int']>
+}
+
+/** A connection to a list of `Unit` values. */
+export interface UnitsConnection {
+  __typename: 'UnitsConnection'
+  /** A list of edges which contains the `Unit` and cursor to aid in pagination. */
+  edges: Array<UnitsEdge>
+  /** A list of `Unit` objects. */
+  nodes: Array<Maybe<Unit>>
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo
+  /** The count of *all* `Unit` you could get from the connection. */
+  totalCount: Scalars['Int']
+}
+
+/** A `Unit` edge in the connection. */
+export interface UnitsEdge {
+  __typename: 'UnitsEdge'
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>
+  /** The `Unit` at the end of the edge. */
+  node?: Maybe<Unit>
+}
+
+/** Methods to use when ordering `Unit`. */
+export enum UnitsOrderBy {
+  AsMlAsc = 'AS_ML_ASC',
+  AsMlDesc = 'AS_ML_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  RecipeIngredientsByUnitIdCountAsc = 'RECIPE_INGREDIENTS_BY_UNIT_ID__COUNT_ASC',
+  RecipeIngredientsByUnitIdCountDesc = 'RECIPE_INGREDIENTS_BY_UNIT_ID__COUNT_DESC',
+  SortAsc = 'SORT_ASC',
+  SortDesc = 'SORT_DESC',
+}
+
+/** All input for the `updateIngredientByNodeId` mutation. */
+export interface UpdateIngredientByNodeIdInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The globally unique `ID` which will identify a single `Ingredient` to be updated. */
+  nodeId: Scalars['ID']
+  /** An object where the defined keys will be set on the `Ingredient` being updated. */
+  patch: IngredientPatch
+}
+
+/** All input for the `updateIngredient` mutation. */
+export interface UpdateIngredientInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+  /** An object where the defined keys will be set on the `Ingredient` being updated. */
+  patch: IngredientPatch
+}
+
+/** The output of our update `Ingredient` mutation. */
+export interface UpdateIngredientPayload {
+  __typename: 'UpdateIngredientPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The `Ingredient` that was updated by this mutation. */
+  ingredient?: Maybe<Ingredient>
+  /** An edge for our `Ingredient`. May be used by Relay 1. */
+  ingredientEdge?: Maybe<IngredientsEdge>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+}
+
+/** The output of our update `Ingredient` mutation. */
+export interface UpdateIngredientPayloadIngredientEdgeArgs {
+  orderBy?: Maybe<Array<IngredientsOrderBy>>
+}
+
+/** All input for the `updateRecipeByNodeId` mutation. */
+export interface UpdateRecipeByNodeIdInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The globally unique `ID` which will identify a single `Recipe` to be updated. */
+  nodeId: Scalars['ID']
+  /** An object where the defined keys will be set on the `Recipe` being updated. */
+  patch: RecipePatch
+}
+
+/** All input for the `updateRecipeIngredientByNodeId` mutation. */
+export interface UpdateRecipeIngredientByNodeIdInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The globally unique `ID` which will identify a single `RecipeIngredient` to be updated. */
+  nodeId: Scalars['ID']
+  /** An object where the defined keys will be set on the `RecipeIngredient` being updated. */
+  patch: RecipeIngredientPatch
+}
+
+/** All input for the `updateRecipeIngredient` mutation. */
+export interface UpdateRecipeIngredientInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+  /** An object where the defined keys will be set on the `RecipeIngredient` being updated. */
+  patch: RecipeIngredientPatch
+}
+
+/** The output of our update `RecipeIngredient` mutation. */
+export interface UpdateRecipeIngredientPayload {
+  __typename: 'UpdateRecipeIngredientPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** Reads a single `Ingredient` that is related to this `RecipeIngredient`. */
+  ingredient?: Maybe<Ingredient>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+  /** Reads a single `Recipe` that is related to this `RecipeIngredient`. */
+  recipe?: Maybe<Recipe>
+  /** The `RecipeIngredient` that was updated by this mutation. */
+  recipeIngredient?: Maybe<RecipeIngredient>
+  /** An edge for our `RecipeIngredient`. May be used by Relay 1. */
+  recipeIngredientEdge?: Maybe<RecipeIngredientsEdge>
+  /** Reads a single `Unit` that is related to this `RecipeIngredient`. */
+  unit?: Maybe<Unit>
+}
+
+/** The output of our update `RecipeIngredient` mutation. */
+export interface UpdateRecipeIngredientPayloadRecipeIngredientEdgeArgs {
+  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+}
+
+/** All input for the `updateRecipe` mutation. */
+export interface UpdateRecipeInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+  /** An object where the defined keys will be set on the `Recipe` being updated. */
+  patch: RecipePatch
+}
+
+/** The output of our update `Recipe` mutation. */
+export interface UpdateRecipePayload {
+  __typename: 'UpdateRecipePayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+  /** The `Recipe` that was updated by this mutation. */
+  recipe?: Maybe<Recipe>
+  /** An edge for our `Recipe`. May be used by Relay 1. */
+  recipeEdge?: Maybe<RecipesEdge>
+}
+
+/** The output of our update `Recipe` mutation. */
+export interface UpdateRecipePayloadRecipeEdgeArgs {
+  orderBy?: Maybe<Array<RecipesOrderBy>>
+}
+
 /** All input for the `updateRoleByAuthority` mutation. */
 export interface UpdateRoleByAuthorityInput {
   authority: Scalars['String']
@@ -824,6 +2104,52 @@ export interface UpdateRolePayload {
 /** The output of our update `Role` mutation. */
 export interface UpdateRolePayloadRoleEdgeArgs {
   orderBy?: Maybe<Array<RolesOrderBy>>
+}
+
+/** All input for the `updateUnitByNodeId` mutation. */
+export interface UpdateUnitByNodeIdInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** The globally unique `ID` which will identify a single `Unit` to be updated. */
+  nodeId: Scalars['ID']
+  /** An object where the defined keys will be set on the `Unit` being updated. */
+  patch: UnitPatch
+}
+
+/** All input for the `updateUnit` mutation. */
+export interface UpdateUnitInput {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  id: Scalars['Int']
+  /** An object where the defined keys will be set on the `Unit` being updated. */
+  patch: UnitPatch
+}
+
+/** The output of our update `Unit` mutation. */
+export interface UpdateUnitPayload {
+  __typename: 'UpdateUnitPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+  /** The `Unit` that was updated by this mutation. */
+  unit?: Maybe<Unit>
+  /** An edge for our `Unit`. May be used by Relay 1. */
+  unitEdge?: Maybe<UnitsEdge>
+}
+
+/** The output of our update `Unit` mutation. */
+export interface UpdateUnitPayloadUnitEdgeArgs {
+  orderBy?: Maybe<Array<UnitsOrderBy>>
 }
 
 /** All input for the `updateUserByEmail` mutation. */
@@ -1115,20 +2441,144 @@ export enum UsersOrderBy {
   UserRolesByUserIdCountDesc = 'USER_ROLES_BY_USER_ID__COUNT_DESC',
 }
 
+export type RecipeFieldsFragment = {
+  __typename: 'RecipesConnection'
+  nodes: Array<
+    | {
+        __typename: 'Recipe'
+        name: string
+        description?: string | null | undefined
+        instructions?: string | null | undefined
+        glass?: string | null | undefined
+        garnish?: string | null | undefined
+        source?: string | null | undefined
+        recipeIngredients: {
+          __typename: 'RecipeIngredientsConnection'
+          nodes: Array<
+            | {
+                __typename: 'RecipeIngredient'
+                amount?: any | null | undefined
+                ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
+                unit?: { __typename: 'Unit'; name: string } | null | undefined
+              }
+            | null
+            | undefined
+          >
+        }
+      }
+    | null
+    | undefined
+  >
+}
+
+export type GetAllDrinksQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetAllDrinksQuery = {
+  __typename: 'Query'
+  recipes?:
+    | {
+        __typename: 'RecipesConnection'
+        nodes: Array<
+          | {
+              __typename: 'Recipe'
+              name: string
+              description?: string | null | undefined
+              instructions?: string | null | undefined
+              glass?: string | null | undefined
+              garnish?: string | null | undefined
+              source?: string | null | undefined
+              recipeIngredients: {
+                __typename: 'RecipeIngredientsConnection'
+                nodes: Array<
+                  | {
+                      __typename: 'RecipeIngredient'
+                      amount?: any | null | undefined
+                      ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
+                      unit?: { __typename: 'Unit'; name: string } | null | undefined
+                    }
+                  | null
+                  | undefined
+                >
+              }
+            }
+          | null
+          | undefined
+        >
+      }
+    | null
+    | undefined
+}
+
+export type GetFilteredDrinksQueryVariables = Exact<{
+  value: Scalars['String']
+}>
+
+export type GetFilteredDrinksQuery = {
+  __typename: 'Query'
+  recipes?:
+    | {
+        __typename: 'RecipesConnection'
+        nodes: Array<
+          | {
+              __typename: 'Recipe'
+              name: string
+              description?: string | null | undefined
+              instructions?: string | null | undefined
+              glass?: string | null | undefined
+              garnish?: string | null | undefined
+              source?: string | null | undefined
+              recipeIngredients: {
+                __typename: 'RecipeIngredientsConnection'
+                nodes: Array<
+                  | {
+                      __typename: 'RecipeIngredient'
+                      amount?: any | null | undefined
+                      ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
+                      unit?: { __typename: 'Unit'; name: string } | null | undefined
+                    }
+                  | null
+                  | undefined
+                >
+              }
+            }
+          | null
+          | undefined
+        >
+      }
+    | null
+    | undefined
+}
+
+export type GetAllIngredientsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetAllIngredientsQuery = {
+  __typename: 'Query'
+  ingredients?:
+    | {
+        __typename: 'IngredientsConnection'
+        nodes: Array<{ __typename: 'Ingredient'; name: string; tags?: string | null | undefined } | null | undefined>
+      }
+    | null
+    | undefined
+}
+
 export type GetUserByEmailQueryVariables = Exact<{
   email: Scalars['String']
 }>
 
 export type GetUserByEmailQuery = {
   __typename: 'Query'
-  userByEmail?: Maybe<{ __typename: 'User'; id: number; email: string }>
+  userByEmail?: { __typename: 'User'; id: number; email: string } | null | undefined
 }
 
 export type GetUserByIdQueryVariables = Exact<{
   id: Scalars['Int']
 }>
 
-export type GetUserByIdQuery = { __typename: 'Query'; user?: Maybe<{ __typename: 'User'; id: number; email: string }> }
+export type GetUserByIdQuery = {
+  __typename: 'Query'
+  user?: { __typename: 'User'; id: number; email: string } | null | undefined
+}
 
 export type UpdateUserMutationVariables = Exact<{
   input: UpdateUserInput
@@ -1136,30 +2586,113 @@ export type UpdateUserMutationVariables = Exact<{
 
 export type UpdateUserMutation = {
   __typename: 'Mutation'
-  updateUser?: Maybe<{
-    __typename: 'UpdateUserPayload'
-    user?: Maybe<{ __typename: 'User'; id: number; email: string }>
-  }>
+  updateUser?:
+    | { __typename: 'UpdateUserPayload'; user?: { __typename: 'User'; id: number; email: string } | null | undefined }
+    | null
+    | undefined
 }
 
 export type GetAllUsersQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetAllUsersQuery = {
   __typename: 'Query'
-  users?: Maybe<{
-    __typename: 'UsersConnection'
-    nodes: Array<Maybe<{ __typename: 'User'; id: number; email: string }>>
-  }>
+  users?:
+    | {
+        __typename: 'UsersConnection'
+        nodes: Array<{ __typename: 'User'; id: number; email: string } | null | undefined>
+      }
+    | null
+    | undefined
 }
 
 export type UserFieldsFragment = { __typename: 'User'; id: number; email: string }
 
+export const RecipeFieldsFragmentDoc = `
+    fragment recipeFields on RecipesConnection {
+  nodes {
+    name
+    description
+    recipeIngredients {
+      nodes {
+        ingredient {
+          name
+        }
+        amount
+        unit {
+          name
+        }
+      }
+    }
+    instructions
+    glass
+    garnish
+    source
+  }
+}
+    `
 export const UserFieldsFragmentDoc = `
     fragment userFields on User {
   id
   email
 }
     `
+export const GetAllDrinksDocument = `
+    query getAllDrinks {
+  recipes(orderBy: NAME_ASC) {
+    ...recipeFields
+  }
+}
+    ${RecipeFieldsFragmentDoc}`
+export const useGetAllDrinksQuery = <TData = GetAllDrinksQuery, TError = QueryError>(
+  variables?: GetAllDrinksQueryVariables,
+  options?: UseQueryOptions<GetAllDrinksQuery, TError, TData>
+) =>
+  useQuery<GetAllDrinksQuery, TError, TData>(
+    variables === undefined ? ['getAllDrinks'] : ['getAllDrinks', variables],
+    useFetchData<GetAllDrinksQuery, GetAllDrinksQueryVariables>(GetAllDrinksDocument).bind(null, variables),
+    options
+  )
+export const GetFilteredDrinksDocument = `
+    query getFilteredDrinks($value: String!) {
+  recipes(filter: {ts: {matches: $value}}, orderBy: NAME_ASC) {
+    ...recipeFields
+  }
+}
+    ${RecipeFieldsFragmentDoc}`
+export const useGetFilteredDrinksQuery = <TData = GetFilteredDrinksQuery, TError = QueryError>(
+  variables: GetFilteredDrinksQueryVariables,
+  options?: UseQueryOptions<GetFilteredDrinksQuery, TError, TData>
+) =>
+  useQuery<GetFilteredDrinksQuery, TError, TData>(
+    ['getFilteredDrinks', variables],
+    useFetchData<GetFilteredDrinksQuery, GetFilteredDrinksQueryVariables>(GetFilteredDrinksDocument).bind(
+      null,
+      variables
+    ),
+    options
+  )
+export const GetAllIngredientsDocument = `
+    query getAllIngredients {
+  ingredients(orderBy: NAME_ASC) {
+    nodes {
+      name
+      tags
+    }
+  }
+}
+    `
+export const useGetAllIngredientsQuery = <TData = GetAllIngredientsQuery, TError = QueryError>(
+  variables?: GetAllIngredientsQueryVariables,
+  options?: UseQueryOptions<GetAllIngredientsQuery, TError, TData>
+) =>
+  useQuery<GetAllIngredientsQuery, TError, TData>(
+    variables === undefined ? ['getAllIngredients'] : ['getAllIngredients', variables],
+    useFetchData<GetAllIngredientsQuery, GetAllIngredientsQueryVariables>(GetAllIngredientsDocument).bind(
+      null,
+      variables
+    ),
+    options
+  )
 export const GetUserByEmailDocument = `
     query getUserByEmail($email: String!) {
   userByEmail(email: $email) {

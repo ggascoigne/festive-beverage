@@ -1,6 +1,7 @@
 const PgSimplifyInflectorPlugin = require('@graphile-contrib/pg-simplify-inflector')
 const ConnectionFilterPlugin = require('postgraphile-plugin-connection-filter')
 const PgOrderByRelatedPlugin = require('@graphile-contrib/pg-order-by-related')
+const PgFulltextFilterPlugin = require('@pyramation/postgraphile-plugin-fulltext-filter')
 
 export const options = {
   dynamicJson: true,
@@ -14,5 +15,5 @@ export const options = {
   ignoreRBAC: false,
   showErrorStack: false,
   watchPg: false,
-  appendPlugins: [PgSimplifyInflectorPlugin, ConnectionFilterPlugin, PgOrderByRelatedPlugin],
+  appendPlugins: [PgSimplifyInflectorPlugin, ConnectionFilterPlugin, PgOrderByRelatedPlugin, PgFulltextFilterPlugin],
 }

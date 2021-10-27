@@ -1,0 +1,42 @@
+fragment recipeFields on RecipesConnection {
+  nodes {
+    name
+    description
+    recipeIngredients {
+      nodes {
+        ingredient {
+          name
+        }
+        amount
+        unit {
+          name
+        }
+      }
+    }
+    instructions
+    glass
+    garnish
+    source
+  }
+}
+
+query getAllDrinks {
+  recipes(orderBy: NAME_ASC) {
+    ...recipeFields
+  }
+}
+
+query getFilteredDrinks($value: String!) {
+  recipes(filter: { ts: { matches: $value } }, orderBy: NAME_ASC) {
+    ...recipeFields
+  }
+}
+
+query getAllIngredients {
+  ingredients(orderBy: NAME_ASC) {
+    nodes {
+      name
+      tags
+    }
+  }
+}

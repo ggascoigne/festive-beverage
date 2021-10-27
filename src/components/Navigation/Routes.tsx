@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Home } from '../../pages/Home'
+import { Home, JwtPage } from '../../pages'
 import { Perms } from '../Auth'
 
 // note that entries are only displayed if they have a label
@@ -33,5 +33,12 @@ export const rootRoutes: RootRoutes = [
     exact: false,
     component: React.lazy(() => import('components/GraphiQL/GraphiQL')),
     permission: Perms.GraphiqlLoad,
+  },
+  {
+    path: '/jwt',
+    label: 'JWT Token',
+    exact: true,
+    component: JwtPage,
+    permission: Perms.IsAdmin,
   },
 ]
