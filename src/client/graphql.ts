@@ -2444,12 +2444,13 @@ export enum UsersOrderBy {
 export type RecipeFieldsFragment = {
   __typename: 'Recipe'
   name: string
+  id: number
   description?: string | null | undefined
   instructions?: string | null | undefined
+  ingredientText: string
   glass?: string | null | undefined
   garnish?: string | null | undefined
   source?: string | null | undefined
-  id: number
   recipeIngredients: {
     __typename: 'RecipeIngredientsConnection'
     nodes: Array<
@@ -2471,12 +2472,13 @@ export type RecipeConnectionFieldsFragment = {
     | {
         __typename: 'Recipe'
         name: string
+        id: number
         description?: string | null | undefined
         instructions?: string | null | undefined
+        ingredientText: string
         glass?: string | null | undefined
         garnish?: string | null | undefined
         source?: string | null | undefined
-        id: number
         recipeIngredients: {
           __typename: 'RecipeIngredientsConnection'
           nodes: Array<
@@ -2507,12 +2509,13 @@ export type GetAllDrinksQuery = {
           | {
               __typename: 'Recipe'
               name: string
+              id: number
               description?: string | null | undefined
               instructions?: string | null | undefined
+              ingredientText: string
               glass?: string | null | undefined
               garnish?: string | null | undefined
               source?: string | null | undefined
-              id: number
               recipeIngredients: {
                 __typename: 'RecipeIngredientsConnection'
                 nodes: Array<
@@ -2548,12 +2551,13 @@ export type GetFilteredDrinksQuery = {
           | {
               __typename: 'Recipe'
               name: string
+              id: number
               description?: string | null | undefined
               instructions?: string | null | undefined
+              ingredientText: string
               glass?: string | null | undefined
               garnish?: string | null | undefined
               source?: string | null | undefined
-              id: number
               recipeIngredients: {
                 __typename: 'RecipeIngredientsConnection'
                 nodes: Array<
@@ -2599,12 +2603,13 @@ export type GetDrinkByIdQuery = {
     | {
         __typename: 'Recipe'
         name: string
+        id: number
         description?: string | null | undefined
         instructions?: string | null | undefined
+        ingredientText: string
         glass?: string | null | undefined
         garnish?: string | null | undefined
         source?: string | null | undefined
-        id: number
         recipeIngredients: {
           __typename: 'RecipeIngredientsConnection'
           nodes: Array<
@@ -2671,7 +2676,13 @@ export type UserFieldsFragment = { __typename: 'User'; id: number; email: string
 export const RecipeFieldsFragmentDoc = `
     fragment recipeFields on Recipe {
   name
+  id
   description
+  instructions
+  ingredientText
+  glass
+  garnish
+  source
   recipeIngredients {
     nodes {
       ingredient {
@@ -2683,11 +2694,6 @@ export const RecipeFieldsFragmentDoc = `
       }
     }
   }
-  instructions
-  glass
-  garnish
-  source
-  id
 }
     `
 export const RecipeConnectionFieldsFragmentDoc = `

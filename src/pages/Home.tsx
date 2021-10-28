@@ -1,8 +1,9 @@
 import { Grid } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useQueryStringKey } from 'use-route-as-state'
 
-import { useGetAllDrinksQuery, useGetDrinkByIdQuery, useGetFilteredDrinksQuery } from '../client'
+import { useGetAllDrinksQuery } from '../client'
 import { useAuth } from '../components/Auth'
 import { Drink, DrinkCard } from '../components/DrinkCard'
 import { GraphQLError } from '../components/GraphQLError'
@@ -16,73 +17,63 @@ const DrinkList: React.FC<{ drinks: Drink[] }> = ({ drinks }) => (
   <Grid container spacing={3}>
     {drinks?.map((d, i) => (
       <Grid key={i} item xs={12} sm={6} md={4} lg={3}>
-        <DrinkCard drink={d} />
+        <Link to={(location: any) => `${location.pathname}?drink=${d.id}`}>
+          <DrinkCard drink={d} />
+        </Link>
       </Grid>
     ))}
   </Grid>
 )
 
-const AllResults: React.FC = () => {
-  const { data, error } = useGetAllDrinksQuery({}, { staleTime: 5 * 60 * 1000 })
-  const [drinks, setDrinks] = useState<Drink[] | undefined>(undefined)
-  useEffect(() => {
-    setDrinks(data?.recipes?.nodes?.filter(notEmpty))
-  }, [data])
+const matchesOne = (s: string, d: Drink) => {
+  const sl = s.toLocaleLowerCase()
 
-  if (error) {
-    return <GraphQLError error={error} />
-  }
-  if (!drinks) {
-    return <Loader />
-  }
-  return <DrinkList drinks={drinks} />
+  return (
+    d.name.toLocaleLowerCase().includes(sl) ||
+    d.ingredientText.toLocaleLowerCase().includes(sl) ||
+    (d.description ?? '').toLocaleLowerCase().includes(sl) ||
+    (d.instructions ?? '').toLocaleLowerCase().includes(sl) ||
+    (d.garnish ?? '').toLocaleLowerCase().includes(sl) ||
+    (d.glass ?? '').toLocaleLowerCase().includes(sl) ||
+    (d.source ?? '').toLocaleLowerCase().includes(sl)
+  )
 }
 
-const SearchResults: React.FC<{ search: string[] }> = ({ search }) => {
-  const { data, error } = useGetFilteredDrinksQuery({ value: search.join(' ') }, { staleTime: 5 * 60 * 1000 })
-  const [drinks, setDrinks] = useState<Drink[] | undefined>(undefined)
-
-  useEffect(() => {
-    setDrinks(data?.recipes?.nodes?.filter(notEmpty))
-  }, [data])
-
-  if (error) {
-    return <GraphQLError error={error} />
-  }
-  if (!drinks) {
-    return <Loader />
-  }
-  return <DrinkList drinks={drinks} />
-}
-
-const SingleDrink: React.FC<{ drinkId: number }> = ({ drinkId }) => {
-  const { data, error } = useGetDrinkByIdQuery({ id: drinkId }, { staleTime: 5 * 60 * 1000 })
-
-  if (error) {
-    return <GraphQLError error={error} />
-  }
-  if (!data) {
-    return <Loader />
-  }
-  return <DrinkCard drink={data.recipe!} />
-}
+const matchesSearch = (search: string[], drink: Drink) => search.every((s) => matchesOne(s, drink))
 
 const LoggedIn = () => {
   const [search, setSearch] = useQueryStringKey('ingredient')
   const [drink] = useQueryStringKey('drink')
   const hasSearch = (search as string[])?.length > 0 || false
+  const { data, error } = useGetAllDrinksQuery({}, { staleTime: 60 * 60 * 1000 })
+  const [drinks, setDrinks] = useState<Drink[] | undefined>(undefined)
+
+  useEffect(() => {
+    if (hasSearch) {
+      setDrinks(data?.recipes?.nodes?.filter(notEmpty).filter((d) => matchesSearch(search as string[], d)))
+    } else {
+      setDrinks(data?.recipes?.nodes?.filter(notEmpty))
+    }
+  }, [data, hasSearch, search])
+
+  if (error) {
+    return <GraphQLError error={error} />
+  }
+  if (!drinks) {
+    return <Loader />
+  }
 
   if (drink) {
     return (
       <Page title='Festive Beverages' hideTitle>
-        <SingleDrink drinkId={parseInt(drink as string)} />
+        <DrinkCard drink={drinks.find((d) => d.id === parseInt(drink as string))} />
       </Page>
     )
   } else {
     return (
       <Page title='Festive Beverages' hideTitle>
         <Search value={search as string[]} onChange={setSearch} />
-        {hasSearch ? <SearchResults search={search as string[]} /> : <AllResults />}
+        <DrinkList drinks={drinks} />
       </Page>
     )
   }

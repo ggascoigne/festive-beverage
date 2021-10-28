@@ -1,6 +1,12 @@
 fragment recipeFields on Recipe {
   name
+  id
   description
+  instructions
+  ingredientText
+  glass
+  garnish
+  source
   recipeIngredients {
     nodes {
       ingredient {
@@ -12,11 +18,6 @@ fragment recipeFields on Recipe {
       }
     }
   }
-  instructions
-  glass
-  garnish
-  source
-  id
 }
 
 fragment recipeConnectionFields on RecipesConnection {

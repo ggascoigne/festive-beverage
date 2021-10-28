@@ -33,6 +33,7 @@ export function Search({ onChange, value }: PropsWithChildren<SearchProps>): Rea
       id='search'
       className={classes.search}
       options={names}
+      freeSolo
       multiple
       value={value}
       renderOption={(ingredient) => <span>{ingredient || ''}</span>}
