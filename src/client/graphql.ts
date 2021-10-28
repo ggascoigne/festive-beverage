@@ -2442,6 +2442,30 @@ export enum UsersOrderBy {
 }
 
 export type RecipeFieldsFragment = {
+  __typename: 'Recipe'
+  name: string
+  description?: string | null | undefined
+  instructions?: string | null | undefined
+  glass?: string | null | undefined
+  garnish?: string | null | undefined
+  source?: string | null | undefined
+  id: number
+  recipeIngredients: {
+    __typename: 'RecipeIngredientsConnection'
+    nodes: Array<
+      | {
+          __typename: 'RecipeIngredient'
+          amount?: any | null | undefined
+          ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
+          unit?: { __typename: 'Unit'; name: string } | null | undefined
+        }
+      | null
+      | undefined
+    >
+  }
+}
+
+export type RecipeConnectionFieldsFragment = {
   __typename: 'RecipesConnection'
   nodes: Array<
     | {
@@ -2452,6 +2476,7 @@ export type RecipeFieldsFragment = {
         glass?: string | null | undefined
         garnish?: string | null | undefined
         source?: string | null | undefined
+        id: number
         recipeIngredients: {
           __typename: 'RecipeIngredientsConnection'
           nodes: Array<
@@ -2487,6 +2512,7 @@ export type GetAllDrinksQuery = {
               glass?: string | null | undefined
               garnish?: string | null | undefined
               source?: string | null | undefined
+              id: number
               recipeIngredients: {
                 __typename: 'RecipeIngredientsConnection'
                 nodes: Array<
@@ -2527,6 +2553,7 @@ export type GetFilteredDrinksQuery = {
               glass?: string | null | undefined
               garnish?: string | null | undefined
               source?: string | null | undefined
+              id: number
               recipeIngredients: {
                 __typename: 'RecipeIngredientsConnection'
                 nodes: Array<
@@ -2557,6 +2584,40 @@ export type GetAllIngredientsQuery = {
     | {
         __typename: 'IngredientsConnection'
         nodes: Array<{ __typename: 'Ingredient'; name: string; tags?: string | null | undefined } | null | undefined>
+      }
+    | null
+    | undefined
+}
+
+export type GetDrinkByIdQueryVariables = Exact<{
+  id: Scalars['Int']
+}>
+
+export type GetDrinkByIdQuery = {
+  __typename: 'Query'
+  recipe?:
+    | {
+        __typename: 'Recipe'
+        name: string
+        description?: string | null | undefined
+        instructions?: string | null | undefined
+        glass?: string | null | undefined
+        garnish?: string | null | undefined
+        source?: string | null | undefined
+        id: number
+        recipeIngredients: {
+          __typename: 'RecipeIngredientsConnection'
+          nodes: Array<
+            | {
+                __typename: 'RecipeIngredient'
+                amount?: any | null | undefined
+                ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
+                unit?: { __typename: 'Unit'; name: string } | null | undefined
+              }
+            | null
+            | undefined
+          >
+        }
       }
     | null
     | undefined
@@ -2608,28 +2669,34 @@ export type GetAllUsersQuery = {
 export type UserFieldsFragment = { __typename: 'User'; id: number; email: string }
 
 export const RecipeFieldsFragmentDoc = `
-    fragment recipeFields on RecipesConnection {
-  nodes {
-    name
-    description
-    recipeIngredients {
-      nodes {
-        ingredient {
-          name
-        }
-        amount
-        unit {
-          name
-        }
+    fragment recipeFields on Recipe {
+  name
+  description
+  recipeIngredients {
+    nodes {
+      ingredient {
+        name
+      }
+      amount
+      unit {
+        name
       }
     }
-    instructions
-    glass
-    garnish
-    source
   }
+  instructions
+  glass
+  garnish
+  source
+  id
 }
     `
+export const RecipeConnectionFieldsFragmentDoc = `
+    fragment recipeConnectionFields on RecipesConnection {
+  nodes {
+    ...recipeFields
+  }
+}
+    ${RecipeFieldsFragmentDoc}`
 export const UserFieldsFragmentDoc = `
     fragment userFields on User {
   id
@@ -2639,10 +2706,10 @@ export const UserFieldsFragmentDoc = `
 export const GetAllDrinksDocument = `
     query getAllDrinks {
   recipes(orderBy: NAME_ASC) {
-    ...recipeFields
+    ...recipeConnectionFields
   }
 }
-    ${RecipeFieldsFragmentDoc}`
+    ${RecipeConnectionFieldsFragmentDoc}`
 export const useGetAllDrinksQuery = <TData = GetAllDrinksQuery, TError = QueryError>(
   variables?: GetAllDrinksQueryVariables,
   options?: UseQueryOptions<GetAllDrinksQuery, TError, TData>
@@ -2655,10 +2722,10 @@ export const useGetAllDrinksQuery = <TData = GetAllDrinksQuery, TError = QueryEr
 export const GetFilteredDrinksDocument = `
     query getFilteredDrinks($value: String!) {
   recipes(filter: {ts: {matches: $value}}, orderBy: NAME_ASC) {
-    ...recipeFields
+    ...recipeConnectionFields
   }
 }
-    ${RecipeFieldsFragmentDoc}`
+    ${RecipeConnectionFieldsFragmentDoc}`
 export const useGetFilteredDrinksQuery = <TData = GetFilteredDrinksQuery, TError = QueryError>(
   variables: GetFilteredDrinksQueryVariables,
   options?: UseQueryOptions<GetFilteredDrinksQuery, TError, TData>
@@ -2691,6 +2758,22 @@ export const useGetAllIngredientsQuery = <TData = GetAllIngredientsQuery, TError
       null,
       variables
     ),
+    options
+  )
+export const GetDrinkByIdDocument = `
+    query getDrinkById($id: Int!) {
+  recipe(id: $id) {
+    ...recipeFields
+  }
+}
+    ${RecipeFieldsFragmentDoc}`
+export const useGetDrinkByIdQuery = <TData = GetDrinkByIdQuery, TError = QueryError>(
+  variables: GetDrinkByIdQueryVariables,
+  options?: UseQueryOptions<GetDrinkByIdQuery, TError, TData>
+) =>
+  useQuery<GetDrinkByIdQuery, TError, TData>(
+    ['getDrinkById', variables],
+    useFetchData<GetDrinkByIdQuery, GetDrinkByIdQueryVariables>(GetDrinkByIdDocument).bind(null, variables),
     options
   )
 export const GetUserByEmailDocument = `

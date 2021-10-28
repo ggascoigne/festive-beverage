@@ -15743,6 +15743,11 @@ use-latest@^1.0.0:
   dependencies:
     use-isomorphic-layout-effect "^1.0.0"
 
+use-route-as-state@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/use-route-as-state/-/use-route-as-state-5.0.0.tgz#72bd1f6bb70b62810b6205213a2996cc128fefbc"
+  integrity sha512-MmMLIzxpmPHji0tSPXfYljeTOnJ2UkzFd+oBSMwcHtSwFM7lwCE8aAS1Gt38wloB90ACXU/BFyETPxNtFixhIg==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"

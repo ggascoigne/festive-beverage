@@ -1,6 +1,7 @@
 import { AppBar, Hidden, IconButton, Theme, Toolbar, Typography, createStyles, makeStyles } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import React, { ReactNode, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Config, useGetConfig } from 'utils'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -55,9 +56,11 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu })
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant='h6' color='inherit' noWrap>
-          Festive Beverage
-        </Typography>
+        <Link to='/' style={{ color: 'white' }}>
+          <Typography variant='h6' color='inherit' noWrap>
+            Festive Beverage
+          </Typography>
+        </Link>
         &nbsp;{configDetails}
       </Toolbar>
       <Hidden smDown implementation='css'>

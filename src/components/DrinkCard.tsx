@@ -4,6 +4,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import Fraction from 'fraction.js'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { GetAllDrinksQuery } from '../client'
 import { GqlType, notEmpty } from '../utils'
@@ -29,35 +30,36 @@ const useStyles = makeStyles({
 
 export const DrinkCard: React.FC<{ drink: Drink }> = ({ drink }) => {
   const classes = useStyles()
-
   return (
-    <Card className={classes.root} elevation={3}>
-      <CardContent>
-        <Typography variant='h5' component='h2' gutterBottom>
-          {drink.name}
-        </Typography>
-        <ul>
-          {drink?.recipeIngredients?.nodes?.filter(notEmpty)?.map((ingredient, i) => (
-            <Typography key={i} component='li'>
-              {ingredient.ingredient?.name} {new Fraction(ingredient.amount).toFraction(true)} {ingredient.unit?.name}
-            </Typography>
-          ))}
-        </ul>
-        <Typography className={classes.pos} color='textSecondary'>
-          Glass: {drink.glass}
-        </Typography>
-        {drink.garnish ? (
-          <Typography className={classes.pos} color='textSecondary'>
-            Garnish: {drink.garnish}
+    <Link to={(location: any) => `${location.pathname}?drink=${drink.id}`}>
+      <Card className={classes.root} elevation={3}>
+        <CardContent>
+          <Typography variant='h5' component='h2' gutterBottom>
+            {drink.name}
           </Typography>
-        ) : null}
-        <Typography variant='body2' component='p'>
-          {drink.instructions}
-        </Typography>
-        <Typography className={classes.pos} color='textSecondary'>
-          Source: {drink.source}
-        </Typography>
-      </CardContent>
-    </Card>
+          <ul>
+            {drink?.recipeIngredients?.nodes?.filter(notEmpty)?.map((ingredient, i) => (
+              <Typography key={i} component='li'>
+                {ingredient.ingredient?.name} {new Fraction(ingredient.amount).toFraction(true)} {ingredient.unit?.name}
+              </Typography>
+            ))}
+          </ul>
+          <Typography className={classes.pos} color='textSecondary'>
+            Glass: {drink.glass}
+          </Typography>
+          {drink.garnish ? (
+            <Typography className={classes.pos} color='textSecondary'>
+              Garnish: {drink.garnish}
+            </Typography>
+          ) : null}
+          <Typography variant='body2' component='p'>
+            {drink.instructions}
+          </Typography>
+          <Typography className={classes.pos} color='textSecondary'>
+            Source: {drink.source}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
