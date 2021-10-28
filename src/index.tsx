@@ -46,7 +46,7 @@ const RootComponent: React.FC = ({ children }) => {
         <NotificationProvider>
           <Auth0Provider>
             <QueryClientProvider client={queryClient}>
-              <Helmet defaultTitle='AmberCon Northwest' titleTemplate='AmberCon Northwest - %s'>
+              <Helmet defaultTitle='Festive Beverage' titleTemplate='Festive Beverage - %s'>
                 <html lang='en' />
               </Helmet>
               {children}
