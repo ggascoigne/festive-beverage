@@ -92,6 +92,7 @@ const LoggedIn = () => {
 }
 
 export const Home = () => {
-  const { isAuthenticated } = useAuth()
-  return isAuthenticated ? <LoggedIn /> : <NotLoggedIn />
+  // const { isAuthenticated } = useAuth()
+  // return isAuthenticated ? <LoggedIn /> : <NotLoggedIn />
+  return <LoggedIn />
 }

@@ -9,10 +9,27 @@ const q = (name) => (name === 'user' ? '"user"' : name)
 exports.q = q
 
 // no access if not logged in
+// const anyUserUpdatePolicy = (table) => `
+//   create policy ${table}_sel_policy on ${q(table)}
+//     for select
+//     using (current_user_id()::boolean);
+//   create policy ${table}_mod_policy on ${q(table)}
+//     using (current_user_id()::boolean);
+//   `
+//
+// const adminUpdatePolicy = (table) => `
+//   create policy ${table}_sel_policy on ${q(table)}
+//     for select
+//     using (current_user_id()::boolean);
+//   create policy ${table}_mod_policy on ${q(table)}
+//     using (current_user_is_admin());
+//   `
+
+// read only if not logged on
 const anyUserUpdatePolicy = (table) => `
   create policy ${table}_sel_policy on ${q(table)}
     for select
-    using (current_user_id()::boolean);
+    using (true);
   create policy ${table}_mod_policy on ${q(table)}
     using (current_user_id()::boolean);
   `
@@ -20,7 +37,7 @@ const anyUserUpdatePolicy = (table) => `
 const adminUpdatePolicy = (table) => `
   create policy ${table}_sel_policy on ${q(table)}
     for select
-    using (current_user_id()::boolean);
+    using (true);
   create policy ${table}_mod_policy on ${q(table)}
     using (current_user_is_admin());
   `

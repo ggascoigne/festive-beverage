@@ -5,8 +5,8 @@ import { WorkSheet, readFile, utils } from 'xlsx'
 
 import { PoolType, getPool } from '../config'
 
-const ingredients = { s: 2, e: 142 }
-const presentation = { s: ingredients.e + 1, e: 156 }
+const ingredients = { s: 2, e: 143 }
+const presentation = { s: ingredients.e + 1, e: 157 }
 
 const isIngredient = (r: number) => r >= ingredients.s && r <= ingredients.e
 const isPresentation = (r: number) => r >= presentation.s && r <= presentation.e

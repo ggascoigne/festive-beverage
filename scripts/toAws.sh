@@ -5,11 +5,11 @@
 
 source `dirname $0`/utils.sh
 
-while read line; do export $line; done < <(grep DATABASE .env.aws | egrep -v '^#')
+while read line; do export $line; done < <(grep DATABASE .env.local | egrep -v '^#')
 PG_INPUT_ARGS=$(getPgString)
 ORIGINAL_DATABASE_NAME=${DATABASE_NAME}
 
-while read line; do export $line; done < <(grep DATABASE .env.local | egrep -v '^#')
+while read line; do export $line; done < <(grep DATABASE .env.aws | egrep -v '^#')
 PG_OUTPUT_ARGS=$(getPgString)
 
 cleanDb ${DATABASE_ADMIN} ${DATABASE_NAME} ${PG_OUTPUT_ARGS} 2>&1 | grep -v NOTICE
@@ -23,15 +23,15 @@ export PGPASSWORD=${DATABASE_ADMIN_PASSWORD}
 
 /usr/local/bin/pg_restore \
   -j4 \
-  --clean \
   -d ${DATABASE_NAME} \
   --no-privileges \
   --no-owner \
   --clean \
   --if-exists \
-  --exit-on-error \
   ${ORIGINAL_DATABASE_NAME}.dump
 
+cp .env .env.backup
+cp .env.aws .env
 yarn tsnode ./scripts/resetDatabaseOwner.ts
-
+mv -f .env.backup .env
 echo Done
