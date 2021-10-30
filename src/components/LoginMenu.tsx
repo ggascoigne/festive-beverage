@@ -117,36 +117,43 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ user }) => {
 
 interface MenuButtonProps {
   user: Auth0User
-  small: boolean
+  size: 'normal' | 'small' | 'tiny'
 }
 
-const MenuButton: React.FC<MenuButtonProps> = ({ small, user }) => {
+const MenuButton: React.FC<MenuButtonProps> = ({ size, user }) => {
   const classes = useStyles()
   const unverified = user.email_verified ? '' : ' (unverified)'
-  return small ? (
-    <>
-      <ProfileImage user={user} />
-      <span className={classes.email}>
-        {user.email}
-        {unverified}
-      </span>
-    </>
-  ) : (
-    <>
-      <span className={classes.email}>
-        {user.email}
-        {unverified}
-      </span>
-      <ProfileImage user={user} />
-    </>
-  )
+  switch (size) {
+    case 'tiny':
+      return <ProfileImage user={user} />
+    case 'small':
+      return (
+        <>
+          <ProfileImage user={user} />
+          <span className={classes.email}>
+            {user.email}
+            {unverified}
+          </span>
+        </>
+      )
+    case 'normal':
+      return (
+        <>
+          <span className={classes.email}>
+            {user.email}
+            {unverified}
+          </span>
+          <ProfileImage user={user} />
+        </>
+      )
+  }
 }
 
 interface LoginMenuProps {
-  small?: boolean
+  size: 'normal' | 'small' | 'tiny'
 }
 
-export const LoginMenu: React.FC<LoginMenuProps> = ({ small = false }) => {
+export const LoginMenu: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
   const classes = useStyles()
   const { isInitializing = true, isAuthenticated, user, loginWithRedirect, logout, hasPermissions } = useAuth()
   const [jwtToken] = useToken()
@@ -223,7 +230,7 @@ export const LoginMenu: React.FC<LoginMenuProps> = ({ small = false }) => {
       <CustomDropdown
         caret={false}
         hoverColor='black'
-        buttonText={<MenuButton small={small} user={user!} />}
+        buttonText={<MenuButton size={size} user={user!} />}
         buttonProps={{
           className: classes.navLink,
         }}

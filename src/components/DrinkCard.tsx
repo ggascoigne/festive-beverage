@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import clsx from 'clsx'
 import Fraction from 'fraction.js'
 import React from 'react'
 
@@ -25,9 +26,11 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  zoomedIngredients: { fontSize: '1.2rem' },
+  zoomedInstructions: { fontSize: '1rem' },
 })
 
-export const DrinkCard: React.FC<{ drink?: Drink }> = ({ drink }) => {
+export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink, zoomed = false }) => {
   const classes = useStyles()
   if (!drink) {
     return (
@@ -48,7 +51,7 @@ export const DrinkCard: React.FC<{ drink?: Drink }> = ({ drink }) => {
         </Typography>
         <ul>
           {drink?.recipeIngredients?.nodes?.filter(notEmpty)?.map((ingredient, i) => (
-            <Typography key={i} component='li'>
+            <Typography key={i} component='li' className={clsx({ [classes.zoomedIngredients]: zoomed })}>
               {ingredient.ingredient?.name} {new Fraction(ingredient.amount).toFraction(true)} {ingredient.unit?.name}
             </Typography>
           ))}
@@ -61,7 +64,11 @@ export const DrinkCard: React.FC<{ drink?: Drink }> = ({ drink }) => {
             Garnish: {drink.garnish}
           </Typography>
         ) : null}
-        <Typography variant='body2' component='p'>
+        <Typography
+          className={clsx(classes.pos, { [classes.zoomedInstructions]: zoomed })}
+          variant='body2'
+          component='p'
+        >
           {drink.instructions}
         </Typography>
         <Typography className={classes.pos} color='textSecondary'>

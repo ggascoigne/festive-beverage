@@ -1,6 +1,6 @@
-import { Grid } from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useQueryStringKey } from 'use-route-as-state'
 
 import { useGetAllDrinksQuery } from '../client'
@@ -24,6 +24,18 @@ const DrinkList: React.FC<{ drinks: Drink[] }> = ({ drinks }) => (
     ))}
   </Grid>
 )
+
+export const SingleDrink: React.FC<{ drink?: Drink }> = ({ drink }) => {
+  const history = useHistory()
+  return (
+    <>
+      <Button variant='contained' onClick={() => history.goBack()} style={{ marginBottom: 16 }}>
+        Back
+      </Button>
+      <DrinkCard drink={drink} zoomed />
+    </>
+  )
+}
 
 const matchesOne = (s: string, d: Drink) => {
   const sl = s.toLocaleLowerCase()
@@ -66,7 +78,7 @@ const LoggedIn = () => {
   if (drink) {
     return (
       <Page title='Festive Beverages' hideTitle>
-        <DrinkCard drink={drinks.find((d) => d.id === parseInt(drink as string))} />
+        <SingleDrink drink={drinks.find((d) => d.id === parseInt(drink as string))} />
       </Page>
     )
   } else {

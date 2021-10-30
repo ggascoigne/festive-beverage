@@ -120,7 +120,7 @@
     "graphql.macro": "^1.4.2",
     "gray-matter": "^4.0.3",
     "hex-rgb": "^5.0.0",
-    "history": "^5.0.1",
+    "history": "4.10.1",
     "isomorphic-fetch": "^3.0.0",
     "jotai": "^1.4.2",
     "jump.js": "^1.0.2",

@@ -27,31 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: 14,
       },
     },
-    // "@global": {
-    //   // MUI typography elements use REMs, so you can scale the global
-    //   // font size by setting the font-size on the <html> element.
-    //   body: {
-    //     [theme.breakpoints.down("sm")]: {
-    //       fontWeight:400
-    //     },
-    //   }
-    // },
-    // "@global": {
-    //   // MUI typography elements use REMs, so you can scale the global
-    //   // font size by setting the font-size on the <html> element.
-    //   html: {
-    //     fontSize: 12.5,
-    //     [theme.breakpoints.up("sm")]: {
-    //       fontSize: 14
-    //     },
-    //     [theme.breakpoints.up("md")]: {
-    //       fontSize: 16
-    //     },
-    //     [theme.breakpoints.up("lg")]: {
-    //       fontSize: 18
-    //     }
-    //   }
-    // },
     root: {
       display: 'flex',
       minHeight: '100vh',
@@ -61,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: '100vh',
       width: '100%',
       flexGrow: 1,
-      paddingTop: theme.spacing(3),
+      // paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
     },
     list: {
@@ -101,7 +76,7 @@ const DrawerContents: React.FC = () => {
   )
 }
 
-const RightMenu: React.FC<{ small?: boolean }> = (props) => {
+const RightMenu: React.FC<{ size: 'normal' | 'small' | 'tiny' }> = (props) => {
   const classes = useStyles()
   return (
     <List className={classes.list}>
@@ -138,7 +113,7 @@ export const App: React.FC = React.memo(() => {
         >
           <DrawerContents />
           <Divider />
-          <RightMenu small />
+          <RightMenu size='small' />
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />

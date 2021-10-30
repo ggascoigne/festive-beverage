@@ -1,8 +1,10 @@
-import { AppBar, Hidden, IconButton, Theme, Toolbar, Typography, createStyles, makeStyles } from '@material-ui/core'
+import { AppBar, IconButton, Theme, Toolbar, Typography, createStyles, makeStyles } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Config, useGetConfig } from 'utils'
+
+import { HasPermission, Perms } from './Auth'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,14 +50,16 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu })
   return (
     <AppBar position='fixed' className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        <IconButton
-          color='inherit'
-          aria-label='Open drawer'
-          onClick={handleDrawerToggle}
-          className={classes.menuButton}
-        >
-          <MenuIcon />
-        </IconButton>
+        <HasPermission permission={Perms.IsAdmin}>
+          <IconButton
+            color='inherit'
+            aria-label='Open drawer'
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+        </HasPermission>
         <Link to='/' style={{ color: 'white' }}>
           <Typography variant='h6' color='inherit' noWrap>
             Festive Beverage
@@ -63,9 +67,7 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu })
         </Link>
         &nbsp;{configDetails}
       </Toolbar>
-      <Hidden smDown implementation='css'>
-        {rightMenu()}
-      </Hidden>
+      {rightMenu({ size: 'tiny' })}
     </AppBar>
   )
 }
