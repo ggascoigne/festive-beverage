@@ -3,7 +3,7 @@ import { Autocomplete } from '@material-ui/lab'
 import React, { PropsWithChildren, ReactElement, useMemo } from 'react'
 import Zet from 'zet'
 
-import { useGetAllIngredientsQuery } from '../client'
+import { useGetAllDrinksQuery, useGetAllIngredientsQuery } from '../client'
 import { notEmpty } from '../utils'
 
 interface SearchProps {
@@ -19,14 +19,17 @@ const useStyles = makeStyles({
 
 export function Search({ onChange, value }: PropsWithChildren<SearchProps>): ReactElement | null {
   const classes = useStyles()
-  const { data } = useGetAllIngredientsQuery()
+  const { data: ingredients } = useGetAllIngredientsQuery()
+  const { data: drinks } = useGetAllDrinksQuery()
 
   const names = useMemo(() => {
     const set = new Zet<string>(
-      data?.ingredients?.nodes?.flatMap((n) => (n?.tags ? [n?.name, ...n.tags.split(' ')] : [n?.name])).filter(notEmpty)
-    )
+      ingredients?.ingredients?.nodes
+        ?.flatMap((n) => (n?.tags ? [n?.name, ...n.tags.split(' ')] : [n?.name]))
+        .filter(notEmpty)
+    ).union(new Zet(drinks?.recipes?.nodes?.map((r) => r?.name).filter(notEmpty)))
     return Array.from(set).sort((a, b) => -b.localeCompare(a)) ?? []
-  }, [data])
+  }, [ingredients, drinks])
 
   return (
     <Autocomplete
