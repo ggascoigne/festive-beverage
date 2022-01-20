@@ -1,0 +1,23 @@
+diff --git a/node_modules/react-scripts/config/webpack.config.js b/node_modules/react-scripts/config/webpack.config.js
+index 2b1b3bb..8a87777 100644
+--- a/node_modules/react-scripts/config/webpack.config.js
++++ b/node_modules/react-scripts/config/webpack.config.js
+@@ -790,5 +790,18 @@ module.exports = function (webpackEnv) {
+     // Turn off performance processing because we utilize
+     // our own hints via the FileSizeReporter
+     performance: false,
++    ignoreWarnings: [
++      // Ignore warnings raised by source-map-loader.
++      // some third party packages may ship miss-configured sourcemaps, that interrupts the build
++      // See: https://github.com/facebook/create-react-app/discussions/11278#discussioncomment-1780169
++      function ignoreSourcemapsloaderWarnings(warning) {
++        return (
++          warning.module &&
++          warning.module.resource.includes('node_modules') &&
++          warning.details &&
++          warning.details.includes('source-map-loader')
++        )
++      },
++    ],
+   };
+ };

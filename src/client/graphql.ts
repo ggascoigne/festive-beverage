@@ -6,6 +6,7 @@ import { UseMutationOptions, UseQueryOptions, useMutation, useQuery } from 'reac
 import { QueryError } from './error'
 
 export type Maybe<T> = T | null
+export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
@@ -26,27 +27,27 @@ export interface Scalars {
 /** A filter to be used against BigFloat fields. All fields are combined with a logical ‘and.’ */
 export interface BigFloatFilter {
   /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<Scalars['BigFloat']>
+  distinctFrom?: InputMaybe<Scalars['BigFloat']>
   /** Equal to the specified value. */
-  equalTo?: Maybe<Scalars['BigFloat']>
+  equalTo?: InputMaybe<Scalars['BigFloat']>
   /** Greater than the specified value. */
-  greaterThan?: Maybe<Scalars['BigFloat']>
+  greaterThan?: InputMaybe<Scalars['BigFloat']>
   /** Greater than or equal to the specified value. */
-  greaterThanOrEqualTo?: Maybe<Scalars['BigFloat']>
+  greaterThanOrEqualTo?: InputMaybe<Scalars['BigFloat']>
   /** Included in the specified list. */
-  in?: Maybe<Array<Scalars['BigFloat']>>
+  in?: InputMaybe<Array<Scalars['BigFloat']>>
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
-  isNull?: Maybe<Scalars['Boolean']>
+  isNull?: InputMaybe<Scalars['Boolean']>
   /** Less than the specified value. */
-  lessThan?: Maybe<Scalars['BigFloat']>
+  lessThan?: InputMaybe<Scalars['BigFloat']>
   /** Less than or equal to the specified value. */
-  lessThanOrEqualTo?: Maybe<Scalars['BigFloat']>
+  lessThanOrEqualTo?: InputMaybe<Scalars['BigFloat']>
   /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<Scalars['BigFloat']>
+  notDistinctFrom?: InputMaybe<Scalars['BigFloat']>
   /** Not equal to the specified value. */
-  notEqualTo?: Maybe<Scalars['BigFloat']>
+  notEqualTo?: InputMaybe<Scalars['BigFloat']>
   /** Not included in the specified list. */
-  notIn?: Maybe<Array<Scalars['BigFloat']>>
+  notIn?: InputMaybe<Array<Scalars['BigFloat']>>
 }
 
 /** All input for the create `Ingredient` mutation. */
@@ -55,7 +56,7 @@ export interface CreateIngredientInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The `Ingredient` to be created by this mutation. */
   ingredient: IngredientInput
 }
@@ -78,7 +79,7 @@ export interface CreateIngredientPayload {
 
 /** The output of our create `Ingredient` mutation. */
 export interface CreateIngredientPayloadIngredientEdgeArgs {
-  orderBy?: Maybe<Array<IngredientsOrderBy>>
+  orderBy?: InputMaybe<Array<IngredientsOrderBy>>
 }
 
 /** All input for the create `RecipeIngredient` mutation. */
@@ -87,7 +88,7 @@ export interface CreateRecipeIngredientInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The `RecipeIngredient` to be created by this mutation. */
   recipeIngredient: RecipeIngredientInput
 }
@@ -116,7 +117,7 @@ export interface CreateRecipeIngredientPayload {
 
 /** The output of our create `RecipeIngredient` mutation. */
 export interface CreateRecipeIngredientPayloadRecipeIngredientEdgeArgs {
-  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+  orderBy?: InputMaybe<Array<RecipeIngredientsOrderBy>>
 }
 
 /** All input for the create `Recipe` mutation. */
@@ -125,7 +126,7 @@ export interface CreateRecipeInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The `Recipe` to be created by this mutation. */
   recipe: RecipeInput
 }
@@ -148,7 +149,7 @@ export interface CreateRecipePayload {
 
 /** The output of our create `Recipe` mutation. */
 export interface CreateRecipePayloadRecipeEdgeArgs {
-  orderBy?: Maybe<Array<RecipesOrderBy>>
+  orderBy?: InputMaybe<Array<RecipesOrderBy>>
 }
 
 /** All input for the create `Role` mutation. */
@@ -157,7 +158,7 @@ export interface CreateRoleInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The `Role` to be created by this mutation. */
   role: RoleInput
 }
@@ -180,7 +181,7 @@ export interface CreateRolePayload {
 
 /** The output of our create `Role` mutation. */
 export interface CreateRolePayloadRoleEdgeArgs {
-  orderBy?: Maybe<Array<RolesOrderBy>>
+  orderBy?: InputMaybe<Array<RolesOrderBy>>
 }
 
 /** All input for the create `Unit` mutation. */
@@ -189,7 +190,7 @@ export interface CreateUnitInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The `Unit` to be created by this mutation. */
   unit: UnitInput
 }
@@ -212,7 +213,7 @@ export interface CreateUnitPayload {
 
 /** The output of our create `Unit` mutation. */
 export interface CreateUnitPayloadUnitEdgeArgs {
-  orderBy?: Maybe<Array<UnitsOrderBy>>
+  orderBy?: InputMaybe<Array<UnitsOrderBy>>
 }
 
 /** All input for the create `User` mutation. */
@@ -221,7 +222,7 @@ export interface CreateUserInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The `User` to be created by this mutation. */
   user: UserInput
 }
@@ -244,7 +245,7 @@ export interface CreateUserPayload {
 
 /** The output of our create `User` mutation. */
 export interface CreateUserPayloadUserEdgeArgs {
-  orderBy?: Maybe<Array<UsersOrderBy>>
+  orderBy?: InputMaybe<Array<UsersOrderBy>>
 }
 
 /** All input for the create `UserRole` mutation. */
@@ -253,7 +254,7 @@ export interface CreateUserRoleInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The `UserRole` to be created by this mutation. */
   userRole: UserRoleInput
 }
@@ -280,7 +281,7 @@ export interface CreateUserRolePayload {
 
 /** The output of our create `UserRole` mutation. */
 export interface CreateUserRolePayloadUserRoleEdgeArgs {
-  orderBy?: Maybe<Array<UserRolesOrderBy>>
+  orderBy?: InputMaybe<Array<UserRolesOrderBy>>
 }
 
 /** All input for the `deleteIngredientByNodeId` mutation. */
@@ -289,7 +290,7 @@ export interface DeleteIngredientByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `Ingredient` to be deleted. */
   nodeId: Scalars['ID']
 }
@@ -300,7 +301,7 @@ export interface DeleteIngredientInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
 }
 
@@ -323,7 +324,7 @@ export interface DeleteIngredientPayload {
 
 /** The output of our delete `Ingredient` mutation. */
 export interface DeleteIngredientPayloadIngredientEdgeArgs {
-  orderBy?: Maybe<Array<IngredientsOrderBy>>
+  orderBy?: InputMaybe<Array<IngredientsOrderBy>>
 }
 
 /** All input for the `deleteRecipeByNodeId` mutation. */
@@ -332,7 +333,7 @@ export interface DeleteRecipeByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `Recipe` to be deleted. */
   nodeId: Scalars['ID']
 }
@@ -343,7 +344,7 @@ export interface DeleteRecipeIngredientByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `RecipeIngredient` to be deleted. */
   nodeId: Scalars['ID']
 }
@@ -354,7 +355,7 @@ export interface DeleteRecipeIngredientInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
 }
 
@@ -383,7 +384,7 @@ export interface DeleteRecipeIngredientPayload {
 
 /** The output of our delete `RecipeIngredient` mutation. */
 export interface DeleteRecipeIngredientPayloadRecipeIngredientEdgeArgs {
-  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+  orderBy?: InputMaybe<Array<RecipeIngredientsOrderBy>>
 }
 
 /** All input for the `deleteRecipe` mutation. */
@@ -392,7 +393,7 @@ export interface DeleteRecipeInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
 }
 
@@ -415,7 +416,7 @@ export interface DeleteRecipePayload {
 
 /** The output of our delete `Recipe` mutation. */
 export interface DeleteRecipePayloadRecipeEdgeArgs {
-  orderBy?: Maybe<Array<RecipesOrderBy>>
+  orderBy?: InputMaybe<Array<RecipesOrderBy>>
 }
 
 /** All input for the `deleteRoleByAuthority` mutation. */
@@ -425,7 +426,7 @@ export interface DeleteRoleByAuthorityInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
 }
 
 /** All input for the `deleteRoleByNodeId` mutation. */
@@ -434,7 +435,7 @@ export interface DeleteRoleByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `Role` to be deleted. */
   nodeId: Scalars['ID']
 }
@@ -445,7 +446,7 @@ export interface DeleteRoleInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
 }
 
@@ -468,7 +469,7 @@ export interface DeleteRolePayload {
 
 /** The output of our delete `Role` mutation. */
 export interface DeleteRolePayloadRoleEdgeArgs {
-  orderBy?: Maybe<Array<RolesOrderBy>>
+  orderBy?: InputMaybe<Array<RolesOrderBy>>
 }
 
 /** All input for the `deleteUnitByNodeId` mutation. */
@@ -477,7 +478,7 @@ export interface DeleteUnitByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `Unit` to be deleted. */
   nodeId: Scalars['ID']
 }
@@ -488,7 +489,7 @@ export interface DeleteUnitInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
 }
 
@@ -511,7 +512,7 @@ export interface DeleteUnitPayload {
 
 /** The output of our delete `Unit` mutation. */
 export interface DeleteUnitPayloadUnitEdgeArgs {
-  orderBy?: Maybe<Array<UnitsOrderBy>>
+  orderBy?: InputMaybe<Array<UnitsOrderBy>>
 }
 
 /** All input for the `deleteUserByEmail` mutation. */
@@ -520,7 +521,7 @@ export interface DeleteUserByEmailInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   email: Scalars['String']
 }
 
@@ -530,7 +531,7 @@ export interface DeleteUserByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `User` to be deleted. */
   nodeId: Scalars['ID']
 }
@@ -541,7 +542,7 @@ export interface DeleteUserInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
 }
 
@@ -564,7 +565,7 @@ export interface DeleteUserPayload {
 
 /** The output of our delete `User` mutation. */
 export interface DeleteUserPayloadUserEdgeArgs {
-  orderBy?: Maybe<Array<UsersOrderBy>>
+  orderBy?: InputMaybe<Array<UsersOrderBy>>
 }
 
 /** All input for the `deleteUserRoleByNodeId` mutation. */
@@ -573,7 +574,7 @@ export interface DeleteUserRoleByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `UserRole` to be deleted. */
   nodeId: Scalars['ID']
 }
@@ -584,7 +585,7 @@ export interface DeleteUserRoleInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   roleId: Scalars['Int']
   userId: Scalars['Int']
 }
@@ -612,17 +613,17 @@ export interface DeleteUserRolePayload {
 
 /** The output of our delete `UserRole` mutation. */
 export interface DeleteUserRolePayloadUserRoleEdgeArgs {
-  orderBy?: Maybe<Array<UserRolesOrderBy>>
+  orderBy?: InputMaybe<Array<UserRolesOrderBy>>
 }
 
 /** All input for the `fTruncateTables` mutation. */
 export interface FTruncateTablesInput {
-  _username?: Maybe<Scalars['String']>
+  _username?: InputMaybe<Scalars['String']>
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
 }
 
 /** The output of our `fTruncateTables` mutation. */
@@ -640,7 +641,7 @@ export interface FTruncateTablesPayload {
 /** A filter to be used against FullText fields. All fields are combined with a logical ‘and.’ */
 export interface FullTextFilter {
   /** Performs a full text search on the field. */
-  matches?: Maybe<Scalars['String']>
+  matches?: InputMaybe<Scalars['String']>
 }
 
 export interface Ingredient extends Node {
@@ -657,14 +658,14 @@ export interface Ingredient extends Node {
 }
 
 export interface IngredientRecipeIngredientsArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<RecipeIngredientCondition>
-  filter?: Maybe<RecipeIngredientFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<RecipeIngredientCondition>
+  filter?: InputMaybe<RecipeIngredientFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<RecipeIngredientsOrderBy>>
 }
 
 /**
@@ -673,53 +674,53 @@ export interface IngredientRecipeIngredientsArgs {
  */
 export interface IngredientCondition {
   /** Checks for equality with the object’s `description` field. */
-  description?: Maybe<Scalars['String']>
+  description?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']>
   /** Checks for equality with the object’s `name` field. */
-  name?: Maybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `sort` field. */
-  sort?: Maybe<Scalars['Int']>
+  sort?: InputMaybe<Scalars['Int']>
   /** Checks for equality with the object’s `tags` field. */
-  tags?: Maybe<Scalars['String']>
+  tags?: InputMaybe<Scalars['String']>
 }
 
 /** A filter to be used against `Ingredient` object types. All fields are combined with a logical ‘and.’ */
 export interface IngredientFilter {
   /** Checks for all expressions in this list. */
-  and?: Maybe<Array<IngredientFilter>>
+  and?: InputMaybe<Array<IngredientFilter>>
   /** Filter by the object’s `description` field. */
-  description?: Maybe<StringFilter>
+  description?: InputMaybe<StringFilter>
   /** Filter by the object’s `id` field. */
-  id?: Maybe<IntFilter>
+  id?: InputMaybe<IntFilter>
   /** Filter by the object’s `name` field. */
-  name?: Maybe<StringFilter>
+  name?: InputMaybe<StringFilter>
   /** Negates the expression. */
-  not?: Maybe<IngredientFilter>
+  not?: InputMaybe<IngredientFilter>
   /** Checks for any expressions in this list. */
-  or?: Maybe<Array<IngredientFilter>>
+  or?: InputMaybe<Array<IngredientFilter>>
   /** Filter by the object’s `sort` field. */
-  sort?: Maybe<IntFilter>
+  sort?: InputMaybe<IntFilter>
   /** Filter by the object’s `tags` field. */
-  tags?: Maybe<StringFilter>
+  tags?: InputMaybe<StringFilter>
 }
 
 /** An input for mutations affecting `Ingredient` */
 export interface IngredientInput {
-  description?: Maybe<Scalars['String']>
-  id?: Maybe<Scalars['Int']>
+  description?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['Int']>
   name: Scalars['String']
-  sort?: Maybe<Scalars['Int']>
-  tags?: Maybe<Scalars['String']>
+  sort?: InputMaybe<Scalars['Int']>
+  tags?: InputMaybe<Scalars['String']>
 }
 
 /** Represents an update to a `Ingredient`. Fields that are set will be updated. */
 export interface IngredientPatch {
-  description?: Maybe<Scalars['String']>
-  id?: Maybe<Scalars['Int']>
-  name?: Maybe<Scalars['String']>
-  sort?: Maybe<Scalars['Int']>
-  tags?: Maybe<Scalars['String']>
+  description?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['Int']>
+  name?: InputMaybe<Scalars['String']>
+  sort?: InputMaybe<Scalars['Int']>
+  tags?: InputMaybe<Scalars['String']>
 }
 
 /** A connection to a list of `Ingredient` values. */
@@ -766,27 +767,27 @@ export enum IngredientsOrderBy {
 /** A filter to be used against Int fields. All fields are combined with a logical ‘and.’ */
 export interface IntFilter {
   /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<Scalars['Int']>
+  distinctFrom?: InputMaybe<Scalars['Int']>
   /** Equal to the specified value. */
-  equalTo?: Maybe<Scalars['Int']>
+  equalTo?: InputMaybe<Scalars['Int']>
   /** Greater than the specified value. */
-  greaterThan?: Maybe<Scalars['Int']>
+  greaterThan?: InputMaybe<Scalars['Int']>
   /** Greater than or equal to the specified value. */
-  greaterThanOrEqualTo?: Maybe<Scalars['Int']>
+  greaterThanOrEqualTo?: InputMaybe<Scalars['Int']>
   /** Included in the specified list. */
-  in?: Maybe<Array<Scalars['Int']>>
+  in?: InputMaybe<Array<Scalars['Int']>>
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
-  isNull?: Maybe<Scalars['Boolean']>
+  isNull?: InputMaybe<Scalars['Boolean']>
   /** Less than the specified value. */
-  lessThan?: Maybe<Scalars['Int']>
+  lessThan?: InputMaybe<Scalars['Int']>
   /** Less than or equal to the specified value. */
-  lessThanOrEqualTo?: Maybe<Scalars['Int']>
+  lessThanOrEqualTo?: InputMaybe<Scalars['Int']>
   /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<Scalars['Int']>
+  notDistinctFrom?: InputMaybe<Scalars['Int']>
   /** Not equal to the specified value. */
-  notEqualTo?: Maybe<Scalars['Int']>
+  notEqualTo?: InputMaybe<Scalars['Int']>
   /** Not included in the specified list. */
-  notIn?: Maybe<Array<Scalars['Int']>>
+  notIn?: InputMaybe<Array<Scalars['Int']>>
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -1157,14 +1158,14 @@ export interface QueryIngredientByNodeIdArgs {
 
 /** The root query type which gives access points into the data universe. */
 export interface QueryIngredientsArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<IngredientCondition>
-  filter?: Maybe<IngredientFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<IngredientsOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<IngredientCondition>
+  filter?: InputMaybe<IngredientFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<IngredientsOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -1194,26 +1195,26 @@ export interface QueryRecipeIngredientByNodeIdArgs {
 
 /** The root query type which gives access points into the data universe. */
 export interface QueryRecipeIngredientsArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<RecipeIngredientCondition>
-  filter?: Maybe<RecipeIngredientFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<RecipeIngredientCondition>
+  filter?: InputMaybe<RecipeIngredientFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<RecipeIngredientsOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
 export interface QueryRecipesArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<RecipeCondition>
-  filter?: Maybe<RecipeFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<RecipesOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<RecipeCondition>
+  filter?: InputMaybe<RecipeFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<RecipesOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -1233,14 +1234,14 @@ export interface QueryRoleByNodeIdArgs {
 
 /** The root query type which gives access points into the data universe. */
 export interface QueryRolesArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<RoleCondition>
-  filter?: Maybe<RoleFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<RolesOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<RoleCondition>
+  filter?: InputMaybe<RoleFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<RolesOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -1255,14 +1256,14 @@ export interface QueryUnitByNodeIdArgs {
 
 /** The root query type which gives access points into the data universe. */
 export interface QueryUnitsArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<UnitCondition>
-  filter?: Maybe<UnitFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<UnitsOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<UnitCondition>
+  filter?: InputMaybe<UnitFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<UnitsOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -1293,26 +1294,26 @@ export interface QueryUserRoleByNodeIdArgs {
 
 /** The root query type which gives access points into the data universe. */
 export interface QueryUserRolesArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<UserRoleCondition>
-  filter?: Maybe<UserRoleFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<UserRolesOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<UserRoleCondition>
+  filter?: InputMaybe<UserRoleFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<UserRolesOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
 export interface QueryUsersArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<UserCondition>
-  filter?: Maybe<UserFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<UsersOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<UserCondition>
+  filter?: InputMaybe<UserFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<UsersOrderBy>>
 }
 
 export interface Recipe extends Node {
@@ -1335,64 +1336,64 @@ export interface Recipe extends Node {
 }
 
 export interface RecipeRecipeIngredientsArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<RecipeIngredientCondition>
-  filter?: Maybe<RecipeIngredientFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<RecipeIngredientCondition>
+  filter?: InputMaybe<RecipeIngredientFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<RecipeIngredientsOrderBy>>
 }
 
 /** A condition to be used against `Recipe` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export interface RecipeCondition {
   /** Checks for equality with the object’s `description` field. */
-  description?: Maybe<Scalars['String']>
+  description?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `garnish` field. */
-  garnish?: Maybe<Scalars['String']>
+  garnish?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `glass` field. */
-  glass?: Maybe<Scalars['String']>
+  glass?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']>
   /** Checks for equality with the object’s `ingredientText` field. */
-  ingredientText?: Maybe<Scalars['String']>
+  ingredientText?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `instructions` field. */
-  instructions?: Maybe<Scalars['String']>
+  instructions?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `name` field. */
-  name?: Maybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `source` field. */
-  source?: Maybe<Scalars['String']>
+  source?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `ts` field. */
-  ts?: Maybe<Scalars['FullText']>
+  ts?: InputMaybe<Scalars['FullText']>
 }
 
 /** A filter to be used against `Recipe` object types. All fields are combined with a logical ‘and.’ */
 export interface RecipeFilter {
   /** Checks for all expressions in this list. */
-  and?: Maybe<Array<RecipeFilter>>
+  and?: InputMaybe<Array<RecipeFilter>>
   /** Filter by the object’s `description` field. */
-  description?: Maybe<StringFilter>
+  description?: InputMaybe<StringFilter>
   /** Filter by the object’s `garnish` field. */
-  garnish?: Maybe<StringFilter>
+  garnish?: InputMaybe<StringFilter>
   /** Filter by the object’s `glass` field. */
-  glass?: Maybe<StringFilter>
+  glass?: InputMaybe<StringFilter>
   /** Filter by the object’s `id` field. */
-  id?: Maybe<IntFilter>
+  id?: InputMaybe<IntFilter>
   /** Filter by the object’s `ingredientText` field. */
-  ingredientText?: Maybe<StringFilter>
+  ingredientText?: InputMaybe<StringFilter>
   /** Filter by the object’s `instructions` field. */
-  instructions?: Maybe<StringFilter>
+  instructions?: InputMaybe<StringFilter>
   /** Filter by the object’s `name` field. */
-  name?: Maybe<StringFilter>
+  name?: InputMaybe<StringFilter>
   /** Negates the expression. */
-  not?: Maybe<RecipeFilter>
+  not?: InputMaybe<RecipeFilter>
   /** Checks for any expressions in this list. */
-  or?: Maybe<Array<RecipeFilter>>
+  or?: InputMaybe<Array<RecipeFilter>>
   /** Filter by the object’s `source` field. */
-  source?: Maybe<StringFilter>
+  source?: InputMaybe<StringFilter>
   /** Filter by the object’s `ts` field. */
-  ts?: Maybe<FullTextFilter>
+  ts?: InputMaybe<FullTextFilter>
 }
 
 export interface RecipeIngredient extends Node {
@@ -1419,59 +1420,59 @@ export interface RecipeIngredient extends Node {
  */
 export interface RecipeIngredientCondition {
   /** Checks for equality with the object’s `amount` field. */
-  amount?: Maybe<Scalars['BigFloat']>
+  amount?: InputMaybe<Scalars['BigFloat']>
   /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']>
   /** Checks for equality with the object’s `ingredientId` field. */
-  ingredientId?: Maybe<Scalars['Int']>
+  ingredientId?: InputMaybe<Scalars['Int']>
   /** Checks for equality with the object’s `modifier` field. */
-  modifier?: Maybe<Scalars['String']>
+  modifier?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `recipeId` field. */
-  recipeId?: Maybe<Scalars['Int']>
+  recipeId?: InputMaybe<Scalars['Int']>
   /** Checks for equality with the object’s `unitId` field. */
-  unitId?: Maybe<Scalars['Int']>
+  unitId?: InputMaybe<Scalars['Int']>
 }
 
 /** A filter to be used against `RecipeIngredient` object types. All fields are combined with a logical ‘and.’ */
 export interface RecipeIngredientFilter {
   /** Filter by the object’s `amount` field. */
-  amount?: Maybe<BigFloatFilter>
+  amount?: InputMaybe<BigFloatFilter>
   /** Checks for all expressions in this list. */
-  and?: Maybe<Array<RecipeIngredientFilter>>
+  and?: InputMaybe<Array<RecipeIngredientFilter>>
   /** Filter by the object’s `id` field. */
-  id?: Maybe<IntFilter>
+  id?: InputMaybe<IntFilter>
   /** Filter by the object’s `ingredientId` field. */
-  ingredientId?: Maybe<IntFilter>
+  ingredientId?: InputMaybe<IntFilter>
   /** Filter by the object’s `modifier` field. */
-  modifier?: Maybe<StringFilter>
+  modifier?: InputMaybe<StringFilter>
   /** Negates the expression. */
-  not?: Maybe<RecipeIngredientFilter>
+  not?: InputMaybe<RecipeIngredientFilter>
   /** Checks for any expressions in this list. */
-  or?: Maybe<Array<RecipeIngredientFilter>>
+  or?: InputMaybe<Array<RecipeIngredientFilter>>
   /** Filter by the object’s `recipeId` field. */
-  recipeId?: Maybe<IntFilter>
+  recipeId?: InputMaybe<IntFilter>
   /** Filter by the object’s `unitId` field. */
-  unitId?: Maybe<IntFilter>
+  unitId?: InputMaybe<IntFilter>
 }
 
 /** An input for mutations affecting `RecipeIngredient` */
 export interface RecipeIngredientInput {
-  amount?: Maybe<Scalars['BigFloat']>
-  id?: Maybe<Scalars['Int']>
+  amount?: InputMaybe<Scalars['BigFloat']>
+  id?: InputMaybe<Scalars['Int']>
   ingredientId: Scalars['Int']
-  modifier?: Maybe<Scalars['String']>
+  modifier?: InputMaybe<Scalars['String']>
   recipeId: Scalars['Int']
   unitId: Scalars['Int']
 }
 
 /** Represents an update to a `RecipeIngredient`. Fields that are set will be updated. */
 export interface RecipeIngredientPatch {
-  amount?: Maybe<Scalars['BigFloat']>
-  id?: Maybe<Scalars['Int']>
-  ingredientId?: Maybe<Scalars['Int']>
-  modifier?: Maybe<Scalars['String']>
-  recipeId?: Maybe<Scalars['Int']>
-  unitId?: Maybe<Scalars['Int']>
+  amount?: InputMaybe<Scalars['BigFloat']>
+  id?: InputMaybe<Scalars['Int']>
+  ingredientId?: InputMaybe<Scalars['Int']>
+  modifier?: InputMaybe<Scalars['String']>
+  recipeId?: InputMaybe<Scalars['Int']>
+  unitId?: InputMaybe<Scalars['Int']>
 }
 
 /** A connection to a list of `RecipeIngredient` values. */
@@ -1553,28 +1554,28 @@ export enum RecipeIngredientsOrderBy {
 
 /** An input for mutations affecting `Recipe` */
 export interface RecipeInput {
-  description?: Maybe<Scalars['String']>
-  garnish?: Maybe<Scalars['String']>
-  glass?: Maybe<Scalars['String']>
-  id?: Maybe<Scalars['Int']>
+  description?: InputMaybe<Scalars['String']>
+  garnish?: InputMaybe<Scalars['String']>
+  glass?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['Int']>
   ingredientText: Scalars['String']
-  instructions?: Maybe<Scalars['String']>
+  instructions?: InputMaybe<Scalars['String']>
   name: Scalars['String']
-  source?: Maybe<Scalars['String']>
-  ts?: Maybe<Scalars['FullText']>
+  source?: InputMaybe<Scalars['String']>
+  ts?: InputMaybe<Scalars['FullText']>
 }
 
 /** Represents an update to a `Recipe`. Fields that are set will be updated. */
 export interface RecipePatch {
-  description?: Maybe<Scalars['String']>
-  garnish?: Maybe<Scalars['String']>
-  glass?: Maybe<Scalars['String']>
-  id?: Maybe<Scalars['Int']>
-  ingredientText?: Maybe<Scalars['String']>
-  instructions?: Maybe<Scalars['String']>
-  name?: Maybe<Scalars['String']>
-  source?: Maybe<Scalars['String']>
-  ts?: Maybe<Scalars['FullText']>
+  description?: InputMaybe<Scalars['String']>
+  garnish?: InputMaybe<Scalars['String']>
+  glass?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['Int']>
+  ingredientText?: InputMaybe<Scalars['String']>
+  instructions?: InputMaybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
+  source?: InputMaybe<Scalars['String']>
+  ts?: InputMaybe<Scalars['FullText']>
 }
 
 /** A connection to a list of `Recipe` values. */
@@ -1639,48 +1640,48 @@ export interface Role extends Node {
 }
 
 export interface RoleUserRolesArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<UserRoleCondition>
-  filter?: Maybe<UserRoleFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<UserRolesOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<UserRoleCondition>
+  filter?: InputMaybe<UserRoleFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<UserRolesOrderBy>>
 }
 
 /** A condition to be used against `Role` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export interface RoleCondition {
   /** Checks for equality with the object’s `authority` field. */
-  authority?: Maybe<Scalars['String']>
+  authority?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']>
 }
 
 /** A filter to be used against `Role` object types. All fields are combined with a logical ‘and.’ */
 export interface RoleFilter {
   /** Checks for all expressions in this list. */
-  and?: Maybe<Array<RoleFilter>>
+  and?: InputMaybe<Array<RoleFilter>>
   /** Filter by the object’s `authority` field. */
-  authority?: Maybe<StringFilter>
+  authority?: InputMaybe<StringFilter>
   /** Filter by the object’s `id` field. */
-  id?: Maybe<IntFilter>
+  id?: InputMaybe<IntFilter>
   /** Negates the expression. */
-  not?: Maybe<RoleFilter>
+  not?: InputMaybe<RoleFilter>
   /** Checks for any expressions in this list. */
-  or?: Maybe<Array<RoleFilter>>
+  or?: InputMaybe<Array<RoleFilter>>
 }
 
 /** An input for mutations affecting `Role` */
 export interface RoleInput {
   authority: Scalars['String']
-  id?: Maybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']>
 }
 
 /** Represents an update to a `Role`. Fields that are set will be updated. */
 export interface RolePatch {
-  authority?: Maybe<Scalars['String']>
-  id?: Maybe<Scalars['Int']>
+  authority?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['Int']>
 }
 
 /** A connection to a list of `Role` values. */
@@ -1721,79 +1722,79 @@ export enum RolesOrderBy {
 /** A filter to be used against String fields. All fields are combined with a logical ‘and.’ */
 export interface StringFilter {
   /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<Scalars['String']>
+  distinctFrom?: InputMaybe<Scalars['String']>
   /** Not equal to the specified value, treating null like an ordinary value (case-insensitive). */
-  distinctFromInsensitive?: Maybe<Scalars['String']>
+  distinctFromInsensitive?: InputMaybe<Scalars['String']>
   /** Ends with the specified string (case-sensitive). */
-  endsWith?: Maybe<Scalars['String']>
+  endsWith?: InputMaybe<Scalars['String']>
   /** Ends with the specified string (case-insensitive). */
-  endsWithInsensitive?: Maybe<Scalars['String']>
+  endsWithInsensitive?: InputMaybe<Scalars['String']>
   /** Equal to the specified value. */
-  equalTo?: Maybe<Scalars['String']>
+  equalTo?: InputMaybe<Scalars['String']>
   /** Equal to the specified value (case-insensitive). */
-  equalToInsensitive?: Maybe<Scalars['String']>
+  equalToInsensitive?: InputMaybe<Scalars['String']>
   /** Greater than the specified value. */
-  greaterThan?: Maybe<Scalars['String']>
+  greaterThan?: InputMaybe<Scalars['String']>
   /** Greater than the specified value (case-insensitive). */
-  greaterThanInsensitive?: Maybe<Scalars['String']>
+  greaterThanInsensitive?: InputMaybe<Scalars['String']>
   /** Greater than or equal to the specified value. */
-  greaterThanOrEqualTo?: Maybe<Scalars['String']>
+  greaterThanOrEqualTo?: InputMaybe<Scalars['String']>
   /** Greater than or equal to the specified value (case-insensitive). */
-  greaterThanOrEqualToInsensitive?: Maybe<Scalars['String']>
+  greaterThanOrEqualToInsensitive?: InputMaybe<Scalars['String']>
   /** Included in the specified list. */
-  in?: Maybe<Array<Scalars['String']>>
+  in?: InputMaybe<Array<Scalars['String']>>
   /** Included in the specified list (case-insensitive). */
-  inInsensitive?: Maybe<Array<Scalars['String']>>
+  inInsensitive?: InputMaybe<Array<Scalars['String']>>
   /** Contains the specified string (case-sensitive). */
-  includes?: Maybe<Scalars['String']>
+  includes?: InputMaybe<Scalars['String']>
   /** Contains the specified string (case-insensitive). */
-  includesInsensitive?: Maybe<Scalars['String']>
+  includesInsensitive?: InputMaybe<Scalars['String']>
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
-  isNull?: Maybe<Scalars['Boolean']>
+  isNull?: InputMaybe<Scalars['Boolean']>
   /** Less than the specified value. */
-  lessThan?: Maybe<Scalars['String']>
+  lessThan?: InputMaybe<Scalars['String']>
   /** Less than the specified value (case-insensitive). */
-  lessThanInsensitive?: Maybe<Scalars['String']>
+  lessThanInsensitive?: InputMaybe<Scalars['String']>
   /** Less than or equal to the specified value. */
-  lessThanOrEqualTo?: Maybe<Scalars['String']>
+  lessThanOrEqualTo?: InputMaybe<Scalars['String']>
   /** Less than or equal to the specified value (case-insensitive). */
-  lessThanOrEqualToInsensitive?: Maybe<Scalars['String']>
+  lessThanOrEqualToInsensitive?: InputMaybe<Scalars['String']>
   /** Matches the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters. */
-  like?: Maybe<Scalars['String']>
+  like?: InputMaybe<Scalars['String']>
   /** Matches the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters. */
-  likeInsensitive?: Maybe<Scalars['String']>
+  likeInsensitive?: InputMaybe<Scalars['String']>
   /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<Scalars['String']>
+  notDistinctFrom?: InputMaybe<Scalars['String']>
   /** Equal to the specified value, treating null like an ordinary value (case-insensitive). */
-  notDistinctFromInsensitive?: Maybe<Scalars['String']>
+  notDistinctFromInsensitive?: InputMaybe<Scalars['String']>
   /** Does not end with the specified string (case-sensitive). */
-  notEndsWith?: Maybe<Scalars['String']>
+  notEndsWith?: InputMaybe<Scalars['String']>
   /** Does not end with the specified string (case-insensitive). */
-  notEndsWithInsensitive?: Maybe<Scalars['String']>
+  notEndsWithInsensitive?: InputMaybe<Scalars['String']>
   /** Not equal to the specified value. */
-  notEqualTo?: Maybe<Scalars['String']>
+  notEqualTo?: InputMaybe<Scalars['String']>
   /** Not equal to the specified value (case-insensitive). */
-  notEqualToInsensitive?: Maybe<Scalars['String']>
+  notEqualToInsensitive?: InputMaybe<Scalars['String']>
   /** Not included in the specified list. */
-  notIn?: Maybe<Array<Scalars['String']>>
+  notIn?: InputMaybe<Array<Scalars['String']>>
   /** Not included in the specified list (case-insensitive). */
-  notInInsensitive?: Maybe<Array<Scalars['String']>>
+  notInInsensitive?: InputMaybe<Array<Scalars['String']>>
   /** Does not contain the specified string (case-sensitive). */
-  notIncludes?: Maybe<Scalars['String']>
+  notIncludes?: InputMaybe<Scalars['String']>
   /** Does not contain the specified string (case-insensitive). */
-  notIncludesInsensitive?: Maybe<Scalars['String']>
+  notIncludesInsensitive?: InputMaybe<Scalars['String']>
   /** Does not match the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters. */
-  notLike?: Maybe<Scalars['String']>
+  notLike?: InputMaybe<Scalars['String']>
   /** Does not match the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters. */
-  notLikeInsensitive?: Maybe<Scalars['String']>
+  notLikeInsensitive?: InputMaybe<Scalars['String']>
   /** Does not start with the specified string (case-sensitive). */
-  notStartsWith?: Maybe<Scalars['String']>
+  notStartsWith?: InputMaybe<Scalars['String']>
   /** Does not start with the specified string (case-insensitive). */
-  notStartsWithInsensitive?: Maybe<Scalars['String']>
+  notStartsWithInsensitive?: InputMaybe<Scalars['String']>
   /** Starts with the specified string (case-sensitive). */
-  startsWith?: Maybe<Scalars['String']>
+  startsWith?: InputMaybe<Scalars['String']>
   /** Starts with the specified string (case-insensitive). */
-  startsWithInsensitive?: Maybe<Scalars['String']>
+  startsWithInsensitive?: InputMaybe<Scalars['String']>
 }
 
 export interface Unit extends Node {
@@ -1809,60 +1810,60 @@ export interface Unit extends Node {
 }
 
 export interface UnitRecipeIngredientsArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<RecipeIngredientCondition>
-  filter?: Maybe<RecipeIngredientFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<RecipeIngredientCondition>
+  filter?: InputMaybe<RecipeIngredientFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<RecipeIngredientsOrderBy>>
 }
 
 /** A condition to be used against `Unit` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export interface UnitCondition {
   /** Checks for equality with the object’s `asMl` field. */
-  asMl?: Maybe<Scalars['BigFloat']>
+  asMl?: InputMaybe<Scalars['BigFloat']>
   /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']>
   /** Checks for equality with the object’s `name` field. */
-  name?: Maybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `sort` field. */
-  sort?: Maybe<Scalars['Int']>
+  sort?: InputMaybe<Scalars['Int']>
 }
 
 /** A filter to be used against `Unit` object types. All fields are combined with a logical ‘and.’ */
 export interface UnitFilter {
   /** Checks for all expressions in this list. */
-  and?: Maybe<Array<UnitFilter>>
+  and?: InputMaybe<Array<UnitFilter>>
   /** Filter by the object’s `asMl` field. */
-  asMl?: Maybe<BigFloatFilter>
+  asMl?: InputMaybe<BigFloatFilter>
   /** Filter by the object’s `id` field. */
-  id?: Maybe<IntFilter>
+  id?: InputMaybe<IntFilter>
   /** Filter by the object’s `name` field. */
-  name?: Maybe<StringFilter>
+  name?: InputMaybe<StringFilter>
   /** Negates the expression. */
-  not?: Maybe<UnitFilter>
+  not?: InputMaybe<UnitFilter>
   /** Checks for any expressions in this list. */
-  or?: Maybe<Array<UnitFilter>>
+  or?: InputMaybe<Array<UnitFilter>>
   /** Filter by the object’s `sort` field. */
-  sort?: Maybe<IntFilter>
+  sort?: InputMaybe<IntFilter>
 }
 
 /** An input for mutations affecting `Unit` */
 export interface UnitInput {
-  asMl?: Maybe<Scalars['BigFloat']>
-  id?: Maybe<Scalars['Int']>
+  asMl?: InputMaybe<Scalars['BigFloat']>
+  id?: InputMaybe<Scalars['Int']>
   name: Scalars['String']
-  sort?: Maybe<Scalars['Int']>
+  sort?: InputMaybe<Scalars['Int']>
 }
 
 /** Represents an update to a `Unit`. Fields that are set will be updated. */
 export interface UnitPatch {
-  asMl?: Maybe<Scalars['BigFloat']>
-  id?: Maybe<Scalars['Int']>
-  name?: Maybe<Scalars['String']>
-  sort?: Maybe<Scalars['Int']>
+  asMl?: InputMaybe<Scalars['BigFloat']>
+  id?: InputMaybe<Scalars['Int']>
+  name?: InputMaybe<Scalars['String']>
+  sort?: InputMaybe<Scalars['Int']>
 }
 
 /** A connection to a list of `Unit` values. */
@@ -1910,7 +1911,7 @@ export interface UpdateIngredientByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `Ingredient` to be updated. */
   nodeId: Scalars['ID']
   /** An object where the defined keys will be set on the `Ingredient` being updated. */
@@ -1923,7 +1924,7 @@ export interface UpdateIngredientInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
   /** An object where the defined keys will be set on the `Ingredient` being updated. */
   patch: IngredientPatch
@@ -1947,7 +1948,7 @@ export interface UpdateIngredientPayload {
 
 /** The output of our update `Ingredient` mutation. */
 export interface UpdateIngredientPayloadIngredientEdgeArgs {
-  orderBy?: Maybe<Array<IngredientsOrderBy>>
+  orderBy?: InputMaybe<Array<IngredientsOrderBy>>
 }
 
 /** All input for the `updateRecipeByNodeId` mutation. */
@@ -1956,7 +1957,7 @@ export interface UpdateRecipeByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `Recipe` to be updated. */
   nodeId: Scalars['ID']
   /** An object where the defined keys will be set on the `Recipe` being updated. */
@@ -1969,7 +1970,7 @@ export interface UpdateRecipeIngredientByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `RecipeIngredient` to be updated. */
   nodeId: Scalars['ID']
   /** An object where the defined keys will be set on the `RecipeIngredient` being updated. */
@@ -1982,7 +1983,7 @@ export interface UpdateRecipeIngredientInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
   /** An object where the defined keys will be set on the `RecipeIngredient` being updated. */
   patch: RecipeIngredientPatch
@@ -2012,7 +2013,7 @@ export interface UpdateRecipeIngredientPayload {
 
 /** The output of our update `RecipeIngredient` mutation. */
 export interface UpdateRecipeIngredientPayloadRecipeIngredientEdgeArgs {
-  orderBy?: Maybe<Array<RecipeIngredientsOrderBy>>
+  orderBy?: InputMaybe<Array<RecipeIngredientsOrderBy>>
 }
 
 /** All input for the `updateRecipe` mutation. */
@@ -2021,7 +2022,7 @@ export interface UpdateRecipeInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
   /** An object where the defined keys will be set on the `Recipe` being updated. */
   patch: RecipePatch
@@ -2045,7 +2046,7 @@ export interface UpdateRecipePayload {
 
 /** The output of our update `Recipe` mutation. */
 export interface UpdateRecipePayloadRecipeEdgeArgs {
-  orderBy?: Maybe<Array<RecipesOrderBy>>
+  orderBy?: InputMaybe<Array<RecipesOrderBy>>
 }
 
 /** All input for the `updateRoleByAuthority` mutation. */
@@ -2055,7 +2056,7 @@ export interface UpdateRoleByAuthorityInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** An object where the defined keys will be set on the `Role` being updated. */
   patch: RolePatch
 }
@@ -2066,7 +2067,7 @@ export interface UpdateRoleByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `Role` to be updated. */
   nodeId: Scalars['ID']
   /** An object where the defined keys will be set on the `Role` being updated. */
@@ -2079,7 +2080,7 @@ export interface UpdateRoleInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
   /** An object where the defined keys will be set on the `Role` being updated. */
   patch: RolePatch
@@ -2103,7 +2104,7 @@ export interface UpdateRolePayload {
 
 /** The output of our update `Role` mutation. */
 export interface UpdateRolePayloadRoleEdgeArgs {
-  orderBy?: Maybe<Array<RolesOrderBy>>
+  orderBy?: InputMaybe<Array<RolesOrderBy>>
 }
 
 /** All input for the `updateUnitByNodeId` mutation. */
@@ -2112,7 +2113,7 @@ export interface UpdateUnitByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `Unit` to be updated. */
   nodeId: Scalars['ID']
   /** An object where the defined keys will be set on the `Unit` being updated. */
@@ -2125,7 +2126,7 @@ export interface UpdateUnitInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
   /** An object where the defined keys will be set on the `Unit` being updated. */
   patch: UnitPatch
@@ -2149,7 +2150,7 @@ export interface UpdateUnitPayload {
 
 /** The output of our update `Unit` mutation. */
 export interface UpdateUnitPayloadUnitEdgeArgs {
-  orderBy?: Maybe<Array<UnitsOrderBy>>
+  orderBy?: InputMaybe<Array<UnitsOrderBy>>
 }
 
 /** All input for the `updateUserByEmail` mutation. */
@@ -2158,7 +2159,7 @@ export interface UpdateUserByEmailInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   email: Scalars['String']
   /** An object where the defined keys will be set on the `User` being updated. */
   patch: UserPatch
@@ -2170,7 +2171,7 @@ export interface UpdateUserByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `User` to be updated. */
   nodeId: Scalars['ID']
   /** An object where the defined keys will be set on the `User` being updated. */
@@ -2183,7 +2184,7 @@ export interface UpdateUserInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   id: Scalars['Int']
   /** An object where the defined keys will be set on the `User` being updated. */
   patch: UserPatch
@@ -2207,7 +2208,7 @@ export interface UpdateUserPayload {
 
 /** The output of our update `User` mutation. */
 export interface UpdateUserPayloadUserEdgeArgs {
-  orderBy?: Maybe<Array<UsersOrderBy>>
+  orderBy?: InputMaybe<Array<UsersOrderBy>>
 }
 
 /** All input for the `updateUserRoleByNodeId` mutation. */
@@ -2216,7 +2217,7 @@ export interface UpdateUserRoleByNodeIdInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** The globally unique `ID` which will identify a single `UserRole` to be updated. */
   nodeId: Scalars['ID']
   /** An object where the defined keys will be set on the `UserRole` being updated. */
@@ -2229,7 +2230,7 @@ export interface UpdateUserRoleInput {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']>
   /** An object where the defined keys will be set on the `UserRole` being updated. */
   patch: UserRolePatch
   roleId: Scalars['Int']
@@ -2258,7 +2259,7 @@ export interface UpdateUserRolePayload {
 
 /** The output of our update `UserRole` mutation. */
 export interface UpdateUserRolePayloadUserRoleEdgeArgs {
-  orderBy?: Maybe<Array<UserRolesOrderBy>>
+  orderBy?: InputMaybe<Array<UserRolesOrderBy>>
 }
 
 export interface User extends Node {
@@ -2272,48 +2273,48 @@ export interface User extends Node {
 }
 
 export interface UserUserRolesArgs {
-  after?: Maybe<Scalars['Cursor']>
-  before?: Maybe<Scalars['Cursor']>
-  condition?: Maybe<UserRoleCondition>
-  filter?: Maybe<UserRoleFilter>
-  first?: Maybe<Scalars['Int']>
-  last?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  orderBy?: Maybe<Array<UserRolesOrderBy>>
+  after?: InputMaybe<Scalars['Cursor']>
+  before?: InputMaybe<Scalars['Cursor']>
+  condition?: InputMaybe<UserRoleCondition>
+  filter?: InputMaybe<UserRoleFilter>
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  orderBy?: InputMaybe<Array<UserRolesOrderBy>>
 }
 
 /** A condition to be used against `User` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export interface UserCondition {
   /** Checks for equality with the object’s `email` field. */
-  email?: Maybe<Scalars['String']>
+  email?: InputMaybe<Scalars['String']>
   /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']>
 }
 
 /** A filter to be used against `User` object types. All fields are combined with a logical ‘and.’ */
 export interface UserFilter {
   /** Checks for all expressions in this list. */
-  and?: Maybe<Array<UserFilter>>
+  and?: InputMaybe<Array<UserFilter>>
   /** Filter by the object’s `email` field. */
-  email?: Maybe<StringFilter>
+  email?: InputMaybe<StringFilter>
   /** Filter by the object’s `id` field. */
-  id?: Maybe<IntFilter>
+  id?: InputMaybe<IntFilter>
   /** Negates the expression. */
-  not?: Maybe<UserFilter>
+  not?: InputMaybe<UserFilter>
   /** Checks for any expressions in this list. */
-  or?: Maybe<Array<UserFilter>>
+  or?: InputMaybe<Array<UserFilter>>
 }
 
 /** An input for mutations affecting `User` */
 export interface UserInput {
   email: Scalars['String']
-  id?: Maybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']>
 }
 
 /** Represents an update to a `User`. Fields that are set will be updated. */
 export interface UserPatch {
-  email?: Maybe<Scalars['String']>
-  id?: Maybe<Scalars['Int']>
+  email?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['Int']>
 }
 
 export interface UserRole extends Node {
@@ -2334,23 +2335,23 @@ export interface UserRole extends Node {
  */
 export interface UserRoleCondition {
   /** Checks for equality with the object’s `roleId` field. */
-  roleId?: Maybe<Scalars['Int']>
+  roleId?: InputMaybe<Scalars['Int']>
   /** Checks for equality with the object’s `userId` field. */
-  userId?: Maybe<Scalars['Int']>
+  userId?: InputMaybe<Scalars['Int']>
 }
 
 /** A filter to be used against `UserRole` object types. All fields are combined with a logical ‘and.’ */
 export interface UserRoleFilter {
   /** Checks for all expressions in this list. */
-  and?: Maybe<Array<UserRoleFilter>>
+  and?: InputMaybe<Array<UserRoleFilter>>
   /** Negates the expression. */
-  not?: Maybe<UserRoleFilter>
+  not?: InputMaybe<UserRoleFilter>
   /** Checks for any expressions in this list. */
-  or?: Maybe<Array<UserRoleFilter>>
+  or?: InputMaybe<Array<UserRoleFilter>>
   /** Filter by the object’s `roleId` field. */
-  roleId?: Maybe<IntFilter>
+  roleId?: InputMaybe<IntFilter>
   /** Filter by the object’s `userId` field. */
-  userId?: Maybe<IntFilter>
+  userId?: InputMaybe<IntFilter>
 }
 
 /** An input for mutations affecting `UserRole` */
@@ -2361,8 +2362,8 @@ export interface UserRoleInput {
 
 /** Represents an update to a `UserRole`. Fields that are set will be updated. */
 export interface UserRolePatch {
-  roleId?: Maybe<Scalars['Int']>
-  userId?: Maybe<Scalars['Int']>
+  roleId?: InputMaybe<Scalars['Int']>
+  userId?: InputMaybe<Scalars['Int']>
 }
 
 /** A connection to a list of `UserRole` values. */
@@ -2827,6 +2828,7 @@ export const useUpdateUserMutation = <TError = QueryError, TContext = unknown>(
   options?: UseMutationOptions<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>
 ) =>
   useMutation<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>(
+    'updateUser',
     useFetchData<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument),
     options
   )

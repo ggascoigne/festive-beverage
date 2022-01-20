@@ -1,8 +1,4 @@
-import 'react-app-polyfill/ie11'
-
 ///<reference types="webpack-env" />
-import './wdyr' // <--- first import
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
