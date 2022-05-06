@@ -4,14 +4,12 @@ import { Link, useHistory } from 'react-router-dom'
 import { useQueryStringKey } from 'use-route-as-state'
 
 import { useGetAllDrinksQuery } from '../client'
-import { useAuth } from '../components/Auth'
 import { Drink, DrinkCard } from '../components/DrinkCard'
 import { GraphQLError } from '../components/GraphQLError'
 import { Loader } from '../components/Loader'
 import { Page } from '../components/Page'
 import { Search } from '../components/Search'
 import { notEmpty } from '../utils'
-import { NotLoggedIn } from './NotLoggedIn'
 
 const DrinkList: React.FC<{ drinks: Drink[] }> = ({ drinks }) => (
   <Grid container spacing={3}>
@@ -91,8 +89,4 @@ const LoggedIn = () => {
   }
 }
 
-export const Home = () => {
-  // const { isAuthenticated } = useAuth()
-  // return isAuthenticated ? <LoggedIn /> : <NotLoggedIn />
-  return <LoggedIn />
-}
+export const Home = () => <LoggedIn />

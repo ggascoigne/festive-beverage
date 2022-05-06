@@ -1,4 +1,4 @@
-import { SpawnSyncReturns, spawn, spawnSync } from 'child_process'
+import { SpawnSyncReturns, spawnSync } from 'child_process'
 import fs from 'fs'
 
 import chalk from 'chalk'
