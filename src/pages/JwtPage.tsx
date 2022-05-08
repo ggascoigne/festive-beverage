@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Grid } from '@mui/material'
 import React, { Suspense } from 'react'
 
 import { useAuth } from '../components/Auth'

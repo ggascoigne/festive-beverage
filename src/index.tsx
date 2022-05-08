@@ -1,3 +1,6 @@
+import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
+import { CssBaseline, StyledEngineProvider, Theme, ThemeProvider } from '@mui/material'
 ///<reference types="webpack-env" />
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -9,6 +12,12 @@ import { BrowserRouter } from 'react-router-dom'
 import { App } from './App'
 import { Auth0Provider } from './components/Auth'
 import { NotificationProvider } from './components/Notifications'
+import { theme } from './components/Theme'
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 // Usage
 // window.toggleDevtools(true)
@@ -25,6 +34,11 @@ const ReactQueryDevtoolsProduction = React.lazy(() =>
 
 const queryClient = new QueryClient()
 
+export const muiCache = createCache({
+  key: 'mui',
+  prepend: true,
+})
+
 const rootElement = document.getElementById('root')
 
 const RootComponent: React.FC = ({ children }) => {
@@ -39,22 +53,29 @@ const RootComponent: React.FC = ({ children }) => {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <NotificationProvider>
-          <Auth0Provider>
-            <QueryClientProvider client={queryClient}>
-              <Helmet defaultTitle='Festive Beverage' titleTemplate='Festive Beverage - %s'>
-                <html lang='en' />
-              </Helmet>
-              {children}
-              <ReactQueryDevtools />
-              {showDevtools ? (
-                <React.Suspense fallback={null}>
-                  <ReactQueryDevtoolsProduction />
-                </React.Suspense>
-              ) : null}
-            </QueryClientProvider>
-          </Auth0Provider>
-        </NotificationProvider>
+        <CacheProvider value={muiCache}>
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <NotificationProvider>
+                <Auth0Provider>
+                  <QueryClientProvider client={queryClient}>
+                    <Helmet defaultTitle='Festive Beverage' titleTemplate='Festive Beverage - %s'>
+                      <html lang='en' />
+                    </Helmet>
+                    {children}
+                    <ReactQueryDevtools />
+                    {showDevtools ? (
+                      <React.Suspense fallback={null}>
+                        <ReactQueryDevtoolsProduction />
+                      </React.Suspense>
+                    ) : null}
+                  </QueryClientProvider>
+                </Auth0Provider>
+              </NotificationProvider>
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </CacheProvider>
       </BrowserRouter>
     </HelmetProvider>
   )

@@ -1,5 +1,7 @@
-import { AppBar, IconButton, Theme, Toolbar, Typography, createStyles, makeStyles } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
+import MenuIcon from '@mui/icons-material/Menu'
+import { AppBar, IconButton, Theme, Toolbar, Typography } from '@mui/material'
+import createStyles from '@mui/styles/createStyles'
+import makeStyles from '@mui/styles/makeStyles'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Config, useGetConfig } from 'utils'
@@ -56,6 +58,7 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu })
             aria-label='Open drawer'
             onClick={handleDrawerToggle}
             className={classes.menuButton}
+            size='large'
           >
             <MenuIcon />
           </IconButton>

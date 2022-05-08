@@ -1,4 +1,6 @@
-import { Popover, createStyles, makeStyles } from '@material-ui/core'
+import { Popover } from '@mui/material'
+import createStyles from '@mui/styles/createStyles'
+import makeStyles from '@mui/styles/makeStyles'
 import { DateTime } from 'luxon'
 import React, { Suspense } from 'react'
 import { useGetConfig } from 'utils'

@@ -1,7 +1,8 @@
-import { useTheme } from '@material-ui/core'
-import { Theme, makeStyles } from '@material-ui/core/styles'
-import createStyles from '@material-ui/core/styles/createStyles'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@mui/material'
+import { Theme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import createStyles from '@mui/styles/createStyles'
+import makeStyles from '@mui/styles/makeStyles'
 import clsx from 'clsx'
 import React, { ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
@@ -51,7 +52,7 @@ export const Page: React.FC<PageProps> = ({
 }) => {
   const classes = useStyles()
   const theme = useTheme()
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
   return (
     <div
       className={clsx(

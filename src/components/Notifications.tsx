@@ -1,6 +1,8 @@
-import { IconButton, Theme, createStyles, makeStyles } from '@material-ui/core'
-import { amber, green } from '@material-ui/core/colors'
-import CloseIcon from '@material-ui/icons/Close'
+import CloseIcon from '@mui/icons-material/Close'
+import { IconButton, Theme } from '@mui/material'
+import { amber, green } from '@mui/material/colors'
+import createStyles from '@mui/styles/createStyles'
+import makeStyles from '@mui/styles/makeStyles'
 import { OptionsObject, SnackbarProvider, VariantType, useSnackbar } from 'notistack'
 import { default as React, ReactElement, useCallback } from 'react'
 
@@ -61,6 +63,7 @@ const SnackBarActionHandler: React.FC<{ keyValue: OptionsObject['key'] }> = ({ k
       color='inherit'
       onClick={() => closeSnackbar(keyValue)}
       data-test='snackbar-action-button'
+      size='large'
     >
       <CloseIcon className={classes.icon} />
     </IconButton>

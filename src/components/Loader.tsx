@@ -1,4 +1,7 @@
-import { Theme, WithStyles, createStyles, withStyles } from '@material-ui/core/styles'
+import { Theme } from '@mui/material/styles'
+import { WithStyles } from '@mui/styles'
+import createStyles from '@mui/styles/createStyles'
+import withStyles from '@mui/styles/withStyles'
 import clsx from 'clsx'
 import React from 'react'
 import Spinner from 'react-spinkit'

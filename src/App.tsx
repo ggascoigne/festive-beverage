@@ -1,21 +1,12 @@
-import {
-  CssBaseline,
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  MuiThemeProvider,
-  Theme,
-  createStyles,
-  makeStyles,
-} from '@material-ui/core'
+import { Divider, Drawer, List, ListItem, Theme } from '@mui/material'
+import createStyles from '@mui/styles/createStyles'
+import makeStyles from '@mui/styles/makeStyles'
 import React, { useCallback, useState } from 'react'
 
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
-import { LoginMenu } from './components/LoginMenu'
+import { LoginButton } from './components/LoginButton'
 import { MenuItems, SelectedContent, rootRoutes } from './components/Navigation'
-import { theme } from './components/Theme'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,7 +72,7 @@ const RightMenu: React.FC<{ size: 'normal' | 'small' | 'tiny' }> = (props) => {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <LoginMenu {...props} />
+        <LoginButton {...props} />
       </ListItem>
     </List>
   )
@@ -98,28 +89,24 @@ export const App: React.FC = React.memo(() => {
 
   return (
     <div className={classes.root}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-
-        <Header handleDrawerToggle={handleDrawerToggle} rightMenu={RightMenu} />
-        <Drawer
-          variant='temporary'
-          anchor='left'
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-        >
-          <DrawerContents />
-          <Divider />
-          <RightMenu size='small' />
-        </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <SelectedContent routes={rootRoutes} />
-        </main>
-      </MuiThemeProvider>
+      <Header handleDrawerToggle={handleDrawerToggle} rightMenu={RightMenu} />
+      <Drawer
+        variant='temporary'
+        anchor='left'
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+      >
+        <DrawerContents />
+        <Divider />
+        <RightMenu size='small' />
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <SelectedContent routes={rootRoutes} />
+      </main>
     </div>
   )
 })
