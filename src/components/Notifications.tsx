@@ -4,6 +4,7 @@ import { amber, green } from '@mui/material/colors'
 import { OptionsObject, SnackbarProvider, VariantType, useSnackbar } from 'notistack'
 import { default as React, ReactElement, useCallback } from 'react'
 
+import { Children } from '../utils'
 import { makeStyles } from '../utils/makeStyles'
 
 export const useSnackbarStyles = makeStyles()((theme: Theme) => ({
@@ -31,7 +32,7 @@ export const useSnackbarStyles = makeStyles()((theme: Theme) => ({
   },
 }))
 
-export const NotificationProvider: React.FC = ({ children }) => {
+export const NotificationProvider: React.FC<Children> = ({ children }) => {
   const { classes } = useSnackbarStyles()
   return (
     <SnackbarProvider

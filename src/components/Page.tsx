@@ -1,7 +1,7 @@
 import { useTheme } from '@mui/material'
 import { Theme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import React, { ReactNode } from 'react'
+import React, { PropsWithChildren, ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
 
 import { makeStyles } from '../utils/makeStyles'
@@ -39,7 +39,7 @@ interface PageProps {
   smaller?: boolean
 }
 
-export const Page: React.FC<PageProps> = ({
+export const Page: React.FC<PropsWithChildren<PageProps>> = ({
   children,
   className,
   title,

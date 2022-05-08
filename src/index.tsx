@@ -13,6 +13,7 @@ import { App } from './App'
 import { Auth0Provider } from './components/Auth'
 import { NotificationProvider } from './components/Notifications'
 import { theme } from './components/Theme'
+import { Children } from './utils'
 
 // Usage
 // window.toggleDevtools(true)
@@ -36,7 +37,7 @@ export const muiCache = createCache({
 
 const rootElement = document.getElementById('root')
 
-const RootComponent: React.FC = ({ children }) => {
+const RootComponent: React.FC<Children> = ({ children }) => {
   const [showDevtools, setShowDevtools] = React.useState(false)
 
   React.useEffect(() => {

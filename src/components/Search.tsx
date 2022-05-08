@@ -39,7 +39,11 @@ export function Search({ onChange, value }: PropsWithChildren<SearchProps>): Rea
       freeSolo
       multiple
       value={value}
-      renderOption={(ingredient) => <span>{ingredient || ''}</span>}
+      renderOption={(ingredient) => (
+        <span>
+          <>{ingredient || ''}</>
+        </span>
+      )}
       fullWidth
       renderInput={(params) => <TextField {...params} label='Search' variant='outlined' />}
       onChange={(e, value) => {

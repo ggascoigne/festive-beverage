@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { QueryClient } from 'react-query'
 
+import { Children } from '../utils'
 import { makeStyles } from '../utils/makeStyles'
 import { Auth0User, Perms, Roles, useAuth, useRoleOverride, useToken } from './Auth'
 import { LoginMenu } from './LoginMenu'
@@ -81,7 +82,7 @@ const OurAvatar: React.FC<ProfileImageProps> = ({ user }) => {
   }
 }
 
-const AdminBadge: React.FC = ({ children }) => {
+const AdminBadge: React.FC<Children> = ({ children }) => {
   const { classes } = useStyles()
   return (
     <Tooltip title='Site Administrator'>

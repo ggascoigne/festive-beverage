@@ -1,8 +1,9 @@
 import React from 'react'
 
+import { Children } from '../../utils'
 import { useTypographyStyles } from './typographyStyle'
 
-export const Success: React.FC = (props) => {
+export const Success: React.FC<Children> = (props) => {
   const { classes } = useTypographyStyles()
   const { children } = props
   return <div className={classes.defaultFontStyle + ' ' + classes.successText}>{children}</div>
