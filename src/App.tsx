@@ -1,61 +1,51 @@
 import { Divider, Drawer, List, ListItem, Theme } from '@mui/material'
-import createStyles from '@mui/styles/createStyles'
-import makeStyles from '@mui/styles/makeStyles'
 import React, { useCallback, useState } from 'react'
 
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { LoginButton } from './components/LoginButton'
 import { MenuItems, SelectedContent, rootRoutes } from './components/Navigation'
+import { makeStyles } from './utils/makeStyles'
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    '@global': {
-      '.MuiListItem-root.Mui-selected': {
-        backgroundColor: 'rgba(0,0,0,0.18)',
-      },
-      'ul, ol': {
-        fontSize: 14,
-      },
-    },
-    root: {
-      display: 'flex',
-      minHeight: '100vh',
-    },
-    toolbar: theme.mixins.toolbar,
-    content: {
-      minHeight: '100vh',
-      width: '100%',
-      flexGrow: 1,
-      // paddingTop: theme.spacing(3),
-      paddingBottom: theme.spacing(3),
-    },
-    list: {
-      fontSize: '14px',
-      margin: 0,
-      paddingLeft: '0',
-      listStyle: 'none',
-      paddingTop: '0',
-      paddingBottom: '0',
-      color: 'inherit',
-    },
-    listItem: {
-      float: 'left',
-      color: 'inherit',
-      position: 'relative',
-      display: 'block',
-      width: 'auto',
-      margin: '0',
-      padding: '0',
-    },
-    listItemText: {
-      padding: '0 !important',
-    },
-  })
-)
+// @ts-ignore
+const useStyles = makeStyles()((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    minHeight: '100vh',
+  },
+  toolbar: theme.mixins.toolbar,
+  content: {
+    minHeight: '100vh',
+    width: '100%',
+    flexGrow: 1,
+    // paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+  },
+  list: {
+    fontSize: '14px',
+    margin: 0,
+    paddingLeft: '0',
+    listStyle: 'none',
+    paddingTop: '0',
+    paddingBottom: '0',
+    color: 'inherit',
+  },
+  listItem: {
+    float: 'left',
+    color: 'inherit',
+    position: 'relative',
+    display: 'block',
+    width: 'auto',
+    margin: '0',
+    padding: '0',
+  },
+  listItemText: {
+    padding: '0 !important',
+  },
+}))
 
 const DrawerContents: React.FC = () => {
-  const classes = useStyles()
+  const { classes } = useStyles()
   return (
     <>
       <div className={classes.toolbar} />
@@ -68,7 +58,7 @@ const DrawerContents: React.FC = () => {
 }
 
 const RightMenu: React.FC<{ size: 'normal' | 'small' | 'tiny' }> = (props) => {
-  const classes = useStyles()
+  const { classes } = useStyles()
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -85,7 +75,7 @@ export const App: React.FC = React.memo(() => {
     setMobileOpen(!mobileOpen)
   }, [mobileOpen])
 
-  const classes = useStyles()
+  const { classes } = useStyles()
 
   return (
     <div className={classes.root}>

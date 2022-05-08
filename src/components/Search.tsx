@@ -1,24 +1,24 @@
 import { Autocomplete, TextField } from '@mui/material'
-import makeStyles from '@mui/styles/makeStyles'
 import React, { PropsWithChildren, ReactElement, useMemo } from 'react'
 import Zet from 'zet'
 
 import { useGetAllDrinksQuery, useGetAllIngredientsQuery } from '../client'
 import { notEmpty } from '../utils'
+import { makeStyles } from '../utils/makeStyles'
 
 interface SearchProps {
   onChange: any
   value: string[]
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles()({
   search: {
     paddingBottom: 12,
   },
 })
 
 export function Search({ onChange, value }: PropsWithChildren<SearchProps>): ReactElement | null {
-  const classes = useStyles()
+  const { classes } = useStyles()
   const { data: ingredients } = useGetAllIngredientsQuery()
   const { data: drinks } = useGetAllDrinksQuery()
 

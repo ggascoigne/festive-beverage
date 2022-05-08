@@ -150,7 +150,7 @@ const create = async (client: PoolClient, drink: Drink) => {
     const unit_id = q?.unit ? await getUnit(client, q.unit) : undefined
 
     if (q) {
-      const insertIngredient = await query(
+      const _insertIngredient = await query(
         client,
         `
             insert into recipe_ingredient (recipe_id, ingredient_id, unit_id, amount, modifier)

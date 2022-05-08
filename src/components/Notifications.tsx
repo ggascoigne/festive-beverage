@@ -1,40 +1,38 @@
 import CloseIcon from '@mui/icons-material/Close'
 import { IconButton, Theme } from '@mui/material'
 import { amber, green } from '@mui/material/colors'
-import createStyles from '@mui/styles/createStyles'
-import makeStyles from '@mui/styles/makeStyles'
 import { OptionsObject, SnackbarProvider, VariantType, useSnackbar } from 'notistack'
 import { default as React, ReactElement, useCallback } from 'react'
 
-export const useSnackbarStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    success: {
-      backgroundColor: green[600],
-    },
-    error: {
-      backgroundColor: theme.palette.error.dark,
-    },
-    info: {
-      backgroundColor: theme.palette.primary.main,
-    },
-    warning: {
-      backgroundColor: amber[700],
-    },
-    icon: {
-      fontSize: 20,
-    },
-    containerRoot: {
-      top: theme.spacing(9.5),
-      right: theme.spacing(2),
-    },
-    rootContainer: {
-      maxWidth: 600,
-    },
-  })
-)
+import { makeStyles } from '../utils/makeStyles'
+
+export const useSnackbarStyles = makeStyles()((theme: Theme) => ({
+  success: {
+    backgroundColor: green[600],
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark,
+  },
+  info: {
+    backgroundColor: theme.palette.primary.main,
+  },
+  warning: {
+    backgroundColor: amber[700],
+  },
+  icon: {
+    fontSize: 20,
+  },
+  containerRoot: {
+    top: theme.spacing(9.5),
+    right: theme.spacing(2),
+  },
+  rootContainer: {
+    maxWidth: 600,
+  },
+}))
 
 export const NotificationProvider: React.FC = ({ children }) => {
-  const classes = useSnackbarStyles({})
+  const { classes } = useSnackbarStyles()
   return (
     <SnackbarProvider
       classes={{
@@ -55,7 +53,7 @@ export const NotificationProvider: React.FC = ({ children }) => {
 
 const SnackBarActionHandler: React.FC<{ keyValue: OptionsObject['key'] }> = ({ keyValue }) => {
   const { closeSnackbar } = useSnackbar()
-  const classes = useSnackbarStyles({})
+  const { classes } = useSnackbarStyles()
   return (
     <IconButton
       key='close'

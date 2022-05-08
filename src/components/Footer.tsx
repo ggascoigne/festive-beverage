@@ -1,11 +1,10 @@
 import { Popover } from '@mui/material'
-import createStyles from '@mui/styles/createStyles'
-import makeStyles from '@mui/styles/makeStyles'
 import { DateTime } from 'luxon'
 import React, { Suspense } from 'react'
 import { useGetConfig } from 'utils'
 import { gitHash } from 'version'
 
+import { makeStyles } from '../utils/makeStyles'
 import { HasPermission, Perms, useAuth } from './Auth'
 import { Loader } from './Loader'
 
@@ -34,7 +33,7 @@ const container = {
   },
 }
 
-const footerStyle = createStyles({
+const useStyles = makeStyles()({
   footer: {
     padding: '0.9375rem 0',
     textAlign: 'center',
@@ -54,11 +53,9 @@ const footerStyle = createStyles({
   },
 })
 
-const useStyles = makeStyles(footerStyle)
-
 export const Footer: React.FC = (props) => {
   const { hasPermissions } = useAuth()
-  const classes = useStyles()
+  const { classes } = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
   const [config, getConfig] = useGetConfig()
 

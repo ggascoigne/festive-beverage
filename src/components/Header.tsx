@@ -1,29 +1,26 @@
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, IconButton, Theme, Toolbar, Typography } from '@mui/material'
-import createStyles from '@mui/styles/createStyles'
-import makeStyles from '@mui/styles/makeStyles'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Config, useGetConfig } from 'utils'
 
+import { makeStyles } from '../utils/makeStyles'
 import { HasPermission, Perms } from './Auth'
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    appBar: {
-      flex: '1 1 auto',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    menuButton: {
-      marginRight: 20,
-    },
-    toolbar: {
-      width: '100%',
-    },
-  })
-)
+const useStyles = makeStyles()((theme: Theme) => ({
+  appBar: {
+    flex: '1 1 auto',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  menuButton: {
+    marginRight: 20,
+  },
+  toolbar: {
+    width: '100%',
+  },
+}))
 
 interface HeaderProps {
   handleDrawerToggle: () => void
@@ -31,7 +28,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu }) => {
-  const classes = useStyles()
+  const { classes } = useStyles()
 
   const [config, getConfig] = useGetConfig()
   const [configDetails, setConfigDetails] = useState('')

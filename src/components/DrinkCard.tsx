@@ -1,17 +1,16 @@
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import makeStyles from '@mui/styles/makeStyles'
-import clsx from 'clsx'
 import Fraction from 'fraction.js'
 import React from 'react'
 
 import { GetAllDrinksQuery } from '../client'
 import { GqlType, notEmpty } from '../utils'
+import { makeStyles } from '../utils/makeStyles'
 
 export type Drink = GqlType<GetAllDrinksQuery, ['recipes', 'nodes', number]>
 
-const useStyles = makeStyles({
+const useStyles = makeStyles()({
   root: {
     minWidth: 275,
   },
@@ -31,7 +30,7 @@ const useStyles = makeStyles({
 })
 
 export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink, zoomed = false }) => {
-  const classes = useStyles()
+  const { classes, cx } = useStyles()
   if (!drink) {
     return (
       <Card className={classes.root} elevation={3}>
@@ -51,7 +50,7 @@ export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink
         </Typography>
         <ul>
           {drink?.recipeIngredients?.nodes?.filter(notEmpty)?.map((ingredient, i) => (
-            <Typography key={i} component='li' className={clsx({ [classes.zoomedIngredients]: zoomed })}>
+            <Typography key={i} component='li' className={cx({ [classes.zoomedIngredients]: zoomed })}>
               {ingredient.ingredient?.name} {new Fraction(ingredient.amount).toFraction(true)} {ingredient.unit?.name}
             </Typography>
           ))}
@@ -64,11 +63,7 @@ export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink
             Garnish: {drink.garnish}
           </Typography>
         ) : null}
-        <Typography
-          className={clsx(classes.pos, { [classes.zoomedInstructions]: zoomed })}
-          variant='body2'
-          component='p'
-        >
+        <Typography className={cx(classes.pos, { [classes.zoomedInstructions]: zoomed })} variant='body2' component='p'>
           {drink.instructions}
         </Typography>
         <Typography className={classes.pos} color='textSecondary'>

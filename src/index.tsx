@@ -1,6 +1,6 @@
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
-import { CssBaseline, StyledEngineProvider, Theme, ThemeProvider } from '@mui/material'
+import { CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material'
 ///<reference types="webpack-env" />
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -13,11 +13,6 @@ import { App } from './App'
 import { Auth0Provider } from './components/Auth'
 import { NotificationProvider } from './components/Notifications'
 import { theme } from './components/Theme'
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
 
 // Usage
 // window.toggleDevtools(true)
