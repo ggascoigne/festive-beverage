@@ -3,7 +3,7 @@ version: '3.7'
 services:
   postgres:
     container_name: festive-beverage-postgres
-    image: postgres:13-alpine
+    image: postgres:14-alpine
     restart: unless-stopped
     ports:
       - "54321:5432"

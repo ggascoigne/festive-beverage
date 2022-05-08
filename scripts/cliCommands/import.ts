@@ -1,9 +1,9 @@
-import { Command } from '@oclif/command'
+import { Command } from '@oclif/core'
 import Fraction from 'fraction.js'
 import { PoolClient } from 'pg'
 import { WorkSheet, readFile, utils } from 'xlsx'
 
-import { PoolType, getPool } from '../config'
+import { PoolType, getPool } from '../../shared/config'
 
 const ingredients = { s: 2, e: 143 }
 const presentation = { s: ingredients.e + 1, e: 157 }
@@ -11,7 +11,7 @@ const presentation = { s: ingredients.e + 1, e: 157 }
 const isIngredient = (r: number) => r >= ingredients.s && r <= ingredients.e
 const isPresentation = (r: number) => r >= presentation.s && r <= presentation.e
 
-type IngredientInfo = {
+interface IngredientInfo {
   name: string
   quantity: string
   tags?: string
@@ -25,7 +25,7 @@ type Drink = {
   ingredientText: string
 } & Record<string, string>
 
-type Quantity = {
+interface Quantity {
   amount?: number
   unit?: string
   modifier?: string
@@ -202,9 +202,10 @@ const getDrinks = (sheet: WorkSheet) => {
 }
 
 export default class Import extends Command {
+  static description = 'Import data from shared Excel spreadsheet.'
   async run() {
     const workbook = readFile('/Users/ggp/Dropbox/Drinks Shared Folder/Drinks Excel Data.xlsx')
-    const drinks = getDrinks(workbook.Sheets['Ingredients'])
+    const drinks = getDrinks(workbook.Sheets.Ingredients)
 
     const pool = getPool(PoolType.ADMIN, `${__dirname}/../../shared/`)
     const client: PoolClient = await pool.connect()

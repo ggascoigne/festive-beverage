@@ -2446,97 +2446,74 @@ export type RecipeFieldsFragment = {
   __typename: 'Recipe'
   name: string
   id: number
-  description?: string | null | undefined
-  instructions?: string | null | undefined
+  description?: string | null
+  instructions?: string | null
   ingredientText: string
-  glass?: string | null | undefined
-  garnish?: string | null | undefined
-  source?: string | null | undefined
+  glass?: string | null
+  garnish?: string | null
+  source?: string | null
   recipeIngredients: {
     __typename: 'RecipeIngredientsConnection'
-    nodes: Array<
-      | {
-          __typename: 'RecipeIngredient'
-          amount?: any | null | undefined
-          ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
-          unit?: { __typename: 'Unit'; name: string } | null | undefined
-        }
-      | null
-      | undefined
-    >
+    nodes: Array<{
+      __typename: 'RecipeIngredient'
+      amount?: any | null
+      ingredient?: { __typename: 'Ingredient'; name: string } | null
+      unit?: { __typename: 'Unit'; name: string } | null
+    } | null>
   }
 }
 
 export type RecipeConnectionFieldsFragment = {
   __typename: 'RecipesConnection'
-  nodes: Array<
-    | {
-        __typename: 'Recipe'
-        name: string
-        id: number
-        description?: string | null | undefined
-        instructions?: string | null | undefined
-        ingredientText: string
-        glass?: string | null | undefined
-        garnish?: string | null | undefined
-        source?: string | null | undefined
-        recipeIngredients: {
-          __typename: 'RecipeIngredientsConnection'
-          nodes: Array<
-            | {
-                __typename: 'RecipeIngredient'
-                amount?: any | null | undefined
-                ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
-                unit?: { __typename: 'Unit'; name: string } | null | undefined
-              }
-            | null
-            | undefined
-          >
-        }
-      }
-    | null
-    | undefined
-  >
+  nodes: Array<{
+    __typename: 'Recipe'
+    name: string
+    id: number
+    description?: string | null
+    instructions?: string | null
+    ingredientText: string
+    glass?: string | null
+    garnish?: string | null
+    source?: string | null
+    recipeIngredients: {
+      __typename: 'RecipeIngredientsConnection'
+      nodes: Array<{
+        __typename: 'RecipeIngredient'
+        amount?: any | null
+        ingredient?: { __typename: 'Ingredient'; name: string } | null
+        unit?: { __typename: 'Unit'; name: string } | null
+      } | null>
+    }
+  } | null>
 }
 
 export type GetAllDrinksQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetAllDrinksQuery = {
   __typename: 'Query'
-  recipes?:
-    | {
-        __typename: 'RecipesConnection'
-        nodes: Array<
-          | {
-              __typename: 'Recipe'
-              name: string
-              id: number
-              description?: string | null | undefined
-              instructions?: string | null | undefined
-              ingredientText: string
-              glass?: string | null | undefined
-              garnish?: string | null | undefined
-              source?: string | null | undefined
-              recipeIngredients: {
-                __typename: 'RecipeIngredientsConnection'
-                nodes: Array<
-                  | {
-                      __typename: 'RecipeIngredient'
-                      amount?: any | null | undefined
-                      ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
-                      unit?: { __typename: 'Unit'; name: string } | null | undefined
-                    }
-                  | null
-                  | undefined
-                >
-              }
-            }
-          | null
-          | undefined
-        >
+  recipes?: {
+    __typename: 'RecipesConnection'
+    nodes: Array<{
+      __typename: 'Recipe'
+      name: string
+      id: number
+      description?: string | null
+      instructions?: string | null
+      ingredientText: string
+      glass?: string | null
+      garnish?: string | null
+      source?: string | null
+      recipeIngredients: {
+        __typename: 'RecipeIngredientsConnection'
+        nodes: Array<{
+          __typename: 'RecipeIngredient'
+          amount?: any | null
+          ingredient?: { __typename: 'Ingredient'; name: string } | null
+          unit?: { __typename: 'Unit'; name: string } | null
+        } | null>
       }
-    | null
-    | undefined
+    } | null>
+  } | null
 }
 
 export type GetFilteredDrinksQueryVariables = Exact<{
@@ -2545,53 +2522,39 @@ export type GetFilteredDrinksQueryVariables = Exact<{
 
 export type GetFilteredDrinksQuery = {
   __typename: 'Query'
-  recipes?:
-    | {
-        __typename: 'RecipesConnection'
-        nodes: Array<
-          | {
-              __typename: 'Recipe'
-              name: string
-              id: number
-              description?: string | null | undefined
-              instructions?: string | null | undefined
-              ingredientText: string
-              glass?: string | null | undefined
-              garnish?: string | null | undefined
-              source?: string | null | undefined
-              recipeIngredients: {
-                __typename: 'RecipeIngredientsConnection'
-                nodes: Array<
-                  | {
-                      __typename: 'RecipeIngredient'
-                      amount?: any | null | undefined
-                      ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
-                      unit?: { __typename: 'Unit'; name: string } | null | undefined
-                    }
-                  | null
-                  | undefined
-                >
-              }
-            }
-          | null
-          | undefined
-        >
+  recipes?: {
+    __typename: 'RecipesConnection'
+    nodes: Array<{
+      __typename: 'Recipe'
+      name: string
+      id: number
+      description?: string | null
+      instructions?: string | null
+      ingredientText: string
+      glass?: string | null
+      garnish?: string | null
+      source?: string | null
+      recipeIngredients: {
+        __typename: 'RecipeIngredientsConnection'
+        nodes: Array<{
+          __typename: 'RecipeIngredient'
+          amount?: any | null
+          ingredient?: { __typename: 'Ingredient'; name: string } | null
+          unit?: { __typename: 'Unit'; name: string } | null
+        } | null>
       }
-    | null
-    | undefined
+    } | null>
+  } | null
 }
 
 export type GetAllIngredientsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetAllIngredientsQuery = {
   __typename: 'Query'
-  ingredients?:
-    | {
-        __typename: 'IngredientsConnection'
-        nodes: Array<{ __typename: 'Ingredient'; name: string; tags?: string | null | undefined } | null | undefined>
-      }
-    | null
-    | undefined
+  ingredients?: {
+    __typename: 'IngredientsConnection'
+    nodes: Array<{ __typename: 'Ingredient'; name: string; tags?: string | null } | null>
+  } | null
 }
 
 export type GetDrinkByIdQueryVariables = Exact<{
@@ -2600,33 +2563,26 @@ export type GetDrinkByIdQueryVariables = Exact<{
 
 export type GetDrinkByIdQuery = {
   __typename: 'Query'
-  recipe?:
-    | {
-        __typename: 'Recipe'
-        name: string
-        id: number
-        description?: string | null | undefined
-        instructions?: string | null | undefined
-        ingredientText: string
-        glass?: string | null | undefined
-        garnish?: string | null | undefined
-        source?: string | null | undefined
-        recipeIngredients: {
-          __typename: 'RecipeIngredientsConnection'
-          nodes: Array<
-            | {
-                __typename: 'RecipeIngredient'
-                amount?: any | null | undefined
-                ingredient?: { __typename: 'Ingredient'; name: string } | null | undefined
-                unit?: { __typename: 'Unit'; name: string } | null | undefined
-              }
-            | null
-            | undefined
-          >
-        }
-      }
-    | null
-    | undefined
+  recipe?: {
+    __typename: 'Recipe'
+    name: string
+    id: number
+    description?: string | null
+    instructions?: string | null
+    ingredientText: string
+    glass?: string | null
+    garnish?: string | null
+    source?: string | null
+    recipeIngredients: {
+      __typename: 'RecipeIngredientsConnection'
+      nodes: Array<{
+        __typename: 'RecipeIngredient'
+        amount?: any | null
+        ingredient?: { __typename: 'Ingredient'; name: string } | null
+        unit?: { __typename: 'Unit'; name: string } | null
+      } | null>
+    }
+  } | null
 }
 
 export type GetUserByEmailQueryVariables = Exact<{
@@ -2635,17 +2591,14 @@ export type GetUserByEmailQueryVariables = Exact<{
 
 export type GetUserByEmailQuery = {
   __typename: 'Query'
-  userByEmail?: { __typename: 'User'; id: number; email: string } | null | undefined
+  userByEmail?: { __typename: 'User'; id: number; email: string } | null
 }
 
 export type GetUserByIdQueryVariables = Exact<{
   id: Scalars['Int']
 }>
 
-export type GetUserByIdQuery = {
-  __typename: 'Query'
-  user?: { __typename: 'User'; id: number; email: string } | null | undefined
-}
+export type GetUserByIdQuery = { __typename: 'Query'; user?: { __typename: 'User'; id: number; email: string } | null }
 
 export type UpdateUserMutationVariables = Exact<{
   input: UpdateUserInput
@@ -2653,23 +2606,20 @@ export type UpdateUserMutationVariables = Exact<{
 
 export type UpdateUserMutation = {
   __typename: 'Mutation'
-  updateUser?:
-    | { __typename: 'UpdateUserPayload'; user?: { __typename: 'User'; id: number; email: string } | null | undefined }
-    | null
-    | undefined
+  updateUser?: {
+    __typename: 'UpdateUserPayload'
+    user?: { __typename: 'User'; id: number; email: string } | null
+  } | null
 }
 
 export type GetAllUsersQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetAllUsersQuery = {
   __typename: 'Query'
-  users?:
-    | {
-        __typename: 'UsersConnection'
-        nodes: Array<{ __typename: 'User'; id: number; email: string } | null | undefined>
-      }
-    | null
-    | undefined
+  users?: {
+    __typename: 'UsersConnection'
+    nodes: Array<{ __typename: 'User'; id: number; email: string } | null>
+  } | null
 }
 
 export type UserFieldsFragment = { __typename: 'User'; id: number; email: string }
@@ -2828,7 +2778,7 @@ export const useUpdateUserMutation = <TError = QueryError, TContext = unknown>(
   options?: UseMutationOptions<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>
 ) =>
   useMutation<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>(
-    'updateUser',
+    ['updateUser'],
     useFetchData<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument),
     options
   )

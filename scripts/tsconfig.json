@@ -4,9 +4,9 @@
     "importHelpers": true,
     "module": "commonjs",
     "outDir": "lib",
-    "rootDir": "shared",
+    "rootDir": "..",
     "strict": true,
-    "target": "es2019"
+    "target": "es2020"
   },
-  "include": ["shared/**/*"]
+  "include": ["../**/*"]
 }

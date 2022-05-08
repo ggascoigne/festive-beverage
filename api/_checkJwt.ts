@@ -1,6 +1,6 @@
 import { audience, authDomain } from './_constants'
 
-const jwt = require('express-jwt')
+const { expressjwt: jwt } = require('express-jwt')
 const fs = require('fs')
 
 const public_key = fs.readFileSync(`${__dirname}/../shared/certs/${authDomain}.pem`).toString()

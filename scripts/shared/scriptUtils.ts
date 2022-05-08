@@ -1,12 +1,12 @@
 import { SpawnSyncReturns, spawnSync } from 'child_process'
-import fs from 'fs'
+import * as fs from 'fs'
 
-import chalk from 'chalk'
-import cli from 'cli-ux'
+import { CliUx } from '@oclif/core'
+import * as chalk from 'chalk'
 import { stripIndent } from 'common-tags'
-import tempy from 'tempy'
+import * as tempy from 'tempy'
 
-import { DbConfig } from '../shared/config'
+import { DbConfig } from '../../shared/config'
 
 export function getPostgresArgs(dbconfig: DbConfig) {
   const { database, host, port, user, password, ssl } = dbconfig
@@ -140,28 +140,28 @@ export function psql(dbconfig: DbConfig, script: string, verbose: boolean) {
   const args = getPostgresArgs(dbconfig)
   args.push('-X', '-v', 'ON_ERROR_STOP=1', '-f', name)
   const cmd = `psql ${args.join(' ')}`
-  verbose && cli.log(`running ${cmd}`)
+  verbose && CliUx.ux.log(`running ${cmd}`)
   runOrExit(spawnSync('/usr/local/bin/psql', args, { stdio: verbose ? 'inherit' : 'ignore' }), cmd)
 }
 
 export const bail = (reason: any) => {
   if (reason) {
-    cli.error(chalk.bold.red('error detected'))
-    cli.error(reason)
+    CliUx.ux.error(chalk.bold.red('error detected'))
+    CliUx.ux.error(reason)
     process.exit(-1)
   }
 }
 export const runOrExit = (processStatus: SpawnSyncReturns<Buffer>, cmd?: string) => {
   if (processStatus.error) {
-    cmd && cli.log(`running ${cmd}`)
+    cmd && CliUx.ux.log(`running ${cmd}`)
     bail(processStatus.error)
   }
   if (processStatus.status) {
-    cmd && cli.log(`running ${cmd}`)
+    cmd && CliUx.ux.log(`running ${cmd}`)
     bail(processStatus.status)
   }
 }
 
 export function info(s: string) {
-  cli.log(chalk.bold(s))
+  CliUx.ux.log(chalk.bold(s))
 }

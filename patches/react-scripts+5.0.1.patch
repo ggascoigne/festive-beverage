@@ -1,8 +1,8 @@
 diff --git a/node_modules/react-scripts/config/webpack.config.js b/node_modules/react-scripts/config/webpack.config.js
-index 2b1b3bb..8a87777 100644
+index e465d8e..c9a6b53 100644
 --- a/node_modules/react-scripts/config/webpack.config.js
 +++ b/node_modules/react-scripts/config/webpack.config.js
-@@ -790,5 +790,18 @@ module.exports = function (webpackEnv) {
+@@ -792,5 +792,18 @@ module.exports = function (webpackEnv) {
      // Turn off performance processing because we utilize
      // our own hints via the FileSizeReporter
      performance: false,
