@@ -82,7 +82,7 @@ const LoggedIn = () => {
   } else {
     return (
       <Page title='Festive Beverages' hideTitle>
-        <Search value={search as string[]} onChange={setSearch} />
+        <Search value={(search ?? []) as string[]} onChange={setSearch} />
         <DrinkList drinks={drinks} />
       </Page>
     )

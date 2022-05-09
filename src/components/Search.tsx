@@ -38,7 +38,7 @@ export function Search({ onChange, value }: PropsWithChildren<SearchProps>): Rea
       options={names}
       freeSolo
       multiple
-      value={value || ''}
+      value={value || []}
       renderOption={(props, ingredient) => (
         <li {...props}>
           <>{ingredient || ''}</>
