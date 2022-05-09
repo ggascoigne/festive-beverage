@@ -57,7 +57,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       marginBottom: '8px',
       marginTop: '8px',
       textAlign: 'left',
-      '& > span:first-child': {
+      '& > span:first-of-type': {
         justifyContent: 'flex-start',
       },
     },

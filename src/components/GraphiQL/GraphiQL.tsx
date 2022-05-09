@@ -132,7 +132,7 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
               overflow: 'unset !important',
               padding: '0 !important',
             },
-            '.graphiql-explorer-root > :first-child': {
+            '.graphiql-explorer-root > :first-of-type': {
               padding: '8px 8px 0 8px',
               // overflowX: 'hidden !important',  // todo ggp: check this
             },

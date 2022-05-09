@@ -38,11 +38,11 @@ export function Search({ onChange, value }: PropsWithChildren<SearchProps>): Rea
       options={names}
       freeSolo
       multiple
-      value={value}
-      renderOption={(ingredient) => (
-        <span>
+      value={value || ''}
+      renderOption={(props, ingredient) => (
+        <li {...props}>
           <>{ingredient || ''}</>
-        </span>
+        </li>
       )}
       fullWidth
       renderInput={(params) => <TextField {...params} label='Search' variant='outlined' />}

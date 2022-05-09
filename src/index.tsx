@@ -3,7 +3,7 @@ import { CacheProvider } from '@emotion/react'
 import { CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material'
 ///<reference types="webpack-env" />
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
@@ -34,8 +34,6 @@ export const muiCache = createCache({
   key: 'mui',
   prepend: true,
 })
-
-const rootElement = document.getElementById('root')
 
 const RootComponent: React.FC<Children> = ({ children }) => {
   const [showDevtools, setShowDevtools] = React.useState(false)
@@ -77,12 +75,14 @@ const RootComponent: React.FC<Children> = ({ children }) => {
   )
 }
 
+const rootElement = document.getElementById('root')
+const root = createRoot(rootElement!)
+
 const render = (Component: React.ComponentType) =>
-  ReactDOM.render(
+  root.render(
     <RootComponent>
       <Component />
-    </RootComponent>,
-    rootElement
+    </RootComponent>
   )
 
 render(App)
