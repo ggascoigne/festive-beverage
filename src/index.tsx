@@ -5,8 +5,8 @@ import { CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { BrowserRouter } from 'react-router-dom'
 
 import { App } from './App'
@@ -19,7 +19,7 @@ import { Children } from './utils'
 // window.toggleDevtools(true)
 
 const ReactQueryDevtoolsProduction = React.lazy(() =>
-  import('react-query/devtools/development').then((d) => ({
+  import('@tanstack/react-query-devtools/build/lib/index.prod.js').then((d) => ({
     default: d.ReactQueryDevtools,
   }))
 )

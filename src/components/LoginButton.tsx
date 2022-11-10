@@ -2,7 +2,7 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
 import { Avatar, Badge, Button, Theme, Tooltip } from '@mui/material'
 import fetch from 'isomorphic-fetch'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { QueryClient } from 'react-query'
+import { QueryClient } from '@tanstack/react-query'
 
 import { Children } from '../utils'
 import { makeStyles } from '../utils/makeStyles'

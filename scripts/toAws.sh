@@ -32,6 +32,6 @@ export PGPASSWORD=${DATABASE_ADMIN_PASSWORD}
 
 cp .env .env.backup
 cp .env.aws .env
-yarn tsnode ./scripts/resetDatabaseOwner.ts
+pnpm node ./scripts/run resetDatabaseOwner
 mv -f .env.backup .env
 echo Done

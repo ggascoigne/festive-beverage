@@ -32,6 +32,6 @@ export PGPASSWORD=${DATABASE_ADMIN_PASSWORD}
   --exit-on-error \
   ${ORIGINAL_DATABASE_NAME}.dump
 
-yarn node ./scripts/run resetDatabaseOwner
+pnpm node ./scripts/run resetDatabaseOwner
 
 echo Done

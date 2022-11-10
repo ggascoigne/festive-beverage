@@ -5,8 +5,8 @@ import { WorkSheet, readFile, utils } from 'xlsx'
 
 import { PoolType, getPool } from '../../shared/config'
 
-const ingredients = { s: 2, e: 143 }
-const presentation = { s: ingredients.e + 1, e: 157 }
+const ingredients = { s: 2, e: 159 } // 159 = garnish line in sheet -2
+const presentation = { s: ingredients.e + 1, e: 180 }
 
 const isIngredient = (r: number) => r >= ingredients.s && r <= ingredients.e
 const isPresentation = (r: number) => r >= presentation.s && r <= presentation.e
@@ -103,6 +103,7 @@ const parseQuantity = (s: string): Quantity | undefined => {
     quarters: 'quarter',
     quarter: 'quarter',
     grated: 'grated',
+    cup: 'cup',
   }
 
   switch (s) {
@@ -204,7 +205,7 @@ const getDrinks = (sheet: WorkSheet) => {
 export default class Import extends Command {
   static description = 'Import data from shared Excel spreadsheet.'
   async run() {
-    const workbook = readFile('/Users/ggp/Dropbox/Drinks Shared Folder/Drinks Excel Data.xlsx')
+    const workbook = readFile('/Users/ggp/Dropbox (Maestral)/Drinks Shared Folder/Drinks Excel Data.xlsx')
     const drinks = getDrinks(workbook.Sheets.Ingredients)
 
     const pool = getPool(PoolType.ADMIN, `${__dirname}/../../shared/`)
