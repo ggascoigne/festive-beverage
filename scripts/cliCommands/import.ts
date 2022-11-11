@@ -1,9 +1,9 @@
 import { Command } from '@oclif/core'
 import Fraction from 'fraction.js'
 import { PoolClient } from 'pg'
-import { WorkSheet, readFile, utils } from 'xlsx'
+import { readFile, utils, WorkSheet } from 'xlsx'
 
-import { PoolType, getPool } from '../../shared/config'
+import { getPool, PoolType } from '../../shared/config'
 
 const ingredients = { s: 2, e: 159 } // 159 = garnish line in sheet -2
 const presentation = { s: ingredients.e + 1, e: 180 }
@@ -31,10 +31,9 @@ interface Quantity {
   modifier?: string
 }
 
-const query = async (client: PoolClient, query: string) => {
-  console.log(`query = ${JSON.stringify(query?.replace(/\s+/g, ' '), null, 2)}`)
-  return client.query(query)
-}
+const query = async (client: PoolClient, query: string) =>
+  // console.log(`query = ${JSON.stringify(query?.replace(/\s+/g, ' '), null, 2)}`)
+  client.query(query)
 
 const esc = (q: string) => q?.replace(/'/g, "''")
 
@@ -142,7 +141,7 @@ const create = async (client: PoolClient, drink: Drink) => {
   )
   const recipe_id = insert?.rows?.[0]?.id
 
-  console.log(drink)
+  // console.log(drink)
   //  const result = await query( client,query)
   for (const ingredient in drink.ingredients) {
     const ingredientInfo = drink.ingredients[ingredient]
@@ -159,7 +158,7 @@ const create = async (client: PoolClient, drink: Drink) => {
             returning *`
       )
     } else {
-      console.log(`skipping ${ingredient}: ${drink.ingredients[ingredient]}`)
+      console.log(`skipping ${ingredient}: ${JSON.stringify(drink.ingredients[ingredient], null, 2)}`)
     }
   }
   // process.exit(1)
