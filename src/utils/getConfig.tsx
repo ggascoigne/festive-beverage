@@ -23,7 +23,7 @@ export const useGetConfig = () => {
   const [config, setConfig] = useState<Config | undefined>()
 
   const getConfig = useCallback(() => {
-    fetch(window.location.origin + '/api/getConfig', {
+    fetch(`${window.location.origin}/api/getConfig`, {
       method: 'get',
       headers: jwtToken
         ? {
@@ -43,6 +43,7 @@ export const useGetConfig = () => {
           // console.log(e)
           return responseBody
         }
+        return undefined
       })
   }, [setConfig, jwtToken])
 

@@ -4,12 +4,14 @@ import * as chalk from 'chalk'
 import { config } from '../../shared/config'
 import { createCleanDb } from '../shared/scriptUtils'
 
-const database = config.rootDatabase.database
+const { database } = config.rootDatabase
 const targetUser = config.userDatabase.user
 const targetUserPassword = config.userDatabase.password
 
 export default class CreateCleanDb extends Command {
   static description = 'Create a clean database.'
+
+  // eslint-disable-next-line class-methods-use-this
   async run() {
     console.log(`Recreating database ${database}`)
 

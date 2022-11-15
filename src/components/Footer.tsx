@@ -53,7 +53,7 @@ const useStyles = makeStyles()({
   },
 })
 
-export const Footer: React.FC = (props) => {
+export const Footer: React.FC = () => {
   const { hasPermissions } = useAuth()
   const { classes } = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)

@@ -28,7 +28,7 @@ export const useStyles = makeStyles()({
 })
 
 const graphQLFetcher = (jwtToken?: string) => (graphQLParams: any) =>
-  fetch(window.location.origin + '/api/graphql', {
+  fetch(`${window.location.origin}/api/graphql`, {
     method: 'post',
     headers: jwtToken
       ? {
@@ -53,8 +53,8 @@ interface Props {
   auth?: { jwtToken?: string }
 }
 
-const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
-  const _graphiql = useRef<any>(null)
+const GraphiQL: React.FC<Props> = () => {
+  const graphiqlRef = useRef<any>(null)
   const [schema, setSchema] = useState<GraphQLSchema | null>(null)
   const [query, setQuery] = useState<string>('')
   const [explorerIsOpen, setExplorerIsOpen] = useState<boolean>(true)
@@ -78,8 +78,7 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
           return false
         }
 
-        const { start, end } = definition.loc
-        return start <= position.start && end >= position.end
+        return definition.loc.start <= position.start && definition.loc.end >= position.end
       })
 
       if (!def) {
@@ -100,6 +99,7 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
       const selector = `.graphiql-explorer-root #${operationKind}-${operationName}`
 
       document.querySelector(selector)?.scrollIntoView()
+      return undefined
     },
     [query]
   )
@@ -108,7 +108,7 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
     graphQLFetcher(jwtToken)({
       query: getIntrospectionQuery(),
     }).then((result) => {
-      const editor = _graphiql.current?.getQueryEditor()
+      const editor = graphiqlRef.current?.getQueryEditor()
       editor?.setOption('extraKeys', {
         ...(editor.options.extraKeys || {}),
         'Shift-Alt-LeftClick': handleInspectOperation,
@@ -117,7 +117,7 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
     })
   }, [handleInspectOperation, jwtToken])
 
-  const handleEditQuery = useCallback((query: string) => setQuery(query), [])
+  const handleEditQuery = useCallback((q: string) => setQuery(q), [])
 
   const handleToggleExplorer = useCallback(() => {
     setExplorerIsOpen((old) => !old)
@@ -152,12 +152,12 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
           schema={schema}
           query={query}
           onEdit={handleEditQuery}
-          onRunOperation={(operationName: string) => _graphiql.current.handleRunQuery(operationName)}
+          onRunOperation={(operationName: string) => graphiqlRef.current.handleRunQuery(operationName)}
           explorerIsOpen={explorerIsOpen}
           onToggleExplorer={handleToggleExplorer}
         />
         <RealGraphiQL
-          ref={_graphiql}
+          ref={graphiqlRef}
           fetcher={graphQLFetcher(jwtToken)}
           schema={schema}
           query={query}
@@ -165,22 +165,22 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
         >
           <RealGraphiQL.Toolbar>
             <RealGraphiQL.Button
-              onClick={() => _graphiql.current.handlePrettifyQuery()}
+              onClick={() => graphiqlRef.current.handlePrettifyQuery()}
               label='Prettify'
               title='Prettify Query (Shift-Ctrl-P)'
             />
             <RealGraphiQL.Button
-              onClick={() => _graphiql.current.handleMergeQuery()}
+              onClick={() => graphiqlRef.current.handleMergeQuery()}
               title='Merge Query (Shift-Ctrl-M)'
               label='Merge'
             />
             <RealGraphiQL.Button
-              onClick={() => _graphiql.current.handleCopyQuery()}
+              onClick={() => graphiqlRef.current.handleCopyQuery()}
               title='Copy Query (Shift-Ctrl-C)'
               label='Copy'
             />{' '}
             <RealGraphiQL.Button
-              onClick={() => _graphiql.current.handleToggleHistory()}
+              onClick={() => graphiqlRef.current.handleToggleHistory()}
               label='History'
               title='Show History'
             />

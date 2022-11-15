@@ -8,6 +8,8 @@ const targetUser = config.userDatabase.user
 
 export default class ResetDatabaseOwner extends Command {
   static description = 'Reset the database owner - for use after import'
+
+  // eslint-disable-next-line class-methods-use-this
   async run() {
     console.log(`using ${getPostgresArgs(config.rootDatabase)}`)
     CliUx.ux.action.start(`resetting database owner for ${targetUser}`)

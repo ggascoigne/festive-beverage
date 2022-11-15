@@ -22,9 +22,8 @@ export const SelectedContent: React.FC<{ routes: RootRoutes }> = ({ routes }) =>
                 key={index}
               />
             )
-          } else {
-            return <Route exact={route.exact} path={route.path} component={route.component!} key={index} />
           }
+          return <Route exact={route.exact} path={route.path} component={route.component!} key={index} />
         }),
     [routes]
   )

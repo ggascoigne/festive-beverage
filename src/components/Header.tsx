@@ -38,9 +38,9 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu })
   }, [getConfig])
 
   useEffect(() => {
-    const getConfigDetails = (config: Config | undefined, href: string | undefined) => {
+    const getConfigDetails = (conf: Config | undefined, href: string | undefined) => {
       if (href?.includes('festivebeverage.com')) return ''
-      return !config ? '' : config.local ? '(local)' : '(prod)'
+      return !conf ? '' : conf.local ? '(local)' : '(prod)'
     }
 
     setConfigDetails(getConfigDetails(config, window.location.href))

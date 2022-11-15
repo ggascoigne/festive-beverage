@@ -1,4 +1,4 @@
-import { SpawnSyncReturns, spawnSync } from 'child_process'
+import { spawnSync, SpawnSyncReturns } from 'child_process'
 import * as fs from 'fs'
 
 import { CliUx } from '@oclif/core'
@@ -11,6 +11,38 @@ import { DbConfig } from '../../shared/config'
 export function getPostgresArgs(dbconfig: DbConfig) {
   const { database, host, port, user, password, ssl } = dbconfig
   return [`postgresql://${user}:${password}@${host}:${port}/${database}${ssl ? '?sslmode=require' : ''}`]
+}
+
+export const bail = (reason: any) => {
+  if (reason) {
+    CliUx.ux.error(chalk.bold.red('error detected'))
+    CliUx.ux.error(reason)
+    process.exit(-1)
+  }
+}
+export const runOrExit = (processStatus: SpawnSyncReturns<Buffer>, cmd?: string) => {
+  if (processStatus.error) {
+    cmd && CliUx.ux.log(`running ${cmd}`)
+    bail(processStatus.error)
+  }
+  if (processStatus.status) {
+    cmd && CliUx.ux.log(`running ${cmd}`)
+    bail(processStatus.status)
+  }
+}
+export function psql(dbconfig: DbConfig, script: string, verbose: boolean) {
+  const name = tempy.file()
+  fs.writeFileSync(name, script)
+
+  const args = getPostgresArgs(dbconfig)
+  args.push('-X', '-v', 'ON_ERROR_STOP=1', '-f', name)
+  const cmd = `psql ${args.join(' ')}`
+  verbose && CliUx.ux.log(`running ${cmd}`)
+  runOrExit(spawnSync('/usr/local/bin/psql', args, { stdio: verbose ? 'inherit' : 'ignore' }), cmd)
+}
+
+export function info(s: string) {
+  CliUx.ux.log(chalk.bold(s))
 }
 
 export async function resetOwner(dbconfig: DbConfig, targetUser: string, verbose: boolean) {
@@ -131,37 +163,4 @@ export function dropKnexMigrationTables(dbconfig: DbConfig, verbose: boolean) {
   // @formatter:on
 
   return psql(dbconfig, sql, verbose)
-}
-
-export function psql(dbconfig: DbConfig, script: string, verbose: boolean) {
-  const name = tempy.file()
-  fs.writeFileSync(name, script)
-
-  const args = getPostgresArgs(dbconfig)
-  args.push('-X', '-v', 'ON_ERROR_STOP=1', '-f', name)
-  const cmd = `psql ${args.join(' ')}`
-  verbose && CliUx.ux.log(`running ${cmd}`)
-  runOrExit(spawnSync('/usr/local/bin/psql', args, { stdio: verbose ? 'inherit' : 'ignore' }), cmd)
-}
-
-export const bail = (reason: any) => {
-  if (reason) {
-    CliUx.ux.error(chalk.bold.red('error detected'))
-    CliUx.ux.error(reason)
-    process.exit(-1)
-  }
-}
-export const runOrExit = (processStatus: SpawnSyncReturns<Buffer>, cmd?: string) => {
-  if (processStatus.error) {
-    cmd && CliUx.ux.log(`running ${cmd}`)
-    bail(processStatus.error)
-  }
-  if (processStatus.status) {
-    cmd && CliUx.ux.log(`running ${cmd}`)
-    bail(processStatus.status)
-  }
-}
-
-export function info(s: string) {
-  CliUx.ux.log(chalk.bold(s))
 }

@@ -35,9 +35,8 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ menuItems }) => {
                 {item}
               </HasPermission>
             )
-          } else {
-            return item
           }
+          return item
         })}
     </List>
   )

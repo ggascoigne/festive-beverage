@@ -39,7 +39,6 @@ export const JwtPage = () => {
         </Suspense>
       </Page>
     )
-  } else {
-    return null
   }
+  return null
 }

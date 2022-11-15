@@ -76,17 +76,16 @@ const LoggedIn = () => {
   if (drink) {
     return (
       <Page title='Festive Beverages' hideTitle>
-        <SingleDrink drink={drinks.find((d) => d.id === parseInt(drink as string))} />
-      </Page>
-    )
-  } else {
-    return (
-      <Page title='Festive Beverages' hideTitle>
-        <Search value={(search ?? []) as string[]} onChange={setSearch} />
-        <DrinkList drinks={drinks} />
+        <SingleDrink drink={drinks.find((d) => d.id === parseInt(drink as string, 10))} />
       </Page>
     )
   }
+  return (
+    <Page title='Festive Beverages' hideTitle>
+      <Search value={(search ?? []) as string[]} onChange={setSearch} />
+      <DrinkList drinks={drinks} />
+    </Page>
+  )
 }
 
 export const Home = () => <LoggedIn />

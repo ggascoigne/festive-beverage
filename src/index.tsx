@@ -1,7 +1,7 @@
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material'
-///<reference types="webpack-env" />
+/// <reference types="webpack-env" />
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Helmet, HelmetProvider } from 'react-helmet-async'

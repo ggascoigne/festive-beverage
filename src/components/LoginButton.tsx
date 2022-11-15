@@ -8,7 +8,7 @@ import { Children } from '../utils'
 import { makeStyles } from '../utils/makeStyles'
 import { Auth0User, Perms, Roles, useAuth, useRoleOverride, useToken } from './Auth'
 import { LoginMenu } from './LoginMenu'
-import { useNotification } from './Notifications'
+import { Snackbar, useNotification } from './Notifications'
 
 const MENU_ITEM_EDIT_PROFILE = 'Edit Profile'
 const MENU_ITEM_RESET_PASSWORD = 'Password Reset'
@@ -76,10 +76,9 @@ interface ProfileImageProps {
 const OurAvatar: React.FC<ProfileImageProps> = ({ user }) => {
   if (user.picture) {
     return <Avatar src={user.picture} />
-  } else {
-    const initials = user.nickname ? user.nickname[0] : '...'
-    return <Avatar>{initials}</Avatar>
   }
+  const initials = user.nickname ? user.nickname[0] : '...'
+  return <Avatar>{initials}</Avatar>
 }
 
 const AdminBadge: React.FC<Children> = ({ children }) => {
@@ -110,9 +109,8 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ user }) => {
         <OurAvatar user={user} />
       </AdminBadge>
     )
-  } else {
-    return <OurAvatar user={user} />
   }
+  return <OurAvatar user={user} />
 }
 
 interface MenuButtonProps {
@@ -137,6 +135,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({ size, user }) => {
         </>
       )
     case 'normal':
+    default:
       return (
         <>
           <span className={classes.email}>
@@ -151,6 +150,38 @@ const MenuButton: React.FC<MenuButtonProps> = ({ size, user }) => {
 
 interface LoginMenuProps {
   size: 'normal' | 'small' | 'tiny'
+}
+
+function extracted(jwtToken: string | undefined, notify: ({ text, variant, options }: Snackbar) => string | number) {
+  fetch(`${window.location.origin}/api/resetPassword`, {
+    method: 'post',
+    headers: jwtToken
+      ? {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwtToken}`,
+        }
+      : {
+          'Content-Type': 'application/json',
+        },
+  })
+    .then((response) => response.text())
+    .then((responseBody) => {
+      try {
+        const result = JSON.parse(responseBody)
+        notify({
+          text: result.message,
+          variant: 'success',
+        })
+      } catch (e: any) {
+        console.log(e)
+        notify({
+          text: e,
+          variant: 'error',
+        })
+        return responseBody
+      }
+      return undefined
+    })
 }
 
 export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
@@ -187,34 +218,7 @@ export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
   }, [hasPermissions, roleOverride, user?.sub])
 
   const resetPassword = useCallback(() => {
-    fetch(window.location.origin + '/api/resetPassword', {
-      method: 'post',
-      headers: jwtToken
-        ? {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${jwtToken}`,
-          }
-        : {
-            'Content-Type': 'application/json',
-          },
-    })
-      .then((response) => response.text())
-      .then((responseBody) => {
-        try {
-          const result = JSON.parse(responseBody)
-          notify({
-            text: result.message,
-            variant: 'success',
-          })
-        } catch (e: any) {
-          console.log(e)
-          notify({
-            text: e,
-            variant: 'error',
-          })
-          return responseBody
-        }
-      })
+    extracted(jwtToken, notify)
   }, [notify, jwtToken])
 
   const viewAsUser = () => {

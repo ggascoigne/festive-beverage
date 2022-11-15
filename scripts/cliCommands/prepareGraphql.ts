@@ -13,6 +13,7 @@ import { options } from '../../shared/postgraphileOptions'
 export default class PrepareGraphQL extends Command {
   static description = 'Prepare GraphQL Schema.'
 
+  // eslint-disable-next-line class-methods-use-this
   async run() {
     CliUx.ux.action.start('transforming postgraphile schema')
     const pgPool = getPool(PoolType.ADMIN, './shared/')

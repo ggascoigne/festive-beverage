@@ -1,8 +1,8 @@
 import CloseIcon from '@mui/icons-material/Close'
 import { IconButton, Theme } from '@mui/material'
 import { amber, green } from '@mui/material/colors'
-import { OptionsObject, SnackbarProvider, VariantType, useSnackbar } from 'notistack'
-import { default as React, ReactElement, useCallback } from 'react'
+import { OptionsObject, SnackbarProvider, useSnackbar, VariantType } from 'notistack'
+import React, { ReactElement, useCallback } from 'react'
 
 import { Children } from '../utils'
 import { makeStyles } from '../utils/makeStyles'
@@ -69,7 +69,7 @@ const SnackBarActionHandler: React.FC<{ keyValue: OptionsObject['key'] }> = ({ k
   )
 }
 
-interface Snackbar {
+export interface Snackbar {
   text: string | ReactElement
   variant: VariantType
   options?: OptionsObject

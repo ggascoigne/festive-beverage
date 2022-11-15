@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { Command } from '@oclif/core'
 import Fraction from 'fraction.js'
 import { PoolClient } from 'pg'
@@ -31,9 +32,9 @@ interface Quantity {
   modifier?: string
 }
 
-const query = async (client: PoolClient, query: string) =>
+const query = async (client: PoolClient, q: string) =>
   // console.log(`query = ${JSON.stringify(query?.replace(/\s+/g, ' '), null, 2)}`)
-  client.query(query)
+  client.query(q)
 
 const esc = (q: string) => q?.replace(/'/g, "''")
 
@@ -79,7 +80,7 @@ const getUnit = async (client: PoolClient, unit: string) => {
 }
 
 const parseQuantity = (s: string): Quantity | undefined => {
-  const q: Record<string, string> = {
+  const quantities: Record<string, string> = {
     oz: 'oz',
     tbsp: 'tbsp',
     tsp: 'tsp',
@@ -116,14 +117,14 @@ const parseQuantity = (s: string): Quantity | undefined => {
       return undefined
   }
 
-  const re = `(\\d+\\s+\\d+/\\d+|\\d+/\\d+|\\d+)?\\s*(${Object.keys(q).join('|')})\\s*(.*)`
+  const re = `(\\d+\\s+\\d+/\\d+|\\d+/\\d+|\\d+)?\\s*(${Object.keys(quantities).join('|')})\\s*(.*)`
   const amount = new RegExp(re).exec(s)
   if (!amount) {
     throw new Error(`failed to parse ${s}`)
   }
   return {
     amount: new Fraction(amount[1]).valueOf(),
-    unit: q[amount[2]],
+    unit: quantities[amount[2]],
     modifier: amount[3],
   }
 }
@@ -139,22 +140,26 @@ const create = async (client: PoolClient, drink: Drink) => {
     ) 
         returning *`
   )
-  const recipe_id = insert?.rows?.[0]?.id
+  const recipeId = insert?.rows?.[0]?.id
 
   // console.log(drink)
   //  const result = await query( client,query)
+  // eslint-disable-next-line guard-for-in
   for (const ingredient in drink.ingredients) {
     const ingredientInfo = drink.ingredients[ingredient]
-    const ingredient_id = await getIngredient(client, ingredientInfo)
-    const q = parseQuantity(ingredientInfo.quantity)
-    const unit_id = q?.unit ? await getUnit(client, q.unit) : undefined
+    const ingredientId = await getIngredient(client, ingredientInfo)
+    const quantity = parseQuantity(ingredientInfo.quantity)
+    const unitId = quantity?.unit ? await getUnit(client, quantity.unit) : undefined
 
-    if (q) {
+    if (quantity) {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const _insertIngredient = await query(
         client,
         `
             insert into recipe_ingredient (recipe_id, ingredient_id, unit_id, amount, modifier)
-            values (${recipe_id}, ${ingredient_id}, ${unit_id || null}, ${q?.amount ?? null}, '${q?.modifier ?? ''}')
+            values (${recipeId}, ${ingredientId}, ${unitId || null}, ${quantity?.amount ?? null}, '${
+          quantity?.modifier ?? ''
+        }')
             returning *`
       )
     } else {
@@ -172,7 +177,7 @@ const getDrinks = (sheet: WorkSheet) => {
 
   for (let c = 2; c <= range.e.c; c++) {
     const drink: any = { name: '', source: '', ingredients: {}, presentation: {}, ingredientText: '', tags: [] }
-    for (let r = range.s.r; r <= range.e.r; r++) {
+    for (let { r } = range.s; r <= range.e.r; r++) {
       const val = getVal(r, c)
       if (val) {
         const key = getVal(r, 0)
@@ -182,19 +187,17 @@ const getDrinks = (sheet: WorkSheet) => {
           tags && drink.tags.push(tags)
         } else if (isPresentation(r)) {
           drink.presentation[key] = val
+        } else if (key === 'Drink') {
+          drink.name = val
+        } else if (key === 'Origin') {
+          drink.source = val
         } else {
-          if (key === 'Drink') {
-            drink.name = val
-          } else if (key === 'Origin') {
-            drink.source = val
-          } else {
-            drink[getVal(r, 0)] = val
-          }
+          drink[getVal(r, 0)] = val
         }
       }
     }
     if (drink.name) {
-      drink.ingredientText = Object.keys(drink.ingredients).join(' ') + ' ' + drink.tags.join(' ')
+      drink.ingredientText = `${Object.keys(drink.ingredients).join(' ')} ${drink.tags.join(' ')}`
       drinks.push(drink)
     }
   }
@@ -203,6 +206,8 @@ const getDrinks = (sheet: WorkSheet) => {
 
 export default class Import extends Command {
   static description = 'Import data from shared Excel spreadsheet.'
+
+  // eslint-disable-next-line class-methods-use-this
   async run() {
     const workbook = readFile('/Users/ggp/Dropbox (Maestral)/Drinks Shared Folder/Drinks Excel Data.xlsx')
     const drinks = getDrinks(workbook.Sheets.Ingredients)

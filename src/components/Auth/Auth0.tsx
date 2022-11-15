@@ -157,7 +157,7 @@ export const Auth0Provider = ({ children, onRedirectCallback = onAuthRedirectCal
       }
     }
 
-    initAuth0().then()
+    initAuth0()
   }, [history, onRedirectCallback])
 
   const loginWithPopup = useCallback(

@@ -1,7 +1,10 @@
-const { Pool } = require('pg')
-const fs = require('fs')
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as pg from 'pg'
+import * as fs from 'fs'
 
-process.env.NODE_ENV !== 'production' && require('dotenv').config()
+const { Pool } = pg
+
+process.env.NODE_ENV !== 'production' && dotenv.config()
 
 export const getSchemas = () => (process.env.DATABASE_SCHEMAS ? process.env.DATABASE_SCHEMAS.split(',') : ['public'])
 
@@ -16,25 +19,26 @@ export const getPool = (poolType: PoolType, pathToRoot = './') => {
     DATABASE_NAME: database,
     DATABASE_PORT: port,
     DATABASE_SSL: ssl = false,
-    DATABASE_SSL_CERT: ssl_cert = '',
+    DATABASE_SSL_CERT: sslCert = '',
   } = process.env
   const user = poolType === 'ADMIN' ? process.env.DATABASE_ADMIN : process.env.DATABASE_USER
   const password =
     (poolType === 'ADMIN' ? process.env.DATABASE_ADMIN_PASSWORD : process.env.DATABASE_USER_PASSWORD) ?? ''
 
-  const sslChunk = ssl ? `?sslmode=verify-full&ssl=1&sslrootcert=${ssl_cert}` : ''
+  const sslChunk = ssl ? `?sslmode=verify-full&ssl=1&sslrootcert=${sslCert}` : ''
   console.log(`using: postgres://${user}:${password && '*****'}@${host}:${port}/${database}${sslChunk}`)
   return new Pool({
     user,
     host,
     database,
     password,
-    port,
+    port: port ? parseInt(port, 10) : undefined,
     ssl: ssl
       ? {
           rejectUnauthorized: true,
+          // @ts-ignore
           sslmode: 'verify-all',
-          ca: fs.readFileSync(pathToRoot + ssl_cert).toString(),
+          ca: fs.readFileSync(pathToRoot + sslCert).toString(),
         }
       : false,
   })
@@ -62,24 +66,24 @@ export const config: { rootDatabase: DbConfig; userDatabase: DbConfig; email: Em
     host: process.env.DATABASE_HOST!,
     database: process.env.DATABASE_NAME!,
     user: process.env.DATABASE_ADMIN!,
-    password: process.env.DATABASE_ADMIN_PASSWORD || '',
-    port: parseInt(process.env.DATABASE_PORT || '', 10),
+    password: process.env.DATABASE_ADMIN_PASSWORD ?? '',
+    port: parseInt(process.env.DATABASE_PORT ?? '', 10),
     ssl: process.env.DATABASE_SSL === '1',
-    ssl_cert: process.env.DATABASE_SSL_CERT || '',
+    ssl_cert: process.env.DATABASE_SSL_CERT ?? '',
   },
   userDatabase: {
     host: process.env.DATABASE_HOST!,
     database: process.env.DATABASE_NAME!,
     user: process.env.DATABASE_USER!,
-    password: process.env.DATABASE_USER_PASSWORD || '',
-    port: parseInt(process.env.DATABASE_PORT || '', 10),
+    password: process.env.DATABASE_USER_PASSWORD ?? '',
+    port: parseInt(process.env.DATABASE_PORT ?? '', 10),
     ssl: process.env.DATABASE_SSL === '1',
-    ssl_cert: process.env.DATABASE_SSL_CERT || '',
+    ssl_cert: process.env.DATABASE_SSL_CERT ?? '',
   },
   email: {
     host: process.env.SMTP_HOST!,
     user: process.env.SMTP_USERNAME!,
-    password: process.env.SMTP_PASSWORD || '',
-    port: parseInt(process.env.SMTP_PORT || '', 10),
+    password: process.env.SMTP_PASSWORD ?? '',
+    port: parseInt(process.env.SMTP_PORT ?? '', 10),
   },
 }

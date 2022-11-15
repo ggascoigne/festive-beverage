@@ -30,5 +30,5 @@
     "rootDir": ".",
     "noErrorTruncation": true
   },
-  "include": ["src", "types", "scripts"]
+  "include": ["api", "scripts", "shared", "src", "types"]
 }
