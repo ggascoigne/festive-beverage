@@ -4,7 +4,7 @@ import React, { Suspense } from 'react'
 import { useGetConfig } from 'utils'
 import { gitHash } from 'version'
 
-import { makeStyles } from '../utils/makeStyles'
+import { makeStyles } from '@/utils/makeStyles'
 import { HasPermission, Perms, useAuth } from './Auth'
 import { Loader } from './Loader'
 
@@ -53,7 +53,7 @@ const useStyles = makeStyles()({
   },
 })
 
-export const Footer: React.FC = () => {
+export const Footer: React.FC = (props) => {
   const { hasPermissions } = useAuth()
   const { classes } = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
@@ -99,7 +99,6 @@ export const Footer: React.FC = () => {
                   <ReactJson
                     src={{
                       commitDate: commitDate.toLocaleString(DateTime.DATETIME_FULL),
-                      authDomain: process.env.REACT_APP_AUTH0_DOMAIN,
                       config,
                     }}
                     enableClipboard={false}

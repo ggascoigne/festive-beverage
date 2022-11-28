@@ -3,12 +3,14 @@ import { Avatar, Badge, Button, Theme, Tooltip } from '@mui/material'
 import fetch from 'isomorphic-fetch'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { QueryClient } from '@tanstack/react-query'
+import Link from 'next/link'
 
-import { Children } from '../utils'
-import { makeStyles } from '../utils/makeStyles'
-import { Auth0User, Perms, Roles, useAuth, useRoleOverride, useToken } from './Auth'
+import { useRouter } from 'next/navigation'
+import { Children } from '@/utils'
+import { makeStyles } from '@/utils/makeStyles'
+import { Auth0User, Perms, Roles, useAuth, useRoleOverride } from './Auth'
 import { LoginMenu } from './LoginMenu'
-import { Snackbar, useNotification } from './Notifications'
+import { useNotification } from './Notifications'
 
 const MENU_ITEM_EDIT_PROFILE = 'Edit Profile'
 const MENU_ITEM_RESET_PASSWORD = 'Password Reset'
@@ -152,60 +154,20 @@ interface LoginMenuProps {
   size: 'normal' | 'small' | 'tiny'
 }
 
-function extracted(jwtToken: string | undefined, notify: ({ text, variant, options }: Snackbar) => string | number) {
-  fetch(`${window.location.origin}/api/resetPassword`, {
-    method: 'post',
-    headers: jwtToken
-      ? {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${jwtToken}`,
-        }
-      : {
-          'Content-Type': 'application/json',
-        },
-  })
-    .then((response) => response.text())
-    .then((responseBody) => {
-      try {
-        const result = JSON.parse(responseBody)
-        notify({
-          text: result.message,
-          variant: 'success',
-        })
-      } catch (e: any) {
-        console.log(e)
-        notify({
-          text: e,
-          variant: 'error',
-        })
-        return responseBody
-      }
-      return undefined
-    })
-}
-
 export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
   const { classes } = useStyles()
-  const { isInitializing = true, isAuthenticated, user, loginWithRedirect, logout, hasPermissions } = useAuth()
-  const [jwtToken] = useToken()
+  const { isLoading = true, user, hasPermissions } = useAuth()
   const notify = useNotification()
   const [authInitialized, setAuthInitialized] = useState(false)
   const [roleOverride, setRoleOverride] = useRoleOverride()
   const queryClient = new QueryClient()
+  const router = useRouter()
 
-  useEffect(() => setAuthInitialized(!isInitializing), [isInitializing])
-
-  const login = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault()
-      return loginWithRedirect && (await loginWithRedirect())
-    },
-    [loginWithRedirect]
-  )
+  useEffect(() => setAuthInitialized(!isLoading), [isLoading])
 
   const menuItems = useMemo(() => {
     const menu = [MENU_ITEM_EDIT_PROFILE]
-    if (user?.sub.startsWith('auth0')) menu.push(MENU_ITEM_RESET_PASSWORD)
+    if (user?.sub?.startsWith('auth0')) menu.push(MENU_ITEM_RESET_PASSWORD)
     if (hasPermissions(Perms.IsAdmin, { ignoreOverride: true })) {
       if (!roleOverride) {
         menu.push(MENU_ITEM_VIEW_AS_USER)
@@ -218,8 +180,30 @@ export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
   }, [hasPermissions, roleOverride, user?.sub])
 
   const resetPassword = useCallback(() => {
-    extracted(jwtToken, notify)
-  }, [notify, jwtToken])
+    fetch(`${window.location.origin}/api/resetPassword`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.text())
+      .then((responseBody) => {
+        try {
+          const result = JSON.parse(responseBody)
+          notify({
+            text: result.message,
+            variant: 'success',
+          })
+        } catch (e: any) {
+          console.log(e)
+          notify({
+            text: e,
+            variant: 'error',
+          })
+        }
+        return responseBody
+      })
+  }, [notify])
 
   const viewAsUser = () => {
     if (!roleOverride) {
@@ -229,7 +213,7 @@ export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
     }
   }
 
-  return isAuthenticated ? (
+  return user ? (
     <>
       <LoginMenu
         buttonText={<MenuButton size={size} user={user!} />}
@@ -248,14 +232,14 @@ export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
               break
             case MENU_ITEM_SIGN_OUT:
               queryClient.clear()
-              logout?.()
+              router.push('/api/auth/logout')
               break
           }
         }}
       />
     </>
   ) : (
-    <Button disabled={!authInitialized} className={classes.loginButton} onClick={login}>
+    <Button disabled={!authInitialized} className={classes.loginButton} component={Link} href='/api/auth/login'>
       Login
     </Button>
   )

@@ -4,9 +4,9 @@ import Fraction from 'fraction.js'
 import { PoolClient } from 'pg'
 import { readFile, utils, WorkSheet } from 'xlsx'
 
-import { getPool, PoolType } from '../../shared/config'
+import { getPool, PoolType } from '../../src/shared/config'
 
-const ingredients = { s: 2, e: 159 } // 159 = garnish line in sheet -2
+const ingredients = { s: 2, e: 161 } // 163 = garnish line in sheet -2
 const presentation = { s: ingredients.e + 1, e: 180 }
 
 const isIngredient = (r: number) => r >= ingredients.s && r <= ingredients.e
@@ -82,9 +82,10 @@ const getUnit = async (client: PoolClient, unit: string) => {
 const parseQuantity = (s: string): Quantity | undefined => {
   const quantities: Record<string, string> = {
     oz: 'oz',
-    tbsp: 'tbsp',
+    tbsp: 'tbs',
+    tbs: 'tbs',
     tsp: 'tsp',
-    bsp: 'bsp',
+    bsp: 'tsp',
     dashes: 'dash',
     dash: 'dash',
     drops: 'drop',
@@ -104,6 +105,7 @@ const parseQuantity = (s: string): Quantity | undefined => {
     quarter: 'quarter',
     grated: 'grated',
     cup: 'cup',
+    twist: 'twist',
   }
 
   switch (s) {

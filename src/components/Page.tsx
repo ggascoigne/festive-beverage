@@ -2,7 +2,7 @@ import { useTheme } from '@mui/material'
 import { Theme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import React, { PropsWithChildren, ReactNode } from 'react'
-import { Helmet } from 'react-helmet-async'
+import Head from 'next/head'
 
 import { makeStyles } from '../utils/makeStyles'
 
@@ -15,7 +15,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   mainRaised: {
     margin: '0px 20px 0px',
     borderRadius: '6px',
-    boxShadow: theme.mixins.boxShadow.page,
+    boxShadow: theme.mixins.boxShadow?.page,
     padding: theme.spacing(3),
   },
   small: {
@@ -61,10 +61,10 @@ export const Page: React.FC<PropsWithChildren<PageProps>> = ({
         className
       )}
     >
-      <Helmet>
+      <Head>
         <title>{title}</title>
-      </Helmet>
-      {!hideTitle ? titleElement ?? <h1 className={classes.smaller}>{title}</h1> : null}
+      </Head>
+      {!hideTitle ? titleElement ? titleElement : <h1 className={classes.smaller}>{title}</h1> : null}
       {children}
     </div>
   )

@@ -46,8 +46,8 @@ export function Search({ onChange, value }: PropsWithChildren<SearchProps>): Rea
       )}
       fullWidth
       renderInput={(params) => <TextField {...params} label='Search' variant='outlined' />}
-      onChange={(e, val) => {
-        onChange(val)
+      onChange={(e, value) => {
+        onChange(value)
       }}
     />
   )

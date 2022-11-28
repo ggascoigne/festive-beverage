@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Children } from '../../utils'
+import { Children } from '@/utils'
 import { useTypographyStyles } from './typographyStyle'
 
 export const Danger: React.FC<Children> = (props) => {

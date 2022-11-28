@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
 
-import { authDomain } from './_constants'
+import { auth0IssuerBaseUrl } from './_constants'
 import { JsonError } from './_JsonError'
 
 export const getProfile = async (authHeader: string) => {
@@ -9,7 +9,7 @@ export const getProfile = async (authHeader: string) => {
     headers: { authorization: authHeader },
   }
 
-  return fetch(`https://${authDomain}/userinfo`, options).then(async (r) => {
+  return fetch(`${auth0IssuerBaseUrl}/userinfo`, options).then(async (r) => {
     const json = await r.json()
     if (r.status !== 200) {
       throw new JsonError(r.status, json.error_description)

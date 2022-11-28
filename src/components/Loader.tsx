@@ -1,6 +1,7 @@
 import { Theme } from '@mui/material/styles'
 import React from 'react'
-import Spinner from 'react-spinkit'
+// import Spinner from 'react-spinkit'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import { makeStyles } from '../utils/makeStyles'
 
@@ -51,7 +52,10 @@ export const Loader: React.FC<ILoader> = ({ error, retry, timedOut, pastDelay, t
         </div>
       )}
       {pastDelay && <div>Loading...</div>}
+      <CircularProgress />
+      {/*
       <Spinner fadeIn='half' className={cx({ [classes.progress]: !tiny })} name='chasing-dots' color='#3f51b5' />
+*/}
     </div>
   )
 }

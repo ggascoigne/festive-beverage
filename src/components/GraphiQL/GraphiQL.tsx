@@ -3,12 +3,11 @@ import 'graphiql/graphiql.css'
 import { GlobalStyles } from '@mui/material'
 import RealGraphiQL from 'graphiql'
 import GraphiQLExplorer from 'graphiql-explorer'
-import { GraphQLSchema, buildClientSchema, getIntrospectionQuery, parse } from 'graphql'
+import { buildClientSchema, getIntrospectionQuery, GraphQLSchema, parse } from 'graphql'
 import fetch from 'isomorphic-fetch'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-import { makeStyles } from '../../utils/makeStyles'
-import { useToken } from '../Auth'
+import { makeStyles } from '@/utils/makeStyles'
 import { Page } from '../Page'
 
 export const useStyles = makeStyles()({
@@ -27,17 +26,12 @@ export const useStyles = makeStyles()({
   },
 })
 
-const graphQLFetcher = (jwtToken?: string) => (graphQLParams: any) =>
+const graphQLFetcher = () => (graphQLParams: any) =>
   fetch(`${window.location.origin}/api/graphql`, {
     method: 'post',
-    headers: jwtToken
-      ? {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${jwtToken}`,
-        }
-      : {
-          'Content-Type': 'application/json',
-        },
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(graphQLParams),
   })
     .then((response) => response.text())
@@ -53,13 +47,12 @@ interface Props {
   auth?: { jwtToken?: string }
 }
 
-const GraphiQL: React.FC<Props> = () => {
+const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
   const graphiqlRef = useRef<any>(null)
   const [schema, setSchema] = useState<GraphQLSchema | null>(null)
   const [query, setQuery] = useState<string>('')
   const [explorerIsOpen, setExplorerIsOpen] = useState<boolean>(true)
   const { classes, cx } = useStyles()
-  const [jwtToken] = useToken()
 
   const handleInspectOperation = useCallback(
     (cm: any, mousePos: { line: number; ch: number }) => {
@@ -105,7 +98,7 @@ const GraphiQL: React.FC<Props> = () => {
   )
 
   useEffect(() => {
-    graphQLFetcher(jwtToken)({
+    graphQLFetcher()({
       query: getIntrospectionQuery(),
     }).then((result) => {
       const editor = graphiqlRef.current?.getQueryEditor()
@@ -115,7 +108,7 @@ const GraphiQL: React.FC<Props> = () => {
       })
       setSchema(buildClientSchema(result.data))
     })
-  }, [handleInspectOperation, jwtToken])
+  }, [handleInspectOperation])
 
   const handleEditQuery = useCallback((q: string) => setQuery(q), [])
 
@@ -123,6 +116,7 @@ const GraphiQL: React.FC<Props> = () => {
     setExplorerIsOpen((old) => !old)
   }, [])
 
+  // @ts-ignore
   return (
     <Page title='GraphiQL' hideTitle className={cx(classes.graphiQlWrapper)}>
       <div className={cx(classes.box, 'graphiql-container')}>
@@ -156,9 +150,10 @@ const GraphiQL: React.FC<Props> = () => {
           explorerIsOpen={explorerIsOpen}
           onToggleExplorer={handleToggleExplorer}
         />
+        {/* @ts-ignore */}
         <RealGraphiQL
           ref={graphiqlRef}
-          fetcher={graphQLFetcher(jwtToken)}
+          fetcher={graphQLFetcher()}
           schema={schema}
           query={query}
           onEditQuery={handleEditQuery}

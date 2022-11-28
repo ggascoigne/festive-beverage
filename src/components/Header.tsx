@@ -1,10 +1,10 @@
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, IconButton, Theme, Toolbar, Typography } from '@mui/material'
 import React, { ReactNode, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { Config, useGetConfig } from 'utils'
+import Link from '@/components/Link'
 
-import { makeStyles } from '../utils/makeStyles'
+import { makeStyles } from '@/utils/makeStyles'
 import { HasPermission, Perms } from './Auth'
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -38,9 +38,9 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu })
   }, [getConfig])
 
   useEffect(() => {
-    const getConfigDetails = (conf: Config | undefined, href: string | undefined) => {
+    const getConfigDetails = (config: Config | undefined, href: string | undefined) => {
       if (href?.includes('festivebeverage.com')) return ''
-      return !conf ? '' : conf.local ? '(local)' : '(prod)'
+      return !config ? '' : config.local ? '(local)' : '(prod)'
     }
 
     setConfigDetails(getConfigDetails(config, window.location.href))
@@ -60,7 +60,7 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu })
             <MenuIcon />
           </IconButton>
         </HasPermission>
-        <Link to='/' style={{ color: 'white' }}>
+        <Link href='/' style={{ color: 'white' }}>
           <Typography variant='h6' color='inherit' noWrap>
             Festive Beverage
           </Typography>

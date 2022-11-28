@@ -68,3 +68,4 @@ src/version.ts
 name_cleanup.js
 
 .vercel
+.next
