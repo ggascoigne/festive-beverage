@@ -47,7 +47,7 @@
   },
   "wireit": {
     "build": {
-      "command": "NODE_ENV=production react-scripts build"
+      "command": "NODE_ENV=production next build"
     },
     "boot": {
       "dependencies": [
