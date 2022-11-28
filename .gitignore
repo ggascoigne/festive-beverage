@@ -69,3 +69,5 @@ name_cleanup.js
 
 .vercel
 .next
+tsconfig.tsbuildinfo
+.wireit
