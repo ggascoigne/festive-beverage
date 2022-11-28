@@ -1,11 +1,10 @@
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+import { LoginButton } from '@/components/LoginButton'
+import { MenuItems, rootRoutes } from '@/components/Navigation'
+import { makeStyles } from '@/utils/makeStyles'
 import { Divider, Drawer, List, ListItem, Theme } from '@mui/material'
 import React, { useCallback, useState } from 'react'
-
-import { Footer } from './components/Footer'
-import { Header } from './components/Header'
-import { LoginButton } from './components/LoginButton'
-import { MenuItems, SelectedContent, rootRoutes } from './components/Navigation'
-import { makeStyles } from './utils/makeStyles'
 
 // @ts-ignore
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -68,7 +67,7 @@ const RightMenu: React.FC<{ size: 'normal' | 'small' | 'tiny' }> = (props) => {
   )
 }
 
-export const App: React.FC = React.memo(() => {
+export const Layout: React.FC<{ children: React.ReactNode }> = React.memo(({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleDrawerToggle = useCallback(() => {
@@ -95,7 +94,7 @@ export const App: React.FC = React.memo(() => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <SelectedContent routes={rootRoutes} />
+        {children}
       </main>
     </div>
   )

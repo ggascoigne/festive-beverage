@@ -3,4 +3,5 @@ eval "$(fnm env)"
 
 fnm use
 pnpm db:start
-vc dev -l 40000
+pnpm dev:debug
+#pnpm dev

@@ -1,8 +1,8 @@
-import { VercelResponse } from '@vercel/node'
+import { NextApiResponse } from 'next'
 
 import { JsonError } from './_JsonError'
 
-export const handleError = (err: any, res: VercelResponse) => {
+export const handleError = (err: any, res: NextApiResponse) => {
   if (err instanceof JsonError) {
     res.status(err.status).send({
       status: err.status,

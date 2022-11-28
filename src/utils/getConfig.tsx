@@ -1,4 +1,3 @@
-import { useToken } from 'components/Auth'
 import fetch from 'isomorphic-fetch'
 import { useCallback, useState } from 'react'
 
@@ -19,20 +18,14 @@ export interface Config {
 }
 
 export const useGetConfig = () => {
-  const [jwtToken] = useToken()
   const [config, setConfig] = useState<Config | undefined>()
 
   const getConfig = useCallback(() => {
     fetch(`${window.location.origin}/api/getConfig`, {
       method: 'get',
-      headers: jwtToken
-        ? {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${jwtToken}`,
-          }
-        : {
-            'Content-Type': 'application/json',
-          },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
       .then((response) => response.text())
       .then((responseBody) => {
@@ -41,11 +34,10 @@ export const useGetConfig = () => {
           setConfig(result)
         } catch (e) {
           // console.log(e)
-          return responseBody
         }
-        return undefined
+        return responseBody
       })
-  }, [setConfig, jwtToken])
+  }, [setConfig])
 
   return [config, getConfig] as const
 }

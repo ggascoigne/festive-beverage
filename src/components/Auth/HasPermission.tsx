@@ -1,8 +1,9 @@
 import React, { PropsWithChildren } from 'react'
 
-import { Children } from '../../utils'
-import { useAuth } from './Auth0'
+import { useUser } from '@auth0/nextjs-auth0'
+import { Children } from '@/utils'
 import type { Perms } from './PermissionRules'
+import { useAuth } from '@/components/Auth/useAuth'
 
 interface PermissionProps {
   permission: Perms
@@ -24,11 +25,11 @@ export const HasPermission: React.FC<PropsWithChildren<PermissionProps>> = ({
 }
 
 export const IsLoggedIn: React.FC<Children> = ({ children }) => {
-  const { isAuthenticated, user } = useAuth()
-  return isAuthenticated && !!user ? <>{children}</> : null
+  const { user } = useUser()
+  return user ? <>{children}</> : null
 }
 
 export const IsNotLoggedIn: React.FC<Children> = ({ children }) => {
-  const { isAuthenticated, user } = useAuth()
-  return isAuthenticated && !!user ? null : <>{children}</>
+  const { user } = useUser()
+  return !user ? <>{children}</> : null
 }

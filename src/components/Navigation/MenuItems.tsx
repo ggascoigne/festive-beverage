@@ -1,7 +1,6 @@
 import { List, ListItemText } from '@mui/material'
 import React from 'react'
-import { useLocation } from 'react-router'
-
+import { useRouter } from 'next/router'
 import { HasPermission } from '../Auth'
 import { ListItemLink } from './ListItemLink'
 import type { RootRoutes } from './Routes'
@@ -11,9 +10,9 @@ interface MenuItemsProps {
 }
 
 export const MenuItems: React.FC<MenuItemsProps> = ({ menuItems }) => {
-  const location = useLocation()
+  const router = useRouter()
 
-  const activeItem = location.pathname
+  const activeItem = router.asPath
 
   return (
     <List>
@@ -25,7 +24,7 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ menuItems }) => {
         .map((menuItem) => {
           const link = menuItem.link ? menuItem.link : menuItem.path
           const item = (
-            <ListItemLink key={link} to={{ pathname: link, state: { fromClick: true } }} selected={activeItem === link}>
+            <ListItemLink key={link} href={{ pathname: link }} selected={activeItem === link}>
               <ListItemText primary={menuItem.label} secondary={menuItem.subText} />
             </ListItemLink>
           )

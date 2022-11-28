@@ -1,34 +1,33 @@
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 export interface Handler {
-  (req: VercelRequest, res: VercelResponse, next: (err?: any) => void): Promise<any>
+  (req: NextApiRequest, res: NextApiResponse, next: (err?: any) => void): Promise<any>
 }
 
 export function combineHandlers(handlers: Array<Handler>) {
   return handlers.reduce(
     (
-        parent: (req: VercelRequest, res: VercelResponse, next: (err?: any) => void) => void,
-        fn: (req: VercelRequest, res: VercelResponse, next: (err?: any) => void) => void
-      ): ((req: VercelRequest, res: VercelResponse, next: (err?: any) => void) => void) =>
+        parent: (req: NextApiRequest, res: NextApiResponse, next: (err?: any) => void) => void,
+        fn: (req: NextApiRequest, res: NextApiResponse, next: (err?: any) => void) => void
+      ): ((req: NextApiRequest, res: NextApiResponse, next: (err?: any) => void) => void) =>
       (req, res, next) => {
         parent(req, res, (error) => {
           if (error) {
             return next(error)
           }
-          fn(req, res, next)
-          return undefined
+          return fn(req, res, next)
         })
       },
-    (_req: VercelRequest, _res: VercelResponse, next: (err?: any) => void) => next()
+    (_req: NextApiRequest, _res: NextApiResponse, next: (err?: any) => void) => next()
   )
 }
 
 export function withApiHandler(handlers: Handler[]): Handler {
-  return async (req: VercelRequest, res: VercelResponse) => {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Methods', 'GET')
     res.setHeader('Access-Control-Allow-Headers', 'Authorization, Accept, Content-Type')
-
+    console.log('in withApiHandler')
     if (req.method === 'OPTIONS') {
       return res.status(200).json({})
     }
@@ -38,6 +37,7 @@ export function withApiHandler(handlers: Handler[]): Handler {
     if (req.url?.startsWith('/api/graphql')) req.url = '/api/graphql'
 
     const handler = combineHandlers(handlers)
+    console.log('combined handlers, calling...')
     try {
       return handler(req, res, (err) => {
         if (err) {

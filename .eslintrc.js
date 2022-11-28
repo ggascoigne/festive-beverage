@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'rulesdir/no-promise-all': 'error',
     'no-console': 'off',
+    'no-else-return': 'off',
   },
   overrides: [
     {
