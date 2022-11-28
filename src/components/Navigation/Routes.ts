@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Perms } from '../Auth'
 
 // note that entries are only displayed if they have a label

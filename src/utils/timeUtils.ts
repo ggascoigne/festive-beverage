@@ -6,20 +6,14 @@ export const formatDurationFromObject = (dt: DurationObjectUnits): string => {
   let formattedDuration = ''
   if (days > 0) {
     formattedDuration = `${days}d ${hours}h ${minutes}m`
+  } else if (hours > 0) {
+    formattedDuration = `${hours}h ${minutes}m`
+  } else if (minutes > 0) {
+    formattedDuration = `${minutes}m ${seconds}s`
+  } else if (seconds > 0) {
+    formattedDuration = `${seconds}s`
   } else {
-    if (hours > 0) {
-      formattedDuration = `${hours}h ${minutes}m`
-    } else {
-      if (minutes > 0) {
-        formattedDuration = `${minutes}m ${seconds}s`
-      } else {
-        if (seconds > 0) {
-          formattedDuration = `${seconds}s`
-        } else {
-          formattedDuration = '1s'
-        }
-      }
-    }
+    formattedDuration = '1s'
   }
   return formattedDuration
 }

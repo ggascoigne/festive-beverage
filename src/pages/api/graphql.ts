@@ -3,11 +3,11 @@ import { postgraphile } from 'postgraphile'
 
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from '@auth0/nextjs-auth0'
+// import  fs from 'fs'
 import { getPool, getSchemas, PoolType } from '@/shared/config'
 import { options } from '@/shared/postgraphileOptions'
 import { isDev } from '@/pages/api/_constants'
 import { getUserId, isAdmin } from '@/pages/api/_utils'
-import  fs from 'fs'
 
 // note that the route here is /api/graphql/[:query] because I like to append the query
 // operation name to the path to make debugging the queries easier in Chrome dev tools.
@@ -33,13 +33,13 @@ const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) =>
 const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.url?.startsWith('/api/graphql')) req.url = '/api/graphql'
 
-  try {
-    const path = `${process.cwd()}/src/shared`
-    const arrayOfFiles = fs.readdirSync(path)
-    // console.log({ path, arrayOfFiles })
-  } catch(e) {
-    console.log(e)
-  }
+  // try {
+  //   const path = `${process.cwd()}/src/shared`
+  //   const arrayOfFiles = fs.readdirSync(path)
+  //   // console.log({ path, arrayOfFiles })
+  // } catch(e) {
+  //   console.log(e)
+  // }
 
   await runMiddleware(
     req,

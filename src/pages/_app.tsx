@@ -16,9 +16,6 @@ const { augmentDocumentWithEmotionCache, withAppEmotionCache } = createEmotionSs
 
 export { augmentDocumentWithEmotionCache }
 
-// Client-side cache, shared for the whole session of the user in the browser.
-// const clientSideEmotionCache = createEmotionCache()
-
 const ReactQueryDevtoolsProduction = React.lazy(() =>
   import('@tanstack/react-query-devtools/build/lib/index.prod.js').then((d) => ({
     default: d.ReactQueryDevtools,

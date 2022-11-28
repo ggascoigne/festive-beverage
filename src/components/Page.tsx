@@ -4,7 +4,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import React, { PropsWithChildren, ReactNode } from 'react'
 import Head from 'next/head'
 
-import { makeStyles } from '../utils/makeStyles'
+import { makeStyles } from '@/utils/makeStyles'
 
 const useStyles = makeStyles()((theme: Theme) => ({
   main: {
@@ -36,7 +36,6 @@ interface PageProps {
   title: string
   titleElement?: ReactNode
   hideTitle?: boolean
-  smaller?: boolean
 }
 
 export const Page: React.FC<PropsWithChildren<PageProps>> = ({
@@ -45,7 +44,6 @@ export const Page: React.FC<PropsWithChildren<PageProps>> = ({
   title,
   titleElement,
   hideTitle = false,
-  smaller = false,
 }) => {
   const { classes, cx } = useStyles()
   const theme = useTheme()
@@ -64,7 +62,7 @@ export const Page: React.FC<PropsWithChildren<PageProps>> = ({
       <Head>
         <title>{title}</title>
       </Head>
-      {!hideTitle ? titleElement ? titleElement : <h1 className={classes.smaller}>{title}</h1> : null}
+      {!hideTitle ? titleElement ?? <h1 className={classes.smaller}>{title}</h1> : null}
       {children}
     </div>
   )

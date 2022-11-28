@@ -1,10 +1,10 @@
+import { Divider, Drawer, List, ListItem, Theme } from '@mui/material'
+import React, { useCallback, useState } from 'react'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { LoginButton } from '@/components/LoginButton'
 import { MenuItems, rootRoutes } from '@/components/Navigation'
 import { makeStyles } from '@/utils/makeStyles'
-import { Divider, Drawer, List, ListItem, Theme } from '@mui/material'
-import React, { useCallback, useState } from 'react'
 
 // @ts-ignore
 const useStyles = makeStyles()((theme: Theme) => ({

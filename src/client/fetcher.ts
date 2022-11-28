@@ -25,7 +25,7 @@ export const fetchData = async <TData, TVariables>(query: string, variables?: TV
     throw new Error(message)
   }
 
-  return json.data
+  return json.data as TData
 }
 
 // eslint-disable-next-line etc/no-misused-generics
