@@ -7,6 +7,7 @@ import { getPool, getSchemas, PoolType } from '@/shared/config'
 import { options } from '@/shared/postgraphileOptions'
 import { isDev } from '@/pages/api/_constants'
 import { getUserId, isAdmin } from '@/pages/api/_utils'
+import  fs from 'fs'
 
 // note that the route here is /api/graphql/[:query] because I like to append the query
 // operation name to the path to make debugging the queries easier in Chrome dev tools.
@@ -31,6 +32,16 @@ const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) =>
 // GraphQL route that handles queries
 const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.url?.startsWith('/api/graphql')) req.url = '/api/graphql'
+
+  try {
+    const arrayOfFiles1 = fs.readdirSync(process.cwd())
+    console.log({ dir: process.cwd(), arrayOfFiles:arrayOfFiles1 })
+    const arrayOfFiles2 = fs.readdirSync(__dirname)
+    console.log({ dir: process.cwd(), arrayOfFiles:arrayOfFiles2 })
+  } catch(e) {
+    console.log(e)
+  }
+
   await runMiddleware(
     req,
     res,
