@@ -72,10 +72,10 @@
       ]
     },
     "db:docker:up": {
-      "command": "[ \"${VERCEL_ENV}\" = \"\" ] && docker-compose up -d"
+      "command": "if [ \"${VERCEL_ENV}\" = \"\" ]; then docker-compose up -d; fi"
     },
     "db:start": {
-      "command": "[ \"${VERCEL_ENV}\" = \"\" ] && ./scripts/wait-for-postgres.sh -c festive-beverage-postgres",
+      "command": "if [ \"${VERCEL_ENV}\" = \"\" ]; then ./scripts/wait-for-postgres.sh -c festive-beverage-postgres; fi",
       "dependencies": [
         "db:docker:up"
       ]
