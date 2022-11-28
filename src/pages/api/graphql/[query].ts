@@ -34,10 +34,12 @@ const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.url?.startsWith('/api/graphql')) req.url = '/api/graphql'
 
   try {
-    const arrayOfFiles1 = fs.readdirSync(process.cwd())
-    console.log({ dir: process.cwd(), arrayOfFiles:arrayOfFiles1 })
-    const arrayOfFiles2 = fs.readdirSync(__dirname)
-    console.log({ dir: process.cwd(), arrayOfFiles:arrayOfFiles2 })
+    const path1 = `${process.cwd()}/src`
+    const arrayOfFiles1 = fs.readdirSync(path1)
+    console.log({ path: path1, arrayOfFiles:arrayOfFiles1 })
+    const path2 = `${process.cwd()}/src/shared`
+    const arrayOfFiles2 = fs.readdirSync(path2)
+    console.log({ path: path2, arrayOfFiles:arrayOfFiles2 })
   } catch(e) {
     console.log(e)
   }
