@@ -3,7 +3,7 @@ import { postgraphile } from 'postgraphile'
 
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from '@auth0/nextjs-auth0'
-// import  fs from 'fs'
+import fs from 'fs'
 import { getPool, getSchemas, PoolType } from '@/shared/config'
 import { options } from '@/shared/postgraphileOptions'
 import { isDev } from '@/pages/api/_constants'
@@ -33,13 +33,13 @@ const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) =>
 const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.url?.startsWith('/api/graphql')) req.url = '/api/graphql'
 
-  // try {
-  //   const path = `${process.cwd()}/src/shared`
-  //   const arrayOfFiles = fs.readdirSync(path)
-  //   // console.log({ path, arrayOfFiles })
-  // } catch(e) {
-  //   console.log(e)
-  // }
+  try {
+    const path = `${process.cwd()}/src/shared`
+    const arrayOfFiles = fs.readdirSync(path)
+    // console.log({ path, arrayOfFiles })
+  } catch (e) {
+    console.log(e)
+  }
 
   await runMiddleware(
     req,
