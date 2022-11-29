@@ -1,9 +1,8 @@
 import { Theme } from '@mui/material/styles'
 import React from 'react'
-// import Spinner from 'react-spinkit'
-import CircularProgress from '@mui/material/CircularProgress'
+import DotLoader from 'react-spinners/DotLoader'
 
-import { makeStyles } from '../utils/makeStyles'
+import { makeStyles } from '@/utils/makeStyles'
 
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {
@@ -23,9 +22,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
       height: 20,
       width: 20,
     },
-  },
-  progress: {
-    margin: theme.spacing(2),
   },
 }))
 
@@ -52,10 +48,14 @@ export const Loader: React.FC<ILoader> = ({ error, retry, timedOut, pastDelay, t
         </div>
       )}
       {pastDelay && <div>Loading...</div>}
-      <CircularProgress />
-      {/*
-      <Spinner fadeIn='half' className={cx({ [classes.progress]: !tiny })} name='chasing-dots' color='#3f51b5' />
-*/}
+      <DotLoader
+        color='#3f51b5'
+        loading
+        cssOverride={{ margin: '16px' }}
+        size={32}
+        aria-label='Loading Spinner'
+        data-testid='loader'
+      />
     </div>
   )
 }

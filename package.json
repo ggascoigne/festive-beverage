@@ -252,7 +252,7 @@
     "react-hotkeys-hook": "^3.4.4",
     "react-intersection-observer": "^9.4.1",
     "react-json-view": "^1.21.3",
-    "react-spinkit": "^3.0.0",
+    "react-spinners": "^0.13.6",
     "react-table": "^7.8.0",
     "react-window": "^1.8.8",
     "react-window-infinite-loader": "^1.0.8",
@@ -299,7 +299,6 @@
   ],
   "pnpm": {
     "patchedDependencies": {
-      "react-spinkit@3.0.0": "patches/react-spinkit@3.0.0.patch",
       "@eslint/eslintrc@1.3.3": "patches/@eslint__eslintrc@1.3.3.patch"
     }
   }
