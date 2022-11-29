@@ -1,13 +1,16 @@
 import { print } from 'graphql'
 import gql from 'graphql-tag'
+import { OperationDefinitionNode } from 'graphql/language/ast'
 import { useCallback } from 'react'
 
 // eslint-disable-next-line etc/no-misused-generics
 export const fetchData = async <TData, TVariables>(query: string, variables?: TVariables) => {
   const ast = gql(query)
+  const operation = ast.definitions.find((def) => def.kind === 'OperationDefinition') as OperationDefinitionNode
+  const operationName = operation?.name?.value ?? ''
   // note that we use gql from graphql-tag to drop duplicate fragment definitions
   // then we use graphql print to convert that back to a text string.
-  const res = await fetch('/api/graphql', {
+  const res = await fetch(`/api/graphql/${operationName}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

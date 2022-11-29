@@ -9,7 +9,7 @@ import { options } from '@/shared/postgraphileOptions'
 import { isDev } from '@/pages/api/_constants'
 import { getUserId, isAdmin } from '@/pages/api/_utils'
 
-// note that the route here is /api/graphql/[:query] because I like to append the query
+// note that the route here is /api/graphql/[:operation] because I like to append the query
 // operation name to the path to make debugging the queries easier in Chrome dev tools.
 
 // FYI export DEBUG="postgraphile:postgres*"to access the postgraphile debugging
@@ -30,13 +30,13 @@ const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) =>
   })
 
 // GraphQL route that handles queries
-const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) => {
+export const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.url?.startsWith('/api/graphql')) req.url = '/api/graphql'
 
   try {
+    // force a file access to force next.js to include the files in the serverless bundle
     const path = `${process.cwd()}/src/shared`
-    const arrayOfFiles = fs.readdirSync(path)
-    // console.log({ path, arrayOfFiles })
+    const _arrayOfFiles = fs.readdirSync(path)
   } catch (e) {
     console.log(e)
   }
