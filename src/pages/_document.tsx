@@ -8,15 +8,19 @@ class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          {/* PWA primary color */}
+          <meta name='application-name' content='Festive Beverage' />
+          <meta name='apple-mobile-web-app-capable' content='yes' />
+          <meta name='apple-mobile-web-app-status-bar-style' content='default' />
+          <meta name='apple-mobile-web-app-title' content='Festive Beverage' />
+          <meta name='description' content='Do you want a Festive Beverage?' />
+          <meta name='mobile-web-app-capable' content='yes' />
+
           <meta name='theme-color' content={theme.palette.primary.main} />
 
           <link rel='shortcut icon' href='/favicon.ico' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <meta name='theme-color' content='#000000' />
 
           <meta name='author' content='guy@wyrdrune.com' />
-          <meta name='description' content='Do you want a Festive Beverage?' />
 
           <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
           <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
