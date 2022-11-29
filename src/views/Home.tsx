@@ -113,7 +113,7 @@ export const HomeView = (props: HomeViewProps) => {
   } else {
     return (
       <Page title='Festive Beverages' hideTitle>
-        <Search value={search} onChange={setSearch} />
+        <Search value={search} onChange={setSearch} allDrinks={props.allDrinks!} />
         <DrinkList drinks={drinks} />
       </Page>
     )

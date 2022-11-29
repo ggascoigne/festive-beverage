@@ -19,7 +19,6 @@ import { makeStyles } from '@/utils/makeStyles'
   only those measures.
 */
 const convert = configureMeasurements({ volume })
-console.log({ convert })
 export type Drink = GqlType<GetAllDrinksQuery, ['recipes', 'nodes', number]>
 
 const useStyles = makeStyles()({

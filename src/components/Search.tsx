@@ -2,13 +2,14 @@ import { Autocomplete, TextField } from '@mui/material'
 import React, { PropsWithChildren, ReactElement, useMemo } from 'react'
 import Zet from 'zet'
 
-import { useGetAllDrinksQuery, useGetAllIngredientsQuery } from '../client'
+import { GetAllDrinksQuery, useGetAllDrinksQuery, useGetAllIngredientsQuery } from '../client'
 import { notEmpty } from '../utils'
 import { makeStyles } from '../utils/makeStyles'
 
 interface SearchProps {
   onChange: any
   value: string[]
+  allDrinks: GetAllDrinksQuery
 }
 
 const useStyles = makeStyles()({
@@ -17,10 +18,10 @@ const useStyles = makeStyles()({
   },
 })
 
-export function Search({ onChange, value }: PropsWithChildren<SearchProps>): ReactElement | null {
+export function Search({ onChange, value, allDrinks }: PropsWithChildren<SearchProps>): ReactElement | null {
   const { classes } = useStyles()
   const { data: ingredients } = useGetAllIngredientsQuery()
-  const { data: drinks } = useGetAllDrinksQuery()
+  const { data: drinks } = useGetAllDrinksQuery(undefined, { staleTime: 60 * 60 * 1000, initialData: allDrinks })
 
   const names = useMemo(() => {
     const set = new Zet<string>(
