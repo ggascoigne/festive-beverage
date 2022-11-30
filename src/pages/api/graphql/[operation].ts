@@ -33,13 +33,13 @@ const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) =>
 export const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.url?.startsWith('/api/graphql')) req.url = '/api/graphql'
 
-  // try {
-  //   // force a file access to force next.js to include the files in the serverless bundle
-  //   const path = `${process.cwd()}/src/shared`
-  //   const _arrayOfFiles = fs.readdirSync(path)
-  // } catch (e) {
-  //   console.log(e)
-  // }
+  try {
+    // force a file access to force next.js to include the files in the serverless bundle
+    const path = `${process.cwd()}/src/shared`
+    const _arrayOfFiles = fs.readdirSync(path)
+  } catch (e) {
+    console.log(e)
+  }
 
   await runMiddleware(
     req,
@@ -68,7 +68,7 @@ export const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) =>
 }
 
 export const config = {
-  unstable_includeFiles: [`${process.cwd()}/src/shared/**`],
+  // unstable_includeFiles: ['src/shared/**'],
   api: {
     bodyParser: false,
   },
