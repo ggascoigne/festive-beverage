@@ -68,7 +68,7 @@ export const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) =>
 }
 
 export const config = {
-  unstable_includeFiles: ['src/shared/**'],
+  unstable_includeFiles: [`${process.cwd()}/src/shared/**`],
   api: {
     bodyParser: false,
   },
