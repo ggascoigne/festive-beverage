@@ -1,4 +1,4 @@
-import { EmotionCache } from '@emotion/react'
+import { CacheProvider, EmotionCache } from '@emotion/react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import { AppProps } from 'next/app'
@@ -7,14 +7,13 @@ import * as React from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { UserProvider } from '@auth0/nextjs-auth0'
-import { createEmotionSsrAdvancedApproach } from 'tss-react/next'
 import { theme } from '@/components/Theme'
 import { NotificationProvider } from '@/components/Notifications'
 import { Layout } from '@/components/Layout'
+import createEmotionCache from '@/utils/createEmotionCache'
 
-const { augmentDocumentWithEmotionCache, withAppEmotionCache } = createEmotionSsrAdvancedApproach({ key: 'css' })
-
-export { augmentDocumentWithEmotionCache }
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache()
 
 const ReactQueryDevtoolsProduction = React.lazy(() =>
   import('@tanstack/react-query-devtools/build/lib/index.prod.js').then((d) => ({
@@ -28,8 +27,8 @@ interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache
 }
 
-function MyApp(props: MyAppProps) {
-  const { Component, pageProps } = props
+export default function MyApp(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const { user } = pageProps
   const [showDevtools, setShowDevtools] = React.useState(false)
 
@@ -40,34 +39,34 @@ function MyApp(props: MyAppProps) {
 
   return (
     <>
-      <Head>
-        <title>Festive Beverage</title>
-        <meta
-          name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
-        />
-      </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <NotificationProvider>
-          <UserProvider user={user}>
-            <QueryClientProvider client={queryClient}>
-              <Layout>
-                <Component {...pageProps} />
-                <ReactQueryDevtools />
-                {showDevtools ? (
-                  <React.Suspense fallback={null}>
-                    <ReactQueryDevtoolsProduction />
-                  </React.Suspense>
-                ) : null}
-              </Layout>
-            </QueryClientProvider>
-          </UserProvider>
-        </NotificationProvider>
-      </ThemeProvider>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>Festive Beverage</title>
+          <meta
+            name='viewport'
+            content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+          />
+        </Head>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <NotificationProvider>
+            <UserProvider user={user}>
+              <QueryClientProvider client={queryClient}>
+                <Layout>
+                  <Component {...pageProps} />
+                  <ReactQueryDevtools />
+                  {showDevtools ? (
+                    <React.Suspense fallback={null}>
+                      <ReactQueryDevtoolsProduction />
+                    </React.Suspense>
+                  ) : null}
+                </Layout>
+              </QueryClientProvider>
+            </UserProvider>
+          </NotificationProvider>
+        </ThemeProvider>
+      </CacheProvider>
     </>
   )
 }
-
-export default withAppEmotionCache(MyApp)

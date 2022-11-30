@@ -27,6 +27,7 @@ specifiers:
   '@graphql-codegen/typescript-react-query': ^4.0.6
   '@mui/icons-material': ^5.10.16
   '@mui/material': ^5.10.16
+  '@mui/system': ^5.10.16
   '@oclif/core': ^1.20.4
   '@oclif/plugin-help': ^5.1.19
   '@pyramation/postgraphile-plugin-fulltext-filter': ^2.0.0
@@ -96,7 +97,7 @@ specifiers:
   next: ^13.0.5
   next-pwa: ^5.6.0
   node-fetch: ^2.6.7
-  notistack: ^2.0.8
+  notistack: ^3.0.0-alpha.11
   pg: ^8.8.0
   postgraphile: ^4.12.11
   postgraphile-core: ^4.12.3
@@ -125,7 +126,6 @@ specifiers:
   tempy: ^1.0.1
   ts-node: ^10.9.1
   ts-toolbelt: ^9.6.0
-  tss-react: ^4.4.4
   typescript: ^4.9.3
   use-debugger-hooks: ^1.3.0
   utility-types: ^3.10.0
@@ -144,6 +144,7 @@ dependencies:
   '@graphile-contrib/pg-simplify-inflector': 6.1.0
   '@mui/icons-material': 5.10.16_ge2ne5gh5gcqikeclw577gsblu
   '@mui/material': 5.10.16_thp4wrxo45nyllusrnt46mid4u
+  '@mui/system': 5.10.16_v64nlmo6pkqfmpmxge6otzlg54
   '@oclif/core': 1.20.4
   '@pyramation/postgraphile-plugin-fulltext-filter': 2.0.0_u4nwofa7xamm54o4tgcpw3rbl4
   '@tanstack/react-query': 4.18.0_biqbaboplfbrettd7655fr4n2y
@@ -176,7 +177,7 @@ dependencies:
   match-sorter: 6.3.1
   next: 13.0.5_672uxklweod7ene3nqtsh262ca
   next-pwa: 5.6.0_2wofhqopa5xwumpn34exg5bqiy
-  notistack: 2.0.8_4xnbwop7ylm5pogdusyqfiqcyu
+  notistack: 3.0.0-alpha.11_biqbaboplfbrettd7655fr4n2y
   pg: 8.8.0
   postgraphile: 4.12.11
   postgraphile-core: 4.12.3_graphql@15.8.0+pg@8.8.0
@@ -198,7 +199,6 @@ dependencies:
   tempy: 1.0.1
   ts-node: 10.9.1_ynn263r5r6vh5bdwgm4umyf45m
   ts-toolbelt: 9.6.0
-  tss-react: 4.4.4_7gkcoq2nf4xufkduddb7kah6jm
   utility-types: 3.10.0
   xlsx: 0.18.5
   yup: 0.32.11
@@ -1674,7 +1674,7 @@ packages:
       '@babel/core': 7.20.5
       '@babel/helper-module-imports': 7.18.6
       '@babel/plugin-syntax-jsx': 7.18.6_@babel+core@7.20.5
-      '@babel/runtime': 7.20.1
+      '@babel/runtime': 7.20.6
       '@emotion/hash': 0.9.0
       '@emotion/memoize': 0.8.0
       '@emotion/serialize': 1.1.1
@@ -6925,6 +6925,12 @@ packages:
       pinkie-promise: 2.0.1
     dev: false
 
+  /goober/2.1.11:
+    resolution: {integrity: sha512-5SS2lmxbhqH0u9ABEWq7WPU69a4i2pYcHeCxqaNq6Cw3mnrF0ghWNM4tEGid4dKy8XNIAUbuThuozDHHKJVh3A==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dev: false
+
   /gopd/1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
@@ -8853,27 +8859,19 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /notistack/2.0.8_4xnbwop7ylm5pogdusyqfiqcyu:
-    resolution: {integrity: sha512-/IY14wkFp5qjPgKNvAdfL5Jp6q90+MjgKTPh4c81r/lW70KeuX6b9pE/4f8L4FG31cNudbN9siiFS5ql1aSLRw==}
+  /notistack/3.0.0-alpha.11_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-QfiVC1On1Zfs1UADxgRRhcVhAWveD3lBUKhDwx0GdXoSKii0UARz0tfJyIwwOxy5Lr+DOeAHz8Mvl1GwpeVnQQ==}
+    engines: {node: '>=12.0.0', npm: '>=6.0.0'}
     peerDependencies:
-      '@emotion/react': ^11.4.1
-      '@emotion/styled': ^11.3.0
-      '@mui/material': ^5.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    peerDependenciesMeta:
-      '@emotion/react':
-        optional: true
-      '@emotion/styled':
-        optional: true
     dependencies:
-      '@emotion/react': 11.10.5_hebjedjhazelsvuzebr6t7ng24
-      '@emotion/styled': 11.10.5_5tjec44ezuvlpkchcqgxkxryqi
-      '@mui/material': 5.10.16_thp4wrxo45nyllusrnt46mid4u
       clsx: 1.2.1
-      hoist-non-react-statics: 3.3.2
+      goober: 2.1.11
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - csstype
     dev: false
 
   /npm-run-path/4.0.1:
@@ -11021,24 +11019,6 @@ packages:
 
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
-
-  /tss-react/4.4.4_7gkcoq2nf4xufkduddb7kah6jm:
-    resolution: {integrity: sha512-Bzyg99bIQq3Lk4Rwc5XMOps58c1biw1rghCkApIX5XkAB+/VjGCIFSl63PePhmiRNvKRxJRpawGPPxHytiw1TA==}
-    peerDependencies:
-      '@emotion/react': ^11.4.1
-      '@emotion/server': ^11.4.0
-      react: ^16.8.0 || ^17.0.2 || ^18.0.0
-    peerDependenciesMeta:
-      '@emotion/server':
-        optional: true
-    dependencies:
-      '@emotion/cache': 11.10.5
-      '@emotion/react': 11.10.5_hebjedjhazelsvuzebr6t7ng24
-      '@emotion/serialize': 1.1.1
-      '@emotion/server': 11.10.0
-      '@emotion/utils': 1.2.0
-      react: 18.2.0
-    dev: false
 
   /tsutils-etc/1.4.1_6srv2tajnzf4k7zj2br63blj3e:
     resolution: {integrity: sha512-6UPYgc7OXcIW5tFxlsZF3OVSBvDInl/BkS3Xsu64YITXk7WrnWTVByKWPCThFDBp5gl5IGHOzGMdQuDCE7OL4g==}

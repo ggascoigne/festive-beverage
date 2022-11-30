@@ -1,5 +1,5 @@
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
-import { Avatar, Badge, Button, Theme, Tooltip } from '@mui/material'
+import { Avatar, Badge, Button, Theme, Tooltip, Typography } from '@mui/material'
 import fetch from 'isomorphic-fetch'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { QueryClient } from '@tanstack/react-query'
@@ -7,7 +7,6 @@ import Link from 'next/link'
 
 import { useRouter } from 'next/navigation'
 import { Children } from '@/utils'
-import { makeStyles } from '@/utils/makeStyles'
 import { Auth0User, Perms, Roles, useAuth, useRoleOverride } from './Auth'
 import { LoginMenu } from './LoginMenu'
 import { useNotification } from './Notifications'
@@ -17,59 +16,6 @@ const MENU_ITEM_RESET_PASSWORD = 'Password Reset'
 const MENU_ITEM_VIEW_AS_USER = 'View as Regular User'
 const MENU_ITEM_VIEW_AS_ADMIN = 'View as Admin'
 const MENU_ITEM_SIGN_OUT = 'Sign out'
-
-const useStyles = makeStyles()((theme: Theme) => ({
-  loginButton: {
-    position: 'relative',
-    fontWeight: 400,
-    textTransform: 'uppercase',
-    fontSize: '12px',
-    lineHeight: '20px',
-    textDecoration: 'none',
-    marginRight: '20px',
-    display: 'inline-flex',
-    padding: '12px 30px',
-    color: 'inherit',
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    '&:hover': {
-      color: 'inherit',
-      background: 'transparent',
-      boxShadow: 'none',
-    },
-  },
-  navLink: {
-    color: 'inherit',
-    position: 'relative',
-    padding: '0 18px 0 0.9375rem',
-    marginRight: 7,
-    fontWeight: 400,
-    fontSize: '14px',
-    textTransform: 'uppercase',
-    borderRadius: '3px',
-    lineHeight: '20px',
-    textDecoration: 'none',
-    margin: '0px',
-    display: 'inline-flex',
-    '&:hover,&:focus': {
-      color: 'inherit',
-      background: 'rgba(200, 200, 200, 0.2)',
-    },
-    [theme.breakpoints.down('md')]: {
-      width: 'calc(100% - 30px)',
-      marginBottom: '8px',
-      marginTop: '8px',
-      textAlign: 'left',
-      '& > span:first-of-type': {
-        justifyContent: 'flex-start',
-      },
-    },
-  },
-  email: {
-    textTransform: 'none',
-    padding: 15,
-  },
-  badge: { color: '#fcc60a', width: 18, height: 18 },
-}))
 
 interface ProfileImageProps {
   user: Auth0User
@@ -83,23 +29,20 @@ const OurAvatar: React.FC<ProfileImageProps> = ({ user }) => {
   return <Avatar>{initials}</Avatar>
 }
 
-const AdminBadge: React.FC<Children> = ({ children }) => {
-  const { classes } = useStyles()
-  return (
-    <Tooltip title='Site Administrator'>
-      <Badge
-        overlap='circular'
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        badgeContent={<VerifiedUserIcon className={classes.badge} />}
-      >
-        {children}
-      </Badge>
-    </Tooltip>
-  )
-}
+const AdminBadge: React.FC<Children> = ({ children }) => (
+  <Tooltip title='Site Administrator'>
+    <Badge
+      overlap='circular'
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      badgeContent={<VerifiedUserIcon sx={{ color: '#fcc60a', width: '18px', height: '18px' }} />}
+    >
+      {children}
+    </Badge>
+  </Tooltip>
+)
 
 const ProfileImage: React.FC<ProfileImageProps> = ({ user }) => {
   const { hasPermissions } = useAuth()
@@ -121,7 +64,6 @@ interface MenuButtonProps {
 }
 
 const MenuButton: React.FC<MenuButtonProps> = ({ size, user }) => {
-  const { classes } = useStyles()
   const unverified = user.email_verified ? '' : ' (unverified)'
   switch (size) {
     case 'tiny':
@@ -130,20 +72,20 @@ const MenuButton: React.FC<MenuButtonProps> = ({ size, user }) => {
       return (
         <>
           <ProfileImage user={user} />
-          <span className={classes.email}>
+          <Typography component='span' sx={{ textTransform: 'none', padding: 2 }}>
             {user.email}
             {unverified}
-          </span>
+          </Typography>
         </>
       )
     case 'normal':
     default:
       return (
         <>
-          <span className={classes.email}>
+          <Typography component='span' sx={{ textTransform: 'none', padding: 2 }}>
             {user.email}
             {unverified}
-          </span>
+          </Typography>
           <ProfileImage user={user} />
         </>
       )
@@ -155,7 +97,6 @@ interface LoginMenuProps {
 }
 
 export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
-  const { classes } = useStyles()
   const { isLoading = true, user, hasPermissions } = useAuth()
   const notify = useNotification()
   const [authInitialized, setAuthInitialized] = useState(false)
@@ -213,12 +154,40 @@ export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
     }
   }
 
+  // @ts-ignore
   return user ? (
     <>
       <LoginMenu
         buttonText={<MenuButton size={size} user={user!} />}
         buttonProps={{
-          className: classes.navLink,
+          /*  @ts-ignore */
+          sx: (theme: Theme) => ({
+            color: 'inherit',
+            position: 'relative',
+            padding: '0 18px 0 0.9375rem',
+            marginRight: '7px',
+            fontWeight: 400,
+            fontSize: '14px',
+            textTransform: 'uppercase',
+            borderRadius: '3px',
+            lineHeight: '20px',
+            textDecoration: 'none',
+            margin: '0px',
+            display: 'inline-flex',
+            '&:hover,&:focus': {
+              color: 'inherit',
+              background: 'rgba(200, 200, 200, 0.2)',
+            },
+            [theme.breakpoints.down('md')]: {
+              width: 'calc(100% - 30px)',
+              marginBottom: '8px',
+              marginTop: '8px',
+              textAlign: 'left',
+              '& > span:first-of-type': {
+                justifyContent: 'flex-start',
+              },
+            },
+          }),
         }}
         dropdownList={menuItems}
         onClick={(prop: string) => {
@@ -239,7 +208,29 @@ export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
       />
     </>
   ) : (
-    <Button disabled={!authInitialized} className={classes.loginButton} component={Link} href='/api/auth/login'>
+    <Button
+      disabled={!authInitialized}
+      sx={{
+        position: 'relative',
+        fontWeight: 400,
+        textTransform: 'uppercase',
+        fontSize: '12px',
+        lineHeight: '20px',
+        textDecoration: 'none',
+        marginRight: '20px',
+        display: 'inline-flex',
+        padding: '12px 30px',
+        color: 'inherit',
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        '&:hover': {
+          color: 'inherit',
+          background: 'transparent',
+          boxShadow: 'none',
+        },
+      }}
+      component={Link}
+      href='/api/auth/login'
+    >
       Login
     </Button>
   )

@@ -2,33 +2,6 @@ import Typography from '@mui/material/Typography'
 import { QueryError } from 'client'
 import React from 'react'
 
-import { Theme } from '@mui/material'
-import { makeStyles } from '@/utils/makeStyles'
-
-export const useTypographyStyles = makeStyles()((theme: Theme) => ({
-  defaultFontStyle: {
-    fontWeight: 300,
-    lineHeight: '1.5em',
-    fontSize: '14px',
-  },
-  quote: {
-    padding: '10px 20px',
-    margin: '0 0 20px',
-    fontSize: '17.5px',
-    borderLeft: '5px solid #eee',
-  },
-  quoteText: {
-    margin: '0 0 10px',
-    fontStyle: 'italic',
-  },
-  quoteAuthor: {
-    display: 'block',
-    fontSize: '80%',
-    lineHeight: '1.42857143',
-    color: '#777',
-  },
-}))
-
 interface QuoteProps {
   text: React.ReactNode
   author?: React.ReactNode
@@ -36,12 +9,25 @@ interface QuoteProps {
 
 export const Quote: React.FC<QuoteProps> = (props) => {
   const { text, author } = props
-  const { classes } = useTypographyStyles()
   return (
-    <blockquote className={`${classes.defaultFontStyle} ${classes.quote}`}>
-      <p className={classes.quoteText}>{text}</p>
-      <small className={classes.quoteAuthor}>{author}</small>
-    </blockquote>
+    <Typography
+      component='blockquote'
+      sx={{
+        fontWeight: 300,
+        lineHeight: '1.5em',
+        padding: '10px 20px',
+        margin: '0 0 20px',
+        fontSize: '17.5px',
+        borderLeft: '5px solid #eee',
+      }}
+    >
+      <Typography paragraph sx={{ margin: '0 0 10px', fontStyle: 'italic' }}>
+        {text}
+      </Typography>
+      <Typography component='small' sx={{ display: 'block', fontSize: '80%', lineHeight: '1.42857143', color: '#777' }}>
+        {author}
+      </Typography>
+    </Typography>
   )
 }
 

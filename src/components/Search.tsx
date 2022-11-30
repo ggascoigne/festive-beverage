@@ -3,23 +3,14 @@ import React, { PropsWithChildren, ReactElement, useMemo } from 'react'
 import Zet from 'zet'
 
 import { GetAllDrinksQuery, useGetAllDrinksQuery, useGetAllIngredientsQuery } from '../client'
-import { notEmpty } from '../utils'
-import { makeStyles } from '../utils/makeStyles'
+import { notEmpty } from '@/utils'
 
 interface SearchProps {
   onChange: any
   value: string[]
   allDrinks: GetAllDrinksQuery
 }
-
-const useStyles = makeStyles()({
-  search: {
-    paddingBottom: 12,
-  },
-})
-
 export function Search({ onChange, value, allDrinks }: PropsWithChildren<SearchProps>): ReactElement | null {
-  const { classes } = useStyles()
   const { data: ingredients } = useGetAllIngredientsQuery()
   const { data: drinks } = useGetAllDrinksQuery(undefined, { staleTime: 60 * 60 * 1000, initialData: allDrinks })
 
@@ -35,7 +26,7 @@ export function Search({ onChange, value, allDrinks }: PropsWithChildren<SearchP
   return (
     <Autocomplete
       id='search'
-      className={classes.search}
+      sx={{ paddingBottom: 1.5 }}
       options={names}
       freeSolo
       multiple

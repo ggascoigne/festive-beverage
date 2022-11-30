@@ -1,30 +1,12 @@
 import 'graphiql/graphiql.css'
 
-import { GlobalStyles } from '@mui/material'
+import { Box, GlobalStyles } from '@mui/material'
 import RealGraphiQL from 'graphiql'
 import GraphiQLExplorer from 'graphiql-explorer'
 import { buildClientSchema, getIntrospectionQuery, GraphQLSchema, parse } from 'graphql'
 import fetch from 'isomorphic-fetch'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-
-import { makeStyles } from '@/utils/makeStyles'
 import { Page } from '../Page'
-
-export const useStyles = makeStyles()({
-  graphiQlWrapper: {
-    height: 'calc(100% - 64px) !Important',
-    maxHeight: '100vh',
-    padding: 12,
-  },
-  box: {
-    boxSizing: 'content-box',
-    height: '100%',
-    border: '1px solid #d6d6d6',
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-  },
-})
 
 const graphQLFetcher = () => (graphQLParams: any) =>
   fetch(`${window.location.origin}/api/graphql`, {
@@ -43,16 +25,11 @@ const graphQLFetcher = () => (graphQLParams: any) =>
       }
     })
 
-interface Props {
-  auth?: { jwtToken?: string }
-}
-
-const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
+const GraphiQL: React.FC = () => {
   const graphiqlRef = useRef<any>(null)
   const [schema, setSchema] = useState<GraphQLSchema | null>(null)
   const [query, setQuery] = useState<string>('')
   const [explorerIsOpen, setExplorerIsOpen] = useState<boolean>(true)
-  const { classes, cx } = useStyles()
 
   const handleInspectOperation = useCallback(
     (cm: any, mousePos: { line: number; ch: number }) => {
@@ -118,8 +95,26 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
 
   // @ts-ignore
   return (
-    <Page title='GraphiQL' hideTitle className={cx(classes.graphiQlWrapper)}>
-      <div className={cx(classes.box, 'graphiql-container')}>
+    <Page
+      title='GraphiQL'
+      hideTitle
+      sx={{
+        height: 'calc(100% - 64px) !Important',
+        maxHeight: '100vh',
+        padding: 1.5,
+      }}
+    >
+      <Box
+        sx={{
+          boxSizing: 'content-box',
+          height: '100%',
+          border: '1px solid #d6d6d6',
+          display: 'flex',
+          flexDirection: 'row',
+          width: '100%',
+        }}
+        className='graphiql-container'
+      >
         <GlobalStyles
           styles={{
             '.graphiql-explorer-root': {
@@ -130,7 +125,7 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
               padding: '8px 8px 0 8px',
               // overflowX: 'hidden !important',  // todo ggp: check this
             },
-            '.graphiql-explorer-root > :nth-child(2)': {
+            '.graphiql-explorer-root > :nth-of-type(2)': {
               padding: '0px 8px 0 8px',
             },
             '.graphiql-container .execute-button:focus': {
@@ -182,7 +177,7 @@ const GraphiQL: React.FC<Props> = ({ auth = {} }) => {
             <RealGraphiQL.Button onClick={handleToggleExplorer} label='Explorer' title='Toggle Explorer' />
           </RealGraphiQL.Toolbar>
         </RealGraphiQL>
-      </div>
+      </Box>
     </Page>
   )
 }

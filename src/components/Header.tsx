@@ -1,26 +1,9 @@
 import MenuIcon from '@mui/icons-material/Menu'
-import { AppBar, IconButton, Theme, Toolbar, Typography } from '@mui/material'
+import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Config, useGetConfig } from 'utils'
 import Link from '@/components/Link'
-
-import { makeStyles } from '@/utils/makeStyles'
 import { HasPermission, Perms } from './Auth'
-
-const useStyles = makeStyles()((theme: Theme) => ({
-  appBar: {
-    flex: '1 1 auto',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  menuButton: {
-    marginRight: 20,
-  },
-  toolbar: {
-    width: '100%',
-  },
-}))
 
 interface HeaderProps {
   handleDrawerToggle: () => void
@@ -28,8 +11,6 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu }) => {
-  const { classes } = useStyles()
-
   const [config, getConfig] = useGetConfig()
   const [configDetails, setConfigDetails] = useState('')
 
@@ -47,14 +28,17 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu })
   }, [config])
 
   return (
-    <AppBar position='fixed' className={classes.appBar}>
-      <Toolbar className={classes.toolbar}>
+    <AppBar
+      position='fixed'
+      sx={{ flex: '1 1 auto', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+    >
+      <Toolbar sx={{ width: '100%' }}>
         <HasPermission permission={Perms.IsAdmin}>
           <IconButton
             color='inherit'
             aria-label='Open drawer'
             onClick={handleDrawerToggle}
-            className={classes.menuButton}
+            sx={{ marginRight: '20px' }}
             size='large'
           >
             <MenuIcon />

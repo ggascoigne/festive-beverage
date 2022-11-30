@@ -1,71 +1,47 @@
-import { Divider, Drawer, List, ListItem, Theme } from '@mui/material'
+import { Box, Divider, Drawer, List, ListItem } from '@mui/material'
 import React, { useCallback, useState } from 'react'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { LoginButton } from '@/components/LoginButton'
 import { MenuItems, rootRoutes } from '@/components/Navigation'
-import { makeStyles } from '@/utils/makeStyles'
 
-// @ts-ignore
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    minHeight: '100vh',
-  },
-  toolbar: theme.mixins.toolbar,
-  content: {
-    minHeight: '100vh',
-    width: '100%',
-    flexGrow: 1,
-    // paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-  },
-  list: {
-    fontSize: '14px',
-    margin: 0,
-    paddingLeft: '0',
-    listStyle: 'none',
-    paddingTop: '0',
-    paddingBottom: '0',
-    color: 'inherit',
-  },
-  listItem: {
-    float: 'left',
-    color: 'inherit',
-    position: 'relative',
-    display: 'block',
-    width: 'auto',
-    margin: '0',
-    padding: '0',
-  },
-  listItemText: {
-    padding: '0 !important',
-  },
-}))
+const DrawerContents: React.FC = () => (
+  <>
+    <Box sx={(theme) => ({ ...theme.mixins.toolbar })} />
+    <Divider />
+    <MenuItems menuItems={rootRoutes} />
+    <Box sx={{ height: '100%' }} />
+    <Footer />
+  </>
+)
 
-const DrawerContents: React.FC = () => {
-  const { classes } = useStyles()
-  return (
-    <>
-      <div className={classes.toolbar} />
-      <Divider />
-      <MenuItems menuItems={rootRoutes} />
-      <div style={{ height: '100%' }} />
-      <Footer />
-    </>
-  )
-}
-
-const RightMenu: React.FC<{ size: 'normal' | 'small' | 'tiny' }> = (props) => {
-  const { classes } = useStyles()
-  return (
-    <List className={classes.list}>
-      <ListItem className={classes.listItem}>
-        <LoginButton {...props} />
-      </ListItem>
-    </List>
-  )
-}
+const RightMenu: React.FC<{ size: 'normal' | 'small' | 'tiny' }> = (props) => (
+  <List
+    sx={{
+      fontSize: '14px',
+      m: 0,
+      listStyle: 'none',
+      pl: '0',
+      pt: '0',
+      pb: '0',
+      color: 'inherit',
+    }}
+  >
+    <ListItem
+      sx={{
+        float: 'left',
+        color: 'inherit',
+        position: 'relative',
+        display: 'block',
+        width: 'auto',
+        m: 0,
+        p: 0,
+      }}
+    >
+      <LoginButton {...props} />
+    </ListItem>
+  </List>
+)
 
 export const Layout: React.FC<{ children: React.ReactNode }> = React.memo(({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -74,10 +50,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = React.memo(({ chi
     setMobileOpen(!mobileOpen)
   }, [mobileOpen])
 
-  const { classes } = useStyles()
-
   return (
-    <div className={classes.root}>
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <Header handleDrawerToggle={handleDrawerToggle} rightMenu={RightMenu} />
       <Drawer
         variant='temporary'
@@ -92,10 +66,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = React.memo(({ chi
         <Divider />
         <RightMenu size='small' />
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
+      <Box component='main' sx={{ minHeight: '100vh', width: '100%', flexGrow: 1, paddingBottom: 3 }}>
+        <Box sx={(theme) => ({ ...theme.mixins.toolbar })} />
         {children}
-      </main>
-    </div>
+      </Box>
+    </Box>
   )
 })

@@ -11,7 +11,6 @@ import configureMeasurements from 'convert-units'
 import volume, { VolumeUnits } from './convert-units/volume'
 import { GetAllDrinksQuery } from '@/client'
 import { GqlType, notEmpty } from '@/utils'
-import { makeStyles } from '@/utils/makeStyles'
 
 /*
   `configureMeasurements` is a closure that accepts a directory
@@ -20,25 +19,6 @@ import { makeStyles } from '@/utils/makeStyles'
 */
 const convert = configureMeasurements({ volume })
 export type Drink = GqlType<GetAllDrinksQuery, ['recipes', 'nodes', number]>
-
-const useStyles = makeStyles()({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  zoomedIngredients: { fontSize: '1.2rem' },
-  zoomedInstructions: { fontSize: '1rem' },
-})
 
 const getAmount = (amount: number, unit: string) => {
   if (['tbsp', 'tsp'].includes(unit)) {
@@ -53,12 +33,11 @@ const getAmount = (amount: number, unit: string) => {
 }
 
 export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink, zoomed = false }) => {
-  const { classes, cx } = useStyles()
   const [quantity, setQuantity] = React.useState(1)
 
   if (!drink) {
     return (
-      <Card className={classes.root} elevation={3}>
+      <Card sx={{ minWidth: 275 }} elevation={3}>
         <CardContent>
           <Typography variant='h5' component='h2' gutterBottom>
             Not Found
@@ -68,7 +47,7 @@ export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink
     )
   }
   return (
-    <Card className={classes.root} elevation={3}>
+    <Card sx={{ minWidth: 275 }} elevation={3}>
       <CardContent>
         {zoomed ? (
           <Grid container alignItems='center' justifyContent='space-between'>
@@ -100,24 +79,24 @@ export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink
           {drink?.recipeIngredients?.nodes?.filter(notEmpty)?.map((ingredient, i) => {
             const amount = getAmount(ingredient.amount * quantity, ingredient.unit?.name ?? '')
             return (
-              <Typography key={i} component='li' className={cx({ [classes.zoomedIngredients]: zoomed })}>
+              <Typography key={i} component='li' sx={[zoomed && { fontSize: '1.2rem' }]}>
                 {`${ingredient.ingredient?.name} ${amount}`}
               </Typography>
             )
           })}
         </ul>
-        <Typography className={classes.pos} color='textSecondary'>
+        <Typography sx={{ marginBottom: 1.5 }} color='textSecondary'>
           Glass: {drink.glass}
         </Typography>
         {drink.garnish ? (
-          <Typography className={classes.pos} color='textSecondary'>
+          <Typography sx={{ marginBottom: 1.5 }} color='textSecondary'>
             Garnish: {drink.garnish}
           </Typography>
         ) : null}
-        <Typography className={cx(classes.pos, { [classes.zoomedInstructions]: zoomed })} variant='body2' component='p'>
+        <Typography sx={[{ marginBottom: 1.5 }, zoomed && { fontSize: '1rem' }]} variant='body2' component='p'>
           {drink.instructions}
         </Typography>
-        <Typography className={classes.pos} color='textSecondary'>
+        <Typography sx={{ marginBottom: 1.5 }} color='textSecondary'>
           Source: {drink.source}
         </Typography>
       </CardContent>
