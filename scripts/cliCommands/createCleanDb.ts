@@ -1,7 +1,7 @@
 import { CliUx, Command } from '@oclif/core'
 import * as chalk from 'chalk'
 
-import { config } from '../../src/shared/config'
+import { config } from '@/shared/config'
 import { createCleanDb } from '../shared/scriptUtils'
 
 const { database } = config.rootDatabase

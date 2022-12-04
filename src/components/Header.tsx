@@ -1,7 +1,7 @@
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
 import React, { ReactNode, useEffect, useState } from 'react'
-import { Config, useGetConfig } from 'utils'
+import { Config, useGetConfig } from '@/utils'
 import Link from '@/components/Link'
 import { HasPermission, Perms } from './Auth'
 

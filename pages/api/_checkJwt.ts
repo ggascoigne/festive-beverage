@@ -4,7 +4,7 @@ import { auth0Audience, auth0IssuerBaseUrl, authDomain } from './_constants'
 const { expressjwt: jwt } = require('express-jwt')
 const fs = require('fs')
 
-const publicKey = fs.readFileSync(`${process.cwd()}/src/shared/certs/${authDomain}.pem`).toString()
+const publicKey = fs.readFileSync(`${process.cwd()}/shared/certs/${authDomain}.pem`).toString()
 
 // note express-jwt doesn't just validate the token, it puts the decoded token on the request as `user`
 

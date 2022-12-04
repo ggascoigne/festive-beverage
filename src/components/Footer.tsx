@@ -1,8 +1,8 @@
 import { Box, Popover } from '@mui/material'
 import { DateTime } from 'luxon'
 import React, { Suspense } from 'react'
-import { useGetConfig } from 'utils'
-import { gitHash } from 'version'
+import { useGetConfig } from '@/utils'
+import { gitHash } from '@/version'
 import { HasPermission, Perms, useAuth } from './Auth'
 import { Loader } from './Loader'
 

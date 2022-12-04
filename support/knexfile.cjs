@@ -19,7 +19,7 @@ const knexConfig = {
         ? {
             rejectUnauthorized: true,
             sslmode: 'verify-all',
-            ca: fs.readFileSync('./src/shared/' + process.env.DATABASE_SSL_CERT || '').toString(),
+            ca: fs.readFileSync('./shared/' + process.env.DATABASE_SSL_CERT || '').toString(),
           }
         : false,
     charset: 'utf8',

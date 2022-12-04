@@ -3,8 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from '@auth0/nextjs-auth0'
 import { config, DbConfig } from '@/shared/config'
 import { handleError } from './_handleError'
-import { authDomain } from '@/pages/api/_constants'
-import { isAdmin } from '@/pages/api/_utils'
+import { authDomain } from './_constants'
+import { isAdmin } from './_utils'
 
 // /api/getConfig
 // auth token: required

@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
-import { QueryError } from 'client'
 import React from 'react'
+import { QueryError } from '@/client'
 
 interface QuoteProps {
   text: React.ReactNode
