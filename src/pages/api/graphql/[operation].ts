@@ -35,8 +35,7 @@ export const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) =>
 
   try {
     // force a file access to force next.js to include the files in the serverless bundle
-    const path = `${process.cwd()}/src/shared`
-    const _arrayOfFiles = fs.readdirSync(path)
+    const _arrayOfFiles = fs.readdirSync(`${process.cwd()}/src/shared`)
   } catch (e) {
     console.log(e)
   }
@@ -47,8 +46,8 @@ export const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) =>
     postgraphile(getPool(PoolType.USER, `${process.cwd()}/src/shared/`), getSchemas(), {
       ...options,
       readCache: `${process.cwd()}/src/shared/postgraphile.cache`,
-      pgSettings: (request) => {
-        const { user } = getSession(request, res) ?? { user: null }
+      pgSettings: async (request) => {
+        const { user } = (await getSession(request, res)) ?? { user: null }
         const settings: Record<string, any> = {}
         if (user) {
           const admin = isAdmin(user)
@@ -68,7 +67,6 @@ export const graphqlRoute = async (req: NextApiRequest, res: NextApiResponse) =>
 }
 
 export const config = {
-  // unstable_includeFiles: ['src/shared/**'],
   api: {
     bodyParser: false,
   },

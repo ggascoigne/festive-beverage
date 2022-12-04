@@ -12,7 +12,7 @@ import { isAdmin } from '@/pages/api/_utils'
 
 const getConfigRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { user } = getSession(req, res) ?? { user: null }
+    const { user } = (await getSession(req, res)) ?? { user: null }
     const admin = isAdmin(user)
     const database: Partial<DbConfig> = { ...config.userDatabase }
     delete database.password

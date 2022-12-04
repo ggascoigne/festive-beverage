@@ -1,4 +1,4 @@
-import { UserProfile, useUser } from '@auth0/nextjs-auth0'
+import { UserProfile, useUser } from '@auth0/nextjs-auth0/client'
 import { useCallback } from 'react'
 import { useRoleOverride } from '@/components/Auth/useRoleOverride'
 import rules, { Perms } from '@/components/Auth/PermissionRules'
