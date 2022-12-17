@@ -85,20 +85,26 @@ export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink
             )
           })}
         </ul>
-        <Typography sx={{ marginBottom: 1.5 }} color='textSecondary'>
-          Glass: {drink.glass}
-        </Typography>
+        {drink.glass && (
+          <Typography sx={{ marginBottom: 1.5 }} color='textSecondary'>
+            Glass: {drink.glass}
+          </Typography>
+        )}
         {drink.garnish ? (
           <Typography sx={{ marginBottom: 1.5 }} color='textSecondary'>
             Garnish: {drink.garnish}
           </Typography>
         ) : null}
-        <Typography sx={[{ marginBottom: 1.5 }, zoomed && { fontSize: '1rem' }]} variant='body2' component='p'>
-          {drink.instructions}
-        </Typography>
-        <Typography sx={{ marginBottom: 1.5 }} color='textSecondary'>
-          Source: {drink.source}
-        </Typography>
+        {drink.instructions && (
+          <Typography sx={[{ marginBottom: 1.5 }, zoomed && { fontSize: '1rem' }]} variant='body2' component='p'>
+            {drink.instructions}
+          </Typography>
+        )}
+        {drink.source && (
+          <Typography sx={{ marginBottom: 1.5 }} color='textSecondary'>
+            Source: {drink.source}
+          </Typography>
+        )}
       </CardContent>
     </Card>
   )

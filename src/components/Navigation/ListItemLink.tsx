@@ -6,7 +6,6 @@ import Link, { LinkProps } from '@/components/Link'
 
 export const ListItemLink: React.FC<ListItemProps & LinkProps> = ({ children, ...rest }) => (
   // @ts-ignore
-  // @ts-ignore
   <ListItem {...rest} component={Link}>
     {children}
   </ListItem>

@@ -6,12 +6,6 @@ import { readFile, utils, WorkSheet } from 'xlsx'
 
 import { getPool, PoolType } from '@/shared/config'
 
-const ingredients = { s: 2, e: 161 } // 163 = garnish line in sheet -2
-const presentation = { s: ingredients.e + 1, e: 180 }
-
-const isIngredient = (r: number) => r >= ingredients.s && r <= ingredients.e
-const isPresentation = (r: number) => r >= presentation.s && r <= presentation.e
-
 interface IngredientInfo {
   name: string
   quantity: string
@@ -172,10 +166,24 @@ const create = async (client: PoolClient, drink: Drink) => {
 }
 
 const getDrinks = (sheet: WorkSheet) => {
-  const getVal = (r: number, c: number) => sheet[utils.encode_cell({ c, r })]?.v
-
   const range = utils.decode_range(sheet['!ref']!)
+
+  const getVal = (r: number, c: number) => sheet[utils.encode_cell({ c, r })]?.v
+  const findGarnish = () => {
+    for (let { r } = range.s; r <= range.e.r; r++) {
+      if (getVal(r, 0) === 'Garnish') {
+        return r
+      }
+    }
+    return -1
+  }
   const drinks: Array<Drink> = []
+
+  const ingredients = { s: 2, e: findGarnish() - 1 }
+  const presentation = { s: ingredients.e + 1, e: 180 }
+
+  const isIngredient = (r: number) => r >= ingredients.s && r <= ingredients.e
+  const isPresentation = (r: number) => r >= presentation.s && r <= presentation.e
 
   for (let c = 2; c <= range.e.c; c++) {
     const drink: any = { name: '', source: '', ingredients: {}, presentation: {}, ingredientText: '', tags: [] }
