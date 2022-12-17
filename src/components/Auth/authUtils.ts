@@ -1,8 +1,6 @@
 // this started off based on https://auth0.com/blog/role-based-access-control-rbac-and-react-apps/
 // changes are all my fault
 
-import find from 'lodash/find'
-
 import type { Perms, Roles, Rules } from './PermissionRules'
 
 // note that incoming roles are defined as strings rather than Roles as they come from an external source
@@ -43,4 +41,4 @@ export const checkMany = (
   action: Perms,
   roleOverride: Roles | undefined,
   data?: any
-) => !!find(roles, (role) => check(rules, role, action, roleOverride, data))
+) => !!roles?.find((role) => check(rules, role, action, roleOverride, data))

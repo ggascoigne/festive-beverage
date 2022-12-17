@@ -1,7 +1,7 @@
 import { Button, Grid } from '@mui/material'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
-import Link from '@/components/Link'
+import { Link } from '@/components/Navigation'
 
 import { GetAllDrinksDocument, GetAllDrinksQuery, GetAllDrinksQueryVariables, useGetAllDrinksQuery } from '@/client'
 import { Drink, DrinkCard } from '@/components/DrinkCard'

@@ -28,10 +28,9 @@ export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComp
       shallow={shallow}
       passHref
       locale={locale}
-      legacyBehavior
-    >
-      <Anchor ref={ref} {...other} />
-    </NextLink>
+      ref={ref}
+      {...other}
+    ></NextLink>
   )
 })
 
@@ -46,7 +45,7 @@ export type LinkProps = {
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/api-reference/next/link
-const Link = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   const {
     activeClassName = 'active',
     as,
@@ -64,7 +63,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   } = props
 
   const router = useRouter()
-  const pathname = typeof href === 'string' ? href : href.pathname
+  const pathname = typeof href === 'string' ? href : href?.pathname
   const className = clsx(classNameProps, {
     [activeClassName]: router.pathname === pathname && activeClassName,
   })
@@ -88,5 +87,3 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
 
   return <MuiLink component={NextLinkComposed} className={className} ref={ref} {...nextjsProps} {...other} />
 })
-
-export default Link

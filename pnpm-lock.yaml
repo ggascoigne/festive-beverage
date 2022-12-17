@@ -45,7 +45,6 @@ specifiers:
   '@types/isomorphic-fetch': ^0.0.36
   '@types/jest': ^29.2.4
   '@types/jump.js': ^1.0.4
-  '@types/lodash': ^4.14.191
   '@types/luxon': ^3.1.0
   '@types/node': ^18.11.11
   '@types/pg': ^8.6.5
@@ -92,7 +91,6 @@ specifiers:
   knex: ^2.3.0
   knex-migrate: ^1.7.4
   lint-staged: ^13.1.0
-  lodash: ^4.17.21
   luxon: ^3.1.1
   match-sorter: ^6.3.1
   next: ^13.0.6
@@ -172,7 +170,6 @@ dependencies:
   jotai: 1.11.1_zavbqmrropwrojvx6ojaa4s7im
   jump.js: 1.0.2
   jwt-decode: 3.1.2
-  lodash: 4.17.21
   luxon: 3.1.1
   match-sorter: 6.3.1
   next: 13.0.6_672uxklweod7ene3nqtsh262ca
@@ -226,7 +223,6 @@ devDependencies:
   '@types/isomorphic-fetch': 0.0.36
   '@types/jest': 29.2.4
   '@types/jump.js': 1.0.4
-  '@types/lodash': 4.14.191
   '@types/luxon': 3.1.0
   '@types/node': 18.11.11
   '@types/pg': 8.6.5
@@ -3627,6 +3623,7 @@ packages:
 
   /@types/lodash/4.14.191:
     resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
+    dev: false
 
   /@types/luxon/3.1.0:
     resolution: {integrity: sha512-gCd/HcCgjqSxfMrgtqxCgYk/22NBQfypwFUG7ZAyG/4pqs51WLTcUzVp1hqTbieDYeHS3WoVEh2Yv/2l+7B0Vg==}
