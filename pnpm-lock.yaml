@@ -122,7 +122,6 @@ specifiers:
   react-window-infinite-loader: ^1.0.8
   regenerator-runtime: ^0.13.11
   source-map-explorer: ^2.5.3
-  sqlite-worker: ^0.8.0
   stringify-object: ^3.3.0
   tempy: ^1.0.1
   ts-node: ^10.9.1
@@ -193,7 +192,6 @@ dependencies:
   react-table: 7.8.0_react@18.2.0
   react-window: 1.8.8_biqbaboplfbrettd7655fr4n2y
   react-window-infinite-loader: 1.0.8_biqbaboplfbrettd7655fr4n2y
-  sqlite-worker: 0.8.0
   stringify-object: 3.3.0
   tempy: 1.0.1
   ts-node: 10.9.1_lpj2q7bjbv7owmpf5rj6kndjrq
@@ -9245,10 +9243,6 @@ packages:
       find-up: 4.1.0
     dev: false
 
-  /plain-tag/0.1.3:
-    resolution: {integrity: sha512-yyVAOFKTAElc7KdLt2+UKGExNYwYb/Y/WE9i+1ezCQsJE8gbKSjewfpRqK2nQgZ4d4hhAAGgDCOcIZVilqE5UA==}
-    dev: false
-
   /pluralize/7.0.0:
     resolution: {integrity: sha512-ARhBOdzS3e41FbkW/XWrTEtukqqLoK5+Z/4UeDaLuSW+39JPeFgs4gCGqsrJHVZX0fUrx//4OF0K1CUGwlIFow==}
     engines: {node: '>=4'}
@@ -10452,26 +10446,6 @@ packages:
   /sprintf-js/1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
 
-  /sqlite-tables-handler/0.2.0:
-    resolution: {integrity: sha512-GNBIquv1N5CkLPT/X79VgBRMl7qpdkPOekYDKmr3vzLiuJhIoDt1OaJ7mJ03udPudhF+Ewmd/5KuTC3vXifFAg==}
-    dev: false
-
-  /sqlite-tag/1.3.2:
-    resolution: {integrity: sha512-AyAx6Y6fPMnTVY8BThi7oUSb3JIyQSX7YyjwycLMMjGnxrX8UducnK57ALwlMqpZlFVnupS3OyBqkqWtRwBp1Q==}
-    dependencies:
-      plain-tag: 0.1.3
-      static-params: 0.3.0
-    dev: false
-
-  /sqlite-worker/0.8.0:
-    resolution: {integrity: sha512-o6Jdcm++k9uNMSNaufdesqN0pxFYf42gNn1RwqY8WM7GVWdsxHT/Vb5hw4VzNUE8pHn5+qyvmmDKF12Qje5/3g==}
-    dependencies:
-      plain-tag: 0.1.3
-      sqlite-tables-handler: 0.2.0
-      sqlite-tag: 1.3.2
-      static-params: 0.3.0
-    dev: false
-
   /ssf/0.11.2:
     resolution: {integrity: sha512-+idbmIXoYET47hH+d7dfm2epdOMUDjqcB4648sTZ+t2JwoyBFL/insLfB/racrDmsKB3diwsDA696pZMieAC5g==}
     engines: {node: '>=0.8'}
@@ -10485,10 +10459,6 @@ packages:
     dependencies:
       escape-string-regexp: 2.0.0
     dev: true
-
-  /static-params/0.3.0:
-    resolution: {integrity: sha512-rJlfWiy6bNyyJ3UJhIYGjR8OdEq0z0dG7GRqQ03bZDaYqmUI2y3pPnlpawNJsypN15ZDlUxzQ4XUUFZeymyObw==}
-    dev: false
 
   /statuses/1.5.0:
     resolution: {integrity: sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==}

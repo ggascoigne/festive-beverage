@@ -46,7 +46,7 @@
         "prepare": "husky install",
         "prepareGraphql": "./scripts/run.js prepareGraphql",
         "disabled:postinstall": "./scripts/buildSql.sh",
-        "start": "BROWSER=none next start",
+        "start": "BROWSER=none next start -p 40000",
         "test": "next test"
     },
     "dependencies": {
@@ -107,7 +107,6 @@
         "react-table": "^7.8.0",
         "react-window": "^1.8.8",
         "react-window-infinite-loader": "^1.0.8",
-        "sqlite-worker": "^0.8.0",
         "stringify-object": "^3.3.0",
         "tempy": "^1.0.1",
         "ts-node": "^10.9.1",
