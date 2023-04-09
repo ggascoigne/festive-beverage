@@ -1,5 +1,5 @@
 diff --git a/dist/eslintrc.cjs b/dist/eslintrc.cjs
-index a722b6ce12fa7962eca6790e82becc1cf7155c4e..b7d45b58123402cecb1b9892fbd9fc1df2b025bc 100644
+index 753117b3244df70d4305a599b9d97c346ddfac44..78d81c971b96a7f23e3184e69877fb80ff4cb14c 100644
 --- a/dist/eslintrc.cjs
 +++ b/dist/eslintrc.cjs
 @@ -563,12 +563,24 @@ class PluginConflictError extends Error {

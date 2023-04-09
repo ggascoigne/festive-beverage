@@ -1,16 +1,17 @@
-import { Button, Grid } from '@mui/material'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+
+import { Button, Grid } from '@mui/material'
 import { useRouter } from 'next/router'
-import { Link } from '@/components/Navigation'
 
 import { GetAllDrinksDocument, GetAllDrinksQuery, GetAllDrinksQueryVariables, useGetAllDrinksQuery } from '@/client'
+import { fetchData } from '@/client/fetcher'
 import { Drink, DrinkCard } from '@/components/DrinkCard'
 import { GraphQLError } from '@/components/GraphQLError'
 import { Loader } from '@/components/Loader'
+import { Link } from '@/components/Navigation'
 import { Page } from '@/components/Page'
 import { Search } from '@/components/Search'
 import { notEmpty } from '@/utils'
-import { fetchData } from '@/client/fetcher'
 
 const DrinkList: React.FC<{ drinks: Drink[] }> = ({ drinks }) => {
   const router = useRouter()

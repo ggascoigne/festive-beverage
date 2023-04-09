@@ -180,7 +180,7 @@ const getDrinks = (sheet: WorkSheet) => {
   const drinks: Array<Drink> = []
 
   const ingredients = { s: 2, e: findGarnish() - 1 }
-  const presentation = { s: ingredients.e + 1, e: 180 }
+  const presentation = { s: ingredients.e + 1, e: 200 }
 
   const isIngredient = (r: number) => r >= ingredients.s && r <= ingredients.e
   const isPresentation = (r: number) => r >= presentation.s && r <= presentation.e

@@ -1,14 +1,16 @@
+import React from 'react'
+
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
+import { Grid, IconButton } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import Fraction from 'fraction.js'
-import React from 'react'
-
-import { Grid, IconButton } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
 import configureMeasurements from 'convert-units'
+import Fraction from 'fraction.js'
+
 import volume, { VolumeUnits } from './convert-units/volume'
+
 import { GetAllDrinksQuery } from '@/client'
 import { GqlType, notEmpty } from '@/utils'
 
@@ -29,6 +31,7 @@ const getAmount = (amount: number, unit: string) => {
       return `${full.val} ${full.unit}`
     }
   }
+  console.log({ amount })
   return `${new Fraction(amount).toFraction(true)} ${unit}`
 }
 

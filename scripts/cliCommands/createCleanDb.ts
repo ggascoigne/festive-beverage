@@ -1,8 +1,9 @@
-import { CliUx, Command } from '@oclif/core'
+import { ux, Command } from '@oclif/core'
 import * as chalk from 'chalk'
 
-import { config } from '@/shared/config'
 import { createCleanDb } from '../shared/scriptUtils'
+
+import { config } from '@/shared/config'
 
 const { database } = config.rootDatabase
 const targetUser = config.userDatabase.user
@@ -15,10 +16,10 @@ export default class CreateCleanDb extends Command {
   async run() {
     console.log(`Recreating database ${database}`)
 
-    CliUx.ux.action.start('cleaning database')
+    ux.action.start('cleaning database')
     createCleanDb(config.rootDatabase, targetUser, targetUserPassword, false)
       .then(() => {
-        CliUx.ux.action.stop()
+        ux.action.stop()
       })
       .catch((reason: any) => {
         console.error(chalk.bold.red('error detected'))
