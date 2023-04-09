@@ -1,5 +1,7 @@
-import { Alert, Typography } from '@mui/material'
 import React from 'react'
+
+import { Alert, Typography } from '@mui/material'
+
 import { Page } from '@/components/Page'
 
 export const NotFound = () => (

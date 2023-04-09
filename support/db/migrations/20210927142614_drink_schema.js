@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-function */
 const { updateRls } = require('./20210925165502_rls')
 
 exports.up = async function (knex) {
@@ -30,7 +31,7 @@ exports.up = async function (knex) {
       table.integer('recipe_id').notNullable().references('recipe.id').unsigned().index()
       table.integer('ingredient_id').notNullable().references('ingredient.id').unsigned().index()
       table.integer('unit_id').notNullable().references('unit.id').unsigned().index()
-      table.decimal('amount', 8, 4)
+      table.decimal('amount', 20, 8)
       table.string('modifier', 32)
     })
 

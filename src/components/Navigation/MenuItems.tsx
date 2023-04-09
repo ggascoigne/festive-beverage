@@ -1,9 +1,12 @@
-import { List, ListItemText } from '@mui/material'
 import React from 'react'
+
+import { List, ListItemText } from '@mui/material'
 import { useRouter } from 'next/router'
-import { HasPermission } from '../Auth'
+
 import { ListItemLink } from './ListItemLink'
 import type { RootRoutes } from './Routes'
+
+import { HasPermission } from '../Auth'
 
 interface MenuItemsProps {
   menuItems: RootRoutes
