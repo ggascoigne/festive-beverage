@@ -3,8 +3,7 @@ import React, { PropsWithChildren, ReactElement, useMemo } from 'react'
 import { Autocomplete, TextField } from '@mui/material'
 import Zet from 'zet'
 
-import { GetAllDrinksQuery, useGetAllDrinksQuery, useGetAllIngredientsQuery } from '../client'
-
+import { GetAllDrinksDocument, GetAllDrinksQuery, GetAllIngredientsDocument, useGraphQL } from '@/client'
 import { notEmpty } from '@/utils'
 
 interface SearchProps {
@@ -13,8 +12,10 @@ interface SearchProps {
   allDrinks: GetAllDrinksQuery
 }
 export function Search({ onChange, value, allDrinks }: PropsWithChildren<SearchProps>): ReactElement | null {
-  const { data: ingredients } = useGetAllIngredientsQuery()
-  const { data: drinks } = useGetAllDrinksQuery(undefined, { staleTime: 60 * 60 * 1000, initialData: allDrinks })
+  const { data: ingredients } = useGraphQL(GetAllIngredientsDocument, {
+    options: { staleTime: 60 * 60 * 1000, initialData: allDrinks },
+  })
+  const { data: drinks } = useGraphQL(GetAllDrinksDocument)
 
   const names = useMemo(() => {
     const set = new Zet<string>(

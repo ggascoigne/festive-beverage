@@ -11,8 +11,8 @@ import Fraction from 'fraction.js'
 
 import volume, { VolumeUnits } from './convert-units/volume'
 
-import { GetAllDrinksQuery } from '@/client'
-import { GqlType, notEmpty } from '@/utils'
+import { Drink } from '@/client'
+import { notEmpty } from '@/utils'
 
 /*
   `configureMeasurements` is a closure that accepts a directory
@@ -20,7 +20,6 @@ import { GqlType, notEmpty } from '@/utils'
   only those measures.
 */
 const convert = configureMeasurements({ volume })
-export type Drink = GqlType<GetAllDrinksQuery, ['recipes', 'nodes', number]>
 
 const getAmount = (amount: number, unit: string) => {
   if (['tbsp', 'tsp'].includes(unit)) {
