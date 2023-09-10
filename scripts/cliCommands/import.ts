@@ -131,8 +131,8 @@ const create = async (client: PoolClient, drink: Drink) => {
     `
         insert into recipe (name,instructions,glass,garnish, ingredient_text, source) 
         values (${q(drink.name)},${q(drink.presentation?.Instructions)},${q(drink.presentation?.Glass)},${q(
-      drink.presentation?.Garnish
-    )},${q(drink.ingredientText)},${q(drink.source ?? null)}
+          drink.presentation?.Garnish
+        )},${q(drink.ingredientText)},${q(drink.source ?? null)}
     ) 
         returning *`
   )
@@ -154,8 +154,8 @@ const create = async (client: PoolClient, drink: Drink) => {
         `
             insert into recipe_ingredient (recipe_id, ingredient_id, unit_id, amount, modifier)
             values (${recipeId}, ${ingredientId}, ${unitId || null}, ${quantity?.amount ?? null}, '${
-          quantity?.modifier ?? ''
-        }')
+              quantity?.modifier ?? ''
+            }')
             returning *`
       )
     } else {

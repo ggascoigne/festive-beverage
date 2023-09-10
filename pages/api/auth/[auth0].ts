@@ -5,7 +5,7 @@ import JwtDecode from 'jwt-decode'
 import { auth0Audience } from '@/pages/api/_constants'
 
 export default handleAuth({
-  async login(req, res) {
+  async login(req: NextApiRequest, res: NextApiResponse) {
     try {
       await handleLogin(req, res, {
         authorizationParams: { audience: auth0Audience },
@@ -14,7 +14,7 @@ export default handleAuth({
       res.status(error.status || 500).end(error.message)
     }
   },
-  async profile(req, res) {
+  async profile(req: NextApiRequest, res: NextApiResponse) {
     try {
       await handleProfile(req, res, {
         refetch: true,

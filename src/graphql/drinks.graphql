@@ -1,4 +1,4 @@
-fragment recipeFields on Recipe {
+fragment Drink on Recipe {
   name
   id
   description
@@ -20,35 +20,37 @@ fragment recipeFields on Recipe {
   }
 }
 
-fragment recipeConnectionFields on RecipesConnection {
-  nodes {
-    ...recipeFields
-  }
-}
-
 query getAllDrinks {
   recipes(orderBy: NAME_ASC) {
-    ...recipeConnectionFields
+    nodes {
+      ...Drink
+    }
   }
 }
 
 query getFilteredDrinks($value: String!) {
   recipes(filter: { ts: { matches: $value } }, orderBy: NAME_ASC) {
-    ...recipeConnectionFields
+    nodes {
+      ...Drink
+    }
   }
+}
+
+fragment Ingredient on Ingredient {
+  name
+  tags
 }
 
 query getAllIngredients {
   ingredients(orderBy: NAME_ASC) {
     nodes {
-      name
-      tags
+      ...Ingredient
     }
   }
 }
 
 query getDrinkById($id: Int!) {
   recipe(id: $id) {
-    ...recipeFields
+    ...Drink
   }
 }

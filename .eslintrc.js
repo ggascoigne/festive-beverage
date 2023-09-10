@@ -16,6 +16,12 @@ module.exports = {
   },
   overrides: [
     {
+      files: 'src/client/graphql/fragment-masking.ts',
+      rules: {
+        'import/order': 'off',
+      },
+    },
+    {
       files: '{api,scripts,shared}/*.{ts,tsx}',
       rules: {
         // this is node.js code, it needs require

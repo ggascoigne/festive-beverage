@@ -1,0 +1,17 @@
+diff --git a/dist/transpilers/swc.js b/dist/transpilers/swc.js
+index eeddd4fbb2f18a7e8b20bb628d5f5c806ae20594..527aac25b85a0a5f517019e5720d9ba27074aba1 100644
+--- a/dist/transpilers/swc.js
++++ b/dist/transpilers/swc.js
+@@ -189,9 +189,6 @@ function createSwcOptions(compilerOptions, nodeModuleEmitKind, swcInstance, swcD
+                     },
+                 },
+                 keepClassNames,
+-                experimental: {
+-                    keepImportAssertions: true,
+-                },
+             },
+         };
+         // Throw a helpful error if swc version is old, for example, if it rejects `ignoreDynamic`
+diff --git a/dist-raw/README.md b/dist-raw/README.md
+deleted file mode 100644
+index 9eeaed31d53188a40567b6c9f6a33f52c389ad1f..0000000000000000000000000000000000000000

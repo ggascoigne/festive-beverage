@@ -3,17 +3,15 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button, Grid } from '@mui/material'
 import { useRouter } from 'next/router'
 
-import { GetAllDrinksDocument, GetAllDrinksQuery, GetAllDrinksQueryVariables, useGetAllDrinksQuery } from '@/client'
-import { fetchData } from '@/client/fetcher'
-import { Drink, DrinkCard } from '@/components/DrinkCard'
-import { GraphQLError } from '@/components/GraphQLError'
+import { GetAllDrinksDocument, GetAllDrinksQuery, Drink, fetchGraphQl, useGraphQL } from '@/client'
+import { DrinkCard } from '@/components/DrinkCard'
 import { Loader } from '@/components/Loader'
 import { Link } from '@/components/Navigation'
 import { Page } from '@/components/Page'
 import { Search } from '@/components/Search'
 import { notEmpty } from '@/utils'
 
-const DrinkList: React.FC<{ drinks: Drink[] }> = ({ drinks }) => {
+const DrinkList: React.FC<{ drinks: readonly Drink[] }> = ({ drinks }) => {
   const router = useRouter()
   return (
     <Grid container spacing={3}>
@@ -57,9 +55,7 @@ const matchesOne = (s: string, d: Drink) => {
 const matchesSearch = (search: string[], drink: Drink) => search.every((s) => matchesOne(s, drink))
 
 export async function getServerSideProps() {
-  const allDrinks: GetAllDrinksQuery = await fetchData<GetAllDrinksQuery, GetAllDrinksQueryVariables>(
-    GetAllDrinksDocument
-  )
+  const allDrinks = await fetchGraphQl(GetAllDrinksDocument)
   return { props: { allDrinks } }
 }
 
@@ -78,7 +74,9 @@ export const HomeView = (props: HomeViewProps) => {
   }, [router.query?.search])
   const drink = router.query?.drink
   const hasSearch = (search as string[])?.length > 0 || false
-  const { data, error } = useGetAllDrinksQuery(undefined, { staleTime: 60 * 60 * 1000, initialData: props.allDrinks })
+  const { data } = useGraphQL(GetAllDrinksDocument, {
+    options: { staleTime: 60 * 60 * 1000, initialData: props.allDrinks },
+  })
   const [drinks, setDrinks] = useState<Drink[] | undefined>(undefined)
 
   useEffect(() => {
@@ -98,9 +96,9 @@ export const HomeView = (props: HomeViewProps) => {
     [router]
   )
 
-  if (error) {
-    return <GraphQLError error={error} />
-  }
+  // if (error) {
+  //   return <GraphQLError error={error} />
+  // }
   if (!drinks) {
     return <Loader />
   }
