@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import { GetAllDrinksDocument, GetAllDrinksQuery, Drink, fetchGraphQl, useGraphQL } from '@/client'
 import { DrinkCard } from '@/components/DrinkCard'
+import { GraphQLError } from '@/components/GraphQLError'
 import { Loader } from '@/components/Loader'
 import { Link } from '@/components/Navigation'
 import { Page } from '@/components/Page'
@@ -74,7 +75,7 @@ export const HomeView = (props: HomeViewProps) => {
   }, [router.query?.search])
   const drink = router.query?.drink
   const hasSearch = (search as string[])?.length > 0 || false
-  const { data } = useGraphQL(GetAllDrinksDocument, {
+  const { data, error } = useGraphQL(GetAllDrinksDocument, {
     options: { staleTime: 60 * 60 * 1000, initialData: props.allDrinks },
   })
   const [drinks, setDrinks] = useState<Drink[] | undefined>(undefined)
@@ -96,9 +97,9 @@ export const HomeView = (props: HomeViewProps) => {
     [router]
   )
 
-  // if (error) {
-  //   return <GraphQLError error={error} />
-  // }
+  if (error) {
+    return <GraphQLError error={error} />
+  }
   if (!drinks) {
     return <Loader />
   }
