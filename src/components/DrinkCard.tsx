@@ -30,7 +30,7 @@ const getAmount = (amount: number, unit: string) => {
       return `${full.val} ${full.unit}`
     }
   }
-  console.log({ amount })
+  // console.log({ amount })
   return `${new Fraction(amount).toFraction(true)} ${unit}`
 }
 
