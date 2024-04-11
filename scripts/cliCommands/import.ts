@@ -100,6 +100,7 @@ const parseQuantity = (s: string): Quantity | undefined => {
     grated: 'grated',
     cup: 'cup',
     twist: 'twist',
+    cube: 'cube',
   }
 
   switch (s) {

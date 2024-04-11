@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { auth0Audience, auth0IssuerBaseUrl, authDomain } from './_constants'
 
-const { expressjwt: jwt } = require('express-jwt')
 const fs = require('fs')
+
+const { expressjwt: jwt } = require('express-jwt')
 
 const publicKey = fs.readFileSync(`${process.cwd()}/shared/certs/${authDomain}.pem`).toString()
 

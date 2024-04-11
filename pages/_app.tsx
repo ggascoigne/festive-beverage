@@ -15,12 +15,6 @@ import createEmotionCache from '@/utils/createEmotionCache'
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 
-const ReactQueryDevtoolsProduction = React.lazy(() =>
-  import('@tanstack/react-query-devtools/build/lib/index.prod.js').then((d) => ({
-    default: d.ReactQueryDevtools,
-  }))
-)
-
 const queryClient = new QueryClient()
 
 interface MyAppProps extends AppProps {
@@ -30,7 +24,6 @@ interface MyAppProps extends AppProps {
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const { user } = pageProps
-  const [showDevtools, setShowDevtools] = React.useState(false)
 
   React.useEffect(() => {
     // @ts-ignore
@@ -56,11 +49,6 @@ export default function MyApp(props: MyAppProps) {
                 <Layout>
                   <Component {...pageProps} />
                   <ReactQueryDevtools />
-                  {showDevtools ? (
-                    <React.Suspense fallback={null}>
-                      <ReactQueryDevtoolsProduction />
-                    </React.Suspense>
-                  ) : null}
                 </Layout>
               </QueryClientProvider>
             </UserProvider>
