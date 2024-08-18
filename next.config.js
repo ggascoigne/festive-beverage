@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 /** @type {import('next').NextConfig} */
 const defaultRuntimeCaching = require('next-pwa/cache')
 
