@@ -6,8 +6,8 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=16",
-    "pnpm": ">=7"
+    "node": ">=20",
+    "pnpm": ">=9"
   },
   "repository": {
     "type": "git",
@@ -43,7 +43,6 @@
     "gitHash": "./scripts/getGitHash.sh",
     "lint": "eslint '{src,api,scripts,shared,types}/**/*.{js,jsx,ts,tsx}' ./.eslintrc.js",
     "preinstall": "npx only-allow pnpm",
-    "prepare": "husky install",
     "prepareGraphql": "./scripts/run.js prepareGraphql",
     "disabled:postinstall": "./scripts/buildSql.sh",
     "start": "BROWSER=none next start -p 40000",
