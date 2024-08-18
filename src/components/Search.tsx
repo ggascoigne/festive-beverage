@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, ReactElement, useMemo } from 'react'
 
 import { Autocomplete, TextField } from '@mui/material'
-import Zet from 'zet'
 
 import { GetAllDrinksDocument, GetAllDrinksQuery, GetAllIngredientsDocument, useGraphQL } from '@/client'
 import { notEmpty } from '@/utils'
@@ -18,11 +17,11 @@ export function Search({ onChange, value, allDrinks }: PropsWithChildren<SearchP
   const { data: drinks } = useGraphQL(GetAllDrinksDocument)
 
   const names = useMemo(() => {
-    const set = new Zet<string>(
+    const set = new Set<string>(
       ingredients?.ingredients?.nodes
         ?.flatMap((n) => (n?.tags ? [n?.name, ...n.tags.split(' ')] : [n?.name]))
         .filter(notEmpty)
-    ).union(new Zet(drinks?.recipes?.nodes?.map((r) => r?.name).filter(notEmpty)))
+    ).union(new Set(drinks?.recipes?.nodes?.map((r) => r?.name).filter(notEmpty)))
     return Array.from(set).sort((a, b) => -b.localeCompare(a)) ?? []
   }, [ingredients, drinks])
 

@@ -1,15 +1,17 @@
+import * as React from 'react'
+
+import { UserProvider } from '@auth0/nextjs-auth0/client'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
-import { AppProps } from 'next/app'
-import Head from 'next/head'
-import * as React from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { UserProvider } from '@auth0/nextjs-auth0/client'
-import { theme } from '@/components/Theme'
-import { NotificationProvider } from '@/components/Notifications'
+import { AppProps } from 'next/app'
+import Head from 'next/head'
+
 import { Layout } from '@/components/Layout'
+import { NotificationProvider } from '@/components/Notifications'
+import { theme } from '@/components/Theme'
 import createEmotionCache from '@/utils/createEmotionCache'
 
 // Client-side cache, shared for the whole session of the user in the browser.
