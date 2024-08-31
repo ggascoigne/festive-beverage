@@ -1,11 +1,15 @@
 import React, { useCallback, useState } from 'react'
 
-import { Box, Divider, Drawer, List, ListItem } from '@mui/material'
+import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
+import Drawer from '@mui/material/Drawer'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
 
-import { Footer } from '@/components/Footer'
-import { Header } from '@/components/Header'
-import { LoginButton } from '@/components/LoginButton'
-import { MenuItems, rootRoutes } from '@/components/Navigation'
+import { Footer } from '#components/Footer'
+import { Header } from '#components/Header'
+import { LoginButton } from '#components/LoginButton'
+import { MenuItems, rootRoutes } from '#components/Navigation'
 
 const DrawerContents: React.FC = () => (
   <>

@@ -9,10 +9,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import { Layout } from '@/components/Layout'
-import { NotificationProvider } from '@/components/Notifications'
-import { theme } from '@/components/Theme'
-import createEmotionCache from '@/utils/createEmotionCache'
+import { Layout } from '#components/Layout'
+import { NotificationProvider } from '#components/Notifications'
+import { theme } from '#components/Theme'
+import createEmotionCache from '#utils/createEmotionCache'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()

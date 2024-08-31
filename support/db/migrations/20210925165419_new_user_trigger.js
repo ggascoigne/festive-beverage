@@ -1,4 +1,4 @@
-exports.up = async function (knex) {
+export async function up(knex) {
   return knex.raw(`
       CREATE OR REPLACE FUNCTION add_default_role()
         RETURNS TRIGGER 
@@ -15,4 +15,5 @@ exports.up = async function (knex) {
     `)
 }
 
-exports.down = async function (knex) {}
+// eslint-disable-next-line no-empty-function
+export async function down(knex) {}

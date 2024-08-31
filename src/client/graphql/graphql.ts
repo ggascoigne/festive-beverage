@@ -79,6 +79,38 @@ export type CreateIngredientPayloadIngredientEdgeArgs = {
   orderBy?: InputMaybe<Array<IngredientsOrderBy>>
 }
 
+/** All input for the create `KnexMigrationsLock` mutation. */
+export type CreateKnexMigrationsLockInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
+  /** The `KnexMigrationsLock` to be created by this mutation. */
+  knexMigrationsLock: KnexMigrationsLockInput
+}
+
+/** The output of our create `KnexMigrationsLock` mutation. */
+export type CreateKnexMigrationsLockPayload = {
+  __typename: 'CreateKnexMigrationsLockPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']['output']>
+  /** The `KnexMigrationsLock` that was created by this mutation. */
+  knexMigrationsLock?: Maybe<KnexMigrationsLock>
+  /** An edge for our `KnexMigrationsLock`. May be used by Relay 1. */
+  knexMigrationsLockEdge?: Maybe<KnexMigrationsLocksEdge>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+}
+
+/** The output of our create `KnexMigrationsLock` mutation. */
+export type CreateKnexMigrationsLockPayloadKnexMigrationsLockEdgeArgs = {
+  orderBy?: InputMaybe<Array<KnexMigrationsLocksOrderBy>>
+}
+
 /** All input for the create `RecipeIngredient` mutation. */
 export type CreateRecipeIngredientInput = {
   /**
@@ -322,6 +354,49 @@ export type DeleteIngredientPayload = {
 /** The output of our delete `Ingredient` mutation. */
 export type DeleteIngredientPayloadIngredientEdgeArgs = {
   orderBy?: InputMaybe<Array<IngredientsOrderBy>>
+}
+
+/** All input for the `deleteKnexMigrationsLockByNodeId` mutation. */
+export type DeleteKnexMigrationsLockByNodeIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
+  /** The globally unique `ID` which will identify a single `KnexMigrationsLock` to be deleted. */
+  nodeId: Scalars['ID']['input']
+}
+
+/** All input for the `deleteKnexMigrationsLock` mutation. */
+export type DeleteKnexMigrationsLockInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
+  index: Scalars['Int']['input']
+}
+
+/** The output of our delete `KnexMigrationsLock` mutation. */
+export type DeleteKnexMigrationsLockPayload = {
+  __typename: 'DeleteKnexMigrationsLockPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']['output']>
+  deletedKnexMigrationsLockNodeId?: Maybe<Scalars['ID']['output']>
+  /** The `KnexMigrationsLock` that was deleted by this mutation. */
+  knexMigrationsLock?: Maybe<KnexMigrationsLock>
+  /** An edge for our `KnexMigrationsLock`. May be used by Relay 1. */
+  knexMigrationsLockEdge?: Maybe<KnexMigrationsLocksEdge>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+}
+
+/** The output of our delete `KnexMigrationsLock` mutation. */
+export type DeleteKnexMigrationsLockPayloadKnexMigrationsLockEdgeArgs = {
+  orderBy?: InputMaybe<Array<KnexMigrationsLocksOrderBy>>
 }
 
 /** All input for the `deleteRecipeByNodeId` mutation. */
@@ -787,11 +862,91 @@ export type IntFilter = {
   notIn?: InputMaybe<Array<Scalars['Int']['input']>>
 }
 
+export type KnexMigrationsLock = Node & {
+  __typename: 'KnexMigrationsLock'
+  index: Scalars['Int']['output']
+  isLocked?: Maybe<Scalars['Int']['output']>
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID']['output']
+}
+
+/**
+ * A condition to be used against `KnexMigrationsLock` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type KnexMigrationsLockCondition = {
+  /** Checks for equality with the object’s `index` field. */
+  index?: InputMaybe<Scalars['Int']['input']>
+  /** Checks for equality with the object’s `isLocked` field. */
+  isLocked?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** A filter to be used against `KnexMigrationsLock` object types. All fields are combined with a logical ‘and.’ */
+export type KnexMigrationsLockFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<KnexMigrationsLockFilter>>
+  /** Filter by the object’s `index` field. */
+  index?: InputMaybe<IntFilter>
+  /** Filter by the object’s `isLocked` field. */
+  isLocked?: InputMaybe<IntFilter>
+  /** Negates the expression. */
+  not?: InputMaybe<KnexMigrationsLockFilter>
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<KnexMigrationsLockFilter>>
+}
+
+/** An input for mutations affecting `KnexMigrationsLock` */
+export type KnexMigrationsLockInput = {
+  index?: InputMaybe<Scalars['Int']['input']>
+  isLocked?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** Represents an update to a `KnexMigrationsLock`. Fields that are set will be updated. */
+export type KnexMigrationsLockPatch = {
+  index?: InputMaybe<Scalars['Int']['input']>
+  isLocked?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** A connection to a list of `KnexMigrationsLock` values. */
+export type KnexMigrationsLocksConnection = {
+  __typename: 'KnexMigrationsLocksConnection'
+  /** A list of edges which contains the `KnexMigrationsLock` and cursor to aid in pagination. */
+  edges: Array<KnexMigrationsLocksEdge>
+  /** A list of `KnexMigrationsLock` objects. */
+  nodes: Array<Maybe<KnexMigrationsLock>>
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo
+  /** The count of *all* `KnexMigrationsLock` you could get from the connection. */
+  totalCount: Scalars['Int']['output']
+}
+
+/** A `KnexMigrationsLock` edge in the connection. */
+export type KnexMigrationsLocksEdge = {
+  __typename: 'KnexMigrationsLocksEdge'
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>
+  /** The `KnexMigrationsLock` at the end of the edge. */
+  node?: Maybe<KnexMigrationsLock>
+}
+
+/** Methods to use when ordering `KnexMigrationsLock`. */
+export enum KnexMigrationsLocksOrderBy {
+  IndexAsc = 'INDEX_ASC',
+  IndexDesc = 'INDEX_DESC',
+  IsLockedAsc = 'IS_LOCKED_ASC',
+  IsLockedDesc = 'IS_LOCKED_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+}
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type Mutation = {
   __typename: 'Mutation'
   /** Creates a single `Ingredient`. */
   createIngredient?: Maybe<CreateIngredientPayload>
+  /** Creates a single `KnexMigrationsLock`. */
+  createKnexMigrationsLock?: Maybe<CreateKnexMigrationsLockPayload>
   /** Creates a single `Recipe`. */
   createRecipe?: Maybe<CreateRecipePayload>
   /** Creates a single `RecipeIngredient`. */
@@ -808,6 +963,10 @@ export type Mutation = {
   deleteIngredient?: Maybe<DeleteIngredientPayload>
   /** Deletes a single `Ingredient` using its globally unique id. */
   deleteIngredientByNodeId?: Maybe<DeleteIngredientPayload>
+  /** Deletes a single `KnexMigrationsLock` using a unique key. */
+  deleteKnexMigrationsLock?: Maybe<DeleteKnexMigrationsLockPayload>
+  /** Deletes a single `KnexMigrationsLock` using its globally unique id. */
+  deleteKnexMigrationsLockByNodeId?: Maybe<DeleteKnexMigrationsLockPayload>
   /** Deletes a single `Recipe` using a unique key. */
   deleteRecipe?: Maybe<DeleteRecipePayload>
   /** Deletes a single `Recipe` using its globally unique id. */
@@ -841,6 +1000,10 @@ export type Mutation = {
   updateIngredient?: Maybe<UpdateIngredientPayload>
   /** Updates a single `Ingredient` using its globally unique id and a patch. */
   updateIngredientByNodeId?: Maybe<UpdateIngredientPayload>
+  /** Updates a single `KnexMigrationsLock` using a unique key and a patch. */
+  updateKnexMigrationsLock?: Maybe<UpdateKnexMigrationsLockPayload>
+  /** Updates a single `KnexMigrationsLock` using its globally unique id and a patch. */
+  updateKnexMigrationsLockByNodeId?: Maybe<UpdateKnexMigrationsLockPayload>
   /** Updates a single `Recipe` using a unique key and a patch. */
   updateRecipe?: Maybe<UpdateRecipePayload>
   /** Updates a single `Recipe` using its globally unique id and a patch. */
@@ -874,6 +1037,11 @@ export type Mutation = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateIngredientArgs = {
   input: CreateIngredientInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateKnexMigrationsLockArgs = {
+  input: CreateKnexMigrationsLockInput
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -914,6 +1082,16 @@ export type MutationDeleteIngredientArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteIngredientByNodeIdArgs = {
   input: DeleteIngredientByNodeIdInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteKnexMigrationsLockArgs = {
+  input: DeleteKnexMigrationsLockInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteKnexMigrationsLockByNodeIdArgs = {
+  input: DeleteKnexMigrationsLockByNodeIdInput
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -999,6 +1177,16 @@ export type MutationUpdateIngredientArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateIngredientByNodeIdArgs = {
   input: UpdateIngredientByNodeIdInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateKnexMigrationsLockArgs = {
+  input: UpdateKnexMigrationsLockInput
+}
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateKnexMigrationsLockByNodeIdArgs = {
+  input: UpdateKnexMigrationsLockByNodeIdInput
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -1100,6 +1288,11 @@ export type Query = Node & {
   ingredientByNodeId?: Maybe<Ingredient>
   /** Reads and enables pagination through a set of `Ingredient`. */
   ingredients?: Maybe<IngredientsConnection>
+  knexMigrationsLock?: Maybe<KnexMigrationsLock>
+  /** Reads a single `KnexMigrationsLock` using its globally unique `ID`. */
+  knexMigrationsLockByNodeId?: Maybe<KnexMigrationsLock>
+  /** Reads and enables pagination through a set of `KnexMigrationsLock`. */
+  knexMigrationsLocks?: Maybe<KnexMigrationsLocksConnection>
   /** Fetches an object given its globally unique `ID`. */
   node?: Maybe<Node>
   /** The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`. */
@@ -1163,6 +1356,28 @@ export type QueryIngredientsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>
   offset?: InputMaybe<Scalars['Int']['input']>
   orderBy?: InputMaybe<Array<IngredientsOrderBy>>
+}
+
+/** The root query type which gives access points into the data universe. */
+export type QueryKnexMigrationsLockArgs = {
+  index: Scalars['Int']['input']
+}
+
+/** The root query type which gives access points into the data universe. */
+export type QueryKnexMigrationsLockByNodeIdArgs = {
+  nodeId: Scalars['ID']['input']
+}
+
+/** The root query type which gives access points into the data universe. */
+export type QueryKnexMigrationsLocksArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>
+  before?: InputMaybe<Scalars['Cursor']['input']>
+  condition?: InputMaybe<KnexMigrationsLockCondition>
+  filter?: InputMaybe<KnexMigrationsLockFilter>
+  first?: InputMaybe<Scalars['Int']['input']>
+  last?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  orderBy?: InputMaybe<Array<KnexMigrationsLocksOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -1946,6 +2161,52 @@ export type UpdateIngredientPayload = {
 /** The output of our update `Ingredient` mutation. */
 export type UpdateIngredientPayloadIngredientEdgeArgs = {
   orderBy?: InputMaybe<Array<IngredientsOrderBy>>
+}
+
+/** All input for the `updateKnexMigrationsLockByNodeId` mutation. */
+export type UpdateKnexMigrationsLockByNodeIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
+  /** The globally unique `ID` which will identify a single `KnexMigrationsLock` to be updated. */
+  nodeId: Scalars['ID']['input']
+  /** An object where the defined keys will be set on the `KnexMigrationsLock` being updated. */
+  patch: KnexMigrationsLockPatch
+}
+
+/** All input for the `updateKnexMigrationsLock` mutation. */
+export type UpdateKnexMigrationsLockInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
+  index: Scalars['Int']['input']
+  /** An object where the defined keys will be set on the `KnexMigrationsLock` being updated. */
+  patch: KnexMigrationsLockPatch
+}
+
+/** The output of our update `KnexMigrationsLock` mutation. */
+export type UpdateKnexMigrationsLockPayload = {
+  __typename: 'UpdateKnexMigrationsLockPayload'
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']['output']>
+  /** The `KnexMigrationsLock` that was updated by this mutation. */
+  knexMigrationsLock?: Maybe<KnexMigrationsLock>
+  /** An edge for our `KnexMigrationsLock`. May be used by Relay 1. */
+  knexMigrationsLockEdge?: Maybe<KnexMigrationsLocksEdge>
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>
+}
+
+/** The output of our update `KnexMigrationsLock` mutation. */
+export type UpdateKnexMigrationsLockPayloadKnexMigrationsLockEdgeArgs = {
+  orderBy?: InputMaybe<Array<KnexMigrationsLocksOrderBy>>
 }
 
 /** All input for the `updateRecipeByNodeId` mutation. */

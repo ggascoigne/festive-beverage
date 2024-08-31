@@ -1,4 +1,4 @@
-exports.up = async function (knex) {
+export async function up(knex) {
   await knex.schema
     .createTable('user', (table) => {
       table.increments().primary()
@@ -21,4 +21,5 @@ exports.up = async function (knex) {
   `)
 }
 
-exports.down = async function (knex) {}
+// eslint-disable-next-line no-empty-function
+export async function down(knex) {}

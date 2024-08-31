@@ -1,59 +1,30 @@
 {
-  "ts-node": {
-    "files": true,
-    "swc": false,
-    "compilerOptions": {
-      "module": "commonjs",
-      "outDir": "lib",
-      "rootDir": ".",
-      "strict": true,
-      "target": "es2020"
-    }
-  },
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "ES2020",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
     "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "module": "Preserve",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
-    "rootDir": ".",
     "noErrorTruncation": true,
     "incremental": true,
-    "paths": {
-      "@/shared/*": [
-        "./shared/*"
-      ],
-      "@/pages/*": [
-        "./pages/*"
-      ],
-      "@/*": [
-        "./src/*"
-      ]
-    }
+    "allowImportingTsExtensions": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.mts", "**/*.cts", "**/*.tsx"],
   //  "include": ["api", "scripts", "shared", "src", "types"],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

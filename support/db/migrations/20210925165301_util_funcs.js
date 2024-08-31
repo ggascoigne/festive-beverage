@@ -1,4 +1,4 @@
-exports.up = async function (knex) {
+export async function up(knex) {
   // create a stored procedure that can be used to quickly drop all data - used for a fast cleanup in tests
   await knex.schema.raw(`
     CREATE OR REPLACE FUNCTION f_truncate_tables(_username TEXT)
@@ -26,4 +26,5 @@ exports.up = async function (knex) {
   `)
 }
 
-exports.down = async function (knex) {}
+// eslint-disable-next-line no-empty-function
+export async function down(knex) {}

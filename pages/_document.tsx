@@ -1,11 +1,13 @@
 import * as React from 'react'
-import Document, { Head, Html, Main, NextScript } from 'next/document'
+
 import createEmotionServer from '@emotion/server/create-instance'
-import { theme } from '@/components/Theme'
-import createEmotionCache from '@/utils/createEmotionCache'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
+
+import { theme } from '#components/Theme'
+import createEmotionCache from '#utils/createEmotionCache'
 
 class MyDocument extends Document {
-  render() {
+  override render() {
     return (
       <Html lang='en'>
         <Head>

@@ -1,4 +1,4 @@
-exports.up = async function (knex) {
+export async function up(knex) {
   const user = process.env.DEFAULT_ADMIN_ACCOUNT
 
   const res = await knex.raw(`
@@ -12,4 +12,5 @@ exports.up = async function (knex) {
   )
 }
 
-exports.down = async function (knex) {}
+// eslint-disable-next-line no-empty-function
+export async function down(knex) {}

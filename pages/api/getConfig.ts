@@ -1,10 +1,11 @@
+import { getSession } from '@auth0/nextjs-auth0'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { getSession } from '@auth0/nextjs-auth0'
-import { config, DbConfig } from '@/shared/config'
-import { handleError } from './_handleError'
 import { authDomain } from './_constants'
+import { handleError } from './_handleError'
 import { isAdmin } from './_utils'
+
+import { config, DbConfig } from '../../shared/config'
 
 // /api/getConfig
 // auth token: required

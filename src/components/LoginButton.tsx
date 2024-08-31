@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
-import { Avatar, Badge, Button, Theme, Tooltip, Typography } from '@mui/material'
+import Avatar from '@mui/material/Avatar'
+import Badge from '@mui/material/Badge'
+import Button from '@mui/material/Button'
+import Tooltip from '@mui/material/Tooltip'
+import Typography from '@mui/material/Typography'
 import { QueryClient } from '@tanstack/react-query'
 import fetch from 'isomorphic-fetch'
 import Link from 'next/link'
@@ -11,7 +15,7 @@ import { Auth0User, Perms, Roles, useAuth, useRoleOverride } from './Auth'
 import { LoginMenu } from './LoginMenu'
 import { useNotification } from './Notifications'
 
-import { Children } from '@/utils'
+import { Children } from '#utils'
 
 const MENU_ITEM_EDIT_PROFILE = 'Edit Profile'
 const MENU_ITEM_RESET_PASSWORD = 'Password Reset'

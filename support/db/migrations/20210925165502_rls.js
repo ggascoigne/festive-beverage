@@ -1,12 +1,5 @@
-const tables = [
-  { name: 'role', admin: true },
-  { name: 'user', admin: false },
-  { name: 'user_role', admin: true },
-]
-
 // protect the user column from causing syntax errors
-const q = (name) => (name === 'user' ? '"user"' : name)
-exports.q = q
+export const q = (name) => (name === 'user' ? '"user"' : name)
 
 // no access if not logged in
 // const anyUserUpdatePolicy = (table) => `
@@ -42,7 +35,7 @@ const adminUpdatePolicy = (table) => `
     using (current_user_is_admin());
   `
 
-const updateRls = async (knex, tables) => {
+export const updateRls = async (knex, tables) => {
   await knex.raw(
     tables
       .map(
@@ -61,11 +54,15 @@ const updateRls = async (knex, tables) => {
 
   await knex.raw(tables.map((table) => `alter table ${q(table.name)} enable row level security;`).join('\n'))
 }
-exports.updateRls = updateRls
 
-exports.up = async function (knex) {
+export async function up(knex) {
   const user = process.env.DATABASE_USER
   const password = process.env.DATABASE_USER_PASSWORD ?? ''
+  const tables = [
+    { name: 'role', admin: true },
+    { name: 'user', admin: false },
+    { name: 'user_role', admin: true },
+  ]
 
   const res = await knex.raw(`SELECT 1 FROM pg_roles WHERE rolname='${user}'`)
   if (res?.rows?.[0]?.['?column?'] !== 1) {
@@ -81,4 +78,5 @@ exports.up = async function (knex) {
   await updateRls(knex, tables)
 }
 
-exports.down = async function (knex) {}
+// eslint-disable-next-line no-empty-function
+export async function down(knex) {}

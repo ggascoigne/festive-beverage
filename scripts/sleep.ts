@@ -3,7 +3,7 @@ export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve
 
 async function main() {
   const argv = process.argv.slice(2)
-  argv.length && (await sleep(parseInt(argv[0], 10) * 1000))
+  argv.length && (await sleep(parseInt(argv[0] ?? '0', 10) * 1000))
 }
 
 main()

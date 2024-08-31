@@ -1,10 +1,22 @@
-/* eslint-disable no-await-in-loop */
-import { Command } from '@oclif/core'
-import Fraction from 'fraction.js'
-import { PoolClient } from 'pg'
-import { readFile, utils, WorkSheet } from 'xlsx'
+#!/usr/bin/env node_modules/.bin/tsx
 
-import { getPool, PoolType } from '@/shared/config'
+/* eslint-disable no-await-in-loop, @typescript-eslint/naming-convention, default-case */
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+import chalk from 'chalk'
+import Fraction from 'fraction.js'
+import Listr from 'listr'
+import { PoolClient } from 'pg'
+import { set_fs, readFile, utils, WorkSheet } from 'xlsx'
+
+import { getPool, PoolType } from '../shared/config.ts'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+set_fs(fs)
 
 interface IngredientInfo {
   name: string
@@ -115,7 +127,7 @@ const parseQuantity = (s: string): Quantity | undefined => {
   }
 
   const re = `(\\d+\\s+\\d+/\\d+|\\d+/\\d+|\\d+)?\\s*(${Object.keys(quantities).join('|')})\\s*(.*)`
-  const amount = new RegExp(re).exec(s)
+  const amount = new RegExp(re).exec(s) as [string, string, string, string] | null
   if (!amount) {
     throw new Error(`failed to parse ${s}`)
   }
@@ -144,6 +156,11 @@ const create = async (client: PoolClient, drink: Drink) => {
   // eslint-disable-next-line guard-for-in
   for (const ingredient in drink.ingredients) {
     const ingredientInfo = drink.ingredients[ingredient]
+    if (!ingredientInfo) {
+      console.log(`skipping unknown ingredient${ingredient}`)
+      // eslint-disable-next-line no-continue
+      continue
+    }
     const ingredientId = await getIngredient(client, ingredientInfo)
     const quantity = parseQuantity(ingredientInfo.quantity)
     const unitId = quantity?.unit ? await getUnit(client, quantity.unit) : undefined
@@ -215,23 +232,30 @@ const getDrinks = (sheet: WorkSheet) => {
   return drinks
 }
 
-export default class Import extends Command {
-  static description = 'Import data from shared Excel spreadsheet.'
+const tasks = new Listr([
+  {
+    title: `Importing Drinks from spreadsheet`,
+    task: async () => {
+      const workbook = readFile('/Users/ggp/Dropbox (Maestral)/Drinks Shared Folder/Drinks Excel Data.xlsx')
+      const drinks = getDrinks(workbook.Sheets.Ingredients!)
 
-  // eslint-disable-next-line class-methods-use-this
-  async run() {
-    const workbook = readFile('/Users/ggp/Dropbox (Maestral)/Drinks Shared Folder/Drinks Excel Data.xlsx')
-    const drinks = getDrinks(workbook.Sheets.Ingredients)
+      const pool = getPool(PoolType.ADMIN, `${__dirname}/./shared/`)
+      const client: PoolClient = await pool.connect()
 
-    const pool = getPool(PoolType.ADMIN, `${__dirname}/../../shared/`)
-    const client: PoolClient = await pool.connect()
+      for (const drink of drinks) {
+        await create(client, drink)
+      }
 
-    for (const drink of drinks) {
-      await create(client, drink)
-    }
+      client.release()
+    },
+  },
+])
 
-    client.release()
-    console.log('Done')
-    process.exit(0)
-  }
-}
+tasks
+  .run()
+  .then(() => process.exit(0))
+  .catch((reason: any) => {
+    console.error(chalk.bold.red('error detected'))
+    console.error(reason)
+    process.exit(-1)
+  })

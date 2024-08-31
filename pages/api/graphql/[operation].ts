@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-shadow */
+import fs from 'fs'
+
+import { getSession } from '@auth0/nextjs-auth0'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { postgraphile } from 'postgraphile'
 
-import { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from '@auth0/nextjs-auth0'
-import fs from 'fs'
-import { getPool, getSchemas, PoolType } from '@/shared/config'
-import { options } from '@/shared/postgraphileOptions'
-import { isDev } from '@/pages/api/_constants'
-import { getUserId, isAdmin } from '@/pages/api/_utils'
+import { isDev } from '../_constants'
+import { getUserId, isAdmin } from '../_utils'
+import { getPool, getSchemas, PoolType } from '../../../shared/config'
+import { options } from '../../../shared/postgraphileOptions'
 
 // note that the route here is /api/graphql/[:operation] because I like to append the query
 // operation name to the path to make debugging the queries easier in Chrome dev tools.

@@ -1,4 +1,6 @@
-"""The root query type which gives access points into the data universe."""
+"""
+The root query type which gives access points into the data universe.
+"""
 type Query implements Node {
   """
   Exposes the root query type nested one level down. This is helpful for Relay 1
@@ -11,18 +13,28 @@ type Query implements Node {
   """
   nodeId: ID!
 
-  """Fetches an object given its globally unique `ID`."""
+  """
+  Fetches an object given its globally unique `ID`.
+  """
   node(
-    """The globally unique `ID`."""
+    """
+    The globally unique `ID`.
+    """
     nodeId: ID!
   ): Node
 
-  """Reads and enables pagination through a set of `Ingredient`."""
+  """
+  Reads and enables pagination through a set of `Ingredient`.
+  """
   ingredients(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -31,13 +43,19 @@ type Query implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `Ingredient`."""
+    """
+    The method to use when ordering `Ingredient`.
+    """
     orderBy: [IngredientsOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -51,12 +69,18 @@ type Query implements Node {
     filter: IngredientFilter
   ): IngredientsConnection
 
-  """Reads and enables pagination through a set of `Recipe`."""
-  recipes(
-    """Only read the first `n` values of the set."""
+  """
+  Reads and enables pagination through a set of `KnexMigrationsLock`.
+  """
+  knexMigrationsLocks(
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -65,13 +89,65 @@ type Query implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `Recipe`."""
+    """
+    The method to use when ordering `KnexMigrationsLock`.
+    """
+    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: KnexMigrationsLockCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: KnexMigrationsLockFilter
+  ): KnexMigrationsLocksConnection
+
+  """
+  Reads and enables pagination through a set of `Recipe`.
+  """
+  recipes(
+    """
+    Only read the first `n` values of the set.
+    """
+    first: Int
+
+    """
+    Only read the last `n` values of the set.
+    """
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """
+    Read all values in the set before (above) this cursor.
+    """
+    before: Cursor
+
+    """
+    Read all values in the set after (below) this cursor.
+    """
+    after: Cursor
+
+    """
+    The method to use when ordering `Recipe`.
+    """
     orderBy: [RecipesOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -85,12 +161,18 @@ type Query implements Node {
     filter: RecipeFilter
   ): RecipesConnection
 
-  """Reads and enables pagination through a set of `RecipeIngredient`."""
+  """
+  Reads and enables pagination through a set of `RecipeIngredient`.
+  """
   recipeIngredients(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -99,13 +181,19 @@ type Query implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `RecipeIngredient`."""
+    """
+    The method to use when ordering `RecipeIngredient`.
+    """
     orderBy: [RecipeIngredientsOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -119,12 +207,18 @@ type Query implements Node {
     filter: RecipeIngredientFilter
   ): RecipeIngredientsConnection
 
-  """Reads and enables pagination through a set of `Role`."""
+  """
+  Reads and enables pagination through a set of `Role`.
+  """
   roles(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -133,13 +227,19 @@ type Query implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `Role`."""
+    """
+    The method to use when ordering `Role`.
+    """
     orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -153,12 +253,18 @@ type Query implements Node {
     filter: RoleFilter
   ): RolesConnection
 
-  """Reads and enables pagination through a set of `Unit`."""
+  """
+  Reads and enables pagination through a set of `Unit`.
+  """
   units(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -167,13 +273,19 @@ type Query implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `Unit`."""
+    """
+    The method to use when ordering `Unit`.
+    """
     orderBy: [UnitsOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -187,12 +299,18 @@ type Query implements Node {
     filter: UnitFilter
   ): UnitsConnection
 
-  """Reads and enables pagination through a set of `User`."""
+  """
+  Reads and enables pagination through a set of `User`.
+  """
   users(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -201,13 +319,19 @@ type Query implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `User`."""
+    """
+    The method to use when ordering `User`.
+    """
     orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -221,12 +345,18 @@ type Query implements Node {
     filter: UserFilter
   ): UsersConnection
 
-  """Reads and enables pagination through a set of `UserRole`."""
+  """
+  Reads and enables pagination through a set of `UserRole`.
+  """
   userRoles(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -235,13 +365,19 @@ type Query implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `UserRole`."""
+    """
+    The method to use when ordering `UserRole`.
+    """
     orderBy: [UserRolesOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -255,6 +391,7 @@ type Query implements Node {
     filter: UserRoleFilter
   ): UserRolesConnection
   ingredient(id: Int!): Ingredient
+  knexMigrationsLock(index: Int!): KnexMigrationsLock
   recipe(id: Int!): Recipe
   recipeIngredient(id: Int!): RecipeIngredient
   role(id: Int!): Role
@@ -266,7 +403,9 @@ type Query implements Node {
   currentUserId: Int
   currentUserIsAdmin: Boolean
 
-  """Reads a single `Ingredient` using its globally unique `ID`."""
+  """
+  Reads a single `Ingredient` using its globally unique `ID`.
+  """
   ingredientByNodeId(
     """
     The globally unique `ID` to be used in selecting a single `Ingredient`.
@@ -274,13 +413,29 @@ type Query implements Node {
     nodeId: ID!
   ): Ingredient
 
-  """Reads a single `Recipe` using its globally unique `ID`."""
+  """
+  Reads a single `KnexMigrationsLock` using its globally unique `ID`.
+  """
+  knexMigrationsLockByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `KnexMigrationsLock`.
+    """
+    nodeId: ID!
+  ): KnexMigrationsLock
+
+  """
+  Reads a single `Recipe` using its globally unique `ID`.
+  """
   recipeByNodeId(
-    """The globally unique `ID` to be used in selecting a single `Recipe`."""
+    """
+    The globally unique `ID` to be used in selecting a single `Recipe`.
+    """
     nodeId: ID!
   ): Recipe
 
-  """Reads a single `RecipeIngredient` using its globally unique `ID`."""
+  """
+  Reads a single `RecipeIngredient` using its globally unique `ID`.
+  """
   recipeIngredientByNodeId(
     """
     The globally unique `ID` to be used in selecting a single `RecipeIngredient`.
@@ -288,32 +443,50 @@ type Query implements Node {
     nodeId: ID!
   ): RecipeIngredient
 
-  """Reads a single `Role` using its globally unique `ID`."""
+  """
+  Reads a single `Role` using its globally unique `ID`.
+  """
   roleByNodeId(
-    """The globally unique `ID` to be used in selecting a single `Role`."""
+    """
+    The globally unique `ID` to be used in selecting a single `Role`.
+    """
     nodeId: ID!
   ): Role
 
-  """Reads a single `Unit` using its globally unique `ID`."""
+  """
+  Reads a single `Unit` using its globally unique `ID`.
+  """
   unitByNodeId(
-    """The globally unique `ID` to be used in selecting a single `Unit`."""
+    """
+    The globally unique `ID` to be used in selecting a single `Unit`.
+    """
     nodeId: ID!
   ): Unit
 
-  """Reads a single `User` using its globally unique `ID`."""
+  """
+  Reads a single `User` using its globally unique `ID`.
+  """
   userByNodeId(
-    """The globally unique `ID` to be used in selecting a single `User`."""
+    """
+    The globally unique `ID` to be used in selecting a single `User`.
+    """
     nodeId: ID!
   ): User
 
-  """Reads a single `UserRole` using its globally unique `ID`."""
+  """
+  Reads a single `UserRole` using its globally unique `ID`.
+  """
   userRoleByNodeId(
-    """The globally unique `ID` to be used in selecting a single `UserRole`."""
+    """
+    The globally unique `ID` to be used in selecting a single `UserRole`.
+    """
     nodeId: ID!
   ): UserRole
 }
 
-"""An object with a globally unique `ID`."""
+"""
+An object with a globally unique `ID`.
+"""
 interface Node {
   """
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
@@ -321,9 +494,13 @@ interface Node {
   nodeId: ID!
 }
 
-"""A connection to a list of `Ingredient` values."""
+"""
+A connection to a list of `Ingredient` values.
+"""
 type IngredientsConnection {
-  """A list of `Ingredient` objects."""
+  """
+  A list of `Ingredient` objects.
+  """
   nodes: [Ingredient]!
 
   """
@@ -331,10 +508,14 @@ type IngredientsConnection {
   """
   edges: [IngredientsEdge!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Ingredient` you could get from the connection."""
+  """
+  The count of *all* `Ingredient` you could get from the connection.
+  """
   totalCount: Int!
 }
 
@@ -349,12 +530,18 @@ type Ingredient implements Node {
   sort: Int
   description: String
 
-  """Reads and enables pagination through a set of `RecipeIngredient`."""
+  """
+  Reads and enables pagination through a set of `RecipeIngredient`.
+  """
   recipeIngredients(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -363,13 +550,19 @@ type Ingredient implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `RecipeIngredient`."""
+    """
+    The method to use when ordering `RecipeIngredient`.
+    """
     orderBy: [RecipeIngredientsOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -384,9 +577,13 @@ type Ingredient implements Node {
   ): RecipeIngredientsConnection!
 }
 
-"""A connection to a list of `RecipeIngredient` values."""
+"""
+A connection to a list of `RecipeIngredient` values.
+"""
 type RecipeIngredientsConnection {
-  """A list of `RecipeIngredient` objects."""
+  """
+  A list of `RecipeIngredient` objects.
+  """
   nodes: [RecipeIngredient]!
 
   """
@@ -394,7 +591,9 @@ type RecipeIngredientsConnection {
   """
   edges: [RecipeIngredientsEdge!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
   """
@@ -415,7 +614,9 @@ type RecipeIngredient implements Node {
   amount: BigFloat
   modifier: String
 
-  """Reads a single `Recipe` that is related to this `RecipeIngredient`."""
+  """
+  Reads a single `Recipe` that is related to this `RecipeIngredient`.
+  """
   recipe: Recipe
 
   """
@@ -423,7 +624,9 @@ type RecipeIngredient implements Node {
   """
   ingredient: Ingredient
 
-  """Reads a single `Unit` that is related to this `RecipeIngredient`."""
+  """
+  Reads a single `Unit` that is related to this `RecipeIngredient`.
+  """
   unit: Unit
 }
 
@@ -447,12 +650,18 @@ type Recipe implements Node {
   source: String
   ts: FullText
 
-  """Reads and enables pagination through a set of `RecipeIngredient`."""
+  """
+  Reads and enables pagination through a set of `RecipeIngredient`.
+  """
   recipeIngredients(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -461,13 +670,19 @@ type Recipe implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `RecipeIngredient`."""
+    """
+    The method to use when ordering `RecipeIngredient`.
+    """
     orderBy: [RecipeIngredientsOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -481,16 +696,22 @@ type Recipe implements Node {
     filter: RecipeIngredientFilter
   ): RecipeIngredientsConnection!
 
-  """Full-text search ranking when filtered by `ts`."""
+  """
+  Full-text search ranking when filtered by `ts`.
+  """
   tsRank: Float
 }
 
 scalar FullText
 
-"""A location in a connection that can be used for resuming pagination."""
+"""
+A location in a connection that can be used for resuming pagination.
+"""
 scalar Cursor
 
-"""Methods to use when ordering `RecipeIngredient`."""
+"""
+Methods to use when ordering `RecipeIngredient`.
+"""
 enum RecipeIngredientsOrderBy {
   NATURAL
   ID_ASC
@@ -550,22 +771,34 @@ A condition to be used against `RecipeIngredient` object types. All fields are
 tested for equality and combined with a logical ‘and.’
 """
 input RecipeIngredientCondition {
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: Int
 
-  """Checks for equality with the object’s `recipeId` field."""
+  """
+  Checks for equality with the object’s `recipeId` field.
+  """
   recipeId: Int
 
-  """Checks for equality with the object’s `ingredientId` field."""
+  """
+  Checks for equality with the object’s `ingredientId` field.
+  """
   ingredientId: Int
 
-  """Checks for equality with the object’s `unitId` field."""
+  """
+  Checks for equality with the object’s `unitId` field.
+  """
   unitId: Int
 
-  """Checks for equality with the object’s `amount` field."""
+  """
+  Checks for equality with the object’s `amount` field.
+  """
   amount: BigFloat
 
-  """Checks for equality with the object’s `modifier` field."""
+  """
+  Checks for equality with the object’s `modifier` field.
+  """
   modifier: String
 }
 
@@ -573,31 +806,49 @@ input RecipeIngredientCondition {
 A filter to be used against `RecipeIngredient` object types. All fields are combined with a logical ‘and.’
 """
 input RecipeIngredientFilter {
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: IntFilter
 
-  """Filter by the object’s `recipeId` field."""
+  """
+  Filter by the object’s `recipeId` field.
+  """
   recipeId: IntFilter
 
-  """Filter by the object’s `ingredientId` field."""
+  """
+  Filter by the object’s `ingredientId` field.
+  """
   ingredientId: IntFilter
 
-  """Filter by the object’s `unitId` field."""
+  """
+  Filter by the object’s `unitId` field.
+  """
   unitId: IntFilter
 
-  """Filter by the object’s `amount` field."""
+  """
+  Filter by the object’s `amount` field.
+  """
   amount: BigFloatFilter
 
-  """Filter by the object’s `modifier` field."""
+  """
+  Filter by the object’s `modifier` field.
+  """
   modifier: StringFilter
 
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [RecipeIngredientFilter!]
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [RecipeIngredientFilter!]
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: RecipeIngredientFilter
 }
 
@@ -610,10 +861,14 @@ input IntFilter {
   """
   isNull: Boolean
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: Int
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: Int
 
   """
@@ -621,25 +876,39 @@ input IntFilter {
   """
   distinctFrom: Int
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: Int
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [Int!]
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [Int!]
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: Int
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: Int
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: Int
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: Int
 }
 
@@ -652,10 +921,14 @@ input BigFloatFilter {
   """
   isNull: Boolean
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: BigFloat
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: BigFloat
 
   """
@@ -663,25 +936,39 @@ input BigFloatFilter {
   """
   distinctFrom: BigFloat
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: BigFloat
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [BigFloat!]
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [BigFloat!]
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: BigFloat
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: BigFloat
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: BigFloat
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: BigFloat
 }
 
@@ -694,10 +981,14 @@ input StringFilter {
   """
   isNull: Boolean
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: String
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: String
 
   """
@@ -705,61 +996,99 @@ input StringFilter {
   """
   distinctFrom: String
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: String
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [String!]
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [String!]
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: String
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: String
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: String
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: String
 
-  """Contains the specified string (case-sensitive)."""
+  """
+  Contains the specified string (case-sensitive).
+  """
   includes: String
 
-  """Does not contain the specified string (case-sensitive)."""
+  """
+  Does not contain the specified string (case-sensitive).
+  """
   notIncludes: String
 
-  """Contains the specified string (case-insensitive)."""
+  """
+  Contains the specified string (case-insensitive).
+  """
   includesInsensitive: String
 
-  """Does not contain the specified string (case-insensitive)."""
+  """
+  Does not contain the specified string (case-insensitive).
+  """
   notIncludesInsensitive: String
 
-  """Starts with the specified string (case-sensitive)."""
+  """
+  Starts with the specified string (case-sensitive).
+  """
   startsWith: String
 
-  """Does not start with the specified string (case-sensitive)."""
+  """
+  Does not start with the specified string (case-sensitive).
+  """
   notStartsWith: String
 
-  """Starts with the specified string (case-insensitive)."""
+  """
+  Starts with the specified string (case-insensitive).
+  """
   startsWithInsensitive: String
 
-  """Does not start with the specified string (case-insensitive)."""
+  """
+  Does not start with the specified string (case-insensitive).
+  """
   notStartsWithInsensitive: String
 
-  """Ends with the specified string (case-sensitive)."""
+  """
+  Ends with the specified string (case-sensitive).
+  """
   endsWith: String
 
-  """Does not end with the specified string (case-sensitive)."""
+  """
+  Does not end with the specified string (case-sensitive).
+  """
   notEndsWith: String
 
-  """Ends with the specified string (case-insensitive)."""
+  """
+  Ends with the specified string (case-insensitive).
+  """
   endsWithInsensitive: String
 
-  """Does not end with the specified string (case-insensitive)."""
+  """
+  Does not end with the specified string (case-insensitive).
+  """
   notEndsWithInsensitive: String
 
   """
@@ -782,10 +1111,14 @@ input StringFilter {
   """
   notLikeInsensitive: String
 
-  """Equal to the specified value (case-insensitive)."""
+  """
+  Equal to the specified value (case-insensitive).
+  """
   equalToInsensitive: String
 
-  """Not equal to the specified value (case-insensitive)."""
+  """
+  Not equal to the specified value (case-insensitive).
+  """
   notEqualToInsensitive: String
 
   """
@@ -798,22 +1131,34 @@ input StringFilter {
   """
   notDistinctFromInsensitive: String
 
-  """Included in the specified list (case-insensitive)."""
+  """
+  Included in the specified list (case-insensitive).
+  """
   inInsensitive: [String!]
 
-  """Not included in the specified list (case-insensitive)."""
+  """
+  Not included in the specified list (case-insensitive).
+  """
   notInInsensitive: [String!]
 
-  """Less than the specified value (case-insensitive)."""
+  """
+  Less than the specified value (case-insensitive).
+  """
   lessThanInsensitive: String
 
-  """Less than or equal to the specified value (case-insensitive)."""
+  """
+  Less than or equal to the specified value (case-insensitive).
+  """
   lessThanOrEqualToInsensitive: String
 
-  """Greater than the specified value (case-insensitive)."""
+  """
+  Greater than the specified value (case-insensitive).
+  """
   greaterThanInsensitive: String
 
-  """Greater than or equal to the specified value (case-insensitive)."""
+  """
+  Greater than or equal to the specified value (case-insensitive).
+  """
   greaterThanOrEqualToInsensitive: String
 }
 
@@ -827,12 +1172,18 @@ type Unit implements Node {
   asMl: BigFloat
   sort: Int
 
-  """Reads and enables pagination through a set of `RecipeIngredient`."""
+  """
+  Reads and enables pagination through a set of `RecipeIngredient`.
+  """
   recipeIngredients(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -841,13 +1192,19 @@ type Unit implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `RecipeIngredient`."""
+    """
+    The method to use when ordering `RecipeIngredient`.
+    """
     orderBy: [RecipeIngredientsOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -862,40 +1219,64 @@ type Unit implements Node {
   ): RecipeIngredientsConnection!
 }
 
-"""A `RecipeIngredient` edge in the connection."""
+"""
+A `RecipeIngredient` edge in the connection.
+"""
 type RecipeIngredientsEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `RecipeIngredient` at the end of the edge."""
+  """
+  The `RecipeIngredient` at the end of the edge.
+  """
   node: RecipeIngredient
 }
 
-"""Information about pagination in a connection."""
+"""
+Information about pagination in a connection.
+"""
 type PageInfo {
-  """When paginating forwards, are there more items?"""
+  """
+  When paginating forwards, are there more items?
+  """
   hasNextPage: Boolean!
 
-  """When paginating backwards, are there more items?"""
+  """
+  When paginating backwards, are there more items?
+  """
   hasPreviousPage: Boolean!
 
-  """When paginating backwards, the cursor to continue."""
+  """
+  When paginating backwards, the cursor to continue.
+  """
   startCursor: Cursor
 
-  """When paginating forwards, the cursor to continue."""
+  """
+  When paginating forwards, the cursor to continue.
+  """
   endCursor: Cursor
 }
 
-"""A `Ingredient` edge in the connection."""
+"""
+A `Ingredient` edge in the connection.
+"""
 type IngredientsEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Ingredient` at the end of the edge."""
+  """
+  The `Ingredient` at the end of the edge.
+  """
   node: Ingredient
 }
 
-"""Methods to use when ordering `Ingredient`."""
+"""
+Methods to use when ordering `Ingredient`.
+"""
 enum IngredientsOrderBy {
   NATURAL
   ID_ASC
@@ -919,19 +1300,29 @@ A condition to be used against `Ingredient` object types. All fields are tested
 for equality and combined with a logical ‘and.’
 """
 input IngredientCondition {
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: Int
 
-  """Checks for equality with the object’s `name` field."""
+  """
+  Checks for equality with the object’s `name` field.
+  """
   name: String
 
-  """Checks for equality with the object’s `tags` field."""
+  """
+  Checks for equality with the object’s `tags` field.
+  """
   tags: String
 
-  """Checks for equality with the object’s `sort` field."""
+  """
+  Checks for equality with the object’s `sort` field.
+  """
   sort: Int
 
-  """Checks for equality with the object’s `description` field."""
+  """
+  Checks for equality with the object’s `description` field.
+  """
   description: String
 }
 
@@ -939,34 +1330,162 @@ input IngredientCondition {
 A filter to be used against `Ingredient` object types. All fields are combined with a logical ‘and.’
 """
 input IngredientFilter {
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: IntFilter
 
-  """Filter by the object’s `name` field."""
+  """
+  Filter by the object’s `name` field.
+  """
   name: StringFilter
 
-  """Filter by the object’s `tags` field."""
+  """
+  Filter by the object’s `tags` field.
+  """
   tags: StringFilter
 
-  """Filter by the object’s `sort` field."""
+  """
+  Filter by the object’s `sort` field.
+  """
   sort: IntFilter
 
-  """Filter by the object’s `description` field."""
+  """
+  Filter by the object’s `description` field.
+  """
   description: StringFilter
 
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [IngredientFilter!]
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [IngredientFilter!]
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: IngredientFilter
 }
 
-"""A connection to a list of `Recipe` values."""
+"""
+A connection to a list of `KnexMigrationsLock` values.
+"""
+type KnexMigrationsLocksConnection {
+  """
+  A list of `KnexMigrationsLock` objects.
+  """
+  nodes: [KnexMigrationsLock]!
+
+  """
+  A list of edges which contains the `KnexMigrationsLock` and cursor to aid in pagination.
+  """
+  edges: [KnexMigrationsLocksEdge!]!
+
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `KnexMigrationsLock` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+type KnexMigrationsLock implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  index: Int!
+  isLocked: Int
+}
+
+"""
+A `KnexMigrationsLock` edge in the connection.
+"""
+type KnexMigrationsLocksEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: Cursor
+
+  """
+  The `KnexMigrationsLock` at the end of the edge.
+  """
+  node: KnexMigrationsLock
+}
+
+"""
+Methods to use when ordering `KnexMigrationsLock`.
+"""
+enum KnexMigrationsLocksOrderBy {
+  NATURAL
+  INDEX_ASC
+  INDEX_DESC
+  IS_LOCKED_ASC
+  IS_LOCKED_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `KnexMigrationsLock` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input KnexMigrationsLockCondition {
+  """
+  Checks for equality with the object’s `index` field.
+  """
+  index: Int
+
+  """
+  Checks for equality with the object’s `isLocked` field.
+  """
+  isLocked: Int
+}
+
+"""
+A filter to be used against `KnexMigrationsLock` object types. All fields are combined with a logical ‘and.’
+"""
+input KnexMigrationsLockFilter {
+  """
+  Filter by the object’s `index` field.
+  """
+  index: IntFilter
+
+  """
+  Filter by the object’s `isLocked` field.
+  """
+  isLocked: IntFilter
+
+  """
+  Checks for all expressions in this list.
+  """
+  and: [KnexMigrationsLockFilter!]
+
+  """
+  Checks for any expressions in this list.
+  """
+  or: [KnexMigrationsLockFilter!]
+
+  """
+  Negates the expression.
+  """
+  not: KnexMigrationsLockFilter
+}
+
+"""
+A connection to a list of `Recipe` values.
+"""
 type RecipesConnection {
-  """A list of `Recipe` objects."""
+  """
+  A list of `Recipe` objects.
+  """
   nodes: [Recipe]!
 
   """
@@ -974,23 +1493,35 @@ type RecipesConnection {
   """
   edges: [RecipesEdge!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Recipe` you could get from the connection."""
+  """
+  The count of *all* `Recipe` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `Recipe` edge in the connection."""
+"""
+A `Recipe` edge in the connection.
+"""
 type RecipesEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Recipe` at the end of the edge."""
+  """
+  The `Recipe` at the end of the edge.
+  """
   node: Recipe
 }
 
-"""Methods to use when ordering `Recipe`."""
+"""
+Methods to use when ordering `Recipe`.
+"""
 enum RecipesOrderBy {
   NATURAL
   ID_ASC
@@ -1023,31 +1554,49 @@ enum RecipesOrderBy {
 A condition to be used against `Recipe` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input RecipeCondition {
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: Int
 
-  """Checks for equality with the object’s `name` field."""
+  """
+  Checks for equality with the object’s `name` field.
+  """
   name: String
 
-  """Checks for equality with the object’s `description` field."""
+  """
+  Checks for equality with the object’s `description` field.
+  """
   description: String
 
-  """Checks for equality with the object’s `instructions` field."""
+  """
+  Checks for equality with the object’s `instructions` field.
+  """
   instructions: String
 
-  """Checks for equality with the object’s `ingredientText` field."""
+  """
+  Checks for equality with the object’s `ingredientText` field.
+  """
   ingredientText: String
 
-  """Checks for equality with the object’s `glass` field."""
+  """
+  Checks for equality with the object’s `glass` field.
+  """
   glass: String
 
-  """Checks for equality with the object’s `garnish` field."""
+  """
+  Checks for equality with the object’s `garnish` field.
+  """
   garnish: String
 
-  """Checks for equality with the object’s `source` field."""
+  """
+  Checks for equality with the object’s `source` field.
+  """
   source: String
 
-  """Checks for equality with the object’s `ts` field."""
+  """
+  Checks for equality with the object’s `ts` field.
+  """
   ts: FullText
 }
 
@@ -1055,40 +1604,64 @@ input RecipeCondition {
 A filter to be used against `Recipe` object types. All fields are combined with a logical ‘and.’
 """
 input RecipeFilter {
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: IntFilter
 
-  """Filter by the object’s `name` field."""
+  """
+  Filter by the object’s `name` field.
+  """
   name: StringFilter
 
-  """Filter by the object’s `description` field."""
+  """
+  Filter by the object’s `description` field.
+  """
   description: StringFilter
 
-  """Filter by the object’s `instructions` field."""
+  """
+  Filter by the object’s `instructions` field.
+  """
   instructions: StringFilter
 
-  """Filter by the object’s `ingredientText` field."""
+  """
+  Filter by the object’s `ingredientText` field.
+  """
   ingredientText: StringFilter
 
-  """Filter by the object’s `glass` field."""
+  """
+  Filter by the object’s `glass` field.
+  """
   glass: StringFilter
 
-  """Filter by the object’s `garnish` field."""
+  """
+  Filter by the object’s `garnish` field.
+  """
   garnish: StringFilter
 
-  """Filter by the object’s `source` field."""
+  """
+  Filter by the object’s `source` field.
+  """
   source: StringFilter
 
-  """Filter by the object’s `ts` field."""
+  """
+  Filter by the object’s `ts` field.
+  """
   ts: FullTextFilter
 
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [RecipeFilter!]
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [RecipeFilter!]
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: RecipeFilter
 }
 
@@ -1096,13 +1669,19 @@ input RecipeFilter {
 A filter to be used against FullText fields. All fields are combined with a logical ‘and.’
 """
 input FullTextFilter {
-  """Performs a full text search on the field."""
+  """
+  Performs a full text search on the field.
+  """
   matches: String
 }
 
-"""A connection to a list of `Role` values."""
+"""
+A connection to a list of `Role` values.
+"""
 type RolesConnection {
-  """A list of `Role` objects."""
+  """
+  A list of `Role` objects.
+  """
   nodes: [Role]!
 
   """
@@ -1110,10 +1689,14 @@ type RolesConnection {
   """
   edges: [RolesEdge!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Role` you could get from the connection."""
+  """
+  The count of *all* `Role` you could get from the connection.
+  """
   totalCount: Int!
 }
 
@@ -1125,12 +1708,18 @@ type Role implements Node {
   id: Int!
   authority: String!
 
-  """Reads and enables pagination through a set of `UserRole`."""
+  """
+  Reads and enables pagination through a set of `UserRole`.
+  """
   userRoles(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -1139,13 +1728,19 @@ type Role implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `UserRole`."""
+    """
+    The method to use when ordering `UserRole`.
+    """
     orderBy: [UserRolesOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -1160,9 +1755,13 @@ type Role implements Node {
   ): UserRolesConnection!
 }
 
-"""A connection to a list of `UserRole` values."""
+"""
+A connection to a list of `UserRole` values.
+"""
 type UserRolesConnection {
-  """A list of `UserRole` objects."""
+  """
+  A list of `UserRole` objects.
+  """
   nodes: [UserRole]!
 
   """
@@ -1170,10 +1769,14 @@ type UserRolesConnection {
   """
   edges: [UserRolesEdge!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `UserRole` you could get from the connection."""
+  """
+  The count of *all* `UserRole` you could get from the connection.
+  """
   totalCount: Int!
 }
 
@@ -1185,10 +1788,14 @@ type UserRole implements Node {
   roleId: Int!
   userId: Int!
 
-  """Reads a single `Role` that is related to this `UserRole`."""
+  """
+  Reads a single `Role` that is related to this `UserRole`.
+  """
   role: Role
 
-  """Reads a single `User` that is related to this `UserRole`."""
+  """
+  Reads a single `User` that is related to this `UserRole`.
+  """
   user: User
 }
 
@@ -1200,12 +1807,18 @@ type User implements Node {
   id: Int!
   email: String!
 
-  """Reads and enables pagination through a set of `UserRole`."""
+  """
+  Reads and enables pagination through a set of `UserRole`.
+  """
   userRoles(
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -1214,13 +1827,19 @@ type User implements Node {
     """
     offset: Int
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """The method to use when ordering `UserRole`."""
+    """
+    The method to use when ordering `UserRole`.
+    """
     orderBy: [UserRolesOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
@@ -1235,7 +1854,9 @@ type User implements Node {
   ): UserRolesConnection!
 }
 
-"""Methods to use when ordering `UserRole`."""
+"""
+Methods to use when ordering `UserRole`.
+"""
 enum UserRolesOrderBy {
   NATURAL
   ROLE_ID_ASC
@@ -1259,10 +1880,14 @@ A condition to be used against `UserRole` object types. All fields are tested
 for equality and combined with a logical ‘and.’
 """
 input UserRoleCondition {
-  """Checks for equality with the object’s `roleId` field."""
+  """
+  Checks for equality with the object’s `roleId` field.
+  """
   roleId: Int
 
-  """Checks for equality with the object’s `userId` field."""
+  """
+  Checks for equality with the object’s `userId` field.
+  """
   userId: Int
 }
 
@@ -1270,41 +1895,65 @@ input UserRoleCondition {
 A filter to be used against `UserRole` object types. All fields are combined with a logical ‘and.’
 """
 input UserRoleFilter {
-  """Filter by the object’s `roleId` field."""
+  """
+  Filter by the object’s `roleId` field.
+  """
   roleId: IntFilter
 
-  """Filter by the object’s `userId` field."""
+  """
+  Filter by the object’s `userId` field.
+  """
   userId: IntFilter
 
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [UserRoleFilter!]
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [UserRoleFilter!]
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: UserRoleFilter
 }
 
-"""A `UserRole` edge in the connection."""
+"""
+A `UserRole` edge in the connection.
+"""
 type UserRolesEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `UserRole` at the end of the edge."""
+  """
+  The `UserRole` at the end of the edge.
+  """
   node: UserRole
 }
 
-"""A `Role` edge in the connection."""
+"""
+A `Role` edge in the connection.
+"""
 type RolesEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Role` at the end of the edge."""
+  """
+  The `Role` at the end of the edge.
+  """
   node: Role
 }
 
-"""Methods to use when ordering `Role`."""
+"""
+Methods to use when ordering `Role`.
+"""
 enum RolesOrderBy {
   NATURAL
   ID_ASC
@@ -1321,10 +1970,14 @@ enum RolesOrderBy {
 A condition to be used against `Role` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input RoleCondition {
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: Int
 
-  """Checks for equality with the object’s `authority` field."""
+  """
+  Checks for equality with the object’s `authority` field.
+  """
   authority: String
 }
 
@@ -1332,25 +1985,39 @@ input RoleCondition {
 A filter to be used against `Role` object types. All fields are combined with a logical ‘and.’
 """
 input RoleFilter {
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: IntFilter
 
-  """Filter by the object’s `authority` field."""
+  """
+  Filter by the object’s `authority` field.
+  """
   authority: StringFilter
 
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [RoleFilter!]
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [RoleFilter!]
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: RoleFilter
 }
 
-"""A connection to a list of `Unit` values."""
+"""
+A connection to a list of `Unit` values.
+"""
 type UnitsConnection {
-  """A list of `Unit` objects."""
+  """
+  A list of `Unit` objects.
+  """
   nodes: [Unit]!
 
   """
@@ -1358,23 +2025,35 @@ type UnitsConnection {
   """
   edges: [UnitsEdge!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Unit` you could get from the connection."""
+  """
+  The count of *all* `Unit` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `Unit` edge in the connection."""
+"""
+A `Unit` edge in the connection.
+"""
 type UnitsEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Unit` at the end of the edge."""
+  """
+  The `Unit` at the end of the edge.
+  """
   node: Unit
 }
 
-"""Methods to use when ordering `Unit`."""
+"""
+Methods to use when ordering `Unit`.
+"""
 enum UnitsOrderBy {
   NATURAL
   ID_ASC
@@ -1395,16 +2074,24 @@ enum UnitsOrderBy {
 A condition to be used against `Unit` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input UnitCondition {
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: Int
 
-  """Checks for equality with the object’s `name` field."""
+  """
+  Checks for equality with the object’s `name` field.
+  """
   name: String
 
-  """Checks for equality with the object’s `asMl` field."""
+  """
+  Checks for equality with the object’s `asMl` field.
+  """
   asMl: BigFloat
 
-  """Checks for equality with the object’s `sort` field."""
+  """
+  Checks for equality with the object’s `sort` field.
+  """
   sort: Int
 }
 
@@ -1412,31 +2099,49 @@ input UnitCondition {
 A filter to be used against `Unit` object types. All fields are combined with a logical ‘and.’
 """
 input UnitFilter {
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: IntFilter
 
-  """Filter by the object’s `name` field."""
+  """
+  Filter by the object’s `name` field.
+  """
   name: StringFilter
 
-  """Filter by the object’s `asMl` field."""
+  """
+  Filter by the object’s `asMl` field.
+  """
   asMl: BigFloatFilter
 
-  """Filter by the object’s `sort` field."""
+  """
+  Filter by the object’s `sort` field.
+  """
   sort: IntFilter
 
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [UnitFilter!]
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [UnitFilter!]
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: UnitFilter
 }
 
-"""A connection to a list of `User` values."""
+"""
+A connection to a list of `User` values.
+"""
 type UsersConnection {
-  """A list of `User` objects."""
+  """
+  A list of `User` objects.
+  """
   nodes: [User]!
 
   """
@@ -1444,23 +2149,35 @@ type UsersConnection {
   """
   edges: [UsersEdge!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `User` you could get from the connection."""
+  """
+  The count of *all* `User` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `User` edge in the connection."""
+"""
+A `User` edge in the connection.
+"""
 type UsersEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `User` at the end of the edge."""
+  """
+  The `User` at the end of the edge.
+  """
   node: User
 }
 
-"""Methods to use when ordering `User`."""
+"""
+Methods to use when ordering `User`.
+"""
 enum UsersOrderBy {
   NATURAL
   ID_ASC
@@ -1477,10 +2194,14 @@ enum UsersOrderBy {
 A condition to be used against `User` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input UserCondition {
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: Int
 
-  """Checks for equality with the object’s `email` field."""
+  """
+  Checks for equality with the object’s `email` field.
+  """
   email: String
 }
 
@@ -1488,19 +2209,29 @@ input UserCondition {
 A filter to be used against `User` object types. All fields are combined with a logical ‘and.’
 """
 input UserFilter {
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: IntFilter
 
-  """Filter by the object’s `email` field."""
+  """
+  Filter by the object’s `email` field.
+  """
   email: StringFilter
 
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [UserFilter!]
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [UserFilter!]
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: UserFilter
 }
 
@@ -1508,7 +2239,9 @@ input UserFilter {
 The root mutation type which contains root level fields which mutate data.
 """
 type Mutation {
-  """Creates a single `Ingredient`."""
+  """
+  Creates a single `Ingredient`.
+  """
   createIngredient(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1516,7 +2249,19 @@ type Mutation {
     input: CreateIngredientInput!
   ): CreateIngredientPayload
 
-  """Creates a single `Recipe`."""
+  """
+  Creates a single `KnexMigrationsLock`.
+  """
+  createKnexMigrationsLock(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateKnexMigrationsLockInput!
+  ): CreateKnexMigrationsLockPayload
+
+  """
+  Creates a single `Recipe`.
+  """
   createRecipe(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1524,7 +2269,9 @@ type Mutation {
     input: CreateRecipeInput!
   ): CreateRecipePayload
 
-  """Creates a single `RecipeIngredient`."""
+  """
+  Creates a single `RecipeIngredient`.
+  """
   createRecipeIngredient(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1532,7 +2279,9 @@ type Mutation {
     input: CreateRecipeIngredientInput!
   ): CreateRecipeIngredientPayload
 
-  """Creates a single `Role`."""
+  """
+  Creates a single `Role`.
+  """
   createRole(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1540,7 +2289,9 @@ type Mutation {
     input: CreateRoleInput!
   ): CreateRolePayload
 
-  """Creates a single `Unit`."""
+  """
+  Creates a single `Unit`.
+  """
   createUnit(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1548,7 +2299,9 @@ type Mutation {
     input: CreateUnitInput!
   ): CreateUnitPayload
 
-  """Creates a single `User`."""
+  """
+  Creates a single `User`.
+  """
   createUser(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1556,7 +2309,9 @@ type Mutation {
     input: CreateUserInput!
   ): CreateUserPayload
 
-  """Creates a single `UserRole`."""
+  """
+  Creates a single `UserRole`.
+  """
   createUserRole(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1574,7 +2329,9 @@ type Mutation {
     input: UpdateIngredientByNodeIdInput!
   ): UpdateIngredientPayload
 
-  """Updates a single `Ingredient` using a unique key and a patch."""
+  """
+  Updates a single `Ingredient` using a unique key and a patch.
+  """
   updateIngredient(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1582,7 +2339,29 @@ type Mutation {
     input: UpdateIngredientInput!
   ): UpdateIngredientPayload
 
-  """Updates a single `Recipe` using its globally unique id and a patch."""
+  """
+  Updates a single `KnexMigrationsLock` using its globally unique id and a patch.
+  """
+  updateKnexMigrationsLockByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateKnexMigrationsLockByNodeIdInput!
+  ): UpdateKnexMigrationsLockPayload
+
+  """
+  Updates a single `KnexMigrationsLock` using a unique key and a patch.
+  """
+  updateKnexMigrationsLock(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateKnexMigrationsLockInput!
+  ): UpdateKnexMigrationsLockPayload
+
+  """
+  Updates a single `Recipe` using its globally unique id and a patch.
+  """
   updateRecipeByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1590,7 +2369,9 @@ type Mutation {
     input: UpdateRecipeByNodeIdInput!
   ): UpdateRecipePayload
 
-  """Updates a single `Recipe` using a unique key and a patch."""
+  """
+  Updates a single `Recipe` using a unique key and a patch.
+  """
   updateRecipe(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1608,7 +2389,9 @@ type Mutation {
     input: UpdateRecipeIngredientByNodeIdInput!
   ): UpdateRecipeIngredientPayload
 
-  """Updates a single `RecipeIngredient` using a unique key and a patch."""
+  """
+  Updates a single `RecipeIngredient` using a unique key and a patch.
+  """
   updateRecipeIngredient(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1616,7 +2399,9 @@ type Mutation {
     input: UpdateRecipeIngredientInput!
   ): UpdateRecipeIngredientPayload
 
-  """Updates a single `Role` using its globally unique id and a patch."""
+  """
+  Updates a single `Role` using its globally unique id and a patch.
+  """
   updateRoleByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1624,7 +2409,9 @@ type Mutation {
     input: UpdateRoleByNodeIdInput!
   ): UpdateRolePayload
 
-  """Updates a single `Role` using a unique key and a patch."""
+  """
+  Updates a single `Role` using a unique key and a patch.
+  """
   updateRole(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1632,7 +2419,9 @@ type Mutation {
     input: UpdateRoleInput!
   ): UpdateRolePayload
 
-  """Updates a single `Role` using a unique key and a patch."""
+  """
+  Updates a single `Role` using a unique key and a patch.
+  """
   updateRoleByAuthority(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1640,7 +2429,9 @@ type Mutation {
     input: UpdateRoleByAuthorityInput!
   ): UpdateRolePayload
 
-  """Updates a single `Unit` using its globally unique id and a patch."""
+  """
+  Updates a single `Unit` using its globally unique id and a patch.
+  """
   updateUnitByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1648,7 +2439,9 @@ type Mutation {
     input: UpdateUnitByNodeIdInput!
   ): UpdateUnitPayload
 
-  """Updates a single `Unit` using a unique key and a patch."""
+  """
+  Updates a single `Unit` using a unique key and a patch.
+  """
   updateUnit(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1656,7 +2449,9 @@ type Mutation {
     input: UpdateUnitInput!
   ): UpdateUnitPayload
 
-  """Updates a single `User` using its globally unique id and a patch."""
+  """
+  Updates a single `User` using its globally unique id and a patch.
+  """
   updateUserByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1664,7 +2459,9 @@ type Mutation {
     input: UpdateUserByNodeIdInput!
   ): UpdateUserPayload
 
-  """Updates a single `User` using a unique key and a patch."""
+  """
+  Updates a single `User` using a unique key and a patch.
+  """
   updateUser(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1672,7 +2469,9 @@ type Mutation {
     input: UpdateUserInput!
   ): UpdateUserPayload
 
-  """Updates a single `User` using a unique key and a patch."""
+  """
+  Updates a single `User` using a unique key and a patch.
+  """
   updateUserByEmail(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1680,7 +2479,9 @@ type Mutation {
     input: UpdateUserByEmailInput!
   ): UpdateUserPayload
 
-  """Updates a single `UserRole` using its globally unique id and a patch."""
+  """
+  Updates a single `UserRole` using its globally unique id and a patch.
+  """
   updateUserRoleByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1688,7 +2489,9 @@ type Mutation {
     input: UpdateUserRoleByNodeIdInput!
   ): UpdateUserRolePayload
 
-  """Updates a single `UserRole` using a unique key and a patch."""
+  """
+  Updates a single `UserRole` using a unique key and a patch.
+  """
   updateUserRole(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1696,7 +2499,9 @@ type Mutation {
     input: UpdateUserRoleInput!
   ): UpdateUserRolePayload
 
-  """Deletes a single `Ingredient` using its globally unique id."""
+  """
+  Deletes a single `Ingredient` using its globally unique id.
+  """
   deleteIngredientByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1704,7 +2509,9 @@ type Mutation {
     input: DeleteIngredientByNodeIdInput!
   ): DeleteIngredientPayload
 
-  """Deletes a single `Ingredient` using a unique key."""
+  """
+  Deletes a single `Ingredient` using a unique key.
+  """
   deleteIngredient(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1712,7 +2519,29 @@ type Mutation {
     input: DeleteIngredientInput!
   ): DeleteIngredientPayload
 
-  """Deletes a single `Recipe` using its globally unique id."""
+  """
+  Deletes a single `KnexMigrationsLock` using its globally unique id.
+  """
+  deleteKnexMigrationsLockByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteKnexMigrationsLockByNodeIdInput!
+  ): DeleteKnexMigrationsLockPayload
+
+  """
+  Deletes a single `KnexMigrationsLock` using a unique key.
+  """
+  deleteKnexMigrationsLock(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteKnexMigrationsLockInput!
+  ): DeleteKnexMigrationsLockPayload
+
+  """
+  Deletes a single `Recipe` using its globally unique id.
+  """
   deleteRecipeByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1720,7 +2549,9 @@ type Mutation {
     input: DeleteRecipeByNodeIdInput!
   ): DeleteRecipePayload
 
-  """Deletes a single `Recipe` using a unique key."""
+  """
+  Deletes a single `Recipe` using a unique key.
+  """
   deleteRecipe(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1728,7 +2559,9 @@ type Mutation {
     input: DeleteRecipeInput!
   ): DeleteRecipePayload
 
-  """Deletes a single `RecipeIngredient` using its globally unique id."""
+  """
+  Deletes a single `RecipeIngredient` using its globally unique id.
+  """
   deleteRecipeIngredientByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1736,7 +2569,9 @@ type Mutation {
     input: DeleteRecipeIngredientByNodeIdInput!
   ): DeleteRecipeIngredientPayload
 
-  """Deletes a single `RecipeIngredient` using a unique key."""
+  """
+  Deletes a single `RecipeIngredient` using a unique key.
+  """
   deleteRecipeIngredient(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1744,7 +2579,9 @@ type Mutation {
     input: DeleteRecipeIngredientInput!
   ): DeleteRecipeIngredientPayload
 
-  """Deletes a single `Role` using its globally unique id."""
+  """
+  Deletes a single `Role` using its globally unique id.
+  """
   deleteRoleByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1752,7 +2589,9 @@ type Mutation {
     input: DeleteRoleByNodeIdInput!
   ): DeleteRolePayload
 
-  """Deletes a single `Role` using a unique key."""
+  """
+  Deletes a single `Role` using a unique key.
+  """
   deleteRole(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1760,7 +2599,9 @@ type Mutation {
     input: DeleteRoleInput!
   ): DeleteRolePayload
 
-  """Deletes a single `Role` using a unique key."""
+  """
+  Deletes a single `Role` using a unique key.
+  """
   deleteRoleByAuthority(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1768,7 +2609,9 @@ type Mutation {
     input: DeleteRoleByAuthorityInput!
   ): DeleteRolePayload
 
-  """Deletes a single `Unit` using its globally unique id."""
+  """
+  Deletes a single `Unit` using its globally unique id.
+  """
   deleteUnitByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1776,7 +2619,9 @@ type Mutation {
     input: DeleteUnitByNodeIdInput!
   ): DeleteUnitPayload
 
-  """Deletes a single `Unit` using a unique key."""
+  """
+  Deletes a single `Unit` using a unique key.
+  """
   deleteUnit(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1784,7 +2629,9 @@ type Mutation {
     input: DeleteUnitInput!
   ): DeleteUnitPayload
 
-  """Deletes a single `User` using its globally unique id."""
+  """
+  Deletes a single `User` using its globally unique id.
+  """
   deleteUserByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1792,7 +2639,9 @@ type Mutation {
     input: DeleteUserByNodeIdInput!
   ): DeleteUserPayload
 
-  """Deletes a single `User` using a unique key."""
+  """
+  Deletes a single `User` using a unique key.
+  """
   deleteUser(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1800,7 +2649,9 @@ type Mutation {
     input: DeleteUserInput!
   ): DeleteUserPayload
 
-  """Deletes a single `User` using a unique key."""
+  """
+  Deletes a single `User` using a unique key.
+  """
   deleteUserByEmail(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1808,7 +2659,9 @@ type Mutation {
     input: DeleteUserByEmailInput!
   ): DeleteUserPayload
 
-  """Deletes a single `UserRole` using its globally unique id."""
+  """
+  Deletes a single `UserRole` using its globally unique id.
+  """
   deleteUserRoleByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1816,7 +2669,9 @@ type Mutation {
     input: DeleteUserRoleByNodeIdInput!
   ): DeleteUserRolePayload
 
-  """Deletes a single `UserRole` using a unique key."""
+  """
+  Deletes a single `UserRole` using a unique key.
+  """
   deleteUserRole(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1831,7 +2686,9 @@ type Mutation {
   ): FTruncateTablesPayload
 }
 
-"""The output of our create `Ingredient` mutation."""
+"""
+The output of our create `Ingredient` mutation.
+"""
 type CreateIngredientPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -1839,7 +2696,9 @@ type CreateIngredientPayload {
   """
   clientMutationId: String
 
-  """The `Ingredient` that was created by this mutation."""
+  """
+  The `Ingredient` that was created by this mutation.
+  """
   ingredient: Ingredient
 
   """
@@ -1847,14 +2706,20 @@ type CreateIngredientPayload {
   """
   query: Query
 
-  """An edge for our `Ingredient`. May be used by Relay 1."""
+  """
+  An edge for our `Ingredient`. May be used by Relay 1.
+  """
   ingredientEdge(
-    """The method to use when ordering `Ingredient`."""
+    """
+    The method to use when ordering `Ingredient`.
+    """
     orderBy: [IngredientsOrderBy!] = [PRIMARY_KEY_ASC]
   ): IngredientsEdge
 }
 
-"""All input for the create `Ingredient` mutation."""
+"""
+All input for the create `Ingredient` mutation.
+"""
 input CreateIngredientInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -1862,11 +2727,15 @@ input CreateIngredientInput {
   """
   clientMutationId: String
 
-  """The `Ingredient` to be created by this mutation."""
+  """
+  The `Ingredient` to be created by this mutation.
+  """
   ingredient: IngredientInput!
 }
 
-"""An input for mutations affecting `Ingredient`"""
+"""
+An input for mutations affecting `Ingredient`
+"""
 input IngredientInput {
   id: Int
   name: String!
@@ -1875,7 +2744,64 @@ input IngredientInput {
   description: String
 }
 
-"""The output of our create `Recipe` mutation."""
+"""
+The output of our create `KnexMigrationsLock` mutation.
+"""
+type CreateKnexMigrationsLockPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  The `KnexMigrationsLock` that was created by this mutation.
+  """
+  knexMigrationsLock: KnexMigrationsLock
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """
+  An edge for our `KnexMigrationsLock`. May be used by Relay 1.
+  """
+  knexMigrationsLockEdge(
+    """
+    The method to use when ordering `KnexMigrationsLock`.
+    """
+    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsLocksEdge
+}
+
+"""
+All input for the create `KnexMigrationsLock` mutation.
+"""
+input CreateKnexMigrationsLockInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The `KnexMigrationsLock` to be created by this mutation.
+  """
+  knexMigrationsLock: KnexMigrationsLockInput!
+}
+
+"""
+An input for mutations affecting `KnexMigrationsLock`
+"""
+input KnexMigrationsLockInput {
+  index: Int
+  isLocked: Int
+}
+
+"""
+The output of our create `Recipe` mutation.
+"""
 type CreateRecipePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -1883,7 +2809,9 @@ type CreateRecipePayload {
   """
   clientMutationId: String
 
-  """The `Recipe` that was created by this mutation."""
+  """
+  The `Recipe` that was created by this mutation.
+  """
   recipe: Recipe
 
   """
@@ -1891,14 +2819,20 @@ type CreateRecipePayload {
   """
   query: Query
 
-  """An edge for our `Recipe`. May be used by Relay 1."""
+  """
+  An edge for our `Recipe`. May be used by Relay 1.
+  """
   recipeEdge(
-    """The method to use when ordering `Recipe`."""
+    """
+    The method to use when ordering `Recipe`.
+    """
     orderBy: [RecipesOrderBy!] = [PRIMARY_KEY_ASC]
   ): RecipesEdge
 }
 
-"""All input for the create `Recipe` mutation."""
+"""
+All input for the create `Recipe` mutation.
+"""
 input CreateRecipeInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -1906,11 +2840,15 @@ input CreateRecipeInput {
   """
   clientMutationId: String
 
-  """The `Recipe` to be created by this mutation."""
+  """
+  The `Recipe` to be created by this mutation.
+  """
   recipe: RecipeInput!
 }
 
-"""An input for mutations affecting `Recipe`"""
+"""
+An input for mutations affecting `Recipe`
+"""
 input RecipeInput {
   id: Int
   name: String!
@@ -1923,7 +2861,9 @@ input RecipeInput {
   ts: FullText
 }
 
-"""The output of our create `RecipeIngredient` mutation."""
+"""
+The output of our create `RecipeIngredient` mutation.
+"""
 type CreateRecipeIngredientPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -1931,7 +2871,9 @@ type CreateRecipeIngredientPayload {
   """
   clientMutationId: String
 
-  """The `RecipeIngredient` that was created by this mutation."""
+  """
+  The `RecipeIngredient` that was created by this mutation.
+  """
   recipeIngredient: RecipeIngredient
 
   """
@@ -1939,7 +2881,9 @@ type CreateRecipeIngredientPayload {
   """
   query: Query
 
-  """Reads a single `Recipe` that is related to this `RecipeIngredient`."""
+  """
+  Reads a single `Recipe` that is related to this `RecipeIngredient`.
+  """
   recipe: Recipe
 
   """
@@ -1947,17 +2891,25 @@ type CreateRecipeIngredientPayload {
   """
   ingredient: Ingredient
 
-  """Reads a single `Unit` that is related to this `RecipeIngredient`."""
+  """
+  Reads a single `Unit` that is related to this `RecipeIngredient`.
+  """
   unit: Unit
 
-  """An edge for our `RecipeIngredient`. May be used by Relay 1."""
+  """
+  An edge for our `RecipeIngredient`. May be used by Relay 1.
+  """
   recipeIngredientEdge(
-    """The method to use when ordering `RecipeIngredient`."""
+    """
+    The method to use when ordering `RecipeIngredient`.
+    """
     orderBy: [RecipeIngredientsOrderBy!] = [PRIMARY_KEY_ASC]
   ): RecipeIngredientsEdge
 }
 
-"""All input for the create `RecipeIngredient` mutation."""
+"""
+All input for the create `RecipeIngredient` mutation.
+"""
 input CreateRecipeIngredientInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -1965,11 +2917,15 @@ input CreateRecipeIngredientInput {
   """
   clientMutationId: String
 
-  """The `RecipeIngredient` to be created by this mutation."""
+  """
+  The `RecipeIngredient` to be created by this mutation.
+  """
   recipeIngredient: RecipeIngredientInput!
 }
 
-"""An input for mutations affecting `RecipeIngredient`"""
+"""
+An input for mutations affecting `RecipeIngredient`
+"""
 input RecipeIngredientInput {
   id: Int
   recipeId: Int!
@@ -1979,7 +2935,9 @@ input RecipeIngredientInput {
   modifier: String
 }
 
-"""The output of our create `Role` mutation."""
+"""
+The output of our create `Role` mutation.
+"""
 type CreateRolePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -1987,7 +2945,9 @@ type CreateRolePayload {
   """
   clientMutationId: String
 
-  """The `Role` that was created by this mutation."""
+  """
+  The `Role` that was created by this mutation.
+  """
   role: Role
 
   """
@@ -1995,14 +2955,20 @@ type CreateRolePayload {
   """
   query: Query
 
-  """An edge for our `Role`. May be used by Relay 1."""
+  """
+  An edge for our `Role`. May be used by Relay 1.
+  """
   roleEdge(
-    """The method to use when ordering `Role`."""
+    """
+    The method to use when ordering `Role`.
+    """
     orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
   ): RolesEdge
 }
 
-"""All input for the create `Role` mutation."""
+"""
+All input for the create `Role` mutation.
+"""
 input CreateRoleInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2010,17 +2976,23 @@ input CreateRoleInput {
   """
   clientMutationId: String
 
-  """The `Role` to be created by this mutation."""
+  """
+  The `Role` to be created by this mutation.
+  """
   role: RoleInput!
 }
 
-"""An input for mutations affecting `Role`"""
+"""
+An input for mutations affecting `Role`
+"""
 input RoleInput {
   id: Int
   authority: String!
 }
 
-"""The output of our create `Unit` mutation."""
+"""
+The output of our create `Unit` mutation.
+"""
 type CreateUnitPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2028,7 +3000,9 @@ type CreateUnitPayload {
   """
   clientMutationId: String
 
-  """The `Unit` that was created by this mutation."""
+  """
+  The `Unit` that was created by this mutation.
+  """
   unit: Unit
 
   """
@@ -2036,14 +3010,20 @@ type CreateUnitPayload {
   """
   query: Query
 
-  """An edge for our `Unit`. May be used by Relay 1."""
+  """
+  An edge for our `Unit`. May be used by Relay 1.
+  """
   unitEdge(
-    """The method to use when ordering `Unit`."""
+    """
+    The method to use when ordering `Unit`.
+    """
     orderBy: [UnitsOrderBy!] = [PRIMARY_KEY_ASC]
   ): UnitsEdge
 }
 
-"""All input for the create `Unit` mutation."""
+"""
+All input for the create `Unit` mutation.
+"""
 input CreateUnitInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2051,11 +3031,15 @@ input CreateUnitInput {
   """
   clientMutationId: String
 
-  """The `Unit` to be created by this mutation."""
+  """
+  The `Unit` to be created by this mutation.
+  """
   unit: UnitInput!
 }
 
-"""An input for mutations affecting `Unit`"""
+"""
+An input for mutations affecting `Unit`
+"""
 input UnitInput {
   id: Int
   name: String!
@@ -2063,7 +3047,9 @@ input UnitInput {
   sort: Int
 }
 
-"""The output of our create `User` mutation."""
+"""
+The output of our create `User` mutation.
+"""
 type CreateUserPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2071,7 +3057,9 @@ type CreateUserPayload {
   """
   clientMutationId: String
 
-  """The `User` that was created by this mutation."""
+  """
+  The `User` that was created by this mutation.
+  """
   user: User
 
   """
@@ -2079,14 +3067,20 @@ type CreateUserPayload {
   """
   query: Query
 
-  """An edge for our `User`. May be used by Relay 1."""
+  """
+  An edge for our `User`. May be used by Relay 1.
+  """
   userEdge(
-    """The method to use when ordering `User`."""
+    """
+    The method to use when ordering `User`.
+    """
     orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
   ): UsersEdge
 }
 
-"""All input for the create `User` mutation."""
+"""
+All input for the create `User` mutation.
+"""
 input CreateUserInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2094,17 +3088,23 @@ input CreateUserInput {
   """
   clientMutationId: String
 
-  """The `User` to be created by this mutation."""
+  """
+  The `User` to be created by this mutation.
+  """
   user: UserInput!
 }
 
-"""An input for mutations affecting `User`"""
+"""
+An input for mutations affecting `User`
+"""
 input UserInput {
   id: Int
   email: String!
 }
 
-"""The output of our create `UserRole` mutation."""
+"""
+The output of our create `UserRole` mutation.
+"""
 type CreateUserRolePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2112,7 +3112,9 @@ type CreateUserRolePayload {
   """
   clientMutationId: String
 
-  """The `UserRole` that was created by this mutation."""
+  """
+  The `UserRole` that was created by this mutation.
+  """
   userRole: UserRole
 
   """
@@ -2120,20 +3122,30 @@ type CreateUserRolePayload {
   """
   query: Query
 
-  """Reads a single `Role` that is related to this `UserRole`."""
+  """
+  Reads a single `Role` that is related to this `UserRole`.
+  """
   role: Role
 
-  """Reads a single `User` that is related to this `UserRole`."""
+  """
+  Reads a single `User` that is related to this `UserRole`.
+  """
   user: User
 
-  """An edge for our `UserRole`. May be used by Relay 1."""
+  """
+  An edge for our `UserRole`. May be used by Relay 1.
+  """
   userRoleEdge(
-    """The method to use when ordering `UserRole`."""
+    """
+    The method to use when ordering `UserRole`.
+    """
     orderBy: [UserRolesOrderBy!] = [PRIMARY_KEY_ASC]
   ): UserRolesEdge
 }
 
-"""All input for the create `UserRole` mutation."""
+"""
+All input for the create `UserRole` mutation.
+"""
 input CreateUserRoleInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2141,17 +3153,23 @@ input CreateUserRoleInput {
   """
   clientMutationId: String
 
-  """The `UserRole` to be created by this mutation."""
+  """
+  The `UserRole` to be created by this mutation.
+  """
   userRole: UserRoleInput!
 }
 
-"""An input for mutations affecting `UserRole`"""
+"""
+An input for mutations affecting `UserRole`
+"""
 input UserRoleInput {
   roleId: Int!
   userId: Int!
 }
 
-"""The output of our update `Ingredient` mutation."""
+"""
+The output of our update `Ingredient` mutation.
+"""
 type UpdateIngredientPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2159,7 +3177,9 @@ type UpdateIngredientPayload {
   """
   clientMutationId: String
 
-  """The `Ingredient` that was updated by this mutation."""
+  """
+  The `Ingredient` that was updated by this mutation.
+  """
   ingredient: Ingredient
 
   """
@@ -2167,14 +3187,20 @@ type UpdateIngredientPayload {
   """
   query: Query
 
-  """An edge for our `Ingredient`. May be used by Relay 1."""
+  """
+  An edge for our `Ingredient`. May be used by Relay 1.
+  """
   ingredientEdge(
-    """The method to use when ordering `Ingredient`."""
+    """
+    The method to use when ordering `Ingredient`.
+    """
     orderBy: [IngredientsOrderBy!] = [PRIMARY_KEY_ASC]
   ): IngredientsEdge
 }
 
-"""All input for the `updateIngredientByNodeId` mutation."""
+"""
+All input for the `updateIngredientByNodeId` mutation.
+"""
 input UpdateIngredientByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2204,7 +3230,9 @@ input IngredientPatch {
   description: String
 }
 
-"""All input for the `updateIngredient` mutation."""
+"""
+All input for the `updateIngredient` mutation.
+"""
 input UpdateIngredientInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2219,7 +3247,86 @@ input UpdateIngredientInput {
   id: Int!
 }
 
-"""The output of our update `Recipe` mutation."""
+"""
+The output of our update `KnexMigrationsLock` mutation.
+"""
+type UpdateKnexMigrationsLockPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  The `KnexMigrationsLock` that was updated by this mutation.
+  """
+  knexMigrationsLock: KnexMigrationsLock
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """
+  An edge for our `KnexMigrationsLock`. May be used by Relay 1.
+  """
+  knexMigrationsLockEdge(
+    """
+    The method to use when ordering `KnexMigrationsLock`.
+    """
+    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsLocksEdge
+}
+
+"""
+All input for the `updateKnexMigrationsLockByNodeId` mutation.
+"""
+input UpdateKnexMigrationsLockByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `KnexMigrationsLock` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `KnexMigrationsLock` being updated.
+  """
+  patch: KnexMigrationsLockPatch!
+}
+
+"""
+Represents an update to a `KnexMigrationsLock`. Fields that are set will be updated.
+"""
+input KnexMigrationsLockPatch {
+  index: Int
+  isLocked: Int
+}
+
+"""
+All input for the `updateKnexMigrationsLock` mutation.
+"""
+input UpdateKnexMigrationsLockInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `KnexMigrationsLock` being updated.
+  """
+  patch: KnexMigrationsLockPatch!
+  index: Int!
+}
+
+"""
+The output of our update `Recipe` mutation.
+"""
 type UpdateRecipePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2227,7 +3334,9 @@ type UpdateRecipePayload {
   """
   clientMutationId: String
 
-  """The `Recipe` that was updated by this mutation."""
+  """
+  The `Recipe` that was updated by this mutation.
+  """
   recipe: Recipe
 
   """
@@ -2235,14 +3344,20 @@ type UpdateRecipePayload {
   """
   query: Query
 
-  """An edge for our `Recipe`. May be used by Relay 1."""
+  """
+  An edge for our `Recipe`. May be used by Relay 1.
+  """
   recipeEdge(
-    """The method to use when ordering `Recipe`."""
+    """
+    The method to use when ordering `Recipe`.
+    """
     orderBy: [RecipesOrderBy!] = [PRIMARY_KEY_ASC]
   ): RecipesEdge
 }
 
-"""All input for the `updateRecipeByNodeId` mutation."""
+"""
+All input for the `updateRecipeByNodeId` mutation.
+"""
 input UpdateRecipeByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2276,7 +3391,9 @@ input RecipePatch {
   ts: FullText
 }
 
-"""All input for the `updateRecipe` mutation."""
+"""
+All input for the `updateRecipe` mutation.
+"""
 input UpdateRecipeInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2291,7 +3408,9 @@ input UpdateRecipeInput {
   id: Int!
 }
 
-"""The output of our update `RecipeIngredient` mutation."""
+"""
+The output of our update `RecipeIngredient` mutation.
+"""
 type UpdateRecipeIngredientPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2299,7 +3418,9 @@ type UpdateRecipeIngredientPayload {
   """
   clientMutationId: String
 
-  """The `RecipeIngredient` that was updated by this mutation."""
+  """
+  The `RecipeIngredient` that was updated by this mutation.
+  """
   recipeIngredient: RecipeIngredient
 
   """
@@ -2307,7 +3428,9 @@ type UpdateRecipeIngredientPayload {
   """
   query: Query
 
-  """Reads a single `Recipe` that is related to this `RecipeIngredient`."""
+  """
+  Reads a single `Recipe` that is related to this `RecipeIngredient`.
+  """
   recipe: Recipe
 
   """
@@ -2315,17 +3438,25 @@ type UpdateRecipeIngredientPayload {
   """
   ingredient: Ingredient
 
-  """Reads a single `Unit` that is related to this `RecipeIngredient`."""
+  """
+  Reads a single `Unit` that is related to this `RecipeIngredient`.
+  """
   unit: Unit
 
-  """An edge for our `RecipeIngredient`. May be used by Relay 1."""
+  """
+  An edge for our `RecipeIngredient`. May be used by Relay 1.
+  """
   recipeIngredientEdge(
-    """The method to use when ordering `RecipeIngredient`."""
+    """
+    The method to use when ordering `RecipeIngredient`.
+    """
     orderBy: [RecipeIngredientsOrderBy!] = [PRIMARY_KEY_ASC]
   ): RecipeIngredientsEdge
 }
 
-"""All input for the `updateRecipeIngredientByNodeId` mutation."""
+"""
+All input for the `updateRecipeIngredientByNodeId` mutation.
+"""
 input UpdateRecipeIngredientByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2356,7 +3487,9 @@ input RecipeIngredientPatch {
   modifier: String
 }
 
-"""All input for the `updateRecipeIngredient` mutation."""
+"""
+All input for the `updateRecipeIngredient` mutation.
+"""
 input UpdateRecipeIngredientInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2371,7 +3504,9 @@ input UpdateRecipeIngredientInput {
   id: Int!
 }
 
-"""The output of our update `Role` mutation."""
+"""
+The output of our update `Role` mutation.
+"""
 type UpdateRolePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2379,7 +3514,9 @@ type UpdateRolePayload {
   """
   clientMutationId: String
 
-  """The `Role` that was updated by this mutation."""
+  """
+  The `Role` that was updated by this mutation.
+  """
   role: Role
 
   """
@@ -2387,14 +3524,20 @@ type UpdateRolePayload {
   """
   query: Query
 
-  """An edge for our `Role`. May be used by Relay 1."""
+  """
+  An edge for our `Role`. May be used by Relay 1.
+  """
   roleEdge(
-    """The method to use when ordering `Role`."""
+    """
+    The method to use when ordering `Role`.
+    """
     orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
   ): RolesEdge
 }
 
-"""All input for the `updateRoleByNodeId` mutation."""
+"""
+All input for the `updateRoleByNodeId` mutation.
+"""
 input UpdateRoleByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2413,13 +3556,17 @@ input UpdateRoleByNodeIdInput {
   patch: RolePatch!
 }
 
-"""Represents an update to a `Role`. Fields that are set will be updated."""
+"""
+Represents an update to a `Role`. Fields that are set will be updated.
+"""
 input RolePatch {
   id: Int
   authority: String
 }
 
-"""All input for the `updateRole` mutation."""
+"""
+All input for the `updateRole` mutation.
+"""
 input UpdateRoleInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2434,7 +3581,9 @@ input UpdateRoleInput {
   id: Int!
 }
 
-"""All input for the `updateRoleByAuthority` mutation."""
+"""
+All input for the `updateRoleByAuthority` mutation.
+"""
 input UpdateRoleByAuthorityInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2449,7 +3598,9 @@ input UpdateRoleByAuthorityInput {
   authority: String!
 }
 
-"""The output of our update `Unit` mutation."""
+"""
+The output of our update `Unit` mutation.
+"""
 type UpdateUnitPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2457,7 +3608,9 @@ type UpdateUnitPayload {
   """
   clientMutationId: String
 
-  """The `Unit` that was updated by this mutation."""
+  """
+  The `Unit` that was updated by this mutation.
+  """
   unit: Unit
 
   """
@@ -2465,14 +3618,20 @@ type UpdateUnitPayload {
   """
   query: Query
 
-  """An edge for our `Unit`. May be used by Relay 1."""
+  """
+  An edge for our `Unit`. May be used by Relay 1.
+  """
   unitEdge(
-    """The method to use when ordering `Unit`."""
+    """
+    The method to use when ordering `Unit`.
+    """
     orderBy: [UnitsOrderBy!] = [PRIMARY_KEY_ASC]
   ): UnitsEdge
 }
 
-"""All input for the `updateUnitByNodeId` mutation."""
+"""
+All input for the `updateUnitByNodeId` mutation.
+"""
 input UpdateUnitByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2491,7 +3650,9 @@ input UpdateUnitByNodeIdInput {
   patch: UnitPatch!
 }
 
-"""Represents an update to a `Unit`. Fields that are set will be updated."""
+"""
+Represents an update to a `Unit`. Fields that are set will be updated.
+"""
 input UnitPatch {
   id: Int
   name: String
@@ -2499,7 +3660,9 @@ input UnitPatch {
   sort: Int
 }
 
-"""All input for the `updateUnit` mutation."""
+"""
+All input for the `updateUnit` mutation.
+"""
 input UpdateUnitInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2514,7 +3677,9 @@ input UpdateUnitInput {
   id: Int!
 }
 
-"""The output of our update `User` mutation."""
+"""
+The output of our update `User` mutation.
+"""
 type UpdateUserPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2522,7 +3687,9 @@ type UpdateUserPayload {
   """
   clientMutationId: String
 
-  """The `User` that was updated by this mutation."""
+  """
+  The `User` that was updated by this mutation.
+  """
   user: User
 
   """
@@ -2530,14 +3697,20 @@ type UpdateUserPayload {
   """
   query: Query
 
-  """An edge for our `User`. May be used by Relay 1."""
+  """
+  An edge for our `User`. May be used by Relay 1.
+  """
   userEdge(
-    """The method to use when ordering `User`."""
+    """
+    The method to use when ordering `User`.
+    """
     orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
   ): UsersEdge
 }
 
-"""All input for the `updateUserByNodeId` mutation."""
+"""
+All input for the `updateUserByNodeId` mutation.
+"""
 input UpdateUserByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2556,13 +3729,17 @@ input UpdateUserByNodeIdInput {
   patch: UserPatch!
 }
 
-"""Represents an update to a `User`. Fields that are set will be updated."""
+"""
+Represents an update to a `User`. Fields that are set will be updated.
+"""
 input UserPatch {
   id: Int
   email: String
 }
 
-"""All input for the `updateUser` mutation."""
+"""
+All input for the `updateUser` mutation.
+"""
 input UpdateUserInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2577,7 +3754,9 @@ input UpdateUserInput {
   id: Int!
 }
 
-"""All input for the `updateUserByEmail` mutation."""
+"""
+All input for the `updateUserByEmail` mutation.
+"""
 input UpdateUserByEmailInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2592,7 +3771,9 @@ input UpdateUserByEmailInput {
   email: String!
 }
 
-"""The output of our update `UserRole` mutation."""
+"""
+The output of our update `UserRole` mutation.
+"""
 type UpdateUserRolePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2600,7 +3781,9 @@ type UpdateUserRolePayload {
   """
   clientMutationId: String
 
-  """The `UserRole` that was updated by this mutation."""
+  """
+  The `UserRole` that was updated by this mutation.
+  """
   userRole: UserRole
 
   """
@@ -2608,20 +3791,30 @@ type UpdateUserRolePayload {
   """
   query: Query
 
-  """Reads a single `Role` that is related to this `UserRole`."""
+  """
+  Reads a single `Role` that is related to this `UserRole`.
+  """
   role: Role
 
-  """Reads a single `User` that is related to this `UserRole`."""
+  """
+  Reads a single `User` that is related to this `UserRole`.
+  """
   user: User
 
-  """An edge for our `UserRole`. May be used by Relay 1."""
+  """
+  An edge for our `UserRole`. May be used by Relay 1.
+  """
   userRoleEdge(
-    """The method to use when ordering `UserRole`."""
+    """
+    The method to use when ordering `UserRole`.
+    """
     orderBy: [UserRolesOrderBy!] = [PRIMARY_KEY_ASC]
   ): UserRolesEdge
 }
 
-"""All input for the `updateUserRoleByNodeId` mutation."""
+"""
+All input for the `updateUserRoleByNodeId` mutation.
+"""
 input UpdateUserRoleByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2648,7 +3841,9 @@ input UserRolePatch {
   userId: Int
 }
 
-"""All input for the `updateUserRole` mutation."""
+"""
+All input for the `updateUserRole` mutation.
+"""
 input UpdateUserRoleInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2664,7 +3859,9 @@ input UpdateUserRoleInput {
   userId: Int!
 }
 
-"""The output of our delete `Ingredient` mutation."""
+"""
+The output of our delete `Ingredient` mutation.
+"""
 type DeleteIngredientPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2672,7 +3869,9 @@ type DeleteIngredientPayload {
   """
   clientMutationId: String
 
-  """The `Ingredient` that was deleted by this mutation."""
+  """
+  The `Ingredient` that was deleted by this mutation.
+  """
   ingredient: Ingredient
   deletedIngredientNodeId: ID
 
@@ -2681,14 +3880,20 @@ type DeleteIngredientPayload {
   """
   query: Query
 
-  """An edge for our `Ingredient`. May be used by Relay 1."""
+  """
+  An edge for our `Ingredient`. May be used by Relay 1.
+  """
   ingredientEdge(
-    """The method to use when ordering `Ingredient`."""
+    """
+    The method to use when ordering `Ingredient`.
+    """
     orderBy: [IngredientsOrderBy!] = [PRIMARY_KEY_ASC]
   ): IngredientsEdge
 }
 
-"""All input for the `deleteIngredientByNodeId` mutation."""
+"""
+All input for the `deleteIngredientByNodeId` mutation.
+"""
 input DeleteIngredientByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2702,7 +3907,9 @@ input DeleteIngredientByNodeIdInput {
   nodeId: ID!
 }
 
-"""All input for the `deleteIngredient` mutation."""
+"""
+All input for the `deleteIngredient` mutation.
+"""
 input DeleteIngredientInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2712,7 +3919,69 @@ input DeleteIngredientInput {
   id: Int!
 }
 
-"""The output of our delete `Recipe` mutation."""
+"""
+The output of our delete `KnexMigrationsLock` mutation.
+"""
+type DeleteKnexMigrationsLockPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  The `KnexMigrationsLock` that was deleted by this mutation.
+  """
+  knexMigrationsLock: KnexMigrationsLock
+  deletedKnexMigrationsLockNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """
+  An edge for our `KnexMigrationsLock`. May be used by Relay 1.
+  """
+  knexMigrationsLockEdge(
+    """
+    The method to use when ordering `KnexMigrationsLock`.
+    """
+    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsLocksEdge
+}
+
+"""
+All input for the `deleteKnexMigrationsLockByNodeId` mutation.
+"""
+input DeleteKnexMigrationsLockByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `KnexMigrationsLock` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""
+All input for the `deleteKnexMigrationsLock` mutation.
+"""
+input DeleteKnexMigrationsLockInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  index: Int!
+}
+
+"""
+The output of our delete `Recipe` mutation.
+"""
 type DeleteRecipePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2720,7 +3989,9 @@ type DeleteRecipePayload {
   """
   clientMutationId: String
 
-  """The `Recipe` that was deleted by this mutation."""
+  """
+  The `Recipe` that was deleted by this mutation.
+  """
   recipe: Recipe
   deletedRecipeNodeId: ID
 
@@ -2729,14 +4000,20 @@ type DeleteRecipePayload {
   """
   query: Query
 
-  """An edge for our `Recipe`. May be used by Relay 1."""
+  """
+  An edge for our `Recipe`. May be used by Relay 1.
+  """
   recipeEdge(
-    """The method to use when ordering `Recipe`."""
+    """
+    The method to use when ordering `Recipe`.
+    """
     orderBy: [RecipesOrderBy!] = [PRIMARY_KEY_ASC]
   ): RecipesEdge
 }
 
-"""All input for the `deleteRecipeByNodeId` mutation."""
+"""
+All input for the `deleteRecipeByNodeId` mutation.
+"""
 input DeleteRecipeByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2750,7 +4027,9 @@ input DeleteRecipeByNodeIdInput {
   nodeId: ID!
 }
 
-"""All input for the `deleteRecipe` mutation."""
+"""
+All input for the `deleteRecipe` mutation.
+"""
 input DeleteRecipeInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2760,7 +4039,9 @@ input DeleteRecipeInput {
   id: Int!
 }
 
-"""The output of our delete `RecipeIngredient` mutation."""
+"""
+The output of our delete `RecipeIngredient` mutation.
+"""
 type DeleteRecipeIngredientPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2768,7 +4049,9 @@ type DeleteRecipeIngredientPayload {
   """
   clientMutationId: String
 
-  """The `RecipeIngredient` that was deleted by this mutation."""
+  """
+  The `RecipeIngredient` that was deleted by this mutation.
+  """
   recipeIngredient: RecipeIngredient
   deletedRecipeIngredientNodeId: ID
 
@@ -2777,7 +4060,9 @@ type DeleteRecipeIngredientPayload {
   """
   query: Query
 
-  """Reads a single `Recipe` that is related to this `RecipeIngredient`."""
+  """
+  Reads a single `Recipe` that is related to this `RecipeIngredient`.
+  """
   recipe: Recipe
 
   """
@@ -2785,17 +4070,25 @@ type DeleteRecipeIngredientPayload {
   """
   ingredient: Ingredient
 
-  """Reads a single `Unit` that is related to this `RecipeIngredient`."""
+  """
+  Reads a single `Unit` that is related to this `RecipeIngredient`.
+  """
   unit: Unit
 
-  """An edge for our `RecipeIngredient`. May be used by Relay 1."""
+  """
+  An edge for our `RecipeIngredient`. May be used by Relay 1.
+  """
   recipeIngredientEdge(
-    """The method to use when ordering `RecipeIngredient`."""
+    """
+    The method to use when ordering `RecipeIngredient`.
+    """
     orderBy: [RecipeIngredientsOrderBy!] = [PRIMARY_KEY_ASC]
   ): RecipeIngredientsEdge
 }
 
-"""All input for the `deleteRecipeIngredientByNodeId` mutation."""
+"""
+All input for the `deleteRecipeIngredientByNodeId` mutation.
+"""
 input DeleteRecipeIngredientByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2809,7 +4102,9 @@ input DeleteRecipeIngredientByNodeIdInput {
   nodeId: ID!
 }
 
-"""All input for the `deleteRecipeIngredient` mutation."""
+"""
+All input for the `deleteRecipeIngredient` mutation.
+"""
 input DeleteRecipeIngredientInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2819,7 +4114,9 @@ input DeleteRecipeIngredientInput {
   id: Int!
 }
 
-"""The output of our delete `Role` mutation."""
+"""
+The output of our delete `Role` mutation.
+"""
 type DeleteRolePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2827,7 +4124,9 @@ type DeleteRolePayload {
   """
   clientMutationId: String
 
-  """The `Role` that was deleted by this mutation."""
+  """
+  The `Role` that was deleted by this mutation.
+  """
   role: Role
   deletedRoleNodeId: ID
 
@@ -2836,14 +4135,20 @@ type DeleteRolePayload {
   """
   query: Query
 
-  """An edge for our `Role`. May be used by Relay 1."""
+  """
+  An edge for our `Role`. May be used by Relay 1.
+  """
   roleEdge(
-    """The method to use when ordering `Role`."""
+    """
+    The method to use when ordering `Role`.
+    """
     orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
   ): RolesEdge
 }
 
-"""All input for the `deleteRoleByNodeId` mutation."""
+"""
+All input for the `deleteRoleByNodeId` mutation.
+"""
 input DeleteRoleByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2857,7 +4162,9 @@ input DeleteRoleByNodeIdInput {
   nodeId: ID!
 }
 
-"""All input for the `deleteRole` mutation."""
+"""
+All input for the `deleteRole` mutation.
+"""
 input DeleteRoleInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2867,7 +4174,9 @@ input DeleteRoleInput {
   id: Int!
 }
 
-"""All input for the `deleteRoleByAuthority` mutation."""
+"""
+All input for the `deleteRoleByAuthority` mutation.
+"""
 input DeleteRoleByAuthorityInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2877,7 +4186,9 @@ input DeleteRoleByAuthorityInput {
   authority: String!
 }
 
-"""The output of our delete `Unit` mutation."""
+"""
+The output of our delete `Unit` mutation.
+"""
 type DeleteUnitPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2885,7 +4196,9 @@ type DeleteUnitPayload {
   """
   clientMutationId: String
 
-  """The `Unit` that was deleted by this mutation."""
+  """
+  The `Unit` that was deleted by this mutation.
+  """
   unit: Unit
   deletedUnitNodeId: ID
 
@@ -2894,14 +4207,20 @@ type DeleteUnitPayload {
   """
   query: Query
 
-  """An edge for our `Unit`. May be used by Relay 1."""
+  """
+  An edge for our `Unit`. May be used by Relay 1.
+  """
   unitEdge(
-    """The method to use when ordering `Unit`."""
+    """
+    The method to use when ordering `Unit`.
+    """
     orderBy: [UnitsOrderBy!] = [PRIMARY_KEY_ASC]
   ): UnitsEdge
 }
 
-"""All input for the `deleteUnitByNodeId` mutation."""
+"""
+All input for the `deleteUnitByNodeId` mutation.
+"""
 input DeleteUnitByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2915,7 +4234,9 @@ input DeleteUnitByNodeIdInput {
   nodeId: ID!
 }
 
-"""All input for the `deleteUnit` mutation."""
+"""
+All input for the `deleteUnit` mutation.
+"""
 input DeleteUnitInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2925,7 +4246,9 @@ input DeleteUnitInput {
   id: Int!
 }
 
-"""The output of our delete `User` mutation."""
+"""
+The output of our delete `User` mutation.
+"""
 type DeleteUserPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2933,7 +4256,9 @@ type DeleteUserPayload {
   """
   clientMutationId: String
 
-  """The `User` that was deleted by this mutation."""
+  """
+  The `User` that was deleted by this mutation.
+  """
   user: User
   deletedUserNodeId: ID
 
@@ -2942,14 +4267,20 @@ type DeleteUserPayload {
   """
   query: Query
 
-  """An edge for our `User`. May be used by Relay 1."""
+  """
+  An edge for our `User`. May be used by Relay 1.
+  """
   userEdge(
-    """The method to use when ordering `User`."""
+    """
+    The method to use when ordering `User`.
+    """
     orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
   ): UsersEdge
 }
 
-"""All input for the `deleteUserByNodeId` mutation."""
+"""
+All input for the `deleteUserByNodeId` mutation.
+"""
 input DeleteUserByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2963,7 +4294,9 @@ input DeleteUserByNodeIdInput {
   nodeId: ID!
 }
 
-"""All input for the `deleteUser` mutation."""
+"""
+All input for the `deleteUser` mutation.
+"""
 input DeleteUserInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2973,7 +4306,9 @@ input DeleteUserInput {
   id: Int!
 }
 
-"""All input for the `deleteUserByEmail` mutation."""
+"""
+All input for the `deleteUserByEmail` mutation.
+"""
 input DeleteUserByEmailInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -2983,7 +4318,9 @@ input DeleteUserByEmailInput {
   email: String!
 }
 
-"""The output of our delete `UserRole` mutation."""
+"""
+The output of our delete `UserRole` mutation.
+"""
 type DeleteUserRolePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -2991,7 +4328,9 @@ type DeleteUserRolePayload {
   """
   clientMutationId: String
 
-  """The `UserRole` that was deleted by this mutation."""
+  """
+  The `UserRole` that was deleted by this mutation.
+  """
   userRole: UserRole
   deletedUserRoleNodeId: ID
 
@@ -3000,20 +4339,30 @@ type DeleteUserRolePayload {
   """
   query: Query
 
-  """Reads a single `Role` that is related to this `UserRole`."""
+  """
+  Reads a single `Role` that is related to this `UserRole`.
+  """
   role: Role
 
-  """Reads a single `User` that is related to this `UserRole`."""
+  """
+  Reads a single `User` that is related to this `UserRole`.
+  """
   user: User
 
-  """An edge for our `UserRole`. May be used by Relay 1."""
+  """
+  An edge for our `UserRole`. May be used by Relay 1.
+  """
   userRoleEdge(
-    """The method to use when ordering `UserRole`."""
+    """
+    The method to use when ordering `UserRole`.
+    """
     orderBy: [UserRolesOrderBy!] = [PRIMARY_KEY_ASC]
   ): UserRolesEdge
 }
 
-"""All input for the `deleteUserRoleByNodeId` mutation."""
+"""
+All input for the `deleteUserRoleByNodeId` mutation.
+"""
 input DeleteUserRoleByNodeIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -3027,7 +4376,9 @@ input DeleteUserRoleByNodeIdInput {
   nodeId: ID!
 }
 
-"""All input for the `deleteUserRole` mutation."""
+"""
+All input for the `deleteUserRole` mutation.
+"""
 input DeleteUserRoleInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
@@ -3038,7 +4389,9 @@ input DeleteUserRoleInput {
   userId: Int!
 }
 
-"""The output of our `fTruncateTables` mutation."""
+"""
+The output of our `fTruncateTables` mutation.
+"""
 type FTruncateTablesPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -3052,7 +4405,9 @@ type FTruncateTablesPayload {
   query: Query
 }
 
-"""All input for the `fTruncateTables` mutation."""
+"""
+All input for the `fTruncateTables` mutation.
+"""
 input FTruncateTablesInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the

@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, ReactNode } from 'react'
 
-import { Box, useTheme } from '@mui/material'
-import { SxProps, Theme } from '@mui/material/styles'
+import Box from '@mui/material/Box'
+import { SxProps, Theme, useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Head from 'next/head'
 
@@ -45,7 +45,7 @@ export const Page: React.FC<PropsWithChildren<PageProps>> = ({
         <title>{title}</title>
       </Head>
       {!hideTitle
-        ? titleElement ?? (
+        ? (titleElement ?? (
             <Box
               component='h1'
               sx={{
@@ -59,7 +59,7 @@ export const Page: React.FC<PropsWithChildren<PageProps>> = ({
             >
               {title}
             </Box>
-          )
+          ))
         : null}
       {children}
     </Box>

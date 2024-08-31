@@ -1,11 +1,12 @@
-import * as fs from 'fs'
+import fs from 'fs'
 
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-import * as pg from 'pg'
+import 'dotenv/config'
+import pg from 'pg'
 
 const { Pool } = pg
 
-process.env.NODE_ENV !== 'production' && dotenv.config()
+// console.log('config:', { pg, env: process.env })
+// process.env.NODE_ENV !== 'production' && dotenv.config()
 
 export const getSchemas = () => (process.env.DATABASE_SCHEMAS ? process.env.DATABASE_SCHEMAS.split(',') : ['public'])
 
