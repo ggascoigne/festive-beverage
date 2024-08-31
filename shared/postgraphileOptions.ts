@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const PgOrderByRelatedPlugin = require('@graphile-contrib/pg-order-by-related')
-const PgSimplifyInflectorPlugin = require('@graphile-contrib/pg-simplify-inflector')
-const PgFulltextFilterPlugin = require('@pyramation/postgraphile-plugin-fulltext-filter')
-const ConnectionFilterPlugin = require('postgraphile-plugin-connection-filter')
+import PgOrderByRelatedPlugin from '@graphile-contrib/pg-order-by-related'
+import PgSimplifyInflectorPlugin from '@graphile-contrib/pg-simplify-inflector'
+import PgFulltextFilterPlugin from '@pyramation/postgraphile-plugin-fulltext-filter'
+import ConnectionFilterPlugin from 'postgraphile-plugin-connection-filter'
 
 export const options = {
   dynamicJson: true,

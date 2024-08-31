@@ -1,13 +1,14 @@
 import React, { Suspense } from 'react'
 
-import { Box, Popover } from '@mui/material'
+import Box from '@mui/material/Box'
+import Popover from '@mui/material/Popover'
 import { DateTime } from 'luxon'
 
 import { HasPermission, Perms, useAuth } from './Auth'
 import { Loader } from './Loader'
 
-import { useGetConfig } from '@/utils'
-import { gitHash } from '@/version'
+import { useGetConfig } from '#utils'
+import { gitHash } from '#version'
 
 const ReactJson = React.lazy(() => import('react-json-view'))
 

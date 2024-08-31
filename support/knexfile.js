@@ -1,11 +1,21 @@
-process.env.NODE_ENV !== 'production' && require('dotenv').config({ path: '.env' })
+/* eslint-disable no-underscore-dangle */
 
-const fs = require('fs')
+import fs from 'fs'
+import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url'
+
+import dotenv from 'dotenv'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+dotenv.config({ path: resolve(__dirname, '../.env') })
 
 const knexConfig = {
   migrations: {
     tableName: 'knex_migrations',
     directory: './db/migrations',
+    loadExtensions: ['.js', '.cjs', '.mjs'],
   },
   client: 'pg',
   connection: {
@@ -19,7 +29,7 @@ const knexConfig = {
         ? {
             rejectUnauthorized: true,
             sslmode: 'verify-all',
-            ca: fs.readFileSync('./shared/' + process.env.DATABASE_SSL_CERT || '').toString(),
+            ca: fs.readFileSync(resolve(__dirname, `../shared/${process.env.DATABASE_SSL_CERT}`) || '').toString(),
           }
         : false,
     charset: 'utf8',
@@ -29,7 +39,7 @@ const knexConfig = {
   acquireConnectionTimeout: 5000,
 }
 
-module.exports = knexConfig
-
 const config = knexConfig.connection
 console.log(`using: postgres://${config.user}:*****@${config.host}:${config.port}/${config.database}`)
+
+export default knexConfig

@@ -1,9 +1,10 @@
 import React, { PropsWithChildren, ReactElement, useMemo } from 'react'
 
-import { Autocomplete, TextField } from '@mui/material'
+import Autocomplete from '@mui/material/Autocomplete'
+import TextField from '@mui/material/TextField'
 
-import { GetAllDrinksDocument, GetAllDrinksQuery, GetAllIngredientsDocument, useGraphQL } from '@/client'
-import { notEmpty } from '@/utils'
+import { GetAllDrinksDocument, GetAllDrinksQuery, GetAllIngredientsDocument, useGraphQL } from '#client'
+import { notEmpty } from '#utils'
 
 interface SearchProps {
   onChange: any

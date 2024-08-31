@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { List, ListItemText } from '@mui/material'
+import List from '@mui/material/List'
+import ListItemText from '@mui/material/ListItemText'
 import { useRouter } from 'next/router'
 
 import { ListItemLink } from './ListItemLink'

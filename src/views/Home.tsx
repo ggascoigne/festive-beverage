@@ -1,16 +1,17 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { Button, Grid } from '@mui/material'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
 import { useRouter } from 'next/router'
 
-import { GetAllDrinksDocument, GetAllDrinksQuery, Drink, fetchGraphQl, useGraphQL } from '@/client'
-import { DrinkCard } from '@/components/DrinkCard'
-import { GraphQLError } from '@/components/GraphQLError'
-import { Loader } from '@/components/Loader'
-import { Link } from '@/components/Navigation'
-import { Page } from '@/components/Page'
-import { Search } from '@/components/Search'
-import { notEmpty } from '@/utils'
+import { GetAllDrinksDocument, GetAllDrinksQuery, Drink, fetchGraphQl, useGraphQL } from '#client'
+import { DrinkCard } from '#components/DrinkCard'
+import { GraphQLError } from '#components/GraphQLError'
+import { Loader } from '#components/Loader'
+import { Link } from '#components/Navigation'
+import { Page } from '#components/Page'
+import { Search } from '#components/Search'
+import { notEmpty } from '#utils'
 
 const DrinkList: React.FC<{ drinks: readonly Drink[] }> = ({ drinks }) => {
   const router = useRouter()

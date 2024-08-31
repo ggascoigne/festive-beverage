@@ -2,7 +2,7 @@ import { DateTime, Duration, DurationObjectUnits } from 'luxon'
 
 export const formatDurationFromObject = (dt: DurationObjectUnits): string => {
   const durationString = Duration.fromObject(dt).toFormat('d h m s S')
-  const [days, hours, minutes, seconds] = durationString.split(' ').map((x) => parseInt(x, 10))
+  const [days = 0, hours = 0, minutes = 0, seconds = 0] = durationString.split(' ').map((x) => parseInt(x, 10))
   let formattedDuration = ''
   if (days > 0) {
     formattedDuration = `${days}d ${hours}h ${minutes}m`

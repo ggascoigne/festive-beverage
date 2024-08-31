@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
-import { Box, IconButton, useTheme } from '@mui/material'
+import Box from '@mui/material/Box'
 import { amber, green } from '@mui/material/colors'
+import IconButton from '@mui/material/IconButton'
+import { useTheme } from '@mui/material/styles'
 import {
   CustomContentProps,
   OptionsObject,
@@ -12,7 +14,7 @@ import {
   VariantType,
 } from 'notistack'
 
-import { Children } from '@/utils'
+import { Children } from '#utils'
 
 const MySnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((props, forwardedRef) => {
   const { id, message, action: componentOrFunctionAction, iconVariant, variant, hideIconVariant, style } = props

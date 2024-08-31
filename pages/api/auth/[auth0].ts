@@ -3,7 +3,7 @@ import { handleAuth, handleLogin, handleProfile, Session } from '@auth0/nextjs-a
 import { jwtDecode } from 'jwt-decode'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { auth0Audience } from '@/pages/api/_constants'
+import { auth0Audience } from '../_constants'
 
 export default handleAuth({
   async login(req: NextApiRequest, res: NextApiResponse) {

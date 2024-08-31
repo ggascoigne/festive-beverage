@@ -1,17 +1,12 @@
-const rulesDirPlugin = require('eslint-plugin-rulesdir')
-
-rulesDirPlugin.RULES_DIR = 'eslint-rules'
-
 module.exports = {
-  plugins: ['rulesdir'],
   // when changing this, remember that you can run `pnpm eslint --print-config <filename>` to print
   // the existing used config for that path
   extends: '@ggascoigne/eslint-config/ts',
   parserOptions: {
     project: `./tsconfig.json`,
+    ecmaVersion: 2024,
   },
   rules: {
-    'rulesdir/no-promise-all': 'error',
     'no-console': 'off',
   },
   overrides: [

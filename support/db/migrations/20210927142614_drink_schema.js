@@ -1,7 +1,7 @@
 /* eslint-disable no-empty-function */
-const { updateRls } = require('./20210925165502_rls')
+import { updateRls } from './20210925165502_rls.js'
 
-exports.up = async function (knex) {
+export async function up(knex) {
   await knex.schema
     .createTable('recipe', (table) => {
       table.increments().primary()
@@ -75,4 +75,5 @@ exports.up = async function (knex) {
     `)
 }
 
-exports.down = async function (knex) {}
+// eslint-disable-next-line no-empty-function
+export async function down(knex) {}
