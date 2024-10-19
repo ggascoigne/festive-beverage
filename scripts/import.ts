@@ -11,7 +11,7 @@ import Listr from 'listr'
 import { PoolClient } from 'pg'
 import { set_fs, readFile, utils, WorkSheet } from 'xlsx'
 
-import { getPool, PoolType } from '../shared/config.ts'
+import { getPool, PoolType } from '../src/shared/config.ts'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

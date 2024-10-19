@@ -8,7 +8,6 @@ type Permissions = AtLeastOne<{
 export type Rules = Record<string, Permissions>
 
 export enum Perms {
-  GraphiqlLoad = 'graphiql:load',
   IsAdmin = 'is:Admin',
   IsLoggedIn = 'is:LoggedIn',
 }

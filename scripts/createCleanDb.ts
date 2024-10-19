@@ -4,7 +4,7 @@ import Listr from 'listr'
 
 import { createCleanDb } from './shared/scriptUtils.ts'
 
-import { config } from '../shared/config.ts'
+import { config } from '../src/shared/config.ts'
 
 const { database } = config.rootDatabase
 const targetUser = config.userDatabase.user

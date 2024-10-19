@@ -7,7 +7,7 @@ import { DateTime } from 'luxon'
 import { HasPermission, Perms, useAuth } from './Auth'
 import { Loader } from './Loader'
 
-import { useGetConfig } from '#utils'
+import { api } from '#utils/api.ts'
 import { gitHash } from '#version'
 
 const ReactJson = React.lazy(() => import('react-json-view'))
@@ -38,11 +38,15 @@ const container = {
 export const Footer: React.FC = (_props) => {
   const { hasPermissions } = useAuth()
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
-  const [config, getConfig] = useGetConfig()
+
+  const { data: config } = api.config.getConfig.useQuery(undefined, {
+    staleTime: 60 * 60 * 1000,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  })
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (hasPermissions(Perms.IsAdmin)) {
-      getConfig()
       setAnchorEl(event.currentTarget)
     }
   }

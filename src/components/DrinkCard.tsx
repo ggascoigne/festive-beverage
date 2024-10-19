@@ -12,8 +12,8 @@ import Fraction from 'fraction.js'
 
 import volume, { VolumeUnits } from './convert-units/volume'
 
-import { Drink } from '#client'
 import { notEmpty } from '#utils'
+import { Drink } from '#utils/apiTypes.ts'
 
 /*
   `configureMeasurements` is a closure that accepts a directory
@@ -79,8 +79,8 @@ export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink
           </Typography>
         )}
         <ul>
-          {drink?.recipeIngredients?.nodes?.filter(notEmpty)?.map((ingredient, i) => {
-            const amount = getAmount(ingredient.amount * quantity, ingredient.unit?.name ?? '')
+          {drink?.recipeIngredients?.filter(notEmpty)?.map((ingredient, i) => {
+            const amount = getAmount(parseFloat(ingredient.amount ?? '0') * quantity, ingredient.unit?.name ?? '')
             return (
               <Typography key={i} component='li' sx={[zoomed && { fontSize: '1.2rem' }]}>
                 {`${ingredient.ingredient?.name} ${amount}`}

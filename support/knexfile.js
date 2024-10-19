@@ -23,7 +23,7 @@ const knexConfig = {
     database: process.env.DATABASE_NAME,
     user: process.env.DATABASE_ADMIN,
     password: process.env.DATABASE_ADMIN_PASSWORD || '',
-    port: parseInt(process.env.DATABASE_PORT, 10),
+    port: parseInt(process.env.DATABASE_PORT ?? '', 10),
     ssl:
       process.env.DATABASE_SSL === '1'
         ? {

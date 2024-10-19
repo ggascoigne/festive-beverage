@@ -4,14 +4,15 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import { useRouter } from 'next/router'
 
-import { GetAllDrinksDocument, GetAllDrinksQuery, Drink, fetchGraphQl, useGraphQL } from '#client'
 import { DrinkCard } from '#components/DrinkCard'
-import { GraphQLError } from '#components/GraphQLError'
 import { Loader } from '#components/Loader'
 import { Link } from '#components/Navigation'
 import { Page } from '#components/Page'
 import { Search } from '#components/Search'
+import { TrpcError } from '#components/TrpcError'
 import { notEmpty } from '#utils'
+import { api } from '#utils/api'
+import { Drink } from '#utils/apiTypes.ts'
 
 const DrinkList: React.FC<{ drinks: readonly Drink[] }> = ({ drinks }) => {
   const router = useRouter()
@@ -56,16 +57,7 @@ const matchesOne = (s: string, d: Drink) => {
 
 const matchesSearch = (search: string[], drink: Drink) => search.every((s) => matchesOne(s, drink))
 
-export async function getServerSideProps() {
-  const allDrinks = await fetchGraphQl(GetAllDrinksDocument)
-  return { props: { allDrinks } }
-}
-
-type HomeViewProps = {
-  allDrinks?: GetAllDrinksQuery
-}
-
-export const HomeView = (props: HomeViewProps) => {
+export const HomeView = () => {
   const router = useRouter()
   const search: string[] = useMemo(() => {
     if (!router.query?.search) {
@@ -76,16 +68,19 @@ export const HomeView = (props: HomeViewProps) => {
   }, [router.query?.search])
   const drink = router.query?.drink
   const hasSearch = (search as string[])?.length > 0 || false
-  const { data, error } = useGraphQL(GetAllDrinksDocument, {
-    options: { staleTime: 60 * 60 * 1000, initialData: props.allDrinks },
+  const { data, error } = api.drinks.getAllDrinks.useQuery(undefined, {
+    staleTime: 60 * 60 * 1000,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   })
+
   const [drinks, setDrinks] = useState<Drink[] | undefined>(undefined)
 
   useEffect(() => {
     if (hasSearch) {
-      setDrinks(data?.recipes?.nodes?.filter(notEmpty).filter((d) => matchesSearch(search as string[], d)))
+      setDrinks(data?.filter(notEmpty).filter((d) => matchesSearch(search as string[], d)))
     } else {
-      setDrinks(data?.recipes?.nodes?.filter(notEmpty))
+      setDrinks(data?.filter(notEmpty))
     }
   }, [data, hasSearch, search])
 
@@ -99,7 +94,7 @@ export const HomeView = (props: HomeViewProps) => {
   )
 
   if (error) {
-    return <GraphQLError error={error} />
+    return <TrpcError error={error} />
   }
   if (!drinks) {
     return <Loader />
@@ -114,7 +109,7 @@ export const HomeView = (props: HomeViewProps) => {
   } else {
     return (
       <Page title='Festive Beverages' hideTitle>
-        <Search value={search} onChange={setSearch} allDrinks={props.allDrinks!} />
+        <Search value={search} onChange={setSearch} />
         <DrinkList drinks={drinks} />
       </Page>
     )

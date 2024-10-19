@@ -1,6 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    /* Base Options: */
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "es2022",
@@ -8,23 +9,41 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
+
+    /* Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
-    "module": "Preserve",
-    "rootDir": ".",
-    "baseUrl": ".",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "checkJs": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
+
+    /* Bundled projects */
+    "lib": ["dom", "dom.iterable", "ESNext"],
     "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "jsx": "preserve",
-    "jsxImportSource": "@emotion/react",
-    "noErrorTruncation": true,
+    "plugins": [{ "name": "next" }],
     "incremental": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+
+    // "module": "Preserve",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "jsxImportSource": "@emotion/react",
+    "noErrorTruncation": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.mts", "**/*.cts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.mts",
+    "**/*.cts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.js",
+    ".next/types/**/*.ts"
+  ],
   //  "include": ["api", "scripts", "shared", "src", "types"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "build", "public", "./next.config.cjs"]
 }

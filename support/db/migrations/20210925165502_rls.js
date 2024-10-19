@@ -1,4 +1,9 @@
-// protect the user column from causing syntax errors
+/**
+ * protect the user column from causing syntax errors
+ *
+ * @param {string} name
+ * @returns {string}
+ */
 export const q = (name) => (name === 'user' ? '"user"' : name)
 
 // no access if not logged in
@@ -18,7 +23,11 @@ export const q = (name) => (name === 'user' ? '"user"' : name)
 //     using (current_user_is_admin());
 //   `
 
-// read only if not logged on
+/**
+ * read only if not logged on
+ * @param {string} table
+ * @returns {string}
+ */
 const anyUserUpdatePolicy = (table) => `
   create policy ${table}_sel_policy on ${q(table)}
     for select
@@ -27,6 +36,10 @@ const anyUserUpdatePolicy = (table) => `
     using (current_user_id()::boolean);
   `
 
+/**
+ * @param {string} table
+ * @returns {string}
+ */
 const adminUpdatePolicy = (table) => `
   create policy ${table}_sel_policy on ${q(table)}
     for select
@@ -35,6 +48,11 @@ const adminUpdatePolicy = (table) => `
     using (current_user_is_admin());
   `
 
+/**
+ * @param {import('knex').Knex} knex
+ * @param {{ name: string;  admin: boolean }[]} tables
+ * @returns {Promise<void>}
+ */
 export const updateRls = async (knex, tables) => {
   await knex.raw(
     tables
@@ -55,6 +73,10 @@ export const updateRls = async (knex, tables) => {
   await knex.raw(tables.map((table) => `alter table ${q(table.name)} enable row level security;`).join('\n'))
 }
 
+/**
+ * @param {import('knex').Knex} knex
+ * @returns {Promise<void>}
+ */
 export async function up(knex) {
   const user = process.env.DATABASE_USER
   const password = process.env.DATABASE_USER_PASSWORD ?? ''
@@ -78,5 +100,9 @@ export async function up(knex) {
   await updateRls(knex, tables)
 }
 
+/**
+ * @param {import('knex').Knex} knex
+ * @returns {Promise<void>}
+ */
 // eslint-disable-next-line no-empty-function
 export async function down(knex) {}

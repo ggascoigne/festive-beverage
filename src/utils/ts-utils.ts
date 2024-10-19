@@ -4,7 +4,7 @@ import { O } from 'ts-toolbelt'
 import { Key } from 'ts-toolbelt/out/Any/Key'
 import { List } from 'ts-toolbelt/out/List/List'
 
-export type Maybe<T> = T | null
+export type Maybe<T> = T | null | undefined
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N
@@ -14,11 +14,8 @@ export type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N
 export type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never
 
 // expands object types recursively
-export type ExpandRecursively<T> = T extends Record<string, unknown>
-  ? T extends infer O
-    ? { [K in keyof O]: ExpandRecursively<O[K]> }
-    : never
-  : T
+export type ExpandRecursively<T> =
+  T extends Record<string, unknown> ? (T extends infer O ? { [K in keyof O]: ExpandRecursively<O[K]> } : never) : T
 
 // Cool trick
 // eslint-disable-next-line @typescript-eslint/naming-convention

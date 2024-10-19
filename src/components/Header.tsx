@@ -9,7 +9,8 @@ import Typography from '@mui/material/Typography'
 import { HasPermission, Perms } from './Auth'
 
 import { Link } from '#components/Navigation'
-import { Config, useGetConfig } from '#utils'
+import { api } from '#utils/api.ts'
+import { Config } from '#utils/apiTypes.ts'
 
 interface HeaderProps {
   handleDrawerToggle: () => void
@@ -17,12 +18,13 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu }) => {
-  const [config, getConfig] = useGetConfig()
-  const [configDetails, setConfigDetails] = useState('')
+  const { data: config } = api.config.getConfig.useQuery(undefined, {
+    staleTime: 60 * 60 * 1000,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  })
 
-  useEffect(() => {
-    getConfig()
-  }, [getConfig])
+  const [configDetails, setConfigDetails] = useState('')
 
   useEffect(() => {
     const getConfigDetails = (conf: Config | undefined, href: string | undefined) => {
