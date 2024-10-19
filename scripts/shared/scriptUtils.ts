@@ -5,7 +5,7 @@ import chalk from 'chalk'
 import { stripIndent } from 'common-tags'
 import { temporaryFile } from 'tempy'
 
-import { DbConfig } from '../../shared/config.ts'
+import { DbConfig } from '../../src/shared/config.ts'
 
 export function getPostgresArgs(dbconfig: DbConfig) {
   const { database, host, port, user, password, ssl } = dbconfig

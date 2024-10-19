@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["typedSql"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Ingredient {
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(128)
+  tags              String?             @db.VarChar(128)
+  sort              Int?                @default(0)
+  description       String?
+  recipeIngredients RecipeIngredient[]
+
+  @@map("ingredient")
+}
+
+model KnexMigration {
+  id             Int       @id @default(autoincrement())
+  name           String?   @db.VarChar(255)
+  batch          Int?
+  migrationTime  DateTime? @db.Timestamptz(6)
+
+  @@map("knex_migrations")
+}
+
+model KnexMigrationLock {
+  index     Int  @id @default(autoincrement())
+  isLocked  Int?
+
+  @@map("knex_migrations_lock")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Recipe {
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(128)
+  description       String?
+  instructions      String?
+  ingredientText    String              @map("ingredient_text")
+  glass             String?             @db.VarChar(65)
+  garnish           String?             @db.VarChar(65)
+  source            String?             @db.VarChar(128)
+  ts                Unsupported("tsvector")? @default(dbgenerated("((((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::\"char\") || setweight(to_tsvector('english'::regconfig, ingredient_text), 'B'::\"char\")) || setweight(to_tsvector('english'::regconfig, COALESCE(description, ''::text)), 'C'::\"char\")) || setweight(to_tsvector('english'::regconfig, COALESCE(instructions, ''::text)), 'C'::\"char\")) || setweight(to_tsvector('english'::regconfig, (COALESCE(glass, ''::character varying))::text), 'D'::\"char\"))"))
+  recipeIngredients RecipeIngredient[]
+
+  @@index([ts], map: "ts_idx", type: Gin)
+  @@map("recipe")
+}
+
+model RecipeIngredient {
+  id            Int        @id @default(autoincrement())
+  recipeId      Int        @map("recipe_id")
+  ingredientId  Int        @map("ingredient_id")
+  unitId        Int        @map("unit_id")
+  amount        Decimal?   @db.Decimal(20, 8)
+  modifier      String?    @db.VarChar(32)
+  ingredient    Ingredient @relation(fields: [ingredientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  recipe        Recipe     @relation(fields: [recipeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  unit          Unit       @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([ingredientId], map: "recipe_ingredient_ingredient_id_index")
+  @@index([recipeId], map: "recipe_ingredient_recipe_id_index")
+  @@index([unitId], map: "recipe_ingredient_unit_id_index")
+  @@map("recipe_ingredient")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Role {
+  id        Int         @id @default(autoincrement())
+  authority String      @unique(map: "role_authority_unique") @db.VarChar(40)
+  userRoles UserRole[]
+
+  @@map("role")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Unit {
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(32)
+  asMl              Decimal?            @db.Decimal(10, 6) @map("as_ml")
+  sort              Int?                @default(0)
+  recipeIngredients RecipeIngredient[]
+
+  @@map("unit")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model User {
+  id        Int         @id @default(autoincrement())
+  email     String      @unique(map: "user_email_unique") @db.VarChar(64)
+  userRoles UserRole[]
+
+  @@map("user")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model UserRole {
+  roleId Int  @map("role_id")
+  userId Int  @map("user_id")
+  role   Role @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([roleId, userId])
+  @@index([roleId], map: "user_role_role_id_index")
+  @@index([userId], map: "user_role_user_id_index")
+  @@map("user_role")
+}

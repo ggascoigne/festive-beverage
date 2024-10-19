@@ -4,7 +4,7 @@ import Listr from 'listr'
 
 import { getPostgresArgs, resetOwner } from './shared/scriptUtils.ts'
 
-import { config } from '../shared/config.ts'
+import { config } from '../src/shared/config.ts'
 
 const targetUser = config.userDatabase.user
 

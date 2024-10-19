@@ -21,9 +21,4 @@ export const rootRoutes: RootRoutes = [
     label: 'Home',
     exact: true,
   },
-  {
-    path: '/graphiql',
-    label: 'GraphQL',
-    exact: true,
-  },
 ]

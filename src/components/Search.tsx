@@ -3,26 +3,29 @@ import React, { PropsWithChildren, ReactElement, useMemo } from 'react'
 import Autocomplete from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
 
-import { GetAllDrinksDocument, GetAllDrinksQuery, GetAllIngredientsDocument, useGraphQL } from '#client'
 import { notEmpty } from '#utils'
+import { api } from '#utils/api.ts'
 
 interface SearchProps {
   onChange: any
   value: string[]
-  allDrinks: GetAllDrinksQuery
 }
-export function Search({ onChange, value, allDrinks }: PropsWithChildren<SearchProps>): ReactElement | null {
-  const { data: ingredients } = useGraphQL(GetAllIngredientsDocument, {
-    options: { staleTime: 60 * 60 * 1000, initialData: allDrinks },
+export function Search({ onChange, value }: PropsWithChildren<SearchProps>): ReactElement | null {
+  const { data: ingredients } = api.drinks.getAllIngredients.useQuery(undefined, {
+    staleTime: 60 * 60 * 1000,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   })
-  const { data: drinks } = useGraphQL(GetAllDrinksDocument)
+  const { data: drinks } = api.drinks.getAllDrinks.useQuery(undefined, {
+    staleTime: 60 * 60 * 1000,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  })
 
   const names = useMemo(() => {
     const set = new Set<string>(
-      ingredients?.ingredients?.nodes
-        ?.flatMap((n) => (n?.tags ? [n?.name, ...n.tags.split(' ')] : [n?.name]))
-        .filter(notEmpty)
-    ).union(new Set(drinks?.recipes?.nodes?.map((r) => r?.name).filter(notEmpty)))
+      ingredients?.flatMap((n) => (n?.tags ? [n?.name, ...n.tags.split(' ')] : [n?.name])).filter(notEmpty)
+    ).union(new Set(drinks?.map((r) => r?.name).filter(notEmpty)))
     return Array.from(set).sort((a, b) => -b.localeCompare(a)) ?? []
   }, [ingredients, drinks])
 
