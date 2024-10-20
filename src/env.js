@@ -1,9 +1,19 @@
+import path from 'path'
+
 // eslint-disable-next-line import/no-unresolved
 import { createEnv } from '@t3-oss/env-nextjs'
+import dotenv from 'dotenv'
 import { z } from 'zod'
+
+import { getPaths } from './shared/filePaths.js'
 
 export const isDev = process.env.NODE_ENV !== 'production'
 export const isTest = process.env.NODE_ENV === 'test'
+
+if (isDev) {
+  const { dirname } = getPaths(import.meta.url)
+  dotenv.config({ path: path.resolve(dirname, '../.env') })
+}
 
 export const env = createEnv({
   /**

@@ -34,7 +34,7 @@
     "db:clean": "pnpm db:start && ./scripts/createCleanDb.ts",
     "db:import": "pnpm db:start && ./scripts/toLocal.sh",
     "db:migrate:generate": "knex migrate:make --knexfile ./support/knexfile.js",
-    "db:migrate:up": "knex migrate:latest --knexfile ./support/knexfile.js",
+    "db:migrate:up": "tsx node_modules/knex/bin/cli.js migrate:latest --knexfile ./support/knexfile.ts up",
     "db:setup": "pnpm db:clean && pnpm db:migrate:up",
     "db:start": "docker compose up -d && ./scripts/wait-for-postgres.sh -c festive-beverage-postgres",
     "dev": "pnpm boot && next dev -p 40000",
