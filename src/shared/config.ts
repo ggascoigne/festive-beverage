@@ -1,14 +1,10 @@
 import fs from 'fs'
 
-import 'dotenv/config'
 import pg from 'pg'
 
 import { env } from '#env'
 
 const { Pool } = pg
-
-// console.log('config:', { pg, env: env })
-// env.NODE_ENV !== 'production' && dotenv.config()
 
 export const getSchemas = () => (env.DATABASE_SCHEMAS ? env.DATABASE_SCHEMAS.split(',') : ['public'])
 
