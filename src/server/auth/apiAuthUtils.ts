@@ -1,6 +1,7 @@
 import { Session } from '@auth0/nextjs-auth0'
 import { getUserWithRoles, createUser } from '@prisma/client/sql'
 
+import { isDev } from '#env'
 import { dbAdmin } from '#server/db'
 
 type AuthInfo = { userId: number; roles: string[] }
@@ -19,11 +20,11 @@ export const getUserRoles = async (session: Session): Promise<AuthInfo | undefin
     return undefined
   }
   if (!session?.user?.email_verified) {
-    process.env.NODE_ENV !== 'production' && console.log('User not verified')
+    isDev && console.log('User not verified')
     return undefined
   }
   if ((session.accessTokenExpiresAt || 0) < new Date().getTime() / 1000) {
-    process.env.NODE_ENV !== 'production' && console.log('Session has expired')
+    isDev && console.log('Session has expired')
     return undefined
   }
 
