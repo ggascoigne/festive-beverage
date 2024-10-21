@@ -12,20 +12,19 @@ class MyDocument extends Document {
           <meta name='application-name' content='Festive Beverage' />
           <meta name='apple-mobile-web-app-capable' content='yes' />
           <meta name='apple-mobile-web-app-status-bar-style' content='default' />
-          <meta name='apple-mobile-web-app-title' content='Festive Beverage' />
           <meta name='description' content='Do you want a Festive Beverage?' />
           <meta name='mobile-web-app-capable' content='yes' />
 
           <meta name='theme-color' content={theme.palette.primary.main} />
 
-          <link rel='shortcut icon' href='/favicon.ico' />
-
           <meta name='author' content='guy@wyrdrune.com' />
 
+          <link rel='icon' type='image/png' href='/favicon-48x48.png' sizes='48x48' />
+          <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+          <link rel='shortcut icon' href='/favicon.ico' />
           <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
-          <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
-          <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
-          <link rel='manifest' href='/manifest.json' />
+          <meta name='apple-mobile-web-app-title' content='Festive Beverage' />
+          <link rel='manifest' href='/site.webmanifest' />
 
           <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap' />
           <meta name='emotion-insertion-point' content='' />
