@@ -1,27 +1,31 @@
 import path from 'path'
 
-// eslint-disable-next-line import/no-unresolved
+import { vercel } from '@t3-oss/env-core/presets'
 import { createEnv } from '@t3-oss/env-nextjs'
 import dotenv from 'dotenv'
 import { z } from 'zod'
 
 import { getPaths } from './shared/filePaths.js'
 
+export * from './utils/connectionStringUtils'
+
 export const isDev = process.env.NODE_ENV !== 'production'
 export const isTest = process.env.NODE_ENV === 'test'
 
-if (isDev) {
+if (isDev && typeof window === 'undefined') {
   const { dirname } = getPaths(import.meta.url)
   dotenv.config({ path: path.resolve(dirname, '../.env') })
 }
 
 export const env = createEnv({
+  extends: [vercel()],
   /**
    * Specify your server-side environment variables schema here. This way you can ensure the app
    * isn't built with invalid env vars.
    */
   server: {
-    // DATABASE_URL: z.string().url(),
+    DATABASE_URL: z.string().url(),
+    ADMIN_DATABASE_URL: z.string().url(),
     NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
 
     MANAGEMENT_CLIENT_ID: z.string(),
@@ -35,14 +39,6 @@ export const env = createEnv({
     AUTH_DOMAIN: z.string(),
     DATABASE_SCHEMAS: z.string().optional(),
 
-    DATABASE_HOST: z.string(),
-    DATABASE_NAME: z.string(),
-    DATABASE_ADMIN: z.string(),
-    DATABASE_ADMIN_PASSWORD: z.string().optional(),
-    DATABASE_USER: z.string(),
-    DATABASE_USER_PASSWORD: z.string(),
-    DATABASE_PORT: z.string(),
-    DATABASE_SSL: z.string().optional(),
     DATABASE_SSL_CERT: z.string().optional(),
 
     SMTP_USERNAME: z.string(),
@@ -57,7 +53,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_PORT: z.string().optional(),
   },
 
   /**
@@ -65,9 +61,9 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    // DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_URL: process.env.DATABASE_URL,
+    ADMIN_DATABASE_URL: process.env.ADMIN_DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 
     MANAGEMENT_CLIENT_ID: process.env.MANAGEMENT_CLIENT_ID,
     MANAGEMENT_CLIENT_SECRET: process.env.MANAGEMENT_CLIENT_SECRET,
@@ -80,20 +76,14 @@ export const env = createEnv({
     AUTH_DOMAIN: (process.env.AUTH0_ISSUER_BASE_URL ?? '').slice(8),
     DATABASE_SCHEMAS: process.env.DATABASE_SCHEMAS,
 
-    DATABASE_HOST: process.env.DATABASE_HOST,
-    DATABASE_NAME: process.env.DATABASE_NAME,
-    DATABASE_ADMIN: process.env.DATABASE_ADMIN,
-    DATABASE_ADMIN_PASSWORD: process.env.DATABASE_ADMIN_PASSWORD,
-    DATABASE_USER: process.env.DATABASE_USER,
-    DATABASE_USER_PASSWORD: process.env.DATABASE_USER_PASSWORD,
-    DATABASE_PORT: process.env.DATABASE_PORT,
-    DATABASE_SSL: process.env.DATABASE_SSL,
     DATABASE_SSL_CERT: process.env.DATABASE_SSL_CERT,
 
     SMTP_USERNAME: process.env.SMTP_USERNAME,
     SMTP_PASSWORD: process.env.SMTP_PASSWORD,
     SMTP_HOST: process.env.SMTP_HOST,
     SMTP_PORT: process.env.SMTP_PORT,
+
+    NEXT_PUBLIC_PORT: process.env.PORT,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -4,7 +4,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import { getUserRoles } from './apiAuthUtils'
 
-process.env.AUTH0_BASE_URL = process.env.AUTH0_BASE_URL ?? process.env.VERCEL_URL
+import { env } from '#env'
+
+process.env.AUTH0_BASE_URL = env.AUTH0_BASE_URL ?? env.VERCEL_URL
 
 const afterCallback: AfterCallback = async (_req, _res, session, _state) => {
   const authorization = await getUserRoles(session)

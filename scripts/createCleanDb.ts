@@ -1,21 +1,22 @@
 #!/usr/bin/env node_modules/.bin/tsx
 import chalk from 'chalk'
-import Listr from 'listr'
+import { Listr } from 'listr2'
 
-import { createCleanDb } from './shared/scriptUtils.ts'
+import { createCleanDb } from './shared/scriptUtils'
 
-import { config } from '../src/shared/config.ts'
+import { config } from '../src/shared/config'
 
-const { database } = config.rootDatabase
-const targetUser = config.userDatabase.user
-const targetUserPassword = config.userDatabase.password
+import { parsePostgresConnectionString } from '#env'
+
+const { database } = parsePostgresConnectionString(config.rootDatabase)
+const { user: targetUser, password: targetUserPassword } = parsePostgresConnectionString(config.userDatabase)
 
 console.log(`Recreating database ${database}`)
 
 const tasks = new Listr([
   {
     title: `cleaning database`,
-    task: () => createCleanDb(config.rootDatabase, targetUser, targetUserPassword, false),
+    task: () => createCleanDb(config.rootDatabase, targetUser!, targetUserPassword!, false),
   },
 ])
 

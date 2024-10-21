@@ -7,9 +7,10 @@ import { temporaryFile } from 'tempy'
 
 import { DbConfig } from '../../src/shared/config.ts'
 
+import { parsePostgresConnectionString, recreatePostgresConnectionString } from '#env'
+
 export function getPostgresArgs(dbconfig: DbConfig) {
-  const { database, host, port, user, password, ssl } = dbconfig
-  return `postgresql://${user}:${password}@${host}:${port}/${database}${ssl ? '?sslmode=require' : ''}`
+  return dbconfig
 }
 
 export const bail = (reason: any) => {
@@ -54,7 +55,7 @@ export async function resetOwner(dbconfig: DbConfig, targetUser: string, verbose
     grant execute on all routines in schema public to ${targetUser};
   `
   // @formatter:on
-  psql({ ...dbconfig }, script, verbose)
+  psql(dbconfig, script, verbose)
 }
 
 export async function createCleanDb(
@@ -63,7 +64,8 @@ export async function createCleanDb(
   targetUserPassword: string,
   verbose: boolean
 ) {
-  const { database, user } = dbconfig
+  const config = parsePostgresConnectionString(dbconfig)
+  const { database, user } = config
   // useful for tests since it forces dropping local connections
   // const script = stripIndent`
   //   -- Disallow new connections
@@ -88,9 +90,10 @@ export async function createCleanDb(
     ALTER DATABASE ${database} OWNER TO ${user}; 
     \\connect ${database} 
     DROP DATABASE IF EXISTS temporary_db_that_shouldnt_exist;
-   `
+  `
   // @formatter:on
-  psql({ ...dbconfig, database: 'postgres' }, script, verbose)
+  const newUrl = recreatePostgresConnectionString({ ...config, database: 'postgres' })
+  psql(newUrl, script, verbose)
 
   // @formatter:off
   // language=PL
@@ -104,9 +107,9 @@ export async function createCleanDb(
     END IF;
     END
     $do$;
-   `
+  `
   // @formatter:on
-  psql({ ...dbconfig, database: 'postgres' }, script2, verbose)
+  psql(newUrl, script2, verbose)
 
   await resetOwner(dbconfig, targetUser, verbose)
 }

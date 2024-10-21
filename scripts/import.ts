@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url'
 
 import chalk from 'chalk'
 import Fraction from 'fraction.js'
-import Listr from 'listr'
+import { Listr } from 'listr2'
 import { PoolClient } from 'pg'
 import { set_fs, readFile, utils, WorkSheet } from 'xlsx'
 
@@ -238,8 +238,7 @@ const tasks = new Listr([
     task: async () => {
       const workbook = readFile('/Users/ggp/Dropbox (Maestral)/Drinks Shared Folder/Drinks Excel Data.xlsx')
       const drinks = getDrinks(workbook.Sheets.Ingredients!)
-
-      const pool = getPool(PoolType.ADMIN, `${__dirname}/./shared/`)
+      const pool = getPool(PoolType.ADMIN)
       const client: PoolClient = await pool.connect()
 
       for (const drink of drinks) {

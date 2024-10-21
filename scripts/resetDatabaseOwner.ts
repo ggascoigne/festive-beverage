@@ -1,19 +1,21 @@
 #!/usr/bin/env node_modules/.bin/tsx
 import chalk from 'chalk'
-import Listr from 'listr'
+import { Listr } from 'listr2'
 
-import { getPostgresArgs, resetOwner } from './shared/scriptUtils.ts'
+import { getPostgresArgs, resetOwner } from './shared/scriptUtils'
 
-import { config } from '../src/shared/config.ts'
+import { config } from '../src/shared/config'
 
-const targetUser = config.userDatabase.user
+import { parsePostgresConnectionString } from '#env'
+
+const { user: targetUser } = parsePostgresConnectionString(config.userDatabase)
 
 console.log(chalk.bold.green('Using'), getPostgresArgs(config.rootDatabase))
 
 const tasks = new Listr([
   {
     title: `resetting database owner for ${targetUser}`,
-    task: () => resetOwner(config.rootDatabase, targetUser, false),
+    task: () => resetOwner(config.rootDatabase, targetUser!, false),
   },
 ])
 
