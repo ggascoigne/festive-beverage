@@ -15,7 +15,7 @@ export const parsePostgresConnectionString = (connectionString: string): Postgre
 
   const match = regex.exec(mainPart!)
 
-  console.log('connectionStringUtils:', { connectionString, mainPart: `|${mainPart}|`, queryString, match })
+  // console.log('connectionStringUtils:', { connectionString, mainPart: `|${mainPart}|`, queryString, match })
   if (!match || !match.groups) {
     throw new Error(`Invalid connection string format: ${connectionString}`)
   }
