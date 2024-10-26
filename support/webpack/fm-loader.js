@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // See the patch-package patch for react-scripts
 // and https://mdxjs.com/guides/custom-loader
 

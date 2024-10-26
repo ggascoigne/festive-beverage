@@ -1,6 +1,6 @@
 #!/usr/bin/env node_modules/.bin/tsx
 
-/* eslint-disable no-await-in-loop, @typescript-eslint/naming-convention, default-case */
+/* eslint-disable no-await-in-loop, no-restricted-syntax, @typescript-eslint/naming-convention, default-case */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -166,7 +166,6 @@ const create = async (client: PoolClient, drink: Drink) => {
     const unitId = quantity?.unit ? await getUnit(client, quantity.unit) : undefined
 
     if (quantity) {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const _insertIngredient = await query(
         client,
         `

@@ -11,11 +11,11 @@ export type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N
 
 // from https://stackoverflow.com/questions/57683303/how-can-i-see-the-full-expanded-contract-of-a-typescript-type
 // expands object types one level deep
-export type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never
+export type Expand<T> = T extends infer R ? { [K in keyof R]: R[K] } : never
 
 // expands object types recursively
 export type ExpandRecursively<T> =
-  T extends Record<string, unknown> ? (T extends infer O ? { [K in keyof O]: ExpandRecursively<O[K]> } : never) : T
+  T extends Record<string, unknown> ? (T extends infer R ? { [K in keyof R]: ExpandRecursively<R[K]> } : never) : T
 
 // Cool trick
 // eslint-disable-next-line @typescript-eslint/naming-convention

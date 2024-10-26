@@ -80,8 +80,7 @@ export async function up(knex) {
 }
 
 /**
- * @param {import('knex').Knex} knex
+ * @param {import('knex').Knex} _knex
  * @returns {Promise<void>}
  */
-// eslint-disable-next-line no-empty-function
-export async function down(knex) {}
+export async function down(_knex) {}

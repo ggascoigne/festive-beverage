@@ -49,33 +49,35 @@ const RightMenu: React.FC<{ size: 'normal' | 'small' | 'tiny' }> = (props) => (
   </List>
 )
 
-export const Layout: React.FC<{ children: React.ReactNode }> = React.memo(({ children }) => {
-  const [mobileOpen, setMobileOpen] = useState(false)
+export const Layout: React.FC<{ children: React.ReactNode }> = React.memo(
+  ({ children }: { children: React.ReactNode }) => {
+    const [mobileOpen, setMobileOpen] = useState(false)
 
-  const handleDrawerToggle = useCallback(() => {
-    setMobileOpen(!mobileOpen)
-  }, [mobileOpen])
+    const handleDrawerToggle = useCallback(() => {
+      setMobileOpen(!mobileOpen)
+    }, [mobileOpen])
 
-  return (
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-      <Header handleDrawerToggle={handleDrawerToggle} rightMenu={RightMenu} />
-      <Drawer
-        variant='temporary'
-        anchor='left'
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-      >
-        <DrawerContents />
-        <Divider />
-        <RightMenu size='small' />
-      </Drawer>
-      <Box component='main' sx={{ minHeight: '100vh', width: '100%', flexGrow: 1, paddingBottom: 3 }}>
-        <Box sx={(theme) => ({ ...theme.mixins.toolbar })} />
-        {children}
+    return (
+      <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+        <Header handleDrawerToggle={handleDrawerToggle} rightMenu={RightMenu} />
+        <Drawer
+          variant='temporary'
+          anchor='left'
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <DrawerContents />
+          <Divider />
+          <RightMenu size='small' />
+        </Drawer>
+        <Box component='main' sx={{ minHeight: '100vh', width: '100%', flexGrow: 1, paddingBottom: 3 }}>
+          <Box sx={(theme) => ({ ...theme.mixins.toolbar })} />
+          {children}
+        </Box>
       </Box>
-    </Box>
-  )
-})
+    )
+  }
+)

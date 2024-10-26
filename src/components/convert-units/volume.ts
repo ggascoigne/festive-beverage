@@ -2,9 +2,6 @@ import { Measure, Unit } from 'convert-units'
 
 // modified to call fl-oz a simple oz.
 
-export type VolumeUnits = VolumeMetricUnits | VolumeImperialUnits
-export type VolumeSystems = 'metric' | 'imperial'
-
 export type VolumeMetricUnits =
   | 'mm3'
   | 'cm3'
@@ -26,13 +23,16 @@ export type VolumeMetricUnits =
 
 export type VolumeImperialUnits = 'tsp' | 'tbs' | 'in3' | 'oz' | 'cup' | 'pnt' | 'qt' | 'gal' | 'ft3' | 'yd3'
 
+export type VolumeUnits = VolumeMetricUnits | VolumeImperialUnits
+export type VolumeSystems = 'metric' | 'imperial'
+
 const metric: Record<VolumeMetricUnits, Unit> = {
   mm3: {
     name: {
       singular: 'Cubic Millimeter',
       plural: 'Cubic Millimeters',
     },
-    to_anchor: 1 / 1000000,
+    to_anchor: 1 / 1_000_000,
   },
   cm3: {
     name: {

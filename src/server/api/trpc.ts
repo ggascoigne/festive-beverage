@@ -1,5 +1,5 @@
 /* eslint-disable prefer-destructuring */
-/* eslint-disable arrow-body-style */
+
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
  * 1. You want to modify request context (see Part 1).
@@ -65,7 +65,6 @@ export const createTRPCRouter = t.router
 const timingMiddleware = t.middleware(async ({ next, path }) => {
   const start = Date.now()
 
-  // eslint-disable-next-line etc/no-internal
   if (t._config.isDev) {
     // artificial delay in dev
     const waitMs = Math.floor(Math.random() * 400) + 100

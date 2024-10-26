@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import { AfterCallback, handleCallback } from '@auth0/nextjs-auth0'
 import { NextApiRequest, NextApiResponse } from 'next'
 

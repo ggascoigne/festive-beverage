@@ -206,6 +206,7 @@ export const LoginButton: React.FC<LoginMenuProps> = ({ size = 'normal' }) => {
               resetPassword()
               break
             case MENU_ITEM_SIGN_OUT:
+            default:
               queryClient.clear()
               router.push('/api/auth/logout')
               break
