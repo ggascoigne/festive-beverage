@@ -84,3 +84,5 @@ tsconfig.tsbuildinfo
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
 **/public/fallback-*.js
+
+lint_research/

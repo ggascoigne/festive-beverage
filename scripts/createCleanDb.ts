@@ -2,23 +2,9 @@
 import chalk from 'chalk'
 import { Listr } from 'listr2'
 
-import { createCleanDb } from './shared/scriptUtils'
+import { createCleanDbTask } from './shared/tasks'
 
-import { config } from '../src/shared/config'
-
-import { parsePostgresConnectionString } from '#env'
-
-const { database } = parsePostgresConnectionString(config.rootDatabase)
-const { user: targetUser, password: targetUserPassword } = parsePostgresConnectionString(config.userDatabase)
-
-console.log(`Recreating database ${database}`)
-
-const tasks = new Listr([
-  {
-    title: `cleaning database`,
-    task: () => createCleanDb(config.rootDatabase, targetUser!, targetUserPassword!, false),
-  },
-])
+const tasks = new Listr(createCleanDbTask)
 
 tasks.run().catch((reason: any) => {
   console.error(chalk.bold.red('error detected'))

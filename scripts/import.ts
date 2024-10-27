@@ -1,4 +1,5 @@
 #!/usr/bin/env node_modules/.bin/tsx
+/* eslint-disable no-plusplus */
 
 /* eslint-disable no-await-in-loop, no-restricted-syntax, @typescript-eslint/naming-convention, default-case */
 import fs from 'fs'
@@ -6,12 +7,15 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 import chalk from 'chalk'
+import debug from 'debug'
 import Fraction from 'fraction.js'
 import { Listr } from 'listr2'
 import { PoolClient } from 'pg'
 import { set_fs, readFile, utils, WorkSheet } from 'xlsx'
 
 import { getPool, PoolType } from '../src/shared/config.ts'
+
+const log = debug('import')
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -151,7 +155,7 @@ const create = async (client: PoolClient, drink: Drink) => {
   )
   const recipeId = insert?.rows?.[0]?.id
 
-  // console.log(drink)
+  log('creating drink %o', drink)
   //  const result = await query( client,query)
   // eslint-disable-next-line guard-for-in
   for (const ingredient in drink.ingredients) {
@@ -235,16 +239,24 @@ const tasks = new Listr([
   {
     title: `Importing Drinks from spreadsheet`,
     task: async () => {
+      log('starting import')
       const workbook = readFile('/Users/ggp/Dropbox (Maestral)/Drinks Shared Folder/Drinks Excel Data.xlsx')
+      log('read workbook')
       const drinks = getDrinks(workbook.Sheets.Ingredients!)
+      log('loaded drinks')
       const pool = getPool(PoolType.ADMIN)
-      const client: PoolClient = await pool.connect()
+      log('got pool')
 
+      const client: PoolClient = await pool.connect()
+      log('got client')
+
+      let count = 0
       for (const drink of drinks) {
         await create(client, drink)
+        count++
       }
-
       client.release()
+      console.log(`import of ${count} drinks complete`)
     },
   },
 ])

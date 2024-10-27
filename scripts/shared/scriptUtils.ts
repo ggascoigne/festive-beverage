@@ -3,42 +3,63 @@ import fs from 'fs'
 
 import chalk from 'chalk'
 import { stripIndent } from 'common-tags'
+import debug from 'debug'
 import { temporaryFile } from 'tempy'
 
 import { DbConfig } from '../../src/shared/config.ts'
 
 import { parsePostgresConnectionString, recreatePostgresConnectionString } from '#env'
 
-export function getPostgresArgs(dbconfig: DbConfig) {
-  return dbconfig
+const log = debug('script')
+
+const waitForStreamToFlush = (stream: NodeJS.WritableStream): Promise<void> =>
+  new Promise((resolve) => {
+    // @ts-ignore
+    if (stream.writableFinished) {
+      resolve() // Stream already flushed
+    } else {
+      stream.once('finish', resolve)
+    }
+  })
+
+// Call this before exiting the process
+const waitForStreamsToFlush = async () => {
+  await Promise.all([waitForStreamToFlush(process.stdout), waitForStreamToFlush(process.stderr)])
 }
 
-export const bail = (reason: any) => {
+export function getPostgresArgs(dbconfig: DbConfig) {
+  // psql doesn't accept the sql-1 parameter even though other things do
+  // so remove it so we don't have to manage two connection strings
+  return dbconfig.replace(/ssl=1&/, '')
+}
+
+export const bail = async (reason: any) => {
   if (reason) {
     console.error(chalk.bold.red('error detected'))
     console.error(reason)
+    await waitForStreamsToFlush()
     process.exit(-1)
   }
 }
-export const runOrExit = (processStatus: SpawnSyncReturns<Buffer>, cmd?: string) => {
+export const runOrExit = async (processStatus: SpawnSyncReturns<Buffer>, cmd?: string) => {
   if (processStatus.error) {
     cmd && console.log(`running ${cmd}`)
-    bail(processStatus.error)
+    await bail(processStatus.error)
   }
   if (processStatus.status) {
     cmd && console.log(`running ${cmd}`)
-    bail(processStatus.status)
+    await bail(processStatus.status)
   }
 }
-export function psql(dbconfig: DbConfig, script: string, verbose: boolean) {
+export async function psql(dbconfig: DbConfig, script: string, verbose: boolean) {
   const name = temporaryFile()
   fs.writeFileSync(name, script)
 
   const args = [getPostgresArgs(dbconfig)]
   args.push('-X', '-v', 'ON_ERROR_STOP=1', '-f', name)
   const cmd = `psql ${args.join(' ')}`
-  verbose && console.log(`running ${cmd}`)
-  runOrExit(spawnSync('/usr/local/bin/psql', args, { stdio: verbose ? 'inherit' : 'ignore' }), cmd)
+  log(`running ${cmd}`)
+  await runOrExit(spawnSync('/usr/local/bin/psql', args, { stdio: verbose ? 'inherit' : 'ignore' }), cmd)
 }
 
 export function info(s: string) {
@@ -55,7 +76,7 @@ export async function resetOwner(dbconfig: DbConfig, targetUser: string, verbose
     grant execute on all routines in schema public to ${targetUser};
   `
   // @formatter:on
-  psql(dbconfig, script, verbose)
+  await psql(dbconfig, script, verbose)
 }
 
 export async function createCleanDb(
@@ -66,6 +87,7 @@ export async function createCleanDb(
 ) {
   const config = parsePostgresConnectionString(dbconfig)
   const { database, user } = config
+  log('database %o', config)
   // useful for tests since it forces dropping local connections
   // const script = stripIndent`
   //   -- Disallow new connections
@@ -93,7 +115,8 @@ export async function createCleanDb(
   `
   // @formatter:on
   const newUrl = recreatePostgresConnectionString({ ...config, database: 'postgres' })
-  psql(newUrl, script, verbose)
+  log(newUrl)
+  await psql(newUrl, script, verbose)
 
   // @formatter:off
   // language=PL
@@ -109,12 +132,12 @@ export async function createCleanDb(
     $do$;
   `
   // @formatter:on
-  psql(newUrl, script2, verbose)
+  await psql(newUrl, script2, verbose)
 
   await resetOwner(dbconfig, targetUser, verbose)
 }
 
-export function createKnexMigrationTables(dbconfig: DbConfig, verbose: boolean) {
+export async function createKnexMigrationTables(dbconfig: DbConfig, verbose: boolean) {
   // @formatter:off
   // language=PostgreSQL
   const sql = stripIndent`
@@ -154,7 +177,7 @@ export function createKnexMigrationTables(dbconfig: DbConfig, verbose: boolean) 
   return psql(dbconfig, sql, verbose)
 }
 
-export function dropKnexMigrationTables(dbconfig: DbConfig, verbose: boolean) {
+export async function dropKnexMigrationTables(dbconfig: DbConfig, verbose: boolean) {
   // @formatter:off
   // language=PostgreSQL
   const sql = stripIndent`

@@ -28,7 +28,9 @@ export type EmailConfig = {
   password: string
 }
 
-export const config: { rootDatabase: DbConfig; userDatabase: DbConfig; email: EmailConfig } = {
+export type ConfigType = { rootDatabase: DbConfig; userDatabase: DbConfig; email: EmailConfig }
+
+export const config: ConfigType = {
   rootDatabase: env.ADMIN_DATABASE_URL,
   userDatabase: env.DATABASE_URL,
   email: {
