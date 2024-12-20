@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import debug from 'debug'
 import { config as dotenvConfig } from 'dotenv'
 import { ListrTaskWrapper, ListrTask } from 'listr2'
