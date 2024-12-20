@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import MenuIcon from '@mui/icons-material/Menu'
 import AppBar from '@mui/material/AppBar'
@@ -14,10 +14,10 @@ import { Config } from '#utils/apiTypes.ts'
 
 interface HeaderProps {
   handleDrawerToggle: () => void
-  rightMenu: (props?: any) => ReactNode
+  rightMenu: React.ComponentType<{ size: 'small' | 'normal' | 'tiny' }>
 }
 
-export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu }) => {
+export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu: RightMenu }) => {
   const { data: config } = api.config.getConfig.useQuery(undefined, {
     staleTime: 60 * 60 * 1000,
     refetchOnMount: false,
@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu })
         </Link>
         &nbsp;{configDetails}
       </Toolbar>
-      {rightMenu({ size: 'tiny' })}
+      <RightMenu size='tiny' />
     </AppBar>
   )
 }

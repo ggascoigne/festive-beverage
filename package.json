@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=20",
+    "node": ">=22",
     "pnpm": ">=9"
   },
   "type": "module",
@@ -34,7 +34,8 @@
     "db:clean": "pnpm db:start && ./scripts/createCleanDb.ts",
     "db:import": "pnpm db:start && ./scripts/toLocal.ts",
     "db:migrate:generate": "knex migrate:make --knexfile ./support/knexfile.js",
-    "db:migrate:up": "tsx node_modules/knex/bin/cli.js migrate:latest --knexfile ./support/knexfile.ts up && ./scripts/resetDatabaseOwner.ts",
+    "db:migrate:up": "tsx node_modules/knex/bin/cli.js migrate:latest --knexfile ./support/knexfile.ts up",
+    "db:resetOwner": "./scripts/resetDatabaseOwner.ts",
     "db:setup": "pnpm db:clean && pnpm db:migrate:up",
     "db:start": "docker compose up -d && ./scripts/wait-for-postgres.sh -c festive-beverage-postgres",
     "dev": "pnpm boot && next dev -p 40000 --turbo",
@@ -161,5 +162,5 @@
     "not ie 11",
     "not op_mini all"
   ],
-  "packageManager": "pnpm@9.12.2"
+  "packageManager": "pnpm@9.15.1"
 }

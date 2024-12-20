@@ -21,7 +21,7 @@ const DrawerContents: React.FC = () => (
   </>
 )
 
-const RightMenu: React.FC<{ size: 'normal' | 'small' | 'tiny' }> = (props) => (
+const RightMenu = (props: { size: 'normal' | 'small' | 'tiny' }) => (
   <List
     sx={{
       fontSize: '14px',

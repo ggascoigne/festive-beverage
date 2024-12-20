@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 /** @type {import('next').NextConfig} */
 
 import withPWAInit, { runtimeCaching } from '@ducanh2912/next-pwa'
@@ -31,5 +30,8 @@ export default withPWA({
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
   },
 })
