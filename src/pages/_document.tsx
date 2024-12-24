@@ -16,12 +16,14 @@ class MyDocument extends Document {
           <meta name='mobile-web-app-capable' content='yes' />
           <meta name='theme-color' content={theme.palette.primary.main} />
           <meta name='author' content='guy@wyrdrune.com' />
-          <link rel='icon' type='image/png' href='/favicon-48x48.png' sizes='48x48' />
-          <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-          <link rel='shortcut icon' href='/favicon.ico' />
           <meta name='apple-mobile-web-app-title' content='Festive Beverage' />
           <link rel='manifest' href='/manifest.json' />
           <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap' />
+          <link rel='icon' type='image/png' href='/favicon-96x96.png' sizes='96x96' />
+          <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+          <link rel='shortcut icon' href='/favicon.ico' />
+          <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />{' '}
+          <link rel='apple-touch-icon-precomposed' sizes='180x180' href='/apple-touch-icon.png' />
           <meta name='emotion-insertion-point' content='' />
           {(this.props as any).emotionStyleTags}
         </Head>
