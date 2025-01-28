@@ -23,7 +23,7 @@ export const getUserRoles = async (session: Session): Promise<AuthInfo | undefin
     isDev && console.log('User not verified')
     return undefined
   }
-  if ((session.accessTokenExpiresAt || 0) < new Date().getTime() / 1000) {
+  if ((session.accessTokenExpiresAt ?? 0) < new Date().getTime() / 1000) {
     isDev && console.log('Session has expired')
     return undefined
   }

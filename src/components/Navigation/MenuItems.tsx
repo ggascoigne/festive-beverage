@@ -26,7 +26,7 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ menuItems }) => {
         .filter((menuItem) => menuItem.condition === undefined || menuItem.condition)
 
         .map((menuItem) => {
-          const link = menuItem.link ? menuItem.link : menuItem.path
+          const link = menuItem.link ?? menuItem.path
           const item = (
             <ListItemLink key={link} href={link} selected={activeItem === link}>
               <ListItemText primary={menuItem.label} secondary={menuItem.subText} />
