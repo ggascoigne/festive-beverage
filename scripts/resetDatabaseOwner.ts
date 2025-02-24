@@ -2,7 +2,7 @@
 import chalk from 'chalk'
 import { Listr } from 'listr2'
 
-import { resetOwnerTask } from './shared/tasks'
+import { resetOwnerTask } from './lib'
 
 const tasks = new Listr(resetOwnerTask)
 

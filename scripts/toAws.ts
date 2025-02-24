@@ -2,8 +2,7 @@
 import chalk from 'chalk'
 import { Listr } from 'listr2'
 
-import { loadEnv } from './shared/importUtils'
-import { TaskContext, copyDatabaseTaskFactory } from './shared/tasks'
+import { loadEnv, TaskContext, copyDatabaseTaskFactory } from './lib'
 
 const awsEnv = loadEnv('.env.aws')
 const localEnv = loadEnv('.env')

@@ -2,7 +2,7 @@
 import chalk from 'chalk'
 import { Listr } from 'listr2'
 
-import { createCleanDbTask } from './shared/tasks'
+import { createCleanDbTask } from './lib'
 
 const tasks = new Listr(createCleanDbTask)
 

@@ -2,7 +2,7 @@
 import chalk from 'chalk'
 import { Listr } from 'listr2'
 
-import { writeCertsTask } from './shared/tasks'
+import { writeCertsTask } from './lib'
 
 const tasks = new Listr(writeCertsTask)
 
