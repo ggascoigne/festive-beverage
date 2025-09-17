@@ -19,7 +19,7 @@ const DrinkList: React.FC<{ drinks: readonly Drink[] }> = ({ drinks }) => {
   return (
     <Grid container spacing={3}>
       {drinks?.map((d, i) => (
-        <Grid key={i} item xs={12} sm={6} md={4} lg={3}>
+        <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
           <Link href={`${router.pathname}?drink=${d.id}`} sx={{ textDecoration: 'none' }}>
             <DrinkCard drink={d} />
           </Link>

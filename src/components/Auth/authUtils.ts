@@ -24,7 +24,7 @@ const check = (rules: Rules, role: string | null, action: Perms, roleOverride: R
   }
 
   if (permissions.dynamic) {
-    const permissionCondition = permissions.dynamic[action] || permissions.dynamic['*']
+    const permissionCondition = permissions.dynamic[action] ?? permissions.dynamic['*']
     if (!permissionCondition) {
       // dynamic rule not provided for action
       return false

@@ -1,5 +1,4 @@
 #!/usr/bin/env node_modules/.bin/tsx
-/* eslint-disable no-plusplus */
 
 /* eslint-disable no-await-in-loop, no-restricted-syntax, @typescript-eslint/naming-convention, default-case */
 import fs from 'fs'
@@ -174,7 +173,7 @@ const create = async (client: PoolClient, drink: Drink) => {
         client,
         `
             insert into recipe_ingredient (recipe_id, ingredient_id, unit_id, amount, modifier)
-            values (${recipeId}, ${ingredientId}, ${unitId || null}, ${quantity?.amount ?? null}, '${
+            values (${recipeId}, ${ingredientId}, ${unitId ?? null}, ${quantity?.amount ?? null}, '${
               quantity?.modifier ?? ''
             }')
             returning *`
@@ -253,7 +252,8 @@ const tasks = new Listr([
       let count = 0
       for (const drink of drinks) {
         await create(client, drink)
-        count++
+        // eslint-disable-next-line operator-assignment
+        count = count + 1
       }
       client.release()
       console.log(`import of ${count} drinks complete`)

@@ -1,5 +1,4 @@
 -- @param {String} $1:email
-
 SELECT
   u.email email,
   u.id user_id,

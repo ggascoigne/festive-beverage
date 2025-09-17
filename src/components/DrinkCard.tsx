@@ -54,12 +54,12 @@ export const DrinkCard: React.FC<{ drink?: Drink; zoomed?: boolean }> = ({ drink
       <CardContent>
         {zoomed ? (
           <Grid container alignItems='center' justifyContent='space-between'>
-            <Grid item>
+            <Grid>
               <Typography variant='h5' component='h2' gutterBottom sx={{ mb: 0 }}>
                 {drink.name}
               </Typography>
             </Grid>
-            <Grid item>
+            <Grid>
               <Grid container alignItems='center'>
                 <Typography variant='h6' component='h2' gutterBottom sx={{ mb: 0, pr: 1 }}>
                   {quantity}

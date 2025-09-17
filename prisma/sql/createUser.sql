@@ -1,5 +1,4 @@
 -- @param {String} $1:email
-
 INSERT INTO
   "user" (id, email)
 VALUES

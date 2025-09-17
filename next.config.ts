@@ -34,4 +34,9 @@ export default withPWA({
   typescript: {
     ignoreBuildErrors: false,
   },
+  // experimental: {
+  //   turbo: {
+  //     treeShaking: true,
+  //   },
+  // },
 })
