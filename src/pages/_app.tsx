@@ -11,6 +11,7 @@ import Head from 'next/head'
 
 import { Layout } from '@/components/Layout'
 import { NotificationProvider } from '@/components/Notifications'
+import { SerwistProvider } from '@/components/SerwistProvider'
 import { theme } from '@/components/Theme'
 import { api } from '@/utils/api'
 import createEmotionCache from '@/utils/createEmotionCache'
@@ -46,10 +47,12 @@ const MyApp = (props: MyAppProps) => {
           <CssBaseline />
           <NotificationProvider>
             <Auth0Provider user={pageProps.user}>
-              <Layout>
-                <Component {...pageProps} />
-                <ReactQueryDevtools />
-              </Layout>
+              <SerwistProvider swUrl='/serwist/sw.js'>
+                <Layout>
+                  <Component {...pageProps} />
+                  <ReactQueryDevtools />
+                </Layout>
+              </SerwistProvider>
             </Auth0Provider>
           </NotificationProvider>
         </ThemeProvider>

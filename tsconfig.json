@@ -14,7 +14,10 @@
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
     /* Bundled projects */
-    "lib": ["dom", "ESNext"],
+    "lib": [
+      "dom",
+      "ESNext"
+    ],
     "noEmit": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -28,7 +31,9 @@
     "allowImportingTsExtensions": true,
     "jsxImportSource": "@emotion/react",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
   "include": [
@@ -39,8 +44,14 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
   //  "include": ["api", "scripts", "shared", "src", "types"],
-  "exclude": ["node_modules", "build", "public", "./next.config.cjs"]
+  "exclude": [
+    "node_modules",
+    "build",
+    "public",
+    "./next.config.cjs"
+  ]
 }

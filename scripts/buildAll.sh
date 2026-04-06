@@ -31,6 +31,11 @@ if ! CI=true pnpm run test ; then
   exit $retVal
 fi
 
+if ! pnpm build ; then
+  retVal=$?
+  echo "exiting due to build error"
+  exit $retVal
+fi
 
 if ! pnpm test:e2e ; then
   retVal=$?
