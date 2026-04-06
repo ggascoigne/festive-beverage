@@ -4,14 +4,14 @@ import { ListrTaskWrapper, ListrTask } from 'listr2'
 import { temporaryFile } from 'tempy'
 import { $ } from 'zx'
 
-import { getPostgresArgs } from './scriptUtils'
+import { ensurePostgresToolVersion, getPostgresArgs } from './scriptUtils'
 import { TaskContext } from './tasks'
 
 import { EnvType, processEnv, parsePostgresConnectionString } from '#env'
 
 const tracing = !!process.env.DEBUG
 
-const log = debug('importUtils')
+const log = debug('script:importUtils')
 
 const $$ = $({
   verbose: true,
@@ -48,7 +48,8 @@ export const dumpDatabaseTask: ListrTask = {
     // eslint-disable-next-line no-param-reassign
     task.title = `dumping database ${database}`
     logger(`dumping database ${database} to ${name}`)
-    await $source`/usr/local/bin/pg_dump ${getPostgresArgs(environ.ADMIN_DATABASE_URL)} -Fc --schema=public > ${name}`
+    ensurePostgresToolVersion('pg_dump')
+    await $source`pg_dump ${getPostgresArgs(environ.ADMIN_DATABASE_URL)} -Fc --schema=public > ${name}`
     outputFileName = name
   },
 }
@@ -77,7 +78,8 @@ export const restoreDatabaseTask: ListrTask = {
     task.title = `Restoring database ${database}`
     logger(`Restoring database ${database} from ${outputFileName!}`)
 
-    await $dest`/usr/local/bin/pg_restore \
+    ensurePostgresToolVersion('pg_restore')
+    await $dest`pg_restore \
       -j4 \
       -d ${database} \
       --no-privileges \

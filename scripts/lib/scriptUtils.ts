@@ -10,7 +10,55 @@ import { DbConfig } from '../../src/shared/config.ts'
 
 import { parsePostgresConnectionString, recreatePostgresConnectionString } from '#env'
 
-const log = debug('script')
+const log = debug('script:utils')
+const supportedPostgresMajorVersion = 18
+const checkedPostgresTools = new Set<string>()
+
+type PostgresToolName = 'pg_dump' | 'pg_isready' | 'pg_restore' | 'psql'
+
+const getResolvedToolPath = (toolName: PostgresToolName) => {
+  const processStatus = spawnSync('which', [toolName], {
+    encoding: 'utf8',
+  })
+
+  if (processStatus.error || processStatus.status !== 0) {
+    return toolName
+  }
+
+  return processStatus.stdout.trim() || toolName
+}
+
+export const ensurePostgresToolVersion = (toolName: PostgresToolName) => {
+  if (checkedPostgresTools.has(toolName)) {
+    return
+  }
+
+  const resolvedToolPath = getResolvedToolPath(toolName)
+  const processStatus = spawnSync(toolName, ['--version'], {
+    encoding: 'utf8',
+  })
+
+  if (processStatus.error) {
+    throw processStatus.error
+  }
+
+  const output = `${processStatus.stdout ?? ''}${processStatus.stderr ?? ''}`.trim()
+  const majorVersion = /(\d+)(?:\.\d+)?/.exec(output)?.[1]
+
+  if (processStatus.status !== 0 || !majorVersion) {
+    throw new Error(
+      `Unable to determine ${toolName} version at ${resolvedToolPath} from output: ${output || '<empty>'}`
+    )
+  }
+
+  if (Number(majorVersion) !== supportedPostgresMajorVersion) {
+    throw new Error(
+      `${toolName} at ${resolvedToolPath} is major version ${majorVersion}, but this repo currently expects PostgreSQL ${supportedPostgresMajorVersion} client tools.`
+    )
+  }
+
+  checkedPostgresTools.add(toolName)
+}
 
 const waitForStreamToFlush = (stream: NodeJS.WritableStream): Promise<void> =>
   new Promise((resolve) => {
@@ -52,6 +100,7 @@ export const runOrExit = async (processStatus: SpawnSyncReturns<Buffer>, cmd?: s
   }
 }
 export async function psql(dbconfig: DbConfig, script: string, verbose: boolean) {
+  ensurePostgresToolVersion('psql')
   const name = temporaryFile()
   fs.writeFileSync(name, script)
 
@@ -59,7 +108,12 @@ export async function psql(dbconfig: DbConfig, script: string, verbose: boolean)
   args.push('-X', '-v', 'ON_ERROR_STOP=1', '-f', name)
   const cmd = `psql ${args.join(' ')}`
   log(`running ${cmd}`)
-  await runOrExit(spawnSync('/usr/local/bin/psql', args, { stdio: verbose ? 'inherit' : 'ignore' }), cmd)
+  await runOrExit(
+    spawnSync('psql', args, {
+      stdio: verbose ? 'inherit' : 'ignore',
+    }),
+    cmd
+  )
 }
 
 export function info(s: string) {
@@ -108,7 +162,7 @@ export async function createCleanDb(
     \\connect temporary_db_that_shouldnt_exist 
     SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${database}'; 
     DROP DATABASE IF EXISTS ${database}; 
-    CREATE DATABASE ${database} WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8'; 
+    CREATE DATABASE ${database} WITH TEMPLATE = template0 ENCODING = 'UTF8'; 
     ALTER DATABASE ${database} OWNER TO ${user}; 
     \\connect ${database} 
     DROP DATABASE IF EXISTS temporary_db_that_shouldnt_exist;
