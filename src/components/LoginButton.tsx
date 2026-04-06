@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import type React from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
 import Avatar from '@mui/material/Avatar'
@@ -11,11 +12,12 @@ import fetch from 'isomorphic-fetch'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-import { Auth0User, Perms, Roles, useAuth, useRoleOverride } from './Auth'
+import type { Auth0User } from './Auth'
+import { Perms, Roles, useAuth, useRoleOverride } from './Auth'
 import { LoginMenu } from './LoginMenu'
 import { useNotification } from './Notifications'
 
-import { Children } from '#utils'
+import type { Children } from '@/utils'
 
 const MENU_ITEM_EDIT_PROFILE = 'Edit Profile'
 const MENU_ITEM_RESET_PASSWORD = 'Password Reset'

@@ -9,8 +9,9 @@ import chalk from 'chalk'
 import debug from 'debug'
 import Fraction from 'fraction.js'
 import { Listr } from 'listr2'
-import { PoolClient } from 'pg'
-import { set_fs, readFile, utils, WorkSheet } from 'xlsx'
+import type { PoolClient } from 'pg'
+import type { WorkSheet } from 'xlsx'
+import { set_fs, readFile, utils } from 'xlsx'
 
 import { getPool, PoolType } from '../src/shared/config.ts'
 

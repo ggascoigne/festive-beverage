@@ -1,6 +1,6 @@
 import pg from 'pg'
 
-import { env, safeConnectionString } from '#env'
+import { env, safeConnectionString } from '@/env'
 
 const { Pool } = pg
 

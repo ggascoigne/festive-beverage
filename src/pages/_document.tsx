@@ -1,8 +1,8 @@
 import createEmotionServer from '@emotion/server/create-instance'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 
-import { theme } from '#components/Theme'
-import createEmotionCache from '#utils/createEmotionCache'
+import { theme } from '@/components/Theme'
+import createEmotionCache from '@/utils/createEmotionCache'
 
 class MyDocument extends Document {
   override render() {

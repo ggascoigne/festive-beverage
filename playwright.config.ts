@@ -14,7 +14,7 @@ export default defineConfig({
   workers: process.env.CI || isLinux ? 1 : 4,
   reporter: [['dot'], ['html', { outputFolder: 'playwright-report', open: 'never' }]],
   webServer: {
-    command: 'pnpm db:start && pnpm boot && pnpm exec next dev -p 40000',
+    command: 'pnpm db:start && pnpm boot && pnpm exec next dev -p 40000 --webpack',
     url: 'http://localhost:40000',
     reuseExistingServer: true,
     cwd: process.cwd(),

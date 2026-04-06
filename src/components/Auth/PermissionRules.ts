@@ -1,4 +1,4 @@
-import { AtLeastOne } from '../../utils'
+import type { AtLeastOne } from '../../utils'
 
 export enum Perms {
   IsAdmin = 'is:Admin',

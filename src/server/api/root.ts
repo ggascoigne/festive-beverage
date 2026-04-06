@@ -1,6 +1,6 @@
-import { configRouter } from '#server/api/routers/config'
-import { drinksRouter } from '#server/api/routers/drinks'
-import { createCallerFactory, createTRPCRouter } from '#server/api/trpc'
+import { configRouter } from '@/server/api/routers/config'
+import { drinksRouter } from '@/server/api/routers/drinks'
+import { createCallerFactory, createTRPCRouter } from '@/server/api/trpc'
 
 /**
  * This is the primary router for your server.

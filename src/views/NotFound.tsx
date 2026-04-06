@@ -1,7 +1,7 @@
 import Alert from '@mui/material/Alert'
 import Typography from '@mui/material/Typography'
 
-import { Page } from '#components/Page'
+import { Page } from '@/components/Page'
 
 export const NotFound = () => (
   <Page title='Not Found'>

@@ -3,14 +3,15 @@ import os from 'os'
 import path from 'path'
 
 import debug from 'debug'
-import { Listr, ListrTask, ListrTaskWrapper } from 'listr2'
+import type { Listr, ListrTask, ListrTaskWrapper } from 'listr2'
 
 import { dumpDatabaseTask, restoreDatabaseTask } from './importUtils'
 import { createCleanDb, resetOwner } from './scriptUtils'
 
 import { certs } from '../../src/shared/dbCerts'
 
-import { env, parsePostgresConnectionString, EnvType, safeConnectionString } from '#env'
+import type { EnvType } from '@/env'
+import { env, parsePostgresConnectionString, safeConnectionString } from '@/env'
 
 const log = debug('script:tasks')
 const filename = path.join(os.platform() === 'win32' ? os.tmpdir() : '/tmp', 'rds-cert.pem')

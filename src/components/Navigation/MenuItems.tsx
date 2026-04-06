@@ -1,4 +1,4 @@
-import React from 'react'
+import type React from 'react'
 
 import List from '@mui/material/List'
 import ListItemText from '@mui/material/ListItemText'

@@ -1,7 +1,8 @@
-import { getSession, Session } from '@auth0/nextjs-auth0'
+import type { SessionData } from '@auth0/nextjs-auth0/types'
 import { type CreateNextContextOptions } from '@trpc/server/adapters/next'
 
-import { db } from '#server/db'
+import { auth0 } from '@/server/auth'
+import { db } from '@/server/db'
 
 /**
  * 1. CONTEXT
@@ -11,7 +12,7 @@ import { db } from '#server/db'
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
 
-type CreateContextOptions = { session?: Session | null }
+type CreateContextOptions = { session?: SessionData | null }
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use it, you can export
@@ -51,8 +52,8 @@ export const createInnerTRPCContext = async ({ session }: CreateContextOptions =
  * @see https://trpc.io/docs/context
  */
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-  const { req, res } = opts
-  const session = await getSession(req, res)
+  const { req } = opts
+  const session = await auth0.getSession(req)
   return createInnerTRPCContext({ session })
 }
 

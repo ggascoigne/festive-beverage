@@ -1,8 +1,21 @@
 import { configs } from '@ggascoigne/eslint-config'
 
+const localIgnores = [
+  {
+    name: 'local-ignores',
+    ignores: [
+      '.{next,vercel}',
+      'src/generated',
+      'next-env.d.ts',
+      'playwright-report',
+    ],
+  },
+]
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
   ...configs.globalIgnores,
+  ...localIgnores,
   ...configs.recommendedJs,
   // ...configs.slow,
   ...configs.officialReact,

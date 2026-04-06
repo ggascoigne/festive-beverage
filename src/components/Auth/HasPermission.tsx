@@ -1,11 +1,12 @@
-import React, { PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
+import type React from 'react'
 
 import { useUser } from '@auth0/nextjs-auth0/client'
 
 import type { Perms } from './PermissionRules'
 
-import { useAuth } from '#components/Auth/useAuth'
-import { Children } from '#utils'
+import { useAuth } from '@/components/Auth/useAuth'
+import type { Children } from '@/utils'
 
 interface PermissionProps {
   permission: Perms

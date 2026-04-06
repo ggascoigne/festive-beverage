@@ -1,9 +1,8 @@
-import React from 'react'
+import type React from 'react'
 
 import Typography from '@mui/material/Typography'
-import { typeToFlattenedError } from 'zod'
 
-import { Maybe } from '#utils/ts-utils.ts'
+import type { Maybe } from '@/utils/ts-utils.ts'
 
 interface QuoteProps {
   text: React.ReactNode
@@ -35,7 +34,6 @@ export const Quote: React.FC<QuoteProps> = (props) => {
 }
 
 type ErrorDataType = {
-  zodError: typeToFlattenedError<any, string> | null
   code: string
   httpStatus: number
   path?: string | undefined

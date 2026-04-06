@@ -1,12 +1,12 @@
-import { Session } from '@auth0/nextjs-auth0'
+import type { SessionData } from '@auth0/nextjs-auth0/types'
 import { getUserWithRoles, createUser } from '@prisma/client/sql'
 
-import { isDev } from '#env'
-import { dbAdmin } from '#server/db'
+import { isDev } from '@/env'
+import { dbAdmin } from '@/server/db'
 
 type AuthInfo = { userId: number; roles: string[] }
 
-export const getUserRoles = async (session: Session): Promise<AuthInfo | undefined> => {
+export const getUserRoles = async (session: SessionData): Promise<AuthInfo | undefined> => {
   // Roles should only be set to verified users.
   // Likewise, user records should only be created for verified users
   if (!session) {
@@ -23,7 +23,7 @@ export const getUserRoles = async (session: Session): Promise<AuthInfo | undefin
     isDev && console.log('User not verified')
     return undefined
   }
-  if ((session.accessTokenExpiresAt ?? 0) < new Date().getTime() / 1000) {
+  if ((session.tokenSet?.expiresAt ?? 0) < new Date().getTime() / 1000) {
     isDev && console.log('Session has expired')
     return undefined
   }

@@ -1,13 +1,14 @@
 import debug from 'debug'
 import { config as dotenvConfig } from 'dotenv'
-import { ListrTaskWrapper, ListrTask } from 'listr2'
+import type { ListrTaskWrapper, ListrTask } from 'listr2'
 import { temporaryFile } from 'tempy'
 import { $ } from 'zx'
 
 import { ensurePostgresToolVersion, getPostgresArgs } from './scriptUtils'
-import { TaskContext } from './tasks'
+import type { TaskContext } from './tasks'
 
-import { EnvType, processEnv, parsePostgresConnectionString } from '#env'
+import type { EnvType } from '@/env'
+import { processEnv, parsePostgresConnectionString } from '@/env'
 
 const tracing = !!process.env.DEBUG
 

@@ -88,3 +88,5 @@ tsconfig.tsbuildinfo
 **/public/fallback-*.js
 
 lint_research/
+
+src/generated

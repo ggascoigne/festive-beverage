@@ -1,4 +1,4 @@
-import { Measure, Unit } from 'convert-units'
+import type { Measure, Unit } from 'convert-units'
 
 // modified to call fl-oz a simple oz.
 

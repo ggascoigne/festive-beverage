@@ -1,8 +1,8 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
-import { O } from 'ts-toolbelt'
-import { Key } from 'ts-toolbelt/out/Any/Key'
-import { List } from 'ts-toolbelt/out/List/List'
+import type { O } from 'ts-toolbelt'
+import type { Key } from 'ts-toolbelt/out/Any/Key'
+import type { List } from 'ts-toolbelt/out/List/List'
 
 export type Maybe<T> = T | null | undefined
 

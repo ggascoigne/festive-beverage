@@ -1,18 +1,19 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import type React from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import { useRouter } from 'next/router'
 
-import { DrinkCard } from '#components/DrinkCard'
-import { Loader } from '#components/Loader'
-import { Link } from '#components/Navigation'
-import { Page } from '#components/Page'
-import { Search } from '#components/Search'
-import { TrpcError } from '#components/TrpcError'
-import { notEmpty } from '#utils'
-import { api } from '#utils/api'
-import { Drink } from '#utils/apiTypes.ts'
+import { DrinkCard } from '@/components/DrinkCard'
+import { Loader } from '@/components/Loader'
+import { Link } from '@/components/Navigation'
+import { Page } from '@/components/Page'
+import { Search } from '@/components/Search'
+import { TrpcError } from '@/components/TrpcError'
+import { notEmpty } from '@/utils'
+import { api } from '@/utils/api'
+import type { Drink } from '@/utils/apiTypes.ts'
 
 const DrinkList: React.FC<{ drinks: readonly Drink[] }> = ({ drinks }) => {
   const router = useRouter()

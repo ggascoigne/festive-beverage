@@ -1,4 +1,5 @@
-import { spawnSync, SpawnSyncReturns } from 'child_process'
+import type { SpawnSyncReturns } from 'child_process'
+import { spawnSync } from 'child_process'
 import fs from 'fs'
 
 import chalk from 'chalk'
@@ -6,9 +7,9 @@ import { stripIndent } from 'common-tags'
 import debug from 'debug'
 import { temporaryFile } from 'tempy'
 
-import { DbConfig } from '../../src/shared/config.ts'
+import type { DbConfig } from '../../src/shared/config.ts'
 
-import { parsePostgresConnectionString, recreatePostgresConnectionString } from '#env'
+import { parsePostgresConnectionString, recreatePostgresConnectionString } from '@/env'
 
 const log = debug('script:utils')
 const supportedPostgresMajorVersion = 18

@@ -9,8 +9,8 @@ import { createTRPCNext } from '@trpc/next'
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server'
 import superjson from 'superjson'
 
-import { env, isDev } from '#env'
-import { type AppRouter } from '#server/api/root'
+import { env, isDev } from '@/env'
+import { type AppRouter } from '@/server/api/root'
 
 const getBaseUrl = () => {
   if (typeof window !== 'undefined') return '' // browser should use relative url

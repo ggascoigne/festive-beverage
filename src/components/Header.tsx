@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import type React from 'react'
+import { useEffect, useState } from 'react'
 
 import MenuIcon from '@mui/icons-material/Menu'
 import AppBar from '@mui/material/AppBar'
@@ -8,9 +9,9 @@ import Typography from '@mui/material/Typography'
 
 import { HasPermission, Perms } from './Auth'
 
-import { Link } from '#components/Navigation'
-import { api } from '#utils/api.ts'
-import { Config } from '#utils/apiTypes.ts'
+import { Link } from '@/components/Navigation'
+import { api } from '@/utils/api.ts'
+import type { Config } from '@/utils/apiTypes.ts'
 
 interface HeaderProps {
   handleDrawerToggle: () => void
