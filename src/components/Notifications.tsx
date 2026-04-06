@@ -5,16 +5,10 @@ import Box from '@mui/material/Box'
 import { amber, green } from '@mui/material/colors'
 import IconButton from '@mui/material/IconButton'
 import { useTheme } from '@mui/material/styles'
-import {
-  CustomContentProps,
-  OptionsObject,
-  SnackbarContent,
-  SnackbarProvider,
-  useSnackbar,
-  VariantType,
-} from 'notistack'
+import type { CustomContentProps, OptionsObject, VariantType } from 'notistack'
+import { SnackbarContent, SnackbarProvider, useSnackbar } from 'notistack'
 
-import { Children } from '#utils'
+import type { Children } from '@/utils'
 
 const MySnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((props, forwardedRef) => {
   const { id, message, action: componentOrFunctionAction, iconVariant, variant, hideIconVariant, style } = props

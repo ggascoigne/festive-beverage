@@ -1,4 +1,4 @@
-import { env, safeConnectionString } from '#env'
+import { env, safeConnectionString } from '@/env'
 
 const knexConfig = {
   migrations: {

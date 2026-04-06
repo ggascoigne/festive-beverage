@@ -1,4 +1,4 @@
-import { RouterOutputs } from './api'
+import type { RouterOutputs } from './api'
 
 export type DrinkQueryResult = RouterOutputs['drinks']['getAllDrinks']
 export type Drink = DrinkQueryResult[number]

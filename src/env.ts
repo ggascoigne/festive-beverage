@@ -5,7 +5,7 @@ import { createEnv } from '@t3-oss/env-nextjs'
 import dotenv from 'dotenv'
 import { z } from 'zod'
 
-import { getPaths } from './shared/filePaths.js'
+import { getPaths } from './shared/filePaths'
 
 export * from './utils/connectionStringUtils'
 

@@ -7,8 +7,8 @@ import { DateTime } from 'luxon'
 import { HasPermission, Perms, useAuth } from './Auth'
 import { Loader } from './Loader'
 
-import { api } from '#utils/api.ts'
-import { gitHash } from '#version'
+import { api } from '@/utils/api.ts'
+import { gitHash } from '@/version'
 
 const ReactJson = React.lazy(() => import('react-json-view'))
 

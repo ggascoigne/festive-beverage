@@ -1,18 +1,20 @@
 import fs from 'fs'
+import os from 'os'
 import path from 'path'
 
 import debug from 'debug'
-import { Listr, ListrTask, ListrTaskWrapper } from 'listr2'
+import type { Listr, ListrTask, ListrTaskWrapper } from 'listr2'
 
 import { dumpDatabaseTask, restoreDatabaseTask } from './importUtils'
 import { createCleanDb, resetOwner } from './scriptUtils'
 
 import { certs } from '../../src/shared/dbCerts'
 
-import { env, parsePostgresConnectionString, EnvType, safeConnectionString } from '#env'
+import type { EnvType } from '@/env'
+import { env, parsePostgresConnectionString, safeConnectionString } from '@/env'
 
-const log = debug('tasks')
-const filename = '/tmp/rds-cert.pem'
+const log = debug('script:tasks')
+const filename = path.join(os.platform() === 'win32' ? os.tmpdir() : '/tmp', 'rds-cert.pem')
 
 export type TaskContext = {
   env?: EnvType
@@ -23,8 +25,7 @@ export const writeCertsTask: ListrTask = {
   task: (ctx: TaskContext, task: ListrTaskWrapper<TaskContext, any, any>) => {
     const environ = ctx?.env ?? env
     if (!environ.DATABASE_SSL_CERT) {
-      // eslint-disable-next-line no-template-curly-in-string
-      return task.skip('Skipping as ${DATABASE_SSL_CERT} is undefined')
+      return task.skip('Persisting cert: skipped')
     } else {
       const certName = path.basename(environ.DATABASE_SSL_CERT ?? '', '.pem')
       log('certName', certName)
@@ -33,7 +34,8 @@ export const writeCertsTask: ListrTask = {
         throw new Error(`SSL was enabled, but the named cert, '${certName}' is not installed.`)
       }
       fs.writeFileSync(filename, certs[certName]!)
-      return Promise.resolve(`Wrote ${environ.DATABASE_SSL_CERT} to ${filename}`)
+      log(`Wrote ${environ.DATABASE_SSL_CERT} to ${filename}`)
+      return Promise.resolve(`Persisting cert: ${filename}`)
     }
   },
 }
@@ -72,7 +74,7 @@ export const copyDatabaseTaskFactory =
         {
           title: `Export source database`,
           task: (_ctx2, task2): Listr =>
-            task2.newListr<TaskContext>([dumpDatabaseTask], {
+            task2.newListr<TaskContext>([writeCertsTask, dumpDatabaseTask], {
               ctx: { env: source },
             }),
         },

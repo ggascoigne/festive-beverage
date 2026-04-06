@@ -10,10 +10,11 @@ import Typography from '@mui/material/Typography'
 import configureMeasurements from 'convert-units'
 import Fraction from 'fraction.js'
 
-import volume, { VolumeUnits } from './convert-units/volume'
+import type { VolumeUnits } from './convert-units/volume'
+import volume from './convert-units/volume'
 
-import { notEmpty } from '#utils'
-import { Drink } from '#utils/apiTypes.ts'
+import { notEmpty } from '@/utils'
+import type { Drink } from '@/utils/apiTypes.ts'
 
 /*
   `configureMeasurements` is a closure that accepts a directory

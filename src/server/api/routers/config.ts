@@ -1,6 +1,6 @@
-import { env, safeConnectionString } from '#env'
-import { createTRPCRouter, publicProcedure } from '#server/api/trpc'
-import { config } from '#shared/config'
+import { env, safeConnectionString } from '@/env'
+import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
+import { config } from '@/shared/config'
 
 export const configRouter = createTRPCRouter({
   getConfig: publicProcedure.query(async ({ ctx }) => {

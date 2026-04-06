@@ -1,1 +1,1 @@
-export * from './authHandler'
+export * from './auth0'

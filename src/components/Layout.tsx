@@ -6,10 +6,10 @@ import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 
-import { Footer } from '#components/Footer'
-import { Header } from '#components/Header'
-import { LoginButton } from '#components/LoginButton'
-import { MenuItems, rootRoutes } from '#components/Navigation'
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+import { LoginButton } from '@/components/LoginButton'
+import { MenuItems, rootRoutes } from '@/components/Navigation'
 
 const DrawerContents: React.FC = () => (
   <>

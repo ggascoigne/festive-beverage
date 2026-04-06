@@ -1,10 +1,11 @@
-import React, { PropsWithChildren, ReactElement, useMemo } from 'react'
+import type { PropsWithChildren, ReactElement } from 'react'
+import React, { useMemo } from 'react'
 
 import Autocomplete from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
 
-import { notEmpty } from '#utils'
-import { api } from '#utils/api.ts'
+import { notEmpty } from '@/utils'
+import { api } from '@/utils/api.ts'
 
 interface SearchProps {
   onChange: any
@@ -39,7 +40,7 @@ export function Search({ onChange, value }: PropsWithChildren<SearchProps>): Rea
       value={value || []}
       renderOption={(props, ingredient) => (
         <li {...props}>
-          <>{ingredient || ''}</>
+          <>{ingredient ?? ''}</>
         </li>
       )}
       fullWidth

@@ -1,7 +1,9 @@
-import React, { PropsWithChildren, ReactNode } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
+import type React from 'react'
 
 import Box from '@mui/material/Box'
-import { SxProps, Theme, useTheme } from '@mui/material/styles'
+import type { SxProps, Theme } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Head from 'next/head'
 
