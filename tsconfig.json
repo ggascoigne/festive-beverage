@@ -30,7 +30,6 @@
 
     // "module": "Preserve",
     "rootDir": ".",
-    "baseUrl": ".",
     "jsxImportSource": "@emotion/react",
     "noErrorTruncation": true
   },
