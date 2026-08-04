@@ -1,5 +1,7 @@
 import { Auth0Client } from '@auth0/nextjs-auth0/server'
 
+import { SESSION_COOKIE_NAME } from './constants'
+
 const toAbsoluteUrl = (value?: string) =>
   value ? (value.startsWith('http://') || value.startsWith('https://') ? value : `https://${value}`) : undefined
 
@@ -16,7 +18,7 @@ export const auth0 = new Auth0Client({
   appBaseUrl,
   session: {
     cookie: {
-      name: 'festive-beverage-session-v4',
+      name: SESSION_COOKIE_NAME,
     },
   },
   routes: {

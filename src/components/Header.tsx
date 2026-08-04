@@ -42,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ handleDrawerToggle, rightMenu: R
       sx={{ flex: '1 1 auto', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
     >
       <Toolbar sx={{ width: '100%' }}>
-        <HasPermission permission={Perms.IsAdmin}>
+        <HasPermission permission={Perms.IsLoggedIn}>
           <IconButton
             color='inherit'
             aria-label='Open drawer'

@@ -89,14 +89,26 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  */
 export const publicProcedure = t.procedure.use(timingMiddleware)
 
-export const protectedProcedure = t.procedure.use(timingMiddleware).use(({ ctx, next }) => {
+export const protectedProcedure = t.procedure.use(timingMiddleware).use(async ({ ctx, next }) => {
   if (!ctx.session || !ctx.session.user) {
     throw new TRPCError({ code: 'UNAUTHORIZED' })
   }
-  return next({
-    ctx: {
-      // infers the `session` as non-nullable
-      session: { ...ctx.session, user: ctx.session.user },
-    },
+  if (!ctx.userId) {
+    throw new TRPCError({ code: 'FORBIDDEN', message: 'The authenticated user does not have a database account.' })
+  }
+  const { session, userId, isAdmin } = ctx
+  const { user } = session
+
+  return ctx.db.$transaction(async (db) => {
+    await db.$executeRaw`select set_config('user.id', ${String(userId)}, true)`
+    await db.$executeRaw`select set_config('user.admin', ${String(Boolean(isAdmin))}, true)`
+
+    return next({
+      ctx: {
+        db,
+        // infers the `session` as non-nullable
+        session: { ...session, user },
+      },
+    })
   })
 })

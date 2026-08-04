@@ -3,8 +3,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
 import { useRouter } from 'next/router'
 
+import { useAuth } from '@/components/Auth'
 import { DrinkCard } from '@/components/DrinkCard'
 import { Loader } from '@/components/Loader'
 import { Link } from '@/components/Navigation'
@@ -32,11 +34,19 @@ const DrinkList: React.FC<{ drinks: readonly Drink[] }> = ({ drinks }) => {
 
 export const SingleDrink: React.FC<{ drink?: Drink }> = ({ drink }) => {
   const router = useRouter()
+  const { user } = useAuth()
   return (
     <>
-      <Button variant='contained' onClick={() => router.back()} style={{ marginBottom: 16 }}>
-        Back
-      </Button>
+      <Stack direction='row' spacing={2} sx={{ marginBottom: 2, flexWrap: 'wrap' }}>
+        <Button variant='contained' onClick={() => router.back()}>
+          Back
+        </Button>
+        {user && drink ? (
+          <Button component={Link} href={`/edit?recipeId=${drink.id}`} variant='outlined'>
+            Edit Recipe
+          </Button>
+        ) : null}
+      </Stack>
       <DrinkCard drink={drink} zoomed />
     </>
   )
@@ -60,6 +70,7 @@ const matchesSearch = (search: string[], drink: Drink) => search.every((s) => ma
 
 export const HomeView = () => {
   const router = useRouter()
+  const { user } = useAuth()
   const search: string[] = useMemo(() => {
     if (!router.query?.search) {
       return []
@@ -110,6 +121,13 @@ export const HomeView = () => {
   } else {
     return (
       <Page title='Festive Beverages' hideTitle>
+        {user ? (
+          <Stack direction='row' justifyContent='flex-end' sx={{ marginBottom: 2 }}>
+            <Button component={Link} href='/edit' variant='outlined'>
+              Edit Catalog
+            </Button>
+          </Stack>
+        ) : null}
         <Search value={search} onChange={setSearch} />
         <DrinkList drinks={drinks} />
       </Page>

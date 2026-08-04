@@ -1,4 +1,4 @@
-import type { Perms } from '../Auth'
+import { Perms } from '../Auth'
 
 // note that entries are only displayed if they have a label
 export interface RouteInfo {
@@ -20,5 +20,11 @@ export const rootRoutes: RootRoutes = [
     path: '/',
     label: 'Home',
     exact: true,
+  },
+  {
+    path: '/edit',
+    label: 'Edit Catalog',
+    exact: true,
+    permission: Perms.IsLoggedIn,
   },
 ]
