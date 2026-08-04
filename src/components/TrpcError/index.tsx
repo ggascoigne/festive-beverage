@@ -23,7 +23,7 @@ export const Quote: React.FC<QuoteProps> = (props) => {
         borderLeft: '5px solid #eee',
       }}
     >
-      <Typography paragraph sx={{ margin: '0 0 10px', fontStyle: 'italic' }}>
+      <Typography component='p' sx={{ margin: '0 0 10px', fontStyle: 'italic' }}>
         {text}
       </Typography>
       <Typography component='small' sx={{ display: 'block', fontSize: '80%', lineHeight: '1.42857143', color: '#777' }}>

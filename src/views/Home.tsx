@@ -122,7 +122,7 @@ export const HomeView = () => {
     return (
       <Page title='Festive Beverages' hideTitle>
         {user ? (
-          <Stack direction='row' justifyContent='flex-end' sx={{ marginBottom: 2 }}>
+          <Stack direction='row' sx={{ justifyContent: 'flex-end', marginBottom: 2 }}>
             <Button component={Link} href='/edit' variant='outlined'>
               Edit Catalog
             </Button>

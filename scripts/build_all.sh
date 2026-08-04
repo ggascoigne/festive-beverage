@@ -7,7 +7,7 @@ rm -rf .next
 
 pnpm i
 
-if ! pnpm tsgo ; then 
+if ! pnpm tsc ; then 
   retVal=$?
   echo "exiting due to build error"
   exit $retVal

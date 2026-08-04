@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState, type FormEventHandler } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutlined'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutlined'
 import EditNoteIcon from '@mui/icons-material/EditNote'
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
 import LocalBarOutlinedIcon from '@mui/icons-material/LocalBarOutlined'
@@ -337,7 +337,7 @@ const IngredientStudio: React.FC<{
                 </Typography>
               </Box>
               {possibleMatches.matches.length > 0 ? (
-                <Stack direction='row' spacing={1} useFlexGap flexWrap='wrap'>
+                <Stack direction='row' spacing={1} useFlexGap sx={{ flexWrap: 'wrap' }}>
                   {possibleMatches.matches.map((ingredient) => {
                     const exactMatch = ingredient.name.toLocaleLowerCase() === normalizedIngredientName
                     return (
@@ -432,7 +432,7 @@ const RecipeWorkspace: React.FC<{
                 <Typography variant='h4'>
                   {activeRecipe ? `Editing ${activeRecipe.name}` : 'Create a new recipe'}
                 </Typography>
-                <Stack direction='row' spacing={1} useFlexGap flexWrap='wrap'>
+                <Stack direction='row' spacing={1} useFlexGap sx={{ flexWrap: 'wrap' }}>
                   {ingredientPreview.length > 0 ? (
                     ingredientPreview.map((ingredient) => <Chip key={ingredient} label={ingredient} size='small' />)
                   ) : (
@@ -583,7 +583,10 @@ const RecipeWorkspace: React.FC<{
                                       {...params}
                                       label='Ingredient'
                                       size='small'
-                                      slotProps={shrunkLabelSlotProps}
+                                      slotProps={{
+                                        ...params.slotProps,
+                                        inputLabel: shrunkLabelSlotProps.inputLabel,
+                                      }}
                                       error={Boolean(errors.recipeIngredients?.[index]?.ingredientId)}
                                       helperText={
                                         errors.recipeIngredients?.[index]?.ingredientId?.message ??
@@ -616,7 +619,7 @@ const RecipeWorkspace: React.FC<{
                                 label='Unit'
                                 select
                                 size='small'
-                                slotProps={shrunkLabelSlotProps}
+                                slotProps={{ ...shrunkLabelSlotProps, select: { native: true } }}
                                 value={controllerField.value ?? ''}
                                 onChange={(event) =>
                                   controllerField.onChange(
@@ -626,7 +629,6 @@ const RecipeWorkspace: React.FC<{
                                 error={Boolean(errors.recipeIngredients?.[index]?.unitId)}
                                 helperText={errors.recipeIngredients?.[index]?.unitId?.message}
                                 fullWidth
-                                SelectProps={{ native: true }}
                               >
                                 <option value=''>Select a unit</option>
                                 {units.map((unit) => (
@@ -650,7 +652,7 @@ const RecipeWorkspace: React.FC<{
                           />
                         </Grid>
                         <Grid size={{ xs: 2, sm: 12, md: 1 }}>
-                          <Box display='flex' justifyContent='center' alignItems='center' height='100%'>
+                          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                             <IconButton
                               color='inherit'
                               onClick={() => setDeleteIngredientIndex(index)}
@@ -685,7 +687,15 @@ const RecipeWorkspace: React.FC<{
 
               <Divider />
 
-              <Box display='flex' justifyContent='space-between' alignItems='center' gap={2} flexWrap='wrap'>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  gap: 2,
+                  flexWrap: 'wrap',
+                }}
+              >
                 <Typography color='text.secondary'>
                   Search text is generated automatically from the selected ingredient names and tags.
                 </Typography>
@@ -1111,7 +1121,7 @@ export const EditView = () => {
                 }}
               >
                 <CardContent sx={{ height: '100%', boxSizing: 'border-box' }}>
-                  <Stack spacing={2} height='100%'>
+                  <Stack spacing={2} sx={{ height: '100%' }}>
                     <Typography variant='h5'>Recipe Library</Typography>
                     <TextField
                       label='Search recipes'
@@ -1141,13 +1151,15 @@ export const EditView = () => {
                           <ListItemText
                             primary={recipe.name}
                             secondary={isPhoneLayout ? undefined : (recipe.description ?? undefined)}
-                            secondaryTypographyProps={{
-                              sx: {
-                                display: '-webkit-box',
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                WebkitBoxOrient: 'vertical',
-                                WebkitLineClamp: 2,
+                            slotProps={{
+                              secondary: {
+                                sx: {
+                                  display: '-webkit-box',
+                                  overflow: 'hidden',
+                                  textOverflow: 'ellipsis',
+                                  WebkitBoxOrient: 'vertical',
+                                  WebkitLineClamp: 2,
+                                },
                               },
                             }}
                           />

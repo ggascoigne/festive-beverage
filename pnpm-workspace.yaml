@@ -1,0 +1,17 @@
+minimumReleaseAge: 1440
+
+allowBuilds:
+  '@prisma/client': true
+  '@prisma/engines': true
+  '@swc/core': true
+  esbuild: true
+  postinstall-postinstall: true
+  prisma: true
+  unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - '@vercel/build-utils@14.0.1'
+  - '@vercel/error-utils@2.2.1'
+  - '@vercel/node@5.9.5'
+  - '@vercel/python-analysis@0.13.1'
+  - '@vercel/static-config@3.4.1'
