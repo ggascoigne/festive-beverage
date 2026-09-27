@@ -2,7 +2,7 @@ import type { SessionData } from '@auth0/nextjs-auth0/types'
 
 import { getUserWithRoles, createUser } from '../../generated/prisma/sql'
 
-import { isDev } from '@/env'
+import { isDev } from '@/env/server'
 import { dbAdmin } from '@/server/db'
 
 type AuthInfo = { userId: number; roles: string[] }

@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 export const cleanupEditorFixtures = async (recipeNames: string[], ingredientNames: string[]) => {
   const { dbAdmin } = await import('../src/server/db')
 

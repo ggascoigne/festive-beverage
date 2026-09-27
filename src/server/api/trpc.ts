@@ -1,4 +1,4 @@
-/* eslint-disable prefer-destructuring */
+/* oxlint-disable prefer-destructuring */
 
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
@@ -68,7 +68,7 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
   if (t._config.isDev) {
     // artificial delay in dev
     const waitMs = Math.floor(Math.random() * 400) + 100
-    // eslint-disable-next-line no-promise-executor-return
+    // oxlint-disable-next-line no-promise-executor-return
     await new Promise((resolve) => setTimeout(resolve, waitMs))
   }
 

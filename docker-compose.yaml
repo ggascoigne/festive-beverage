@@ -4,7 +4,7 @@ services:
     image: postgres:18-alpine
     restart: unless-stopped
     ports:
-      - "54321:5432"
+      - '54321:5432'
     stop_signal: SIGINT
     environment:
       - POSTGRES_USER=ggp

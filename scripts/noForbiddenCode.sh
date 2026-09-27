@@ -10,7 +10,7 @@ FOUND=''
 
 for j in "${FORBIDDEN[@]}"
 do
-  for i in `git diff --cached --name-only | grep -v $(basename $0) | grep -vE "eslint|.*lock.*|package.json"`
+  for i in `git diff --cached --name-only | grep -v $(basename $0) | grep -vE "oxlint|oxfmt|.*lock.*|package.json"`
   do
     if [[ -f $i ]]; then
       # the trick is here...use `git show :file` to output what is staged

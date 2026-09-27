@@ -9,7 +9,7 @@ import { temporaryFile } from 'tempy'
 
 import type { DbConfig } from '../../src/shared/config.ts'
 
-import { parsePostgresConnectionString, recreatePostgresConnectionString } from '@/env'
+import { parsePostgresConnectionString, recreatePostgresConnectionString } from '@/utils/connectionStringUtils'
 
 const log = debug('script:utils')
 const supportedPostgresMajorVersion = 18

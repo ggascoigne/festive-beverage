@@ -1,12 +1,11 @@
-import 'dotenv/config'
-
 import { generateSessionCookie } from '@auth0/nextjs-auth0/testing'
 import type { BrowserContext } from '@playwright/test'
 
+import { env } from '../src/env/node'
 import { SESSION_COOKIE_NAME } from '../src/server/auth/constants'
 
 export const authenticateEditorUser = async (context: BrowserContext) => {
-  const secret = process.env.AUTH0_SECRET
+  const secret = env.AUTH0_SECRET
   if (!secret) {
     throw new Error('AUTH0_SECRET is required to generate the Playwright session cookie.')
   }

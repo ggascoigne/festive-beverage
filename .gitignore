@@ -61,7 +61,6 @@ postgres-data
 .now
 build/
 *.dump
-.eslintcache
 
 # generated at build time
 src/version.ts
@@ -74,6 +73,6 @@ name_cleanup.js
 tsconfig.tsbuildinfo
 .wireit
 
-lint_research/
+next-env.d.ts
 
 src/generated

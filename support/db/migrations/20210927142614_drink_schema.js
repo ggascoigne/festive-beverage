@@ -1,4 +1,4 @@
-/* eslint-disable no-empty-function */
+/* oxlint-disable no-empty-function */
 import { updateRls } from './20210925165502_rls.js'
 
 /**

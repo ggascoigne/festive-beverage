@@ -189,7 +189,7 @@ Successful transcript excerpts from this implementation:
        pnpm test
        git diff --check
 
-   The temporary real-database reproduction and policy probe scripts were deleted after the fix was verified. The permanent router-level regression test remains at `src/server/api/routers/drinks.test.ts`.
+The temporary real-database reproduction and policy probe scripts were deleted after the fix was verified. The permanent router-level regression test remains at `src/server/api/routers/drinks.test.ts`.
 
 Additional repository checks used while implementing:
 

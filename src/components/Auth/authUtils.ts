@@ -7,7 +7,7 @@ import type { Perms, Roles, Rules } from './PermissionRules'
 // and so aren't constrained to the Roles enumeration
 
 const check = (rules: Rules, role: string | null, action: Perms, roleOverride: Roles | undefined, data?: any) => {
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  // oxlint-disable-next-line typescript/prefer-nullish-coalescing
   const roleToTest = (data?.ignoreOverride ? role : roleOverride) || role
 
   if (!roleToTest) {

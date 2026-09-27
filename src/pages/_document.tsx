@@ -84,7 +84,7 @@ MyDocument.getInitialProps = async (ctx) => {
     <style
       data-emotion={`${style.key} ${style.ids.join(' ')}`}
       key={style.key}
-      // eslint-disable-next-line react/no-danger,risxss/catch-potential-xss-react
+      // oxlint-disable-next-line react/no-danger,risxss/catch-potential-xss-react
       dangerouslySetInnerHTML={{ __html: style.css }}
     />
   ))

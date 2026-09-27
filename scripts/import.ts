@@ -1,6 +1,6 @@
 #!/usr/bin/env node_modules/.bin/tsx
 
-/* eslint-disable no-await-in-loop, no-restricted-syntax, @typescript-eslint/naming-convention, default-case */
+/* oxlint-disable no-await-in-loop, no-restricted-syntax, naming-convention, default-case */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -18,6 +18,7 @@ import { getPool, PoolType } from '../src/shared/config.ts'
 const log = debug('import')
 
 const __filename = fileURLToPath(import.meta.url)
+// oxlint-disable-next-line no-unused-vars
 const __dirname = path.dirname(__filename)
 
 set_fs(fs)
@@ -157,12 +158,12 @@ const create = async (client: PoolClient, drink: Drink) => {
 
   log('creating drink %o', drink)
   //  const result = await query( client,query)
-  // eslint-disable-next-line guard-for-in
+  // oxlint-disable-next-line guard-for-in
   for (const ingredient in drink.ingredients) {
     const ingredientInfo = drink.ingredients[ingredient]
     if (!ingredientInfo) {
       console.log(`skipping unknown ingredient${ingredient}`)
-      // eslint-disable-next-line no-continue
+      // oxlint-disable-next-line no-continue
       continue
     }
     const ingredientId = await getIngredient(client, ingredientInfo)
@@ -170,6 +171,7 @@ const create = async (client: PoolClient, drink: Drink) => {
     const unitId = quantity?.unit ? await getUnit(client, quantity.unit) : undefined
 
     if (quantity) {
+      // oxlint-disable-next-line no-unused-vars
       const _insertIngredient = await query(
         client,
         `
@@ -253,7 +255,7 @@ const tasks = new Listr([
       let count = 0
       for (const drink of drinks) {
         await create(client, drink)
-        // eslint-disable-next-line operator-assignment
+        // oxlint-disable-next-line operator-assignment
         count = count + 1
       }
       client.release()

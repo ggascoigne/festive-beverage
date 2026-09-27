@@ -8,9 +8,7 @@ import Debug from 'debug'
 import { PrismaClient } from '../generated/prisma/client'
 import { certs } from '../shared/dbCerts'
 
-import { processEnv, isDev } from '@/env'
-
-const env = processEnv()
+import { env, isDev } from '@/env/server'
 
 const filename = path.join(os.tmpdir(), 'rds-cert.pem')
 

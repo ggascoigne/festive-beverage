@@ -1,10 +1,6 @@
 {
-  "cSpell.words": [
-    "ducanh",
-    "festivebeverage",
-    "graphiql",
-    "notistack",
-    "PGHOST",
-    "serwist"
-  ]
+  "cSpell.words": ["ducanh", "festivebeverage", "graphiql", "notistack", "PGHOST", "serwist"],
+  "editor.formatOnSave": true,
+  "oxc.enable": true,
+  "oxc.enable.oxlint": true
 }

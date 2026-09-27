@@ -1,6 +1,6 @@
 import { createNextApiHandler } from '@trpc/server/adapters/next'
 
-import { isDev } from '@/env'
+import { isDev } from '@/env/server'
 import { createTRPCContext } from '@/server/api/context'
 import { appRouter } from '@/server/api/root'
 

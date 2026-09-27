@@ -2,6 +2,7 @@ import type { SessionData } from '@auth0/nextjs-auth0/types'
 import * as jose from 'jose'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { env } from '@/env/server'
 import { getUserRoles } from '@/server/auth/apiAuthUtils'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -19,8 +20,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return
     }
 
-    const issuerBase = (process.env.AUTH0_DOMAIN ?? process.env.AUTH0_ISSUER_BASE_URL ?? '').replace(/\/$/, '')
-    const audience = process.env.AUTH0_CLIENT_ID
+    const issuerBase = env.AUTH0_ISSUER_BASE_URL.replace(/\/$/, '')
+    const audience = env.AUTH0_CLIENT_ID
 
     if (!issuerBase || !audience) {
       res.status(500).end('server misconfigured')
@@ -33,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { payload } = await jose.jwtVerify(token, jwks, { issuer, audience })
 
     const email = payload.email as string | undefined
-    // eslint-disable-next-line @typescript-eslint/naming-convention
+    // oxlint-disable-next-line typescript/naming-convention
     const email_verified = (payload.email_verified as boolean | undefined) ?? false
     const sub = payload.sub as string | undefined
     const sid = payload.sid as string | undefined

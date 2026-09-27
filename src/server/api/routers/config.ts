@@ -1,4 +1,4 @@
-import { env, safeConnectionString } from '@/env'
+import { env, safeConnectionString } from '@/env/server'
 import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
 import { config } from '@/shared/config'
 

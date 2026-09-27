@@ -3,10 +3,11 @@ import chalk from 'chalk'
 import { Listr } from 'listr2'
 
 import type { TaskContext } from './lib'
-import { loadEnv, copyDatabaseTaskFactory } from './lib'
+import { copyDatabaseTaskFactory } from './lib'
+import { loadScriptEnv } from './env'
 
-const awsEnv = loadEnv('.env.aws')
-const localEnv = loadEnv('.env')
+const awsEnv = loadScriptEnv('.env.aws')
+const localEnv = loadScriptEnv('.env')
 
 const tasks = new Listr<TaskContext>([
   {

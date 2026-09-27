@@ -1,5 +1,4 @@
 import debug from 'debug'
-import { config as dotenvConfig } from 'dotenv'
 import type { ListrTaskWrapper, ListrTask } from 'listr2'
 import { temporaryFile } from 'tempy'
 import { $ } from 'zx'
@@ -7,8 +6,7 @@ import { $ } from 'zx'
 import { ensurePostgresToolVersion, getPostgresArgs } from './scriptUtils'
 import type { TaskContext } from './tasks'
 
-import type { EnvType } from '@/env'
-import { processEnv, parsePostgresConnectionString } from '@/env'
+import { parsePostgresConnectionString } from '@/utils/connectionStringUtils'
 
 const tracing = !!process.env.DEBUG
 
@@ -17,15 +15,6 @@ const log = debug('script:importUtils')
 const $$ = $({
   verbose: true,
 })
-
-export const loadEnv = (path: string): EnvType => {
-  const obj = {}
-  dotenvConfig({
-    path,
-    processEnv: obj,
-  })
-  return processEnv(obj as any)
-}
 
 let outputFileName
 
@@ -46,7 +35,7 @@ export const dumpDatabaseTask: ListrTask = {
 
     const name = temporaryFile()
     const { database } = parsePostgresConnectionString(environ.ADMIN_DATABASE_URL)
-    // eslint-disable-next-line no-param-reassign
+    // oxlint-disable-next-line no-param-reassign
     task.title = `dumping database ${database}`
     logger(`dumping database ${database} to ${name}`)
     ensurePostgresToolVersion('pg_dump')
@@ -67,7 +56,7 @@ export const restoreDatabaseTask: ListrTask = {
       env: {
         ...environ,
         ...process.env,
-        NODE_ENV: 'production', // ensure that the script doesn't load dotenv and prefers the environment
+        NODE_ENV: 'production',
         PGHOST: host,
         PGPORT: `${port}`,
         PGUSER: user,
@@ -75,7 +64,7 @@ export const restoreDatabaseTask: ListrTask = {
       },
     })
 
-    // eslint-disable-next-line no-param-reassign
+    // oxlint-disable-next-line no-param-reassign
     task.title = `Restoring database ${database}`
     logger(`Restoring database ${database} from ${outputFileName!}`)
 

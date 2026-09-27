@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 
-// eslint-disable-next-line import/no-extraneous-dependencies
+// oxlint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({

@@ -10,26 +10,27 @@ import { createCleanDb, resetOwner } from './scriptUtils'
 
 import { certs } from '../../src/shared/dbCerts'
 
-import type { EnvType } from '@/env'
-import { env, parsePostgresConnectionString, safeConnectionString } from '@/env'
+import type { ScriptEnv } from '../env'
+import { parsePostgresConnectionString, safeConnectionString } from '@/utils/connectionStringUtils'
 
 const log = debug('script:tasks')
 const filename = path.join(os.platform() === 'win32' ? os.tmpdir() : '/tmp', 'rds-cert.pem')
 
 export type TaskContext = {
-  env?: EnvType
+  env?: ScriptEnv
 }
 
 export const writeCertsTask: ListrTask = {
   title: `Writing RDS cert`,
   task: (ctx: TaskContext, task: ListrTaskWrapper<TaskContext, any, any>) => {
-    const environ = ctx?.env ?? env
+    const environ = ctx?.env
+    if (!environ) throw new Error('A validated script environment is required.')
     if (!environ.DATABASE_SSL_CERT) {
       return task.skip('Persisting cert: skipped')
     } else {
       const certName = path.basename(environ.DATABASE_SSL_CERT ?? '', '.pem')
       log('certName', certName)
-      // eslint-disable-next-line no-prototype-builtins
+      // oxlint-disable-next-line no-prototype-builtins
       if (!certs.hasOwnProperty(certName)) {
         throw new Error(`SSL was enabled, but the named cert, '${certName}' is not installed.`)
       }
@@ -43,7 +44,8 @@ export const writeCertsTask: ListrTask = {
 export const createCleanDbTask: ListrTask = {
   title: `Cleaning database`,
   task: async (ctx: TaskContext) => {
-    const environ = ctx?.env ?? env
+    const environ = ctx?.env
+    if (!environ) throw new Error('A validated script environment is required.')
     const { user: targetUser, password: targetUserPassword } = parsePostgresConnectionString(environ.DATABASE_URL)
     await createCleanDb(environ.ADMIN_DATABASE_URL, targetUser!, targetUserPassword!, false)
     return Promise.resolve(`Recreating database ${safeConnectionString(environ.ADMIN_DATABASE_URL)}`)
@@ -53,7 +55,8 @@ export const createCleanDbTask: ListrTask = {
 export const resetOwnerTask = {
   title: `Resetting database owner`,
   task: async (ctx: TaskContext) => {
-    const environ = ctx?.env ?? env
+    const environ = ctx?.env
+    if (!environ) throw new Error('A validated script environment is required.')
     const { user: targetUser } = parsePostgresConnectionString(environ.DATABASE_URL)
     await resetOwner(environ.ADMIN_DATABASE_URL, targetUser!, false)
     return Promise.resolve(`Reset owner on ${safeConnectionString(environ.ADMIN_DATABASE_URL)}`)
@@ -68,7 +71,7 @@ export const debugTask: ListrTask = {
 }
 
 export const copyDatabaseTaskFactory =
-  (source: EnvType, dest: EnvType) => async (ctx: TaskContext, task: ListrTaskWrapper<TaskContext, any, any>) =>
+  (source: ScriptEnv, dest: ScriptEnv) => async (ctx: TaskContext, task: ListrTaskWrapper<TaskContext, any, any>) =>
     task.newListr<TaskContext>(
       [
         {
