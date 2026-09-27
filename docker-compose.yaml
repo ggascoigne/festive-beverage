@@ -12,7 +12,7 @@ services:
       - POSTGRES_HOST_AUTH_METHOD=trust
     command: -c log_statement=all -c log_min_error_statement=error
     volumes:
-      - fb-postgres-data:/var/lib/postgresql/data
+      - fb-postgres-data:/var/lib/postgresql
 
 volumes:
   fb-postgres-data:
