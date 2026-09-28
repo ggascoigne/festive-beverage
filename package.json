@@ -43,7 +43,7 @@
     "tsc": "node node_modules/@typescript/native/bin/tsc",
     "coverage": "node --env-file-if-exists=.env ./node_modules/vitest/vitest.mjs run --coverage",
     "knip": "knip",
-    "writeCert": "./scripts/writeDbCert.ts"
+    "writeCert": "node --env-file-if-exists=.env --import tsx ./scripts/writeDbCert.ts"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "4.30.0",
